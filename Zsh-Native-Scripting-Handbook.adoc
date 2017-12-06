@@ -1,0 +1,107 @@
+# Zsh Native Scripting Handbook
+
+This document has been created after 2.5 years of creating software for Zshell
+and receiving help from IRC channel #zsh. Avoiding forks was the main guideline
+when creating the projects and this lead to multiple discoveries of Zsh constructs
+that are fast, robust and do not depend on external tools. Such code is more like
+Ruby or Perl code, less like top-down shell scripts.
+
+## Information
+
+### @ is about splitting
+
+How to access all array elements? -- use `@`. However, Zshell completion
+(`echo ${(<TAB>`) for `@` says: `@ -- double-quoted splitting of scalars` and
+that's the true meaning of this flag / subscript. If you quote e.g. an array,
+like `declare -a array; array=( a b c ); print "$array"`, you create a string, a
+scalar "a b c". `@` is to go back to non-scalar data by doing *splitting*. Two
+forms are available, `"$array[@]"` and `"${(@)array}"`.
+
+## Constructs
+
+### Reading a file
+
+```
+declare -a lines; lines=( "${(@f)"$(<file/path)"}" )
+```
+
+This preserves empty lines because of double-quoting. `@`-flag is used to obtain
+array instead of scalar. If you don't want empty lines preserved, you can also
+skip `@`-splitting, as it is explained in Information section:
+
+```
+declare -a lines; lines=( ${(f)$(<file/path)} )
+```
+
+### Ditching grep
+
+```
+declare -a lines; lines=( "${(@f)"$(<file/path)"}" )
+declare -a grepped; grepped=( ${(M)lines:#*query*} )
+```
+
+To have `grep -v` effect, skip `M`-flag. To grep case insensitively, use `\#i` glob
+flag (`...:#(#i)\*query*}`).
+
+### Pattern matching in AND-fashion
+
+```
+[[ "abc xyz efg" = *abc*~^*efg* ]] && print Match found
+```
+
+The `~` is a negation -- `match \*abc* but not ...`. Then, `^` is also a negation.
+The effect is: `\*abc* but not those that don't have \*efg*` which equals to:
+`\*abc* but those that have also \*efg*`. This is a regular pattern and it can
+be used with `:#` above to search arrays, or with `R`-subscript flag to search
+hashes (`${hsh[\(R)\*pattern*]}`), etc. Inventor of those patterns is Mikael
+Magnusson.
+
+### Ternary expressions with `\+,-,:+,:-` substitutions
+
+```
+HELP="yes"; print ${${HELP:+help enabled}:-help disabled} 
+```
+
+Ternary expression is known from `C` language but exists also in Zsh, but
+directly only in math context, i.e. `\(( a = a > 0 ? b : c ))`. Flexibility of
+Zsh allows such expressions also in normal context. Above is an example. `:+` is
+"if not empty, substitute …" `:-` is "if empty, substitute …". You can save
+great number of lines of code with those substitutions, it's normally at least
+4-lines `if` condition or lenghty `&&`/`||` use.
+
+### Ternary expressions with `:#` substitution
+
+```
+var=abc; print ${${${(M)var:#abc}:+is abc}:-not abc} ▶ is abc
+var=abcd; print ${${${(M)var:#abc}:+is abc}:-not abc} ▶ not abc
+```
+
+One-line "if var = x, then …, else …". Again, can spare a great amount of boring
+code that makes 10-line function a 20-line one.
+
+### Using built-in regular expressions engine
+
+```
+[[ "aabbb" = (#b)(a##)*(b(#c2,2)) ]] && print ${match[1]}-${match[2]} ▶ aa-bb
+```
+
+`\##` is: "1 or more". `(#c2,2)` is: "exactly 2". A few other constructs: `#` is
+"0 or more", `?` is "any character", `(a|b|)` is "a or b or empty match". `#b`
+enables the `$match` parameters. There's also `#m` but it has one parameter
+`$MATCH` for whole matched text, not for any parenthesis.
+
+Zsh patterns are basically a custom regular expressions engine. They are
+slightly faster than `zsh/regex` module (used for `=~` operator) and don't have
+that dependency (regex module can be not present, e.g. in default static build
+of Zsh). Also, they can be used in substitutions, for example in `//`
+substitution.
+
+### Ditching uniq
+
+```
+declare -aU array; array=( a a b ); print $array ▶ a b
+declare -a array; array=( a a b ); print ${(u)array} ▶ a b
+```
+
+Enable `-U` flag for array so that it guards elements to be unique, or use
+`u`-flag to uniquify elements of any array.
