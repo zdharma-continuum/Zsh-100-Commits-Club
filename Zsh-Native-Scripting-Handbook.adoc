@@ -126,7 +126,7 @@ text="a,b,c,1,e"; print ${${(s:,:)text}[4]} ▶ 1
 ### Searching arrays
 
 ```
-declare -a array; array=( a b " c" d ); print ${array[(r)[[:space:]][[:alpha:]]]} ▶  c
+declare -a array; array=( a b " c1" d ); print ${array[(r)[[:space:]][[:alpha:]]*]} ▶  c1
 ```
 
 `\[[:space:]]` contains unicode spaces. This is often used in conditional
