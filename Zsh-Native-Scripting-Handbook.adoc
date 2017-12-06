@@ -76,7 +76,7 @@ var=abc; print ${${${(M)var:#abc}:+is abc}:-not abc} ▶ is abc
 var=abcd; print ${${${(M)var:#abc}:+is abc}:-not abc} ▶ not abc
 ```
 
-One-line "if var = x, then …, else …". Again, can spare a great amount of boring
+An one-line "if var = x, then …, else …". Again, can spare a great amount of boring
 code that makes 10-line function a 20-line one.
 
 ### Using built-in regular expressions engine
@@ -105,3 +105,29 @@ declare -a array; array=( a a b ); print ${(u)array} ▶ a b
 
 Enable `-U` flag for array so that it guards elements to be unique, or use
 `u`-flag to uniquify elements of any array.
+
+### Ditching awk
+
+```
+declare -a list; list=( "a,b,c,1,e" "p,q,r,2,t" );
+print "${list[@]/(#b)([^,]##,)(#c3,3)([^,]##)*/${match[2]}}" ▶ 1 2
+```
+
+The pattern specifies 3 blocks of `[^,]##,` so 3 "not-comma multiple times, then
+comma", then single block of "not-comma multiple times" in second parentheses --
+and then replaces this with second parentheses. Result is 4th column extracted
+from multiple lines of text, something `awk` is often used for. For single line
+of text, one can use also `s`-flag:
+
+```
+text="a,b,c,1,e"; print ${${(s:,:)text}[4]} ▶ 1
+```
+
+### Searching arrays
+
+```
+declare -a array; array=( a b " c" d ); print ${array[(r)[[:space:]][[:alpha:]]]} ▶  c
+```
+
+`\[[:space:]]` contains unicode spaces. This is often used in conditional
+expression like `[[ -z ${array[(r)...]} ]]`.
