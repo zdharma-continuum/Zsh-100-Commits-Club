@@ -5,7 +5,7 @@
   - the project must have at least 100 commits or be derived from other project, yielding 100 or more total commits,
   - documentation commits are counted but their number is divided by 2 and upper-limited to 10% of all commits.
 No forks::
-  - the code cannot have many forks (like `$( ... )` constructs) and calls to tools like `grep`, `awk` – such programming style is deprecated, described years ago in the now infamous Advanced Bash Scripting Guide and is not adequate for Zshell.
+  - the code cannot have many forks (like `$( ... )` constructs) and calls to tools like `grep`, `awk` – such programming style is deprecated, described years ago in the now infamous Advanced Bash Scripting Guide and is not adequate for Zshell. See link:Zsh-Native-Scripting-Handbook.adoc[Zsh Native Scripting Guide] for guidelines to how to code this way.
 Points::
   - there are *points* defined:
     * commits (with above limitations) – initial points,
