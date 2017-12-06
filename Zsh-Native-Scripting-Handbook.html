@@ -602,12 +602,51 @@ of text, one can use also <code>s</code>-flag:</p>
 expression like <code>[[ -z ${array[(r)&#8230;&#8203;]} ]]</code>.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_code_execution_in_code_code_substitution">Code execution in <code>//</code> substitution</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>append() { gathered+=( $array[$1] ); }
+functions -M append 1 1 append
+declare -a array; array=( "Value 1" "Other data" "Value 2" )
+declare -a gathered; integer idx=0
+: ${array[@]/(#b)(Value ([[:digit:]]##)|*)/$(( ${#match[2]} &gt; 0 ? append(++idx) : ++idx ))}
+print $gathered ▶ Value 1 Value 2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use of <code>#b</code> glob flag enables math-code execution (and not only) in <code>/</code> and <code>//</code>
+substitutions. Implementation is very fast.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_serializing_data">Serializing data</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>declare -A hsh deserialized; hsh=( key value )
+serialized="${(j: :)${(qkv@)hsh}}"
+deserialized=( "${(Q@)${(z@)serialized}}" )
+print ${(kv)deserialized} ▶ key value</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>j</code>-flag means join&#8201;&#8212;&#8201;by spaces, in this case. Flags <code>kv</code> mean: keys and values,
+interleaving. Important <code>q</code>-flag means: quote. So what is obtained is each key
+and value quoted, and put into string separated by spaces.</p>
+</div>
+<div class="paragraph">
+<p><code>z</code>-flag means: split as if Zsh parser would split. So quoting (with backslashes,
+double quoting and other) is recognized. Obtained is array <code>( "key" "value")</code>
+which is then dequoted with <code>Q</code>-flag. This yields original data, assigned to
+hash <code>deserialized</code>. Use this to e.g. implement array of hashes.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-12-06 15:43:56 CET
+Last updated 2017-12-06 16:56:47 CET
 </div>
 </div>
 </body>
