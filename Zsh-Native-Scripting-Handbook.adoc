@@ -131,3 +131,35 @@ declare -a array; array=( a b " c1" d ); print ${array[(r)[[:space:]][[:alpha:]]
 
 `\[[:space:]]` contains unicode spaces. This is often used in conditional
 expression like `[[ -z ${array[(r)...]} ]]`.
+
+### Code execution in `//` substitution
+
+```
+append() { gathered+=( $array[$1] ); }
+functions -M append 1 1 append
+declare -a array; array=( "Value 1" "Other data" "Value 2" )
+declare -a gathered; integer idx=0
+: ${array[@]/(#b)(Value ([[:digit:]]##)|*)/$(( ${#match[2]} > 0 ? append(++idx) : ++idx ))}
+print $gathered ▶ Value 1 Value 2
+```
+
+Use of `#b` glob flag enables math-code execution (and not only) in `/` and `//`
+substitutions. Implementation is very fast.
+
+### Serializing data
+
+```
+declare -A hsh deserialized; hsh=( key value )
+serialized="${(j: :)${(qkv@)hsh}}"
+deserialized=( "${(Q@)${(z@)serialized}}" )
+print ${(kv)deserialized} ▶ key value
+```
+
+`j`-flag means join -- by spaces, in this case. Flags `kv` mean: keys and values,
+interleaving. Important `q`-flag means: quote. So what is obtained is each key
+and value quoted, and put into string separated by spaces.
+
+`z`-flag means: split as if Zsh parser would split. So quoting (with backslashes,
+double quoting and other) is recognized. Obtained is array `( "key" "value")`
+which is then dequoted with `Q`-flag. This yields original data, assigned to
+hash `deserialized`. Use this to e.g. implement array of hashes.
