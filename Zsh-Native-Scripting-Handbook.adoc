@@ -17,6 +17,11 @@ like `declare -a array; array=( a b c ); print "$array"`, you create a string, a
 scalar "a b c". `@` is to go back to non-scalar data by doing *splitting*. Two
 forms are available, `"$array[@]"` and `"${(@)array}"`.
 
+### extended_glob
+
+Glob-flags `#b` and `#m` require `setopt extended_glob`. Patterns utilizing `~`
+and `^` also require it. Extended-glob is one of the main features of Zsh.
+
 ## Constructs
 
 ### Reading a file
