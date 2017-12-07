@@ -464,7 +464,7 @@ forms are available, <code>"$array[@]"</code> and <code>"${(@)array}"</code>.</p
 <h3 id="_reading_a_file">Reading a file</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code>declare -a lines; lines=( "${(@f)"$(&lt;file/path)"}" )</code></pre>
+<pre class="highlight"><code>declare -a lines; lines=( "${(@f)"$(&lt;path/file)"}" )</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -474,15 +474,15 @@ skip <code>@</code>-splitting, as it is explained in Information section:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code>declare -a lines; lines=( ${(f)$(&lt;file/path)} )</code></pre>
+<pre class="highlight"><code>declare -a lines; lines=( ${(f)$(&lt;path/file)} )</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ditching_grep">Ditching grep</h3>
+<h3 id="_skipping_grep">Skipping grep</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code>declare -a lines; lines=( "${(@f)"$(&lt;file/path)"}" )
+<pre class="highlight"><code>declare -a lines; lines=( "${(@f)"$(&lt;path/file)"}" )
 declare -a grepped; grepped=( ${(M)lines:#*query*} )</code></pre>
 </div>
 </div>
@@ -511,7 +511,8 @@ Magnusson.</p>
 <h3 id="_ternary_expressions_with_code_code_substitutions">Ternary expressions with <code>+,-,:+,:-</code> substitutions</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code>HELP="yes"; print ${${HELP:+help enabled}:-help disabled}</code></pre>
+<pre class="highlight"><code>HELP="yes"; print ${${HELP:+help enabled}:-help disabled} ▶ help enabled
+HELP=""; print ${${HELP:+help enabled}:-help disabled} ▶ help disabled</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -558,7 +559,7 @@ substitution.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ditching_uniq">Ditching uniq</h3>
+<h3 id="_skipping_uniq">Skipping uniq</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code>declare -aU array; array=( a a b ); print $array ▶ a b
@@ -571,7 +572,7 @@ declare -a array; array=( a a b ); print ${(u)array} ▶ a b</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ditching_awk">Ditching awk</h3>
+<h3 id="_skipping_awk">Skipping awk</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code>declare -a list; list=( "a,b,c,1,e" "p,q,r,2,t" );
@@ -581,12 +582,22 @@ print "${list[@]/(#b)([^,]##,)(#c3,3)([^,]##)*/${match[2]}}" ▶ 1 2</code></pre
 <div class="paragraph">
 <p>The pattern specifies 3 blocks of <code>[^,]##,</code> so 3 "not-comma multiple times, then
 comma", then single block of "not-comma multiple times" in second parentheses&#8201;&#8212;&#8201;and then replaces this with second parentheses. Result is 4th column extracted
-from multiple lines of text, something <code>awk</code> is often used for. For single line
-of text, one can use also <code>s</code>-flag:</p>
+from multiple lines of text, something <code>awk</code> is often used for. Other method is
+use of <code>s</code>-flag. For single line of text:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code>text="a,b,c,1,e"; print ${${(s:,:)text}[4]} ▶ 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Thanks to in-substitution code-execution capabilities it&#8217;s possible to use
+<code>s</code>-flag to apply it to multiple lines:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>declare -a list; list=( "a,b,c,1,e" "p,q,r,2,t" );
+print "${list[@]/(#m)*/${${(s:,:)MATCH}[4]}}" ▶ 1 2</code></pre>
 </div>
 </div>
 </div>
@@ -646,7 +657,7 @@ hash <code>deserialized</code>. Use this to e.g. implement array of hashes.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-12-06 16:56:47 CET
+Last updated 2017-12-07 05:55:57 CET
 </div>
 </div>
 </body>
