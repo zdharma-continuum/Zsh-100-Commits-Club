@@ -22,7 +22,7 @@ forms are available, `"$array[@]"` and `"${(@)array}"`.
 ### Reading a file
 
 ```
-declare -a lines; lines=( "${(@f)"$(<file/path)"}" )
+declare -a lines; lines=( "${(@f)"$(<path/file)"}" )
 ```
 
 This preserves empty lines because of double-quoting. `@`-flag is used to obtain
@@ -30,13 +30,13 @@ array instead of scalar. If you don't want empty lines preserved, you can also
 skip `@`-splitting, as it is explained in Information section:
 
 ```
-declare -a lines; lines=( ${(f)$(<file/path)} )
+declare -a lines; lines=( ${(f)$(<path/file)} )
 ```
 
-### Ditching grep
+### Skipping grep
 
 ```
-declare -a lines; lines=( "${(@f)"$(<file/path)"}" )
+declare -a lines; lines=( "${(@f)"$(<path/file)"}" )
 declare -a grepped; grepped=( ${(M)lines:#*query*} )
 ```
 
@@ -59,7 +59,8 @@ Magnusson.
 ### Ternary expressions with `\+,-,:+,:-` substitutions
 
 ```
-HELP="yes"; print ${${HELP:+help enabled}:-help disabled} 
+HELP="yes"; print ${${HELP:+help enabled}:-help disabled} ▶ help enabled
+HELP=""; print ${${HELP:+help enabled}:-help disabled} ▶ help disabled
 ```
 
 Ternary expression is known from `C` language but exists also in Zsh, but
@@ -96,7 +97,7 @@ that dependency (regex module can be not present, e.g. in default static build
 of Zsh). Also, they can be used in substitutions, for example in `//`
 substitution.
 
-### Ditching uniq
+### Skipping uniq
 
 ```
 declare -aU array; array=( a a b ); print $array ▶ a b
@@ -106,7 +107,7 @@ declare -a array; array=( a a b ); print ${(u)array} ▶ a b
 Enable `-U` flag for array so that it guards elements to be unique, or use
 `u`-flag to uniquify elements of any array.
 
-### Ditching awk
+### Skipping awk
 
 ```
 declare -a list; list=( "a,b,c,1,e" "p,q,r,2,t" );
@@ -116,11 +117,19 @@ print "${list[@]/(#b)([^,]##,)(#c3,3)([^,]##)*/${match[2]}}" ▶ 1 2
 The pattern specifies 3 blocks of `[^,]##,` so 3 "not-comma multiple times, then
 comma", then single block of "not-comma multiple times" in second parentheses --
 and then replaces this with second parentheses. Result is 4th column extracted
-from multiple lines of text, something `awk` is often used for. For single line
-of text, one can use also `s`-flag:
+from multiple lines of text, something `awk` is often used for. Other method is
+use of `s`-flag. For single line of text:
 
 ```
 text="a,b,c,1,e"; print ${${(s:,:)text}[4]} ▶ 1
+```
+
+Thanks to in-substitution code-execution capabilities it's possible to use
+`s`-flag to apply it to multiple lines:
+
+```
+declare -a list; list=( "a,b,c,1,e" "p,q,r,2,t" );
+print "${list[@]/(#m)*/${${(s:,:)MATCH}[4]}}" ▶ 1 2
 ```
 
 ### Searching arrays
