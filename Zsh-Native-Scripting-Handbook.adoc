@@ -17,7 +17,8 @@ like `declare -a array; array=( a b c ); print "$array"`, you create a string, a
 scalar "a b c". `@` is to go back to non-scalar data by doing *splitting*. Two
 forms are available, `"$array[@]"` and `"${(@)array}"`. First form has additional
 effect – when option `KSH_ARRAYS` is set, it indeed induces referencing to whole
-array instead of first element only.
+array instead of first element only. It should then use braces, i.e. `${array[@]}`,
+`"${array[@]}"` (`KSH_ARRAYS` requirement).
 
 ### extended_glob
 
