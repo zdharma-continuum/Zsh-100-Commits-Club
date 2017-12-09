@@ -452,7 +452,9 @@ Ruby or Perl code, less like top-down shell scripts.</p>
 that&#8217;s the true meaning of this flag / subscript. If you quote e.g. an array,
 like <code>declare -a array; array=( a b c ); print "$array"</code>, you create a string, a
 scalar "a b c". <code>@</code> is to go back to non-scalar data by doing <strong>splitting</strong>. Two
-forms are available, <code>"$array[@]"</code> and <code>"${(@)array}"</code>.</p>
+forms are available, <code>"$array[@]"</code> and <code>"${(@)array}"</code>. First form has additional
+effect – when option <code>KSH_ARRAYS</code> is set, it indeed induces referencing to whole
+array instead of first element only.</p>
 </div>
 </div>
 <div class="sect2">
@@ -664,7 +666,7 @@ hash <code>deserialized</code>. Use this to e.g. implement array of hashes.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-12-07 18:42:16 CET
+Last updated 2017-12-09 11:02:01 CET
 </div>
 </div>
 </body>
