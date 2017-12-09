@@ -15,7 +15,9 @@ How to access all array elements? -- use `@`. However, Zshell completion
 that's the true meaning of this flag / subscript. If you quote e.g. an array,
 like `declare -a array; array=( a b c ); print "$array"`, you create a string, a
 scalar "a b c". `@` is to go back to non-scalar data by doing *splitting*. Two
-forms are available, `"$array[@]"` and `"${(@)array}"`.
+forms are available, `"$array[@]"` and `"${(@)array}"`. First form has additional
+effect – when option `KSH_ARRAYS` is set, it indeed induces referencing to whole
+array instead of first element only.
 
 ### extended_glob
 
