@@ -478,14 +478,18 @@ and <code>^</code> also require it. Extended-glob is one of the main features of
 </div>
 </div>
 <div class="paragraph">
-<p>This preserves empty lines because of double-quoting. <code>@</code>-flag is used to obtain
-array instead of scalar. If you don&#8217;t want empty lines preserved, you can also
-skip <code>@</code>-splitting, as it is explained in Information section:</p>
+<p>This preserves empty lines because of double-quoting (the outside one).
+<code>@</code>-flag is used to obtain array instead of scalar. If you don&#8217;t want empty
+lines preserved, you can also skip <code>@</code>-splitting, as it is explained in
+Information section:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code>declare -a lines; lines=( ${(f)$(&lt;path/file)} )</code></pre>
+<pre class="highlight"><code>declare -a lines; lines=( ${(f)"$(&lt;path/file)"} )</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Note: <code>$(&lt;&#8230;&#8203;)</code> construct strips trailing empty lines.</p>
 </div>
 </div>
 <div class="sect2">
@@ -667,7 +671,7 @@ hash <code>deserialized</code>. Use this to e.g. implement array of hashes.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-12-09 17:28:42 CET
+Last updated 2017-12-09 20:19:22 CET
 </div>
 </div>
 </body>
