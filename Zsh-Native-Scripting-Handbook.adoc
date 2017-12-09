@@ -33,13 +33,16 @@ and `^` also require it. Extended-glob is one of the main features of Zsh.
 declare -a lines; lines=( "${(@f)"$(<path/file)"}" )
 ```
 
-This preserves empty lines because of double-quoting. `@`-flag is used to obtain
-array instead of scalar. If you don't want empty lines preserved, you can also
-skip `@`-splitting, as it is explained in Information section:
+This preserves empty lines because of double-quoting (the outside one).
+`@`-flag is used to obtain array instead of scalar. If you don't want empty
+lines preserved, you can also skip `@`-splitting, as it is explained in
+Information section:
 
 ```
-declare -a lines; lines=( ${(f)$(<path/file)} )
+declare -a lines; lines=( ${(f)"$(<path/file)"} )
 ```
+
+Note: `$(<...)` construct strips trailing empty lines.
 
 ### Skipping grep
 
