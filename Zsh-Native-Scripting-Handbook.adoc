@@ -67,6 +67,19 @@ be used with `:#` above to search arrays, or with `R`-subscript flag to search
 hashes (`${hsh[\(R)\*pattern*]}`), etc. Inventor of those patterns is Mikael
 Magnusson.
 
+### Skipping tr
+
+```
+declare -A map; map=( a 1 b 2 );
+text=( "ab" "ba" )
+text=( ${text[@]//(#m)?/${map[$MATCH]}} )
+print $text ▶ 12 21
+```
+
+`#m` flag enables the `$MATCH` parameter. At each `//` substitution, `$map` is
+queried for character-replacement. You can substitute a text variable too, just
+skip `[@]` and parentheses in assignment.
+
 ### Ternary expressions with `\+,-,:+,:-` substitutions
 
 ```
