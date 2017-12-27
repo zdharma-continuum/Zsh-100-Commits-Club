@@ -522,6 +522,22 @@ Magnusson.</p>
 </div>
 </div>
 <div class="sect2">
+<h3 id="_skipping_tr">Skipping tr</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>declare -A map; map=( a 1 b 2 );
+text=( "ab" "ba" )
+text=( ${text[@]//(#m)?/${map[$MATCH]}} )
+print $text ▶ 12 21</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>#m</code> flag enables the <code>$MATCH</code> parameter. At each <code>//</code> substitution, <code>$map</code> is
+queried for character-replacement. You can substitute a text variable too, just
+skip <code>[@]</code> and parentheses in assignment.</p>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_ternary_expressions_with_code_code_substitutions">Ternary expressions with <code>+,-,:+,:-</code> substitutions</h3>
 <div class="listingblock">
 <div class="content">
@@ -671,7 +687,7 @@ hash <code>deserialized</code>. Use this to e.g. implement array of hashes.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-12-09 20:19:22 CET
+Last updated 2017-12-27 07:48:59 CET
 </div>
 </div>
 </body>
