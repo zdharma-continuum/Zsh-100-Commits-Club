@@ -19,7 +19,7 @@ to get plugin path. The one-line code above will:
   * this will allow to e.g. do `eval "$(<plugin)"`, which is faster than `source` (link:http://www.zsh.org/mla/workers/2017/msg01827.html[comparison])
 2. Use `$0` if it doesn't contain path to Zsh binary
   * plugin manager will still be able to set `$0`, although more difficultly
-  * `setopt no_function_argzero` will be detected (it causes `$0` not to contain absolute path, but path to Zsh binary)
+  * `setopt no_function_argzero` will be detected (it causes `$0` not to contain plugin-script path, but path to Zsh binary)
   * `setopt posix_argzero` will be detected (as above)
 3. Use `%N` prompt expansion flag, which always gives absolute path to script
   * plugin manager cannot alter this
