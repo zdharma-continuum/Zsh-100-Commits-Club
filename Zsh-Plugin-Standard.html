@@ -438,9 +438,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-zsh" data-lang="zsh">0="${${ZERO:-${(M)0##/*}}:-${(%):-%N}}"
+<pre class="highlight"><code class="language-zsh" data-lang="zsh">0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 # or
-ZERO="${${ZERO:-${(M)0##/*}}:-${(%):-%N}}"
+ZERO="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 
 # Then ${0:h} or ${ZERO:h} to get plugin's directory</code></pre>
 </div>
@@ -464,7 +464,7 @@ ZERO="${${ZERO:-${(M)0##/*}}:-${(%):-%N}}"
 </div>
 </li>
 <li>
-<p>Use <code>$0</code> if it contains absolute path</p>
+<p>Use <code>$0</code> if it doesn&#8217;t contain path to Zsh binary</p>
 <div class="ulist">
 <ul>
 <li>
@@ -472,6 +472,9 @@ ZERO="${${ZERO:-${(M)0##/*}}:-${(%):-%N}}"
 </li>
 <li>
 <p><code>setopt no_function_argzero</code> will be detected (it causes <code>$0</code> not to contain absolute path, but path to Zsh binary)</p>
+</li>
+<li>
+<p><code>setopt posix_argzero</code> will be detected (as above)</p>
 </li>
 </ul>
 </div>
@@ -490,14 +493,18 @@ ZERO="${${ZERO:-${(M)0##/*}}:-${(%):-%N}}"
 </div>
 <div class="paragraph">
 <p>The goal is flexibility and robustness, with essential motivation to support <code>eval "$(&lt;plugin)"</code> and definitely
-solve <code>setopt no_function_argzero</code> case.</p>
+solve <code>setopt no_function_argzero</code> and <code>setopt posix_argzero</code> cases.</p>
+</div>
+<div class="paragraph">
+<p>A plugin manager will be even able to convert plugin to function, but performance differences of this are unclear.
+It might however provide an use case.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-01-02 10:23:12 CET
+Last updated 2018-01-02 11:07:25 CET
 </div>
 </div>
 </body>
