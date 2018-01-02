@@ -1,0 +1,27 @@
+# Zsh Plugin Standard
+
+## Standarized $0 handling
+
+Plugins should do:
+
+```zsh
+0="${${ZERO:-${(M)0##/*}}:-${(%):-%N}}"
+# or
+ZERO="${${ZERO:-${(M)0##/*}}:-${(%):-%N}}"
+
+# Then ${0:h} or ${ZERO:h} to get plugin's directory
+```
+
+to get plugin path. The one-line code above will:
+
+1. Use `ZERO` if it's not empty
+  * plugin manager will be easily able to alter effective `$0` before loading a plugin
+  * this will allow to e.g. do `eval "$(<plugin)"`, which is faster than `source` (link:http://www.zsh.org/mla/workers/2017/msg01827.html[comparison])
+2. Use `$0` if it contains absolute path
+  * plugin manager will still be able to set `$0`, although more difficultly
+  * `setopt no_function_argzero` will be detected (it causes `$0` not to contain absolute path, but path to Zsh binary)
+3. Use `%N` prompt expansion flag, which always gives absolute path to script
+  * plugin manager cannot alter this
+
+The goal is flexibility and robustness, with essential motivation to support `eval "$(<plugin)"` and definitely
+solving `setopt no_function_argzero` case.
