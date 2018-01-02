@@ -24,4 +24,4 @@ to get plugin path. The one-line code above will:
   * plugin manager cannot alter this
 
 The goal is flexibility and robustness, with essential motivation to support `eval "$(<plugin)"` and definitely
-solving `setopt no_function_argzero` case.
+solve `setopt no_function_argzero` case.
