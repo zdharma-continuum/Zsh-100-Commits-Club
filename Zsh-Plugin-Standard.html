@@ -458,7 +458,7 @@ ZERO="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 <p>plugin manager will be easily able to alter effective <code>$0</code> before loading a plugin</p>
 </li>
 <li>
-<p>this will allow to e.g. do <code>eval "$(&lt;plugin)"</code>, which is faster than <code>source</code> (<a href="http://www.zsh.org/mla/workers/2017/msg01827.html">comparison</a>)</p>
+<p>this will allow to e.g. do <code>eval "$(&lt;plugin)"</code>, which can be faster than <code>source</code> (<a href="http://www.zsh.org/mla/workers/2017/msg01827.html">comparison</a>, note it&#8217;s not for a compiled script)</p>
 </li>
 </ul>
 </div>
@@ -504,7 +504,7 @@ It might however provide an use case.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-01-02 11:23:08 CET
+Last updated 2018-01-02 15:53:30 CET
 </div>
 </div>
 </body>
