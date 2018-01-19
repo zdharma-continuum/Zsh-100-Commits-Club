@@ -18,3 +18,6 @@ gh-pages:
 master:
 	git reset --hard
 	git checkout master
+
+loop:
+	while true; do make all >/dev/null 2>&1; sleep 1; done
