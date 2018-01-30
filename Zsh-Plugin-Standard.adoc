@@ -32,3 +32,13 @@ solve `setopt no_function_argzero` and `setopt posix_argzero` cases.
 
 A plugin manager will be even able to convert plugin to function, but performance differences of this are
 unclear. It might however provide an use case.
+
+## Unload function
+
+If plugin is named e.g. `kalc`, then it can provide function `kalc_unload_plugin`,
+which can be called by a plugin manager to withdraw effects of loading this
+plugin.
+
+Plugin manager can implement its own tracking of changes made by a plugin, so this
+is in general optional, however to properly unload e.g. a prompt, detailed tracking
+(easy to do by the plugin creator) can provide better, predictable results.
