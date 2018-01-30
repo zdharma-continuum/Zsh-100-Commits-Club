@@ -42,3 +42,28 @@ plugin.
 Plugin manager can implement its own tracking of changes made by a plugin, so this
 is in general optional, however to properly unload e.g. a prompt, detailed tracking
 (easy to do by the plugin creator) can provide better, predictable results.
+
+## Plugin manager activity indicator
+
+Plugin manager should set `$LOADED_PLUGINS` array containing all previously loaded
+plugins and currently loaded plugin (on last index). This will allow plugin to:
+
+ 1. Check which plugins are already loaded.
+ 2. Check if it is loaded by a plugin manager.
+
+First item will allow the plugin to e.g. issue a notice about missing dependencies.
+Instead of issuing a notice, it will be able to satisfy the dependencies from resources
+it provides. For example, `pure` prompt provides `zsh-async` dependency library, which
+is a separate project. In result, the prompt can source this plugin, having `$ZERO`, etc.
+(it doesn't normally source the dependency).
+
+Second item will allow plugin to e.g. set up `$fpath`, knowing that plugin manager will
+not handle this:
+
+```zsh
+if [[ ( ${+LOADED_PLUGINS} = 0 || ${LOADED_PLUGINS[-1]} != */kalc ) && -z "${fpath[(r)$ZERO]}" ]]; then
+    fpath+=( "$ZERO" )
+fi
+```
+
+This will allow user to source the plugin without using a plugin manager.
