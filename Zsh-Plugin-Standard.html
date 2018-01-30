@@ -458,7 +458,8 @@ ZERO="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 <p>plugin manager will be easily able to alter effective <code>$0</code> before loading a plugin</p>
 </li>
 <li>
-<p>this will allow to e.g. do <code>eval "$(&lt;plugin)"</code>, which can be faster than <code>source</code> (<a href="http://www.zsh.org/mla/workers/2017/msg01827.html">comparison</a>, note it&#8217;s not for a compiled script)</p>
+<p>this will allow to e.g. do <code>eval "$(&lt;plugin)"</code>, which can be faster than <code>source</code>
+(<a href="http://www.zsh.org/mla/workers/2017/msg01827.html">comparison</a>, note it&#8217;s not for a compiled script)</p>
 </li>
 </ul>
 </div>
@@ -471,7 +472,8 @@ ZERO="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 <p>plugin manager will still be able to set <code>$0</code>, although more difficultly</p>
 </li>
 <li>
-<p><code>setopt no_function_argzero</code> will be detected (it causes <code>$0</code> not to contain plugin-script path, but path to Zsh binary)</p>
+<p><code>setopt no_function_argzero</code> will be detected (it causes <code>$0</code> not to contain plugin-script path, but path
+to Zsh binary)</p>
 </li>
 <li>
 <p><code>setopt posix_argzero</code> will be detected (as above)</p>
@@ -484,7 +486,8 @@ ZERO="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 <div class="ulist">
 <ul>
 <li>
-<p>plugin manager cannot alter this</p>
+<p>plugin manager cannot alter this, but simple source will be saved from breaking by the mentioned
+<code>*_argzero</code> options</p>
 </li>
 </ul>
 </div>
@@ -492,19 +495,74 @@ ZERO="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 </ol>
 </div>
 <div class="paragraph">
-<p>The goal is flexibility and robustness, with essential motivation to support <code>eval "$(&lt;plugin)"</code> and definitely
+<p>The goal is flexibility, with essential motivation to support <code>eval "$(&lt;plugin)"</code> and definitely
 solve <code>setopt no_function_argzero</code> and <code>setopt posix_argzero</code> cases.</p>
 </div>
 <div class="paragraph">
-<p>A plugin manager will be even able to convert plugin to function, but performance differences of this are unclear.
-It might however provide an use case.</p>
+<p>A plugin manager will be even able to convert plugin to function, but performance differences of this are
+unclear. It might however provide an use case.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_unload_function">Unload function</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If plugin is named e.g. <code>kalc</code>, then it can provide function <code>kalc_unload_plugin</code>,
+which can be called by a plugin manager to withdraw effects of loading this
+plugin.</p>
+</div>
+<div class="paragraph">
+<p>Plugin manager can implement its own tracking of changes made by a plugin, so this
+is in general optional, however to properly unload e.g. a prompt, detailed tracking
+(easy to do by the plugin creator) can provide better, predictable results.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_plugin_manager_activity_indicator">Plugin manager activity indicator</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Plugin manager should set <code>$LOADED_PLUGINS</code> array containing all previously loaded
+plugins and currently loaded plugin (on last index). This will allow plugin to:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Check which plugins are already loaded.</p>
+</li>
+<li>
+<p>Check if it is loaded by a plugin manager.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>First item will allow the plugin to e.g. issue a notice about missing dependencies.
+Instead of issuing a notice, it will be able to satisfy the dependencies from resources
+it provides. For example, <code>pure</code> prompt provides <code>zsh-async</code> dependency library, which
+is a separate project. In result, the prompt can source this plugin, having <code>$ZERO</code>, etc.
+(it doesn&#8217;t normally source the dependency).</p>
+</div>
+<div class="paragraph">
+<p>Second item will allow plugin to e.g. set up <code>$fpath</code>, knowing that plugin manager will
+not handle this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-zsh" data-lang="zsh">if [[ ( ${+LOADED_PLUGINS} = 0 || ${LOADED_PLUGINS[-1]} != */kalc ) &amp;&amp; -z "${fpath[(r)$ZERO]}" ]]; then
+    fpath+=( "$ZERO" )
+fi</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will allow user to source the plugin without using a plugin manager.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-01-02 15:53:30 CET
+Last updated 2018-01-30 13:19:05 CET
 </div>
 </div>
 </body>
