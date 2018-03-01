@@ -1,5 +1,6 @@
 # Zsh Plugin Standard
 
+[#zero-handling]
 ## 1. Standarized $0 handling
 
 Plugins should do:
@@ -33,6 +34,7 @@ solve `setopt no_function_argzero` and `setopt posix_argzero` cases.
 A plugin manager will be even able to convert plugin to function, but performance differences of this are
 unclear. It might however provide an use case.
 
+[#unload-fun]
 ## 2. Unload function
 
 If plugin is named e.g. `kalc`, then it can provide function `kalc_unload_plugin`,
@@ -43,6 +45,7 @@ Plugin manager can implement its own tracking of changes made by a plugin, so th
 is in general optional, however to properly unload e.g. a prompt, detailed tracking
 (easy to do by the plugin creator) can provide better, predictable results.
 
+[#indicator]
 ## 3. Plugin manager activity indicator
 
 Plugin manager should set `$LOADED_PLUGINS` array containing all previously loaded
@@ -68,6 +71,7 @@ fi
 
 This will allow user to source the plugin without using a plugin manager.
 
+[#zpfx]
 ## 4. Global parameter with PREFIX for make, configure, etc.
 
 Plugin manager should export parameter `$ZPFX` which should contain path to directory dedicated
