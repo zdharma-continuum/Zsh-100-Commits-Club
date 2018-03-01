@@ -1,6 +1,6 @@
 # Zsh Plugin Standard
 
-## Standarized $0 handling
+## 1. Standarized $0 handling
 
 Plugins should do:
 
@@ -33,7 +33,7 @@ solve `setopt no_function_argzero` and `setopt posix_argzero` cases.
 A plugin manager will be even able to convert plugin to function, but performance differences of this are
 unclear. It might however provide an use case.
 
-## Unload function
+## 2. Unload function
 
 If plugin is named e.g. `kalc`, then it can provide function `kalc_unload_plugin`,
 which can be called by a plugin manager to withdraw effects of loading this
@@ -43,7 +43,7 @@ Plugin manager can implement its own tracking of changes made by a plugin, so th
 is in general optional, however to properly unload e.g. a prompt, detailed tracking
 (easy to do by the plugin creator) can provide better, predictable results.
 
-## Plugin manager activity indicator
+## 3. Plugin manager activity indicator
 
 Plugin manager should set `$LOADED_PLUGINS` array containing all previously loaded
 plugins and currently loaded plugin (on last index). This will allow plugin to:
@@ -67,3 +67,25 @@ fi
 ```
 
 This will allow user to source the plugin without using a plugin manager.
+
+## 4. Global parameter with PREFIX for make, configure, etc.
+
+Plugin manager should export parameter `$ZPFX` which should contain path to directory dedicated
+for user-land software, i.e. for directories `$ZPFX/bin`, `$ZPFX/lib`, `$ZPFX/share`, etc.
+Suggested name of the directory is `polaris`, Zplugin uses this name and places this directory
+at `~/.zplugin/polaris` by default.
+
+User can then configure hooks (feature of e.g. zplug and Zplugin) to invoke e.g. `make PREFIX=$ZPFX install`
+to install software like e.g. link:https://github.com/tj/git-extras[tj/git-extras]. This is
+a developing role of Zsh plugin managers as package managers, where `.zshrc` has similar role to
+Chef or Puppet configuration and allows to declare system state, and have the same state on
+different accounts.
+
+No-narration facts-list:
+
+ 1. `export ZPFX="$HOME/polaris"` (or e.g. `$HOME/.zplugin/polaris`)
+ 2. `make PREFIX=$ZPFX install`
+ 3. `configure --prefix=$ZPFX`
+ 4. `cmake -DCMAKE_INSTALL_PREFIX=$ZPFX .`
+ 5. `zplugin ice make"PREFIX=$ZPFX install"`
+ 6. `zplug ... hook-build:"make PREFIX=$PFX install"`
