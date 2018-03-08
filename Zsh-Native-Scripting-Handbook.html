@@ -681,13 +681,32 @@ double quoting and other) is recognized. Obtained is array <code>( "key" "value"
 which is then dequoted with <code>Q</code>-flag. This yields original data, assigned to
 hash <code>deserialized</code>. Use this to e.g. implement array of hashes.</p>
 </div>
+<div class="paragraph">
+<p>Note: to be compatible with <code>setopt ksharrays</code>, use <code>[@]</code> instead of <code>(@)</code>, e.g.:
+<code>&#8230;&#8203;( "${(Q)${(z)serialized[@]}[@]}" )</code></p>
+</div>
+<div class="sect4">
+<h5 id="_tip_serializing_with_bash">Tip: serializing with Bash</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>array=( key1 key2 )
+printf -v serialized "%q " "${array[@]}"
+eval "deserialized=($serialized)"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This method works also with Zsh. The drawback is use of <code>eval</code>, however it&#8217;s
+impossible that any problem will occurr unless someone compromises variable&#8217;s
+value, but as always, <code>eval</code> should be avoided if possible.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-12-27 07:48:59 CET
+Last updated 2018-03-08 15:28:24 CET
 </div>
 </div>
 </body>
