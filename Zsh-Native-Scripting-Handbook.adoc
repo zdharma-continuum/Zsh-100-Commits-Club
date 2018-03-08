@@ -196,3 +196,18 @@ and value quoted, and put into string separated by spaces.
 double quoting and other) is recognized. Obtained is array `( "key" "value")`
 which is then dequoted with `Q`-flag. This yields original data, assigned to
 hash `deserialized`. Use this to e.g. implement array of hashes.
+
+Note: to be compatible with `setopt ksharrays`, use `[@]` instead of `(@)`, e.g.:
+`...( "${(Q)${(z)serialized[@]}[@]}" )`
+
+##### Tip: serializing with Bash
+
+```
+array=( key1 key2 )
+printf -v serialized "%q " "${array[@]}"
+eval "deserialized=($serialized)"
+```
+
+This method works also with Zsh. The drawback is use of `eval`, however it's
+impossible that any problem will occurr unless someone compromises variable's
+value, but as always, `eval` should be avoided if possible.
