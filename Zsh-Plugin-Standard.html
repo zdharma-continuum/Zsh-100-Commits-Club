@@ -446,48 +446,53 @@ ZERO="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 </div>
 </div>
 <div class="paragraph">
-<p>to get plugin path. The one-line code above will:</p>
+<p>to get plugin-file path. The one-line code above will:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Use <code>ZERO</code> if it&#8217;s not empty</p>
+<p>Be backwards-compatible with normal <code>$0</code> setting and usage.</p>
+</li>
+<li>
+<p>Use <code>ZERO</code> if it&#8217;s not empty,</p>
 <div class="ulist">
 <ul>
 <li>
-<p>plugin manager will be easily able to alter effective <code>$0</code> before loading a plugin</p>
+<p>plugin manager will be easily able to alter effective <code>$0</code> before loading a plugin,</p>
 </li>
 <li>
 <p>this will allow to e.g. do <code>eval "$(&lt;plugin)"</code>, which can be faster than <code>source</code>
-(<a href="http://www.zsh.org/mla/workers/2017/msg01827.html">comparison</a>, note it&#8217;s not for a compiled script)</p>
+(<a href="http://www.zsh.org/mla/workers/2017/msg01827.html">comparison</a>, note it&#8217;s not for a compiled script).</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Use <code>$0</code> if it doesn&#8217;t contain path to Zsh binary</p>
+<p>Use <code>$0</code> if it doesn&#8217;t contain path to Zsh binary,</p>
 <div class="ulist">
 <ul>
 <li>
-<p>plugin manager will still be able to set <code>$0</code>, although more difficultly</p>
+<p>plugin manager will still be able to set <code>$0</code>, although more difficultly (requires <code>unsetopt function_argzero</code>
+before sourcing plugin script, and <code>0=&#8230;&#8203;</code> assignment),</p>
 </li>
 <li>
-<p><code>setopt no_function_argzero</code> will be detected (it causes <code>$0</code> not to contain plugin-script path, but path
-to Zsh binary)</p>
+<p><code>unsetopt function_argzero</code> will be detected (it causes <code>$0</code> not to contain plugin-script path, but path
+to Zsh binary, if not overwritten by <code>0=&#8230;&#8203;</code> assignment),</p>
 </li>
 <li>
-<p><code>setopt posix_argzero</code> will be detected (as above)</p>
+<p><code>setopt posix_argzero</code> will be detected (as above).</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Use <code>%N</code> prompt expansion flag, which always gives absolute path to script</p>
+<p>Use <code>%N</code> prompt expansion flag, which always gives absolute path to script,</p>
 <div class="ulist">
 <ul>
 <li>
-<p>plugin manager cannot alter this, but simple source will be saved from breaking by the mentioned
-<code>*_argzero</code> options</p>
+<p>plugin manager cannot alter this (no advanced loading of plugin is possible), but simple plugin-file
+sourcing (without a plugin manager) will be saved from breaking caused by the mentioned <code>*_argzero</code>
+options, so this is a very good last-resort fallback.</p>
 </li>
 </ul>
 </div>
@@ -499,8 +504,9 @@ to Zsh binary)</p>
 solve <code>setopt no_function_argzero</code> and <code>setopt posix_argzero</code> cases.</p>
 </div>
 <div class="paragraph">
-<p>A plugin manager will be even able to convert plugin to function, but performance differences of this are
-unclear. It might however provide an use case.</p>
+<p>A plugin manager will be even able to convert plugin to function (author implemented such proof of concept
+functionality, it&#8217;s possible), but performance differences of this are unclear. It might however provide an
+use case.</p>
 </div>
 </div>
 </div>
@@ -515,7 +521,9 @@ plugin.</p>
 <div class="paragraph">
 <p>Plugin manager can implement its own tracking of changes made by a plugin, so this
 is in general optional, however to properly unload e.g. a prompt, detailed tracking
-(easy to do by the plugin creator) can provide better, predictable results.</p>
+(easy to do by the plugin creator) can provide better, predictable results. Any
+special, uncommon effects of loading a plugin are possible to withdraw only by a
+dedicated function.</p>
 </div>
 </div>
 </div>
@@ -524,7 +532,7 @@ is in general optional, however to properly unload e.g. a prompt, detailed track
 <div class="sectionbody">
 <div class="paragraph">
 <p>Plugin manager should set <code>$LOADED_PLUGINS</code> array containing all previously loaded
-plugins and currently loaded plugin (on last index). This will allow plugin to:</p>
+plugins and plugin being currently loaded (on last index). This will allow plugin to:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -532,7 +540,7 @@ plugins and currently loaded plugin (on last index). This will allow plugin to:<
 <p>Check which plugins are already loaded.</p>
 </li>
 <li>
-<p>Check if it is loaded by a plugin manager.</p>
+<p>Check if it is being loaded by a plugin manager (i.e. if not just sourced).</p>
 </li>
 </ol>
 </div>
@@ -540,8 +548,9 @@ plugins and currently loaded plugin (on last index). This will allow plugin to:<
 <p>First item will allow the plugin to e.g. issue a notice about missing dependencies.
 Instead of issuing a notice, it will be able to satisfy the dependencies from resources
 it provides. For example, <code>pure</code> prompt provides <code>zsh-async</code> dependency library, which
-is a separate project. In result, the prompt can source this plugin, having <code>$ZERO</code>, etc.
-(it doesn&#8217;t normally source the dependency).</p>
+is a separate project and can be loaded by user on his own behalf. In result, the prompt
+can decide to source its private copy of <code>zsh-async</code>, having also reliable <code>$ZERO</code> defined
+by previous paragraph (note: <code>pure</code> doesn&#8217;t normally do this).</p>
 </div>
 <div class="paragraph">
 <p>Second item will allow plugin to e.g. set up <code>$fpath</code>, knowing that plugin manager will
@@ -549,13 +558,13 @@ not handle this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-zsh" data-lang="zsh">if [[ ( ${+LOADED_PLUGINS} = 0 || ${LOADED_PLUGINS[-1]} != */kalc ) &amp;&amp; -z "${fpath[(r)$ZERO]}" ]]; then
-    fpath+=( "$ZERO" )
+<pre class="highlight"><code class="language-zsh" data-lang="zsh">if [[ ( ${+LOADED_PLUGINS} = 0 || ${LOADED_PLUGINS[-1]} != */kalc ) &amp;&amp; -z "${fpath[(r)${ZERO:h}]}" ]]; then
+    fpath+=( "${ZERO:h}" )
 fi</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This will allow user to source the plugin without using a plugin manager.</p>
+<p>This will allow user to reliably source the plugin without using a plugin manager.</p>
 </div>
 </div>
 </div>
@@ -570,13 +579,13 @@ at <code>~/.zplugin/polaris</code> by default.</p>
 </div>
 <div class="paragraph">
 <p>User can then configure hooks (feature of e.g. zplug and Zplugin) to invoke e.g. <code>make PREFIX=$ZPFX install</code>
-to install software like e.g. <a href="https://github.com/tj/git-extras">tj/git-extras</a>. This is
-a developing role of Zsh plugin managers as package managers, where <code>.zshrc</code> has similar role to
-Chef or Puppet configuration and allows to declare system state, and have the same state on
-different accounts.</p>
+to install software like e.g. <a href="https://github.com/tj/git-extras">tj/git-extras</a>. This is a
+developing role of Zsh plugin managers as package managers, where <code>.zshrc</code> has a similar role
+to Chef or Puppet configuration and allows to <strong>declare</strong> system state, and have the same state
+on different accounts / machines.</p>
 </div>
 <div class="paragraph">
-<p>No-narration facts-list:</p>
+<p>No-narration facts-list related to <code>$ZPFX</code>:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -587,7 +596,7 @@ different accounts.</p>
 <p><code>make PREFIX=$ZPFX install</code></p>
 </li>
 <li>
-<p><code>configure --prefix=$ZPFX</code></p>
+<p><code>./configure --prefix=$ZPFX</code></p>
 </li>
 <li>
 <p><code>cmake -DCMAKE_INSTALL_PREFIX=$ZPFX .</code></p>
@@ -605,7 +614,7 @@ different accounts.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-01 14:26:31 CET
+Last updated 2018-04-26 00:29:43 CEST
 </div>
 </div>
 </body>
