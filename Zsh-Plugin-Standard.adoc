@@ -29,7 +29,7 @@ functions – the proposed standardization. +
 '''
 
 [#zero-handling]
-## 1. Standarized $0 handling
+## 1. Standardized $0 handling
 
 Plugins should do:
 
