@@ -431,6 +431,58 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
+<h2 id="_what_is_a_zsh_plugin">What is a Zsh plugin?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Zsh plugins were first defined by Oh-My-Zsh. They are dramatically simple yet powerful.
+From analytical perspective, a plugin:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Has its directory added to <code>$fpath</code>.</p>
+</li>
+<li>
+<p>It has any first <code>*.plugin.zsh</code> file sourced (or <code>*.zsh</code>, <code>init.zsh</code>, <code>*.sh</code>, these are non-standard).</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>First point allows plugins to provide completions and use <code>autoload</code> functions (a single function per file
+solution, Zsh feature). Second point isn&#8217;t so explicitly useful, but having whole Zsh community agreed on
+single extension standard is something worth noticing.</p>
+</div>
+<div class="paragraph">
+<p>From a more broad perspective, a plugin is:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>A directory with various files (main script, autoload functions, completions, Makefiles, backend
+programs, documentation).</p>
+</li>
+<li>
+<p>A script that obtains path to its directory in <code>$0</code> (see <a href="#zero-handling">next section</a> for
+enhancement proposal).</p>
+</li>
+<li>
+<p>A Github (or other site) repository identified by two components <strong>username</strong>/<strong>pluginname</strong>.</p>
+</li>
+<li>
+<p>A software package with any type of command line artifact – when used with advanced plugin
+managers that have hooks, can run Makefiles, add directories to <code>$PATH</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Below follow proposed enhancements and codifications of "Zsh plugin" meaning and plugin managers'
+functions – the proposed standardization.<br>
+<br></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect1">
 <h2 id="zero-handling">1. Standarized $0 handling</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -550,7 +602,7 @@ Instead of issuing a notice, it will be able to satisfy the dependencies from re
 it provides. For example, <code>pure</code> prompt provides <code>zsh-async</code> dependency library, which
 is a separate project and can be loaded by user on his own behalf. In result, the prompt
 can decide to source its private copy of <code>zsh-async</code>, having also reliable <code>$ZERO</code> defined
-by previous paragraph (note: <code>pure</code> doesn&#8217;t normally do this).</p>
+by previous section (note: <code>pure</code> doesn&#8217;t normally do this).</p>
 </div>
 <div class="paragraph">
 <p>Second item will allow plugin to e.g. set up <code>$fpath</code>, knowing that plugin manager will
@@ -614,7 +666,7 @@ on different accounts / machines.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-26 00:29:43 CEST
+Last updated 2018-04-26 18:49:06 CEST
 </div>
 </div>
 </body>
