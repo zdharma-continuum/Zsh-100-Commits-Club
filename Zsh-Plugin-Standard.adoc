@@ -1,5 +1,33 @@
 # Zsh Plugin Standard
 
+## What is a Zsh plugin?
+
+Zsh plugins were first defined by Oh-My-Zsh. They are dramatically simple yet powerful.
+From analytical perspective, a plugin:
+
+1. Has its directory added to `$fpath`.
+2. It has any first `\*.plugin.zsh` file sourced (or `*.zsh`, `init.zsh`, `*.sh`, these are non-standard).
+
+First point allows plugins to provide completions and use `autoload` functions (a single function per file
+solution, Zsh feature). Second point isn't so explicitly useful, but having whole Zsh community agreed on
+single extension standard is something worth noticing.
+
+From a more broad perspective, a plugin is:
+
+1. A directory with various files (main script, autoload functions, completions, Makefiles, backend
+   programs, documentation).
+2. A script that obtains path to its directory in `$0` (see link:#zero-handling[next section] for
+   enhancement proposal).
+3. A Github (or other site) repository identified by two components **username**/**pluginname**.
+4. A software package with any type of command line artifact – when used with advanced plugin
+   managers that have hooks, can run Makefiles, add directories to `$PATH`.
+
+Below follow proposed enhancements and codifications of "Zsh plugin" meaning and plugin managers'
+functions – the proposed standardization. +
+ +
+
+'''
+
 [#zero-handling]
 ## 1. Standarized $0 handling
 
@@ -65,7 +93,7 @@ Instead of issuing a notice, it will be able to satisfy the dependencies from re
 it provides. For example, `pure` prompt provides `zsh-async` dependency library, which
 is a separate project and can be loaded by user on his own behalf. In result, the prompt
 can decide to source its private copy of `zsh-async`, having also reliable `$ZERO` defined
-by previous paragraph (note: `pure` doesn't normally do this).
+by previous section (note: `pure` doesn't normally do this).
 
 Second item will allow plugin to e.g. set up `$fpath`, knowing that plugin manager will
 not handle this:
