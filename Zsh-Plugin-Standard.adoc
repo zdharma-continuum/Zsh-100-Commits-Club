@@ -5,7 +5,7 @@
 Zsh plugins were first defined by Oh-My-Zsh. They are dramatically simple yet powerful.
 From analytical perspective, a plugin:
 
-1. Has its directory added to `$fpath`.
+1. Has its directory added to `$fpath` (link:http://zsh.sourceforge.net/Doc/Release/Functions.html#Autoloading-Functions[zsh doc]).
 2. It has any first `\*.plugin.zsh` file sourced (or `*.zsh`, `init.zsh`, `*.sh`, these are non-standard).
 
 First point allows plugins to provide completions and use `autoload` functions (a single function per file
