@@ -16,7 +16,7 @@ From a more broad perspective, a plugin is:
 
 1. A directory with various files (main script, autoload functions, completions, Makefiles, backend
    programs, documentation).
-2. A script that obtains path to its directory in `$0` (see link:#zero-handling[next section] for
+2. A script that obtains path to its directory via `$0` (see link:#zero-handling[next section] for
    enhancement proposal).
 3. A Github (or other site) repository identified by two components **username**/**pluginname**.
 4. A software package with any type of command line artifact – when used with advanced plugin
