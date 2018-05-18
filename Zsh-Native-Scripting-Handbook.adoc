@@ -8,6 +8,7 @@ Ruby or Perl code, less like top-down shell scripts.
 
 ## Information
 
+[#at-sign-about-splitting]
 ### @ is about splitting
 
 How to access all array elements? -- use `@`. However, Zshell completion
@@ -20,6 +21,7 @@ effect – when option `KSH_ARRAYS` is set, it indeed induces referencing to wh
 array instead of first element only. It should then use braces, i.e. `${array[@]}`,
 `"${array[@]}"` (`KSH_ARRAYS` requirement).
 
+[#extended-glob]
 ### extended_glob
 
 Glob-flags `#b` and `#m` require `setopt extended_glob`. Patterns utilizing `~`
@@ -27,6 +29,7 @@ and `^` also require it. Extended-glob is one of the main features of Zsh.
 
 ## Constructs
 
+[#reading-a-file]
 ### Reading a file
 
 ```
@@ -44,6 +47,7 @@ declare -a lines; lines=( ${(f)"$(<path/file)"} )
 
 Note: `$(<...)` construct strips trailing empty lines.
 
+[#skipping-grep]
 ### Skipping grep
 
 ```
@@ -54,6 +58,7 @@ declare -a grepped; grepped=( ${(M)lines:#*query*} )
 To have `grep -v` effect, skip `M`-flag. To grep case insensitively, use `\#i` glob
 flag (`...:#(#i)\*query*}`).
 
+[#pattern-matching-in-and-fashion]
 ### Pattern matching in AND-fashion
 
 ```
@@ -67,6 +72,7 @@ be used with `:#` above to search arrays, or with `R`-subscript flag to search
 hashes (`${hsh[\(R)\*pattern*]}`), etc. Inventor of those patterns is Mikael
 Magnusson.
 
+[#skipping-tr]
 ### Skipping tr
 
 ```
@@ -80,6 +86,7 @@ print $text ▶ 12 21
 queried for character-replacement. You can substitute a text variable too, just
 skip `[@]` and parentheses in assignment.
 
+[#ternary-expressions-1]
 ### Ternary expressions with `\+,-,:+,:-` substitutions
 
 ```
@@ -94,6 +101,7 @@ Zsh allows such expressions also in normal context. Above is an example. `:+` is
 great number of lines of code with those substitutions, it's normally at least
 4-lines `if` condition or lenghty `&&`/`||` use.
 
+[#ternary-expressions-2]
 ### Ternary expressions with `:#` substitution
 
 ```
@@ -104,6 +112,7 @@ var=abcd; print ${${${(M)var:#abc}:+is abc}:-not abc} ▶ not abc
 An one-line "if var = x, then …, else …". Again, can spare a great amount of boring
 code that makes 10-line function a 20-line one.
 
+[#built-in-regular-expressions-engine]
 ### Using built-in regular expressions engine
 
 ```
@@ -121,6 +130,7 @@ that dependency (regex module can be not present, e.g. in default static build
 of Zsh). Also, they can be used in substitutions, for example in `//`
 substitution.
 
+[#skipping-uniq]
 ### Skipping uniq
 
 ```
@@ -131,6 +141,7 @@ declare -a array; array=( a a b ); print ${(u)array} ▶ a b
 Enable `-U` flag for array so that it guards elements to be unique, or use
 `u`-flag to uniquify elements of any array.
 
+[#skipping-awk]
 ### Skipping awk
 
 ```
@@ -156,6 +167,7 @@ declare -a list; list=( "a,b,c,1,e" "p,q,r,2,t" );
 print "${list[@]/(#m)*/${${(s:,:)MATCH}[4]}}" ▶ 1 2
 ```
 
+[#searching-arrays]
 ### Searching arrays
 
 ```
@@ -179,6 +191,7 @@ print $gathered ▶ Value 1 Value 2
 Use of `#b` glob flag enables math-code execution (and not only) in `/` and `//`
 substitutions. Implementation is very fast.
 
+[#serializing-data]
 ### Serializing data
 
 ```
@@ -200,6 +213,7 @@ hash `deserialized`. Use this to e.g. implement array of hashes.
 Note: to be compatible with `setopt ksharrays`, use `[@]` instead of `(@)`, e.g.:
 `...( "${(Q)${(z)serialized[@]}[@]}" )`
 
+[#tip-serializing-with-bash]
 ##### Tip: serializing with Bash
 
 ```
