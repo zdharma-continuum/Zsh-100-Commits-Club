@@ -491,10 +491,8 @@ managers that have hooks, it can run Makefiles, add directories to <code>$PATH</
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-zsh" data-lang="zsh">0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
-# or
-ZERO="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 
-# Then ${0:h} or ${ZERO:h} to get plugin's directory</code></pre>
+# Then ${0:h} to get plugin's directory</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -666,7 +664,7 @@ on different accounts / machines.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-05-10 06:31:25 CEST
+Last updated 2018-05-13 08:56:14 CEST
 </div>
 </div>
 </body>
