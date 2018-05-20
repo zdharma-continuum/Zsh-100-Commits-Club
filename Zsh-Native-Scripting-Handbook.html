@@ -736,6 +736,8 @@ intuitive.</p>
 # read-ini-file ./database2-setup.ini DB_CONF db2_
 #
 
+setopt localoptions extendedglob
+
 local __ini_file="$1" __out_hash="$2" __key_prefix="$3"
 local IFS='' __line __cur_section="void" __access_string
 local -a match mbegin mend
@@ -767,7 +769,7 @@ return 0
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-05-20 10:26:56 CEST
+Last updated 2018-05-20 10:30:15 CEST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
