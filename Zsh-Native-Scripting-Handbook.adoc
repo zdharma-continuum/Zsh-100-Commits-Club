@@ -1,4 +1,5 @@
 # Zsh Native Scripting Handbook
+:source-highlighter: prettify
 
 This document has been created after 2.5 years of creating software for Zshell
 and receiving help from IRC channel #zsh. Avoiding forks was the main guideline
@@ -15,8 +16,9 @@ How to access all array elements? -- use `@`. However, Zshell completion
 (`echo ${(<TAB>`) for `@` says: `@ -- double-quoted splitting of scalars` and
 that's the true meaning of this flag / subscript. If you quote e.g. an array,
 like `declare -a array; array=( a b c ); print "$array"`, you create a string, a
-scalar "a b c". `@` is to go back to non-scalar data by doing *splitting*. Two
-forms are available, `"$array[@]"` and `"${(@)array}"`. First form has additional
+scalar "a b c". `@` is to go back to non-scalar data by doing *splitting*.
+
+Two forms are available, `"$array[@]"` and `"${(@)array}"`. First form has additional
 effect – when option `KSH_ARRAYS` is set, it indeed induces referencing to whole
 array instead of first element only. It should then use braces, i.e. `${array[@]}`,
 `"${array[@]}"` (`KSH_ARRAYS` requirement).
@@ -32,28 +34,31 @@ and `^` also require it. Extended-glob is one of the main features of Zsh.
 [#reading-a-file]
 ### Reading a file
 
-```
+[source,none]
+----
 declare -a lines; lines=( "${(@f)"$(<path/file)"}" )
-```
+----
 
 This preserves empty lines because of double-quoting (the outside one).
 `@`-flag is used to obtain array instead of scalar. If you don't want empty
 lines preserved, you can also skip `@`-splitting, as it is explained in
 Information section:
 
-```
+[source,none]
+----
 declare -a lines; lines=( ${(f)"$(<path/file)"} )
-```
+----
 
 Note: `$(<...)` construct strips trailing empty lines.
 
 [#skipping-grep]
 ### Skipping grep
 
-```
+[source,none]
+----
 declare -a lines; lines=( "${(@f)"$(<path/file)"}" )
 declare -a grepped; grepped=( ${(M)lines:#*query*} )
-```
+----
 
 To have `grep -v` effect, skip `M`-flag. To grep case insensitively, use `\#i` glob
 flag (`...:#(#i)\*query*}`).
@@ -61,9 +66,10 @@ flag (`...:#(#i)\*query*}`).
 [#pattern-matching-in-and-fashion]
 ### Pattern matching in AND-fashion
 
-```
+[source,none]
+----
 [[ "abc xyz efg" = *abc*~^*efg* ]] && print Match found
-```
+----
 
 The `~` is a negation -- `match \*abc* but not ...`. Then, `^` is also a negation.
 The effect is: `\*abc* but not those that don't have \*efg*` which equals to:
@@ -75,12 +81,13 @@ Magnusson.
 [#skipping-tr]
 ### Skipping tr
 
-```
+[source,none]
+----
 declare -A map; map=( a 1 b 2 );
 text=( "ab" "ba" )
 text=( ${text[@]//(#m)?/${map[$MATCH]}} )
 print $text ▶ 12 21
-```
+----
 
 `#m` flag enables the `$MATCH` parameter. At each `//` substitution, `$map` is
 queried for character-replacement. You can substitute a text variable too, just
@@ -89,10 +96,11 @@ skip `[@]` and parentheses in assignment.
 [#ternary-expressions-1]
 ### Ternary expressions with `\+,-,:+,:-` substitutions
 
-```
+[source,none]
+----
 HELP="yes"; print ${${HELP:+help enabled}:-help disabled} ▶ help enabled
 HELP=""; print ${${HELP:+help enabled}:-help disabled} ▶ help disabled
-```
+----
 
 Ternary expression is known from `C` language but exists also in Zsh, but
 directly only in math context, i.e. `\(( a = a > 0 ? b : c ))`. Flexibility of
@@ -104,10 +112,11 @@ great number of lines of code with those substitutions, it's normally at least
 [#ternary-expressions-2]
 ### Ternary expressions with `:#` substitution
 
-```
+[source,none]
+----
 var=abc; print ${${${(M)var:#abc}:+is abc}:-not abc} ▶ is abc
 var=abcd; print ${${${(M)var:#abc}:+is abc}:-not abc} ▶ not abc
-```
+----
 
 An one-line "if var = x, then …, else …". Again, can spare a great amount of boring
 code that makes 10-line function a 20-line one.
@@ -115,9 +124,10 @@ code that makes 10-line function a 20-line one.
 [#built-in-regular-expressions-engine]
 ### Using built-in regular expressions engine
 
-```
+[source,none]
+----
 [[ "aabbb" = (#b)(a##)*(b(#c2,2)) ]] && print ${match[1]}-${match[2]} ▶ aa-bb
-```
+----
 
 `\##` is: "1 or more". `(#c2,2)` is: "exactly 2". A few other constructs: `#` is
 "0 or more", `?` is "any character", `(a|b|)` is "a or b or empty match". `#b`
@@ -133,10 +143,11 @@ substitution.
 [#skipping-uniq]
 ### Skipping uniq
 
-```
+[source,none]
+----
 declare -aU array; array=( a a b ); print $array ▶ a b
 declare -a array; array=( a a b ); print ${(u)array} ▶ a b
-```
+----
 
 Enable `-U` flag for array so that it guards elements to be unique, or use
 `u`-flag to uniquify elements of any array.
@@ -144,10 +155,11 @@ Enable `-U` flag for array so that it guards elements to be unique, or use
 [#skipping-awk]
 ### Skipping awk
 
-```
+[source,none]
+----
 declare -a list; list=( "a,b,c,1,e" "p,q,r,2,t" );
 print "${list[@]/(#b)([^,]##,)(#c3,3)([^,]##)*/${match[2]}}" ▶ 1 2
-```
+----
 
 The pattern specifies 3 blocks of `[^,]##,` so 3 "not-comma multiple times, then
 comma", then single block of "not-comma multiple times" in second parentheses --
@@ -155,38 +167,42 @@ and then replaces this with second parentheses. Result is 4th column extracted
 from multiple lines of text, something `awk` is often used for. Other method is
 use of `s`-flag. For single line of text:
 
-```
+[source,none]
+----
 text="a,b,c,1,e"; print ${${(s:,:)text}[4]} ▶ 1
-```
+----
 
 Thanks to in-substitution code-execution capabilities it's possible to use
 `s`-flag to apply it to multiple lines:
 
-```
+[source,none]
+----
 declare -a list; list=( "a,b,c,1,e" "p,q,r,2,t" );
 print "${list[@]/(#m)*/${${(s:,:)MATCH}[4]}}" ▶ 1 2
-```
+----
 
 [#searching-arrays]
 ### Searching arrays
 
-```
+[source,none]
+----
 declare -a array; array=( a b " c1" d ); print ${array[(r)[[:space:]][[:alpha:]]*]} ▶  c1
-```
+----
 
 `\[[:space:]]` contains unicode spaces. This is often used in conditional
 expression like `[[ -z ${array[(r)...]} ]]`.
 
 ### Code execution in `//` substitution
 
-```
+[source,none]
+----
 append() { gathered+=( $array[$1] ); }
 functions -M append 1 1 append
 declare -a array; array=( "Value 1" "Other data" "Value 2" )
 declare -a gathered; integer idx=0
 : ${array[@]/(#b)(Value ([[:digit:]]##)|*)/$(( ${#match[2]} > 0 ? append(++idx) : ++idx ))}
 print $gathered ▶ Value 1 Value 2
-```
+----
 
 Use of `#b` glob flag enables math-code execution (and not only) in `/` and `//`
 substitutions. Implementation is very fast.
@@ -194,12 +210,13 @@ substitutions. Implementation is very fast.
 [#serializing-data]
 ### Serializing data
 
-```
+[source,none]
+----
 declare -A hsh deserialized; hsh=( key value )
 serialized="${(j: :)${(qkv@)hsh}}"
 deserialized=( "${(Q@)${(z@)serialized}}" )
 print ${(kv)deserialized} ▶ key value
-```
+----
 
 `j`-flag means join -- by spaces, in this case. Flags `kv` mean: keys and values,
 interleaving. Important `q`-flag means: quote. So what is obtained is each key
@@ -216,12 +233,68 @@ Note: to be compatible with `setopt ksharrays`, use `[@]` instead of `(@)`, e.g.
 [#tip-serializing-with-bash]
 ##### Tip: serializing with Bash
 
-```
+[source,none]
+----
 array=( key1 key2 )
 printf -v serialized "%q " "${array[@]}"
 eval "deserialized=($serialized)"
-```
+----
 
 This method works also with Zsh. The drawback is use of `eval`, however it's
 impossible that any problem will occurr unless someone compromises variable's
 value, but as always, `eval` should be avoided if possible.
+
+## Tips and Tricks
+
+### Parsing INI file
+
+With Zshell's `extended_glob` parsing an `ini` file is an easy task. It will not
+result in a nested-arrays data structure (Zsh doesn't support nested hashes),
+but the hash keys like `$DB_CONF[db1_<connection>_host]` are actually really
+intuitive.
+
+The code should be placed in file named `read-ini-file`, in `$fpath`, and
+`autoload read-ini-file` should be invoked.
+
+.read-ini-file
+[#read-ini-file]
+[source,zsh]
+----
+# Copyright (c) 2018 Sebastian Gniazdowski
+#
+# $1 - path to the ini file to parse
+# $2 - name of output hash
+# $3 - prefix for keys in the hash
+#
+# Writes to given hash under keys built in following way: ${3}<section>_field.
+# Values are values from ini file. Example invocation:
+#
+# read-ini-file ./database1-setup.ini DB_CONF db1_
+# read-ini-file ./database2-setup.ini DB_CONF db2_
+#
+
+local __ini_file="$1" __out_hash="$2" __key_prefix="$3"
+local IFS='' __line __cur_section="void" __access_string
+local -a match mbegin mend
+
+[[ ! -r "$__ini_file" ]] && { builtin print -r "read-ini-file: an ini file is unreadable ($__ini_file)"; return 1; }
+
+while read -r -t 1 __line; do
+    if [[ "$__line" = [[:blank:]]#\;* ]]; then
+        continue
+    # Match "[Section]" line
+    elif [[ "$__line" = (#b)[[:blank:]]#\[([^\]]##)\][[:blank:]]# ]]; then
+        __cur_section="${match[1]}"
+    # Match "string = string" line
+    elif [[ "$__line" = (#b)[[:blank:]]#([^[:blank:]=]##)[[:blank:]]#[=][[:blank:]]#(*) ]]; then
+        match[2]="${match[2]%"${match[2]##*[! $'\t']}"}" # severe trick - remove trailing whitespace
+        __access_string="${__out_hash}[${__key_prefix}<$__cur_section>_${match[1]}]"
+        : "${(P)__access_string::=${match[2]}}"
+    fi
+done < "$__ini_file"
+
+return 0
+
+# vim:ft=zsh:et
+----
+
