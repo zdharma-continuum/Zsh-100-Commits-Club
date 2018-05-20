@@ -246,6 +246,7 @@ value, but as always, `eval` should be avoided if possible.
 
 ## Tips and Tricks
 
+[#parsing-ini-file]
 ### Parsing INI file
 
 With Zshell's `extended_glob` parsing an `ini` file is an easy task. It will not
