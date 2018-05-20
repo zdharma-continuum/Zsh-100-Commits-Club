@@ -274,6 +274,8 @@ The code should be placed in file named `read-ini-file`, in `$fpath`, and
 # read-ini-file ./database2-setup.ini DB_CONF db2_
 #
 
+setopt localoptions extendedglob
+
 local __ini_file="$1" __out_hash="$2" __key_prefix="$3"
 local IFS='' __line __cur_section="void" __access_string
 local -a match mbegin mend
