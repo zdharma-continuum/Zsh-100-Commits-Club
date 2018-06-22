@@ -1,5 +1,6 @@
 # Zsh Native Scripting Handbook
 :source-highlighter: prettify
+:toc:
 
 This document has been created after 2.5 years of creating software for Zshell
 and receiving help from IRC channel #zsh. Avoiding forks was the main guideline
