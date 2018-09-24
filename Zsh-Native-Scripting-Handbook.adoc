@@ -247,7 +247,7 @@ value, but as always, `eval` should be avoided if possible.
 
 ## Real world examples
 
-Following code checks if there is subcommand `$mysub`:
+Following code checks if there is a `git` subcommand `$mysub`:
 
 [source,none]
 ----
