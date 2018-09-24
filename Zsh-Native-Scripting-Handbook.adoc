@@ -261,7 +261,7 @@ That are `4` forks. The code can be replaced according to this guide:
 local -a lines_list
 lines_list=( ${(f)"$(git help -a)"} )
 lines_list=( ${(M)${(s: :)${(M)lines_list:#  [a-z]*}}:#$mysub} )
-if (( ${#__lines_list} > 0 )); then
+if (( ${#lines_list} > 0 )); then
 ----
 
 The result is just `1` fork.
