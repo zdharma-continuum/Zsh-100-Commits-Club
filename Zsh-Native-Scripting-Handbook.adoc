@@ -245,6 +245,27 @@ This method works also with Zsh. The drawback is use of `eval`, however it's
 impossible that any problem will occurr unless someone compromises variable's
 value, but as always, `eval` should be avoided if possible.
 
+## Real world examples
+
+Following code checks if there is subcommand `$mysub`:
+
+[source,none]
+----
+if git help -a | grep "^  [a-z]" | tr ' ' '\n' | grep -x $mysub > /dev/null > /dev/null; then
+----
+
+That are `4` forks. The code can be replaced according to this guide:
+
+[source,none]
+----
+local -a lines_list
+lines_list=( ${(f)"$(git help -a)"} )
+lines_list=( ${(M)${(s: :)${(M)lines_list:#  [a-z]*}}:#$mysub} )
+if (( ${#__lines_list} > 0 )); then
+----
+
+The result is just `1` fork.
+
 ## Tips and Tricks
 
 [#parsing-ini-file]
