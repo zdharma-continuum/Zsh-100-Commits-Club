@@ -757,7 +757,7 @@ value, but as always, <code>eval</code> should be avoided if possible.</p>
 <pre class="prettyprint highlight"><code class="language-none" data-lang="none">local -a lines_list
 lines_list=( ${(f)"$(git help -a)"} )
 lines_list=( ${(M)${(s: :)${(M)lines_list:#  [a-z]*}}:#$mysub} )
-if (( ${#__lines_list} &gt; 0 )); then</code></pre>
+if (( ${#lines_list} &gt; 0 )); then</code></pre>
 </div>
 </div>
 <div class="paragraph">
