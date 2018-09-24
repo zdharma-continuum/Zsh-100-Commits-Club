@@ -453,6 +453,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#serializing-data">Serializing data</a></li>
 </ul>
 </li>
+<li><a href="#_real_world_examples">Real world examples</a></li>
 <li><a href="#_tips_and_tricks">Tips and Tricks</a>
 <ul class="sectlevel2">
 <li><a href="#parsing-ini-file">Parsing INI file</a></li>
@@ -738,6 +739,33 @@ value, but as always, <code>eval</code> should be avoided if possible.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_real_world_examples">Real world examples</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Following code checks if there is subcommand <code>$mysub</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-none" data-lang="none">if git help -a | grep "^  [a-z]" | tr ' ' '\n' | grep -x $mysub &gt; /dev/null &gt; /dev/null; then</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That are <code>4</code> forks. The code can be replaced according to this guide:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-none" data-lang="none">local -a lines_list
+lines_list=( ${(f)"$(git help -a)"} )
+lines_list=( ${(M)${(s: :)${(M)lines_list:#  [a-z]*}}:#$mysub} )
+if (( ${#__lines_list} &gt; 0 )); then</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The result is just <code>1</code> fork.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_tips_and_tricks">Tips and Tricks</h2>
 <div class="sectionbody">
 <div class="sect2">
@@ -790,9 +818,7 @@ while read -r -t 1 __line; do
     fi
 done &lt; "$__ini_file"
 
-return 0
-
-# vim:ft=zsh:et</code></pre>
+return 0</code></pre>
 </div>
 </div>
 </div>
@@ -801,7 +827,7 @@ return 0
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-06-22 10:54:52 CEST
+Last updated 2018-09-24 06:14:57 CEST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
