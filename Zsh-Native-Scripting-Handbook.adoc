@@ -272,13 +272,14 @@ The result is just `1` fork.
 [#unquoted-apostrophes-test]
 ### Counting unquoted-only apostrophes
 
-A project was needing this to do Zle line-continuation tricks (when you put a
-backslash-\ at the end of the line and press enter – it is the
+A project was needing this to do some Zle line-continuation tricks (when you
+put a backslash-\ at the end of the line and press enter – it is the
 line-continuation that occurs at that moment).
 
-The required functionality is: in given string, count number of apostrophes,
-but only the unquoted ones. This means that only apostrophes with null or an
-even number of preceding backslashes should be accepted into the count:
+The required functionality is: in given string, count the number of
+apostrophes, but _only the unquoted ones_. This means that only apostrophes
+with null or an even number of preceding backslashes should be accepted into
+the count:
 
 [source,none]
 ----
@@ -288,8 +289,9 @@ integer count=0
 echo $count
 ----
 
-The answer (i.e. the output) to above presentation and example is: `3` (there
-are `3` unquoted apostrophes in the string `$buf`).
+The answer (i.e. the output) to the above presentation and example is: `3`
+(there are `3` unquoted apostrophes in total in the string kept in the variable
+`$buf`).
 
 ## Tips and Tricks
 
