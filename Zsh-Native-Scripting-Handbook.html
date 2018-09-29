@@ -453,7 +453,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#serializing-data">Serializing data</a></li>
 </ul>
 </li>
-<li><a href="#_real_world_examples">Real world examples</a></li>
+<li><a href="#rworld-ex">Real world examples</a>
+<ul class="sectlevel2">
+<li><a href="#git-subcmd-test">Testing for Git subcommand</a></li>
+<li><a href="#unquoted-apostrophes-test">Counting unquoted-only apostrophes</a></li>
+</ul>
+</li>
 <li><a href="#_tips_and_tricks">Tips and Tricks</a>
 <ul class="sectlevel2">
 <li><a href="#parsing-ini-file">Parsing INI file</a></li>
@@ -739,8 +744,10 @@ value, but as always, <code>eval</code> should be avoided if possible.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_real_world_examples">Real world examples</h2>
+<h2 id="rworld-ex">Real world examples</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="git-subcmd-test">Testing for Git subcommand</h3>
 <div class="paragraph">
 <p>Following code checks if there is a <code>git</code> subcommand <code>$mysub</code>:</p>
 </div>
@@ -762,6 +769,34 @@ if (( ${#lines_list} &gt; 0 )); then</code></pre>
 </div>
 <div class="paragraph">
 <p>The result is just <code>1</code> fork.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unquoted-apostrophes-test">Counting unquoted-only apostrophes</h3>
+<div class="paragraph">
+<p>A project was needing this to do some Zle line-continuation tricks (when you
+put a backslash-\ at the end of the line and press enter – it is the
+line-continuation that occurs at that moment).</p>
+</div>
+<div class="paragraph">
+<p>The required functionality is: in given string, count the number of
+apostrophes, but <em>only the unquoted ones</em>. This means that only apostrophes
+with null or an even number of preceding backslashes should be accepted into
+the count:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-none" data-lang="none">buf="word'continue\'after\\\'afterSecnd\\''afterPair"
+integer count=0
+: ${buf//(#b)((#s)|[^\\])([\\][\\])#(\'\'#)/$(( count += ${#match[3]} ))}
+echo $count</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The answer (i.e. the output) to the above presentation and example is: <code>3</code>
+(there are <code>3</code> unquoted apostrophes in total in the string kept in the variable
+<code>$buf</code>).</p>
+</div>
 </div>
 </div>
 </div>
@@ -827,7 +862,7 @@ return 0</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-09-24 06:14:57 CEST
+Last updated 2018-09-29 20:49:06 CEST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
