@@ -245,8 +245,11 @@ This method works also with Zsh. The drawback is use of `eval`, however it's
 impossible that any problem will occurr unless someone compromises variable's
 value, but as always, `eval` should be avoided if possible.
 
+[#rworld-ex]
 ## Real world examples
 
+[#git-subcmd-test]
+### Testing for Git subcommand
 Following code checks if there is a `git` subcommand `$mysub`:
 
 [source,none]
@@ -265,6 +268,28 @@ if (( ${#lines_list} > 0 )); then
 ----
 
 The result is just `1` fork.
+
+[#unquoted-apostrophes-test]
+### Counting unquoted-only apostrophes
+
+A project was needing this to do Zle line-continuation tricks (when you put a
+backslash-\ at the end of the line and press enter – it is the
+line-continuation that occurs at that moment).
+
+The required functionality is: in given string, count number of apostrophes,
+but only the unquoted ones. This means that only apostrophes with null or an
+even number of preceding backslashes should be accepted into the count:
+
+[source,none]
+----
+buf="word'continue\'after\\\'afterSecnd\\''afterPair"
+integer count=0
+: ${buf//(#b)((#s)|[^\\])([\\][\\])#(\'\'#)/$(( count += ${#match[3]} ))}
+echo $count
+----
+
+The answer (i.e. the output) to above presentation and example is: `3` (there
+are `3` unquoted apostrophes in the string `$buf`).
 
 ## Tips and Tricks
 
