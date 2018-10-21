@@ -1,6 +1,6 @@
 # Zsh Native Scripting Handbook
 Sebastian Gniazdowski <psprint@zdharma.org>
-v1.15, 10/21/2018
+v1.16, 10/21/2018
 :source-highlighter: prettify
 :toc:
 
@@ -252,6 +252,9 @@ declare -a array; array=( a b " c1" d ); print ${array[(r)[[:space:]][[:alpha:]]
 `\[[:space:]]` contains unicode spaces. This is often used in conditional
 expression like `[[ -z ${array[(r)...]} ]]`.
 
+Note that link:#skipping-grep[Skipping grep] that uses `:#` substitution can also be
+used to search arrays.
+
 ### Code execution in `//` substitution
 
 [source,none]
@@ -345,12 +348,27 @@ the count:
 buf="word'continue\'after\\\'afterSecnd\\''afterPair"
 integer count=0
 : ${buf//(#b)((#s)|[^\\])([\\][\\])#(\'\'#)/$(( count += ${#match[3]} ))}
-echo $count
+echo $count ▶ 3
 ----
 
 The answer (i.e. the output) to the above presentation and example is: `3`
 (there are `3` unquoted apostrophes in total in the string kept in the variable
 `$buf`).
+
+Below follows a variation of above snippet that doesn't use math-code execution:
+
+[source,none]
+----
+buf="word'continue\'after\\\'afterSecnd\\''afterPair"
+buf="${(S)buf//(#b)*((#s)|[^\\])([\\][\\])#(\'\'#)*/${match[3]}}"; buf=${buf%%[^\']##}
+integer count=${#buf}
+echo $count ▶ 3
+----
+
+This is possible thanks to `(S)` flag – non-greedy matching, `([\\][\\])#` trick – it
+matches only unquoted following `(\'\'##)` characters (which are the apostrophes) and
+a general strategy to replace `anything-apostrope(s)` (unquoted ones) with
+`the-apostrope(s)` (and then count them with `${#buf}`).
 
 ## Tips and Tricks
 
@@ -409,6 +427,7 @@ return 0
 
 [appendix]
 == Revision history
+v1.16, 10/21/2018: Count apostrophes example – additional version without math-code +
 v1.15, 10/21/2018: Inform about potential (s::)-flag problems +
 v1.1, 10/21/2018: Elaborate on (M)-flag in "Skipping grep" section +
 v1.05, 10/21/2018: New section "Reading from stdin" +
