@@ -35,7 +35,7 @@ and `^` also require it. Extended-glob is one of the main features of Zsh.
 [#reading-a-file]
 ### Reading a file
 
-[source,none]
+[source,zsh]
 ----
 declare -a lines; lines=( "${(@f)"$(<path/file)"}" )
 ----
@@ -45,12 +45,42 @@ This preserves empty lines because of double-quoting (the outside one).
 lines preserved, you can also skip `@`-splitting, as it is explained in
 Information section:
 
-[source,none]
+[source,zsh]
 ----
 declare -a lines; lines=( ${(f)"$(<path/file)"} )
 ----
 
 Note: `$(<...)` construct strips trailing empty lines.
+
+[#reading-from-stdin]
+### Reading from stdin
+
+This topic is governed by the same principles a the previous paragraph
+(`Reading a file`), with the single difference that instead of the substitution
+`"$(<file-path)"` the substitution that should be used is `"$(command arg1
+...)"`, i.e.:
+
+[source,zsh]
+----
+declare -a lines; lines=( ${(f)"$(command arg1 ...)"} )
+----
+
+This will read the `command's` output into the array `lines`. The version that
+does `@-`splitting and retains empty lines is:
+
+[source,zsh]
+----
+declare -a lines; lines=( "${(f@)$(command arg1 ...)}" )
+----
+
+Note that instead of four double-quotes `"`, an idiom that is justified (simply
+suggested) by the Zsh documentation (and was used in the previous paragraph, in
+the snippet `... "${(@f)"$(<path/file)"}" ...`), only **two** double-quotes are
+being used. I've investigated this form with the main Zsh developers on the
+`zsh-workers@zsh.org` mailing list, and it was clearly stated that single,
+outside quoting of `${(f@)...}` substitution works as if it was also separately
+applied to `$(command ...)` (or to `$(<file-path)`) inner substitution, so the
+second double-quoting isn't actually needed.
 
 [#skipping-grep]
 ### Skipping grep
@@ -187,7 +217,7 @@ print "${list[@]/(#m)*/${${(s:,:)MATCH}[4]}}" ▶ 1 2
 
 [source,none]
 ----
-declare -a array; array=( a b " c1" d ); print ${array[(r)[[:space:]][[:alpha:]]*]} ▶  c1
+declare -a array; array=( a b " c1" d ); print ${array[(r)[[:space:]][[:alpha:]]*]} ▶ c1
 ----
 
 `\[[:space:]]` contains unicode spaces. This is often used in conditional
