@@ -5,6 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.6.1">
+<meta name="author" content="Sebastian Gniazdowski">
 <title>Zsh Native Scripting Handbook</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -428,6 +429,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <body class="article">
 <div id="header">
 <h1>Zsh Native Scripting Handbook</h1>
+<div class="details">
+<span id="author" class="author">Sebastian Gniazdowski</span><br>
+<span id="email" class="email"><a href="mailto:psprint@zdharma.org">psprint@zdharma.org</a></span><br>
+<span id="revnumber">version 1.16,</span>
+<span id="revdate">10/21/2018</span>
+</div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -440,6 +447,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_constructs">Constructs</a>
 <ul class="sectlevel2">
 <li><a href="#reading-a-file">Reading a file</a></li>
+<li><a href="#reading-from-stdin">Reading from stdin</a></li>
 <li><a href="#skipping-grep">Skipping grep</a></li>
 <li><a href="#pattern-matching-in-and-fashion">Pattern matching in AND-fashion</a></li>
 <li><a href="#skipping-tr">Skipping tr</a></li>
@@ -464,6 +472,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#parsing-ini-file">Parsing INI file</a></li>
 </ul>
 </li>
+<li><a href="#_revision_history">Appendix A: Revision history</a></li>
 </ul>
 </div>
 </div>
@@ -514,7 +523,7 @@ and <code>^</code> also require it. Extended-glob is one of the main features of
 <h3 id="reading-a-file">Reading a file</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-none" data-lang="none">declare -a lines; lines=( "${(@f)"$(&lt;path/file)"}" )</code></pre>
+<pre class="prettyprint highlight"><code class="language-zsh" data-lang="zsh">declare -a lines; lines=( "${(@f)"$(&lt;path/file)"}" )</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -525,11 +534,44 @@ Information section:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-none" data-lang="none">declare -a lines; lines=( ${(f)"$(&lt;path/file)"} )</code></pre>
+<pre class="prettyprint highlight"><code class="language-zsh" data-lang="zsh">declare -a lines; lines=( ${(f)"$(&lt;path/file)"} )</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Note: <code>$(&lt;&#8230;&#8203;)</code> construct strips trailing empty lines.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="reading-from-stdin">Reading from stdin</h3>
+<div class="paragraph">
+<p>This topic is governed by the same principles a the previous paragraph
+(<code>Reading a file</code>), with the single difference that instead of the substitution
+<code>"$(&lt;file-path)"</code> the substitution that should be used is <code>"$(command arg1
+&#8230;&#8203;)"</code>, i.e.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-zsh" data-lang="zsh">declare -a lines; lines=( ${(f)"$(command arg1 ...)"} )</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will read the <code>command&#8217;s</code> output into the array <code>lines</code>. The version that
+does <code>@</code> splitting and retains any empty lines is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-zsh" data-lang="zsh">declare -a lines; lines=( "${(f@)$(command arg1 ...)}" )</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that instead of four double-quotes <code>"</code>, an idiom that is justified (simply
+suggested) by the Zsh documentation (and was used in the previous paragraph, in
+the snippet <code>&#8230;&#8203; "${(@f)"$(&lt;path/file)"}" &#8230;&#8203;</code>), only <strong>two</strong> double-quotes are
+being used. I&#8217;ve investigated this form with the main Zsh developers on the
+<code>zsh-workers@zsh.org</code> mailing list, and it was clearly stated that single,
+outside quoting of <code>${(f@)&#8230;&#8203;}</code> substitution works as if it was also separately
+applied to <code>$(command &#8230;&#8203;)</code> (or to <code>$(&lt;file-path)</code>) inner substitution, so the
+second double-quoting isn&#8217;t actually needed.</p>
 </div>
 </div>
 <div class="sect2">
@@ -543,6 +585,16 @@ declare -a grepped; grepped=( ${(M)lines:#*query*} )</code></pre>
 <div class="paragraph">
 <p>To have <code>grep -v</code> effect, skip <code>M</code>-flag. To grep case insensitively, use <code>#i</code> glob
 flag (<code>&#8230;&#8203;:#(#i)*query*}</code>).</p>
+</div>
+<div class="paragraph">
+<p>As it can be seen, <code>${&#8230;&#8203;:#&#8230;&#8203;}</code> substitution is a filtering of array, which by
+default filters-out elements (<code>(M)</code> flag induces the opposite behavior). When
+used with string, not an array, it behaves similarily: returns empty string when
+<code>{input_string_var:#pattern}</code> matches whole input string.</p>
+</div>
+<div class="paragraph">
+<p>Side-note: <code>(M)</code> flag can be used also with <code>${(M)var#pattern}</code> and other
+substitutions, to retain what&#8217;s matched by the pattern instead of removing that.</p>
 </div>
 </div>
 <div class="sect2">
@@ -670,17 +722,42 @@ use of <code>s</code>-flag. For single line of text:</p>
 print "${list[@]/(#m)*/${${(s:,:)MATCH}[4]}}" ▶ 1 2</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>There is a problem with the <code>(s::)</code> flag that can be solved if Zsh is version
+<code>5.4</code> or higher: if there will be single input column, e.g. <code>list=( "column1"
+"a,b")</code> instead of two or more columns (i.e. <code>list=( "column1,column2" "a,b"
+)</code>), then <code>(s::)</code> will return <strong>string</strong> instead of 1-element <strong>array</strong>. So the
+index <code>[4]</code> in above snippet will index a string, and show its 4-th letter.
+Starting with Zsh 5.4, thanks to a patch by Bart Schaefer (<code>40640: the (A)
+parameter flag forces array result even if&#8230;&#8203;</code>), it is possible to force
+<strong>array</strong>-kind of result even for single column, by adding <code>(A)</code> flag, i.e.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-none" data-lang="none">declare -a list; list=( "a,b,c,1,e" "p,q,r,2,t" "column1" );
+print "${list[@]/(#m)*/${${(As:,:)MATCH}[4]}}" ▶ 1 2
+print "${list[@]/(#m)*/${${(s:,:)MATCH}[4]}}" ▶ 1 2 u</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Side-note: <code>(A)</code> flag is often used together with <code>::=</code> assignment-substitution
+and <code>(P)</code> flag, to assign arrays and hashes by-name.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="searching-arrays">Searching arrays</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-none" data-lang="none">declare -a array; array=( a b " c1" d ); print ${array[(r)[[:space:]][[:alpha:]]*]} ▶  c1</code></pre>
+<pre class="prettyprint highlight"><code class="language-none" data-lang="none">declare -a array; array=( a b " c1" d ); print ${array[(r)[[:space:]][[:alpha:]]*]} ▶ c1</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p><code>[[:space:]]</code> contains unicode spaces. This is often used in conditional
 expression like <code>[[ -z ${array[(r)&#8230;&#8203;]} ]]</code>.</p>
+</div>
+<div class="paragraph">
+<p>Note that <a href="#skipping-grep">Skipping grep</a> that uses <code>:#</code> substitution can also be
+used to search arrays.</p>
 </div>
 </div>
 <div class="sect2">
@@ -789,13 +866,30 @@ the count:</p>
 <pre class="prettyprint highlight"><code class="language-none" data-lang="none">buf="word'continue\'after\\\'afterSecnd\\''afterPair"
 integer count=0
 : ${buf//(#b)((#s)|[^\\])([\\][\\])#(\'\'#)/$(( count += ${#match[3]} ))}
-echo $count</code></pre>
+echo $count ▶ 3</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>The answer (i.e. the output) to the above presentation and example is: <code>3</code>
 (there are <code>3</code> unquoted apostrophes in total in the string kept in the variable
 <code>$buf</code>).</p>
+</div>
+<div class="paragraph">
+<p>Below follows a variation of above snippet that doesn&#8217;t use math-code execution:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-none" data-lang="none">buf="word'continue\'after\\\'afterSecnd\\''afterPair"
+buf="${(S)buf//(#b)*((#s)|[^\\])([\\][\\])#(\'\'#)*/${match[3]}}"; buf=${buf%%[^\']##}
+integer count=${#buf}
+echo $count ▶ 3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is possible thanks to <code>(S)</code> flag – non-greedy matching, <code>([\\][\\])<mark></code> trick – it
+matches only unquoted following <code>(\'\'</mark>#)</code> characters (which are the apostrophes) and
+a general strategy to replace <code>anything-apostrope(s)</code> (unquoted ones) with
+<code>the-apostrope(s)</code> (and then count them with <code>${#buf}</code>).</p>
 </div>
 </div>
 </div>
@@ -859,10 +953,23 @@ return 0</code></pre>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_revision_history">Appendix A: Revision history</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>v1.16, 10/21/2018: Count apostrophes example – additional version without math-code<br>
+v1.15, 10/21/2018: Inform about potential (s::)-flag problems<br>
+v1.1, 10/21/2018: Elaborate on (M)-flag in "Skipping grep" section<br>
+v1.05, 10/21/2018: New section "Reading from stdin"<br>
+v1.0, 09/29/2018: New real world examples (<code>git help -a</code> and "Counting apostrophes")<br></p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-09-29 20:49:06 CEST
+Version 1.16<br>
+Last updated 2018-10-21 15:23:09 CEST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
