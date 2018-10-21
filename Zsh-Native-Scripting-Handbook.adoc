@@ -1,6 +1,6 @@
 # Zsh Native Scripting Handbook
 Sebastian Gniazdowski <psprint@zdharma.org>
-v1.16, 10/21/2018
+v1.18, 10/21/2018
 :source-highlighter: prettify
 :toc:
 
@@ -103,6 +103,63 @@ used with string, not an array, it behaves similarily: returns empty string when
 
 Side-note: `(M)` flag can be used also with `${(M)var#pattern}` and other
 substitutions, to retain what's matched by the pattern instead of removing that.
+
+[#multi-line-grep]
+#### Multi-line matching like with grep
+
+Suppose you have a Subversion repository and want to check if it contains files
+being not under version control. You could do this in Bash style like follows:
+
+[source,zsh]
+----
+local svn_status="$(svn status)"
+if [[ -n "$(echo "$svn_status" | \grep \^\?)" ]]; then
+    echo found
+fi
+----
+
+That are 3 forks: for `svn status`, for `echo` and for `grep`. This can be solved
+by `:#` substitution and `(M)` flag described above in this section (just check
+if number of matched lines is greater than 0). However, there's a more direct
+approach:
+
+[source,zsh]
+----
+local svn_status="$(svn status)" nl=$'\n'
+if [[ "$svn_status" = *((#s)|$nl)\?* ]]; then
+  echo found
+fi
+----
+
+This requires `extendedglob`. `(#s)` means: "start of the string". So
+`((#s)|$nl)` means "start of the string OR preceded by a new-line".
+
+If `extendedglob` cannot be used for some reason, this can be achieved also
+without it, but essentially it means that alternative (i.e. `|`) of two
+versions of the pattern will be matched:
+
+[source,zsh]
+----
+setopt localoptions noextendedglob
+local svn_status="$(svn status)" nl=$'\n'
+if [[ "$svn_status" = (\?*|*$nl\?*) ]]; then
+  echo found
+fi
+----
+
+In general, multi-line matching falls into following idiom (`extendedglob`
+version):
+
+[source,zsh]
+----
+local needle="?" required_preceding='[[:space:]]#'
+[[ "$(svn status)" = *((#s)|$nl)${~required_preceding}${needle}* ]] && echo found
+----
+
+It does a single fork (calls `svn status`). The `${~variable}` means (the `~`
+in it): "the variable is holding a pattern, interpret it". All in all, instead
+of regular expressions we were using patterns (globs) (see
+link:#built-in-regular-expressions-engine[this section]).
 
 [#pattern-matching-in-and-fashion]
 ### Pattern matching in AND-fashion
@@ -427,8 +484,9 @@ return 0
 
 [appendix]
 == Revision history
+v1.18, 10/21/2018: Multi-line matching like with `grep`
 v1.16, 10/21/2018: Count apostrophes example – additional version without math-code +
-v1.15, 10/21/2018: Inform about potential (s::)-flag problems +
+v1.15, 10/21/2018: Inform about potential (s::)-flag problems ("Skipping awk) +
 v1.1, 10/21/2018: Elaborate on (M)-flag in "Skipping grep" section +
 v1.05, 10/21/2018: New section "Reading from stdin" +
 v1.0, 09/29/2018: New real world examples (`git help -a` and "Counting apostrophes") +
