@@ -432,7 +432,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Sebastian Gniazdowski</span><br>
 <span id="email" class="email"><a href="mailto:psprint@zdharma.org">psprint@zdharma.org</a></span><br>
-<span id="revnumber">version 1.16,</span>
+<span id="revnumber">version 1.18,</span>
 <span id="revdate">10/21/2018</span>
 </div>
 <div id="toc" class="toc">
@@ -595,6 +595,69 @@ used with string, not an array, it behaves similarily: returns empty string when
 <div class="paragraph">
 <p>Side-note: <code>(M)</code> flag can be used also with <code>${(M)var#pattern}</code> and other
 substitutions, to retain what&#8217;s matched by the pattern instead of removing that.</p>
+</div>
+<div class="sect3">
+<h4 id="multi-line-grep">Multi-line matching like with grep</h4>
+<div class="paragraph">
+<p>Suppose you have a Subversion repository and want to check if it contains files
+being not under version control. You could do this in Bash style like follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-zsh" data-lang="zsh">local svn_status="$(svn status)"
+if [[ -n "$(echo "$svn_status" | \grep \^\?)" ]]; then
+    echo found
+fi</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That are 3 forks: for <code>svn status</code>, for <code>echo</code> and for <code>grep</code>. This can be solved
+by <code>:#</code> substitution and <code>(M)</code> flag described above in this section (just check
+if number of matched lines is greater than 0). However, there&#8217;s a more direct
+approach:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-zsh" data-lang="zsh">local svn_status="$(svn status)" nl=$'\n'
+if [[ "$svn_status" = *((#s)|$nl)\?* ]]; then
+  echo found
+fi</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This requires <code>extendedglob</code>. <code>(#s)</code> means: "start of the string". So
+<code>((#s)|$nl)</code> means "start of the string OR preceded by a new-line".</p>
+</div>
+<div class="paragraph">
+<p>If <code>extendedglob</code> cannot be used for some reason, this can be achieved also
+without it, but essentially it means that alternative (i.e. <code>|</code>) of two
+versions of the pattern will be matched:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-zsh" data-lang="zsh">setopt localoptions noextendedglob
+local svn_status="$(svn status)" nl=$'\n'
+if [[ "$svn_status" = (\?*|*$nl\?*) ]]; then
+  echo found
+fi</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In general, multi-line matching falls into following idiom (<code>extendedglob</code>
+version):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-zsh" data-lang="zsh">local needle="?" required_preceding='[[:space:]]#'
+[[ "$(svn status)" = *((#s)|$nl)${~required_preceding}${needle}* ]] &amp;&amp; echo found</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It does a single fork (calls <code>svn status</code>). The <code>${~variable}</code> means (the <code>~</code>
+in it): "the variable is holding a pattern, interpret it". All in all, instead
+of regular expressions we were using patterns (globs) (see
+<a href="#built-in-regular-expressions-engine">this section</a>).</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -957,8 +1020,9 @@ return 0</code></pre>
 <h2 id="_revision_history">Appendix A: Revision history</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>v1.16, 10/21/2018: Count apostrophes example – additional version without math-code<br>
-v1.15, 10/21/2018: Inform about potential (s::)-flag problems<br>
+<p>v1.18, 10/21/2018: Multi-line matching like with <code>grep</code>
+v1.16, 10/21/2018: Count apostrophes example – additional version without math-code<br>
+v1.15, 10/21/2018: Inform about potential (s::)-flag problems ("Skipping awk)<br>
 v1.1, 10/21/2018: Elaborate on (M)-flag in "Skipping grep" section<br>
 v1.05, 10/21/2018: New section "Reading from stdin"<br>
 v1.0, 09/29/2018: New real world examples (<code>git help -a</code> and "Counting apostrophes")<br></p>
@@ -968,8 +1032,8 @@ v1.0, 09/29/2018: New real world examples (<code>git help -a</code> and "Countin
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.16<br>
-Last updated 2018-10-21 15:23:09 CEST
+Version 1.18<br>
+Last updated 2018-10-21 16:13:01 CEST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
