@@ -120,7 +120,7 @@ fi
 
 That are 3 forks: for `svn status`, for `echo` and for `grep`. This can be solved
 by `:#` substitution and `(M)` flag described above in this section (just check
-if number of matched lines is greater than 0). However, there's a more direct
+if the number of matched lines is greater than 0). However, there's a more direct
 approach:
 
 [source,zsh]
@@ -131,12 +131,13 @@ if [[ "$svn_status" = *((#s)|$nl)\?* ]]; then
 fi
 ----
 
-This requires `extendedglob`. `(#s)` means: "start of the string". So
+This requires `extendedglob`. The `(#s)` means: "start of the string". So
 `((#s)|$nl)` means "start of the string OR preceded by a new-line".
 
-If `extendedglob` cannot be used for some reason, this can be achieved also
+If the `extendedglob` option cannot be used for some reason, this can be
+achieved also
 without it, but essentially it means that alternative (i.e. `|`) of two
-versions of the pattern will be matched:
+versions of the pattern will have to be matched:
 
 [source,zsh]
 ----
@@ -147,7 +148,7 @@ if [[ "$svn_status" = (\?*|*$nl\?*) ]]; then
 fi
 ----
 
-In general, multi-line matching falls into following idiom (`extendedglob`
+In general, multi-line matching falls into the following idiom (`extendedglob`
 version):
 
 [source,zsh]
