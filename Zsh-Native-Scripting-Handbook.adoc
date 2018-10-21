@@ -485,7 +485,7 @@ return 0
 
 [appendix]
 == Revision history
-v1.18, 10/21/2018: Multi-line matching like with `grep`
+v1.18, 10/21/2018: Multi-line matching like with `grep` +
 v1.16, 10/21/2018: Count apostrophes example – additional version without math-code +
 v1.15, 10/21/2018: Inform about potential (s::)-flag problems ("Skipping awk") +
 v1.1, 10/21/2018: Elaborate on (M)-flag in "Skipping grep" section +
