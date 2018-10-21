@@ -1,4 +1,6 @@
 # Zsh Native Scripting Handbook
+Sebastian Gniazdowski <psprint@zdharma.org>
+v1.1, 10/21/2018
 :source-highlighter: prettify
 :toc:
 
@@ -66,7 +68,7 @@ declare -a lines; lines=( ${(f)"$(command arg1 ...)"} )
 ----
 
 This will read the `command's` output into the array `lines`. The version that
-does `@-`splitting and retains empty lines is:
+does `@` splitting and retains any empty lines is:
 
 [source,zsh]
 ----
@@ -93,6 +95,14 @@ declare -a grepped; grepped=( ${(M)lines:#*query*} )
 
 To have `grep -v` effect, skip `M`-flag. To grep case insensitively, use `\#i` glob
 flag (`...:#(#i)\*query*}`).
+
+As it can be seen, `${...:#...}` substitution is a filtering of array, which by
+default filters-out elements (`(M)` flag induces the opposite behavior). When
+used with string, not an array, it behaves similarily: returns empty string when
+`{input_string_var:#pattern}` matches whole input string.
+
+Side-note: `(M)` flag can be used also with `${(M)var#pattern}` and other
+substitutions, to retain what's matched by the pattern instead of removing that.
 
 [#pattern-matching-in-and-fashion]
 ### Pattern matching in AND-fashion
@@ -377,4 +387,10 @@ done < "$__ini_file"
 
 return 0
 ----
+
+[appendix]
+== Revision history
+v1.1, 10/21/2018: Elaborate on (M)-flag in "Skipping grep" section +
+v1.05, 10/21/2018: New section "Reading from stdin" +
+v1.0, 09/29/2018: New real world examples (`git help -a` and "Counting apostrophes") +
 
