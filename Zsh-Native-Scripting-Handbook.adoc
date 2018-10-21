@@ -1,6 +1,6 @@
 # Zsh Native Scripting Handbook
 Sebastian Gniazdowski <psprint@zdharma.org>
-v1.1, 10/21/2018
+v1.15, 10/21/2018
 :source-highlighter: prettify
 :toc:
 
@@ -222,6 +222,25 @@ declare -a list; list=( "a,b,c,1,e" "p,q,r,2,t" );
 print "${list[@]/(#m)*/${${(s:,:)MATCH}[4]}}" ▶ 1 2
 ----
 
+There is a problem with the `(s::)` flag that can be solved if Zsh is version
+`5.4` or higher: if there will be single input column, e.g. `list=( "column1"
+"a,b")` instead of two or more columns (i.e. `list=( "column1,column2" "a,b"
+)`), then `(s::)` will return **string** instead of 1-element **array**. So the
+index `[4]` in above snippet will index a string, and show its 4-th letter.
+Starting with Zsh 5.4, thanks to a patch by Bart Schaefer (`40640: the (A)
+parameter flag forces array result even if...`), it is possible to force
+**array**-kind of result even for single column, by adding `(A)` flag, i.e.:
+
+[source,none]
+----
+declare -a list; list=( "a,b,c,1,e" "p,q,r,2,t" "column1" );
+print "${list[@]/(#m)*/${${(As:,:)MATCH}[4]}}" ▶ 1 2
+print "${list[@]/(#m)*/${${(s:,:)MATCH}[4]}}" ▶ 1 2 u
+----
+
+Side-note: `(A)` flag is often used together with `::=` assignment-substitution
+and `(P)` flag, to assign arrays and hashes by-name.
+
 [#searching-arrays]
 ### Searching arrays
 
@@ -390,6 +409,7 @@ return 0
 
 [appendix]
 == Revision history
+v1.15, 10/21/2018: Inform about potential (s::)-flag problems +
 v1.1, 10/21/2018: Elaborate on (M)-flag in "Skipping grep" section +
 v1.05, 10/21/2018: New section "Reading from stdin" +
 v1.0, 09/29/2018: New real world examples (`git help -a` and "Counting apostrophes") +
