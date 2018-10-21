@@ -613,7 +613,7 @@ fi</code></pre>
 <div class="paragraph">
 <p>That are 3 forks: for <code>svn status</code>, for <code>echo</code> and for <code>grep</code>. This can be solved
 by <code>:#</code> substitution and <code>(M)</code> flag described above in this section (just check
-if number of matched lines is greater than 0). However, there&#8217;s a more direct
+if the number of matched lines is greater than 0). However, there&#8217;s a more direct
 approach:</p>
 </div>
 <div class="listingblock">
@@ -625,13 +625,14 @@ fi</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This requires <code>extendedglob</code>. <code>(#s)</code> means: "start of the string". So
+<p>This requires <code>extendedglob</code>. The <code>(#s)</code> means: "start of the string". So
 <code>((#s)|$nl)</code> means "start of the string OR preceded by a new-line".</p>
 </div>
 <div class="paragraph">
-<p>If <code>extendedglob</code> cannot be used for some reason, this can be achieved also
+<p>If the <code>extendedglob</code> option cannot be used for some reason, this can be
+achieved also
 without it, but essentially it means that alternative (i.e. <code>|</code>) of two
-versions of the pattern will be matched:</p>
+versions of the pattern will have to be matched:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -643,7 +644,7 @@ fi</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>In general, multi-line matching falls into following idiom (<code>extendedglob</code>
+<p>In general, multi-line matching falls into the following idiom (<code>extendedglob</code>
 version):</p>
 </div>
 <div class="listingblock">
@@ -1033,7 +1034,7 @@ v1.0, 09/29/2018: New real world examples (<code>git help -a</code> and "Countin
 <div id="footer">
 <div id="footer-text">
 Version 1.18<br>
-Last updated 2018-10-21 16:13:01 CEST
+Last updated 2018-10-21 16:20:56 CEST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
