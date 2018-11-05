@@ -1,6 +1,6 @@
 # Zsh Native Scripting Handbook
 Sebastian Gniazdowski <psprint@zdharma.org>
-v1.18, 10/21/2018
+v1.19, 10/21/2018
 :source-highlighter: prettify
 :toc:
 
@@ -12,19 +12,29 @@ Ruby or Perl code, less like top-down shell scripts.
 
 ## Information
 
-[#at-sign-about-splitting]
-### @ is about splitting
+[#at-sign-about-keeping-array-form]
+### @ is about keeping array form
 
-How to access all array elements? -- use `@`. However, Zshell completion
-(`echo ${(<TAB>`) for `@` says: `@ -- double-quoted splitting of scalars` and
-that's the true meaning of this flag / subscript. If you quote e.g. an array,
-like `declare -a array; array=( a b c ); print "$array"`, you create a string, a
-scalar "a b c". `@` is to go back to non-scalar data by doing *splitting*.
+How to access all array elements in a shell? The standard answer: `use @
+subscript`, i.e. `${array[@]}`. However, this is the Bash & Ksh way (and with
+the option `KSH_ARRAYS`, Zsh also works this way, i.e. needs `@` to access
+whole array). Zshell **is different**: it is `$array` that refers to all
+elements anyway. There is no need of `@` subscript.
 
-Two forms are available, `"$array[@]"` and `"${(@)array}"`. First form has additional
-effect – when option `KSH_ARRAYS` is set, it indeed induces referencing to whole
-array instead of first element only. It should then use braces, i.e. `${array[@]}`,
-`"${array[@]}"` (`KSH_ARRAYS` requirement).
+So what use has `@` in the Zsh-world? It is: "`keep array form`" or "`do not
+join`".  When is it activated? When user quotes the array, i.e. invokes
+`"$array"`, he induces *joining* of all array elements (into a single string;
+again, `KSH_ARRAYS` induces the Bash behavior: `"$array"` contains only the
+first element). `@` is to have elements still quoted (so empty elements are
+preserved), but not joined.
+
+Two forms are available, `"$array[@]"` and `"${(@)array}"`. First form has
+additional effect – when option `KSH_ARRAYS` is set, it indeed induces
+referencing to whole array instead of first element only. It should then use
+braces, i.e. `${array[@]}`, `"${array[@]}"` (`KSH_ARRAYS` requirement).
+
+In practice, if you'll use `@` as a subscript – `[@]`, not as a flag –
+`${(@)...}`, then you'll make the code `KSH_ARRAYS`-compatible.
 
 [#extended-glob]
 ### extended_glob
@@ -485,6 +495,7 @@ return 0
 
 [appendix]
 == Revision history (history of updates to the document)
+v1.19, 11/05/2018: Less abstract but more true function of `@` (flag, subscript) +
 v1.18, 10/21/2018: Multi-line matching like with `grep` +
 v1.16, 10/21/2018: Count apostrophes example – additional version without math-code +
 v1.15, 10/21/2018: Inform about potential (s::)-flag problems ("Skipping awk") +
