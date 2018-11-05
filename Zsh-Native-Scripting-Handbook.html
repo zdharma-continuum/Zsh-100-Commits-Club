@@ -432,7 +432,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Sebastian Gniazdowski</span><br>
 <span id="email" class="email"><a href="mailto:psprint@zdharma.org">psprint@zdharma.org</a></span><br>
-<span id="revnumber">version 1.18,</span>
+<span id="revnumber">version 1.19,</span>
 <span id="revdate">10/21/2018</span>
 </div>
 <div id="toc" class="toc">
@@ -440,7 +440,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#_information">Information</a>
 <ul class="sectlevel2">
-<li><a href="#at-sign-about-splitting">@ is about splitting</a></li>
+<li><a href="#at-sign-about-keeping-array-form">@ is about keeping array form</a></li>
 <li><a href="#extended-glob">extended_glob</a></li>
 </ul>
 </li>
@@ -492,19 +492,31 @@ Ruby or Perl code, less like top-down shell scripts.</p>
 <h2 id="_information">Information</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="at-sign-about-splitting">@ is about splitting</h3>
+<h3 id="at-sign-about-keeping-array-form">@ is about keeping array form</h3>
 <div class="paragraph">
-<p>How to access all array elements?&#8201;&#8212;&#8201;use <code>@</code>. However, Zshell completion
-(<code>echo ${(&lt;TAB&gt;</code>) for <code>@</code> says: <code>@&#8201;&#8212;&#8201;double-quoted splitting of scalars</code> and
-that&#8217;s the true meaning of this flag / subscript. If you quote e.g. an array,
-like <code>declare -a array; array=( a b c ); print "$array"</code>, you create a string, a
-scalar "a b c". <code>@</code> is to go back to non-scalar data by doing <strong>splitting</strong>.</p>
+<p>How to access all array elements in a shell? The standard answer: <code>use @
+subscript</code>, i.e. <code>${array[@]}</code>. However, this is the Bash &amp; Ksh way (and with
+the option <code>KSH_ARRAYS</code>, Zsh also works this way, i.e. needs <code>@</code> to access
+whole array). Zshell <strong>is different</strong>: it is <code>$array</code> that refers to all
+elements anyway. There is no need of <code>@</code> subscript.</p>
 </div>
 <div class="paragraph">
-<p>Two forms are available, <code>"$array[@]"</code> and <code>"${(@)array}"</code>. First form has additional
-effect – when option <code>KSH_ARRAYS</code> is set, it indeed induces referencing to whole
-array instead of first element only. It should then use braces, i.e. <code>${array[@]}</code>,
-<code>"${array[@]}"</code> (<code>KSH_ARRAYS</code> requirement).</p>
+<p>So what use has <code>@</code> in the Zsh-world? It is: &#8220;keep array form&#8221; or &#8220;do not
+join&#8221;.  When is it activated? When user quotes the array, i.e. invokes
+<code>"$array"</code>, he induces <strong>joining</strong> of all array elements (into a single string;
+again, <code>KSH_ARRAYS</code> induces the Bash behavior: <code>"$array"</code> contains only the
+first element). <code>@</code> is to have elements still quoted (so empty elements are
+preserved), but not joined.</p>
+</div>
+<div class="paragraph">
+<p>Two forms are available, <code>"$array[@]"</code> and <code>"${(@)array}"</code>. First form has
+additional effect – when option <code>KSH_ARRAYS</code> is set, it indeed induces
+referencing to whole array instead of first element only. It should then use
+braces, i.e. <code>${array[@]}</code>, <code>"${array[@]}"</code> (<code>KSH_ARRAYS</code> requirement).</p>
+</div>
+<div class="paragraph">
+<p>In practice, if you&#8217;ll use <code>@</code> as a subscript – <code>[@]</code>, not as a flag –
+<code>${(@)&#8230;&#8203;}</code>, then you&#8217;ll make the code <code>KSH_ARRAYS</code>-compatible.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1021,7 +1033,8 @@ return 0</code></pre>
 <h2 id="_revision_history_history_of_updates_to_the_document">Appendix A: Revision history (history of updates to the document)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>v1.18, 10/21/2018: Multi-line matching like with <code>grep</code><br>
+<p>v1.19, 11/05/2018: Less abstract but more true function of <code>@</code> (flag, subscript)<br>
+v1.18, 10/21/2018: Multi-line matching like with <code>grep</code><br>
 v1.16, 10/21/2018: Count apostrophes example – additional version without math-code<br>
 v1.15, 10/21/2018: Inform about potential (s::)-flag problems ("Skipping awk")<br>
 v1.1, 10/21/2018: Elaborate on (M)-flag in "Skipping grep" section<br>
@@ -1033,8 +1046,8 @@ v1.0, 09/29/2018: New real world examples (<code>git help -a</code> and "Countin
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.18<br>
-Last updated 2018-10-21 20:57:45 CEST
+Version 1.19<br>
+Last updated 2018-11-05 19:54:13 CET
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
