@@ -106,6 +106,15 @@ local basename="${PWD:t}"
 ----
 Read more about link:http://zsh.sourceforge.net/Doc/Release/Expansion.html#Modifiers[history modifiers].
 
+[#resolve-symlinks]
+### Resolve Symlinks
+
+Symbolic links can be turned into an absolute path with:
+[source,zsh]
+----
+local absolute_path="${PWD:A}
+----
+
 [#skipping-grep]
 ### Skipping grep
 
