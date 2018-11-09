@@ -95,10 +95,21 @@ outside quoting of `${(f@)...}` substitution works as if it was also separately
 applied to `$(command ...)` (or to `$(<file-path)`) inner substitution, so the
 second double-quoting isn't actually needed.
 
+[#skipping-dirname-basename]
+### Skipping dirname basename
+
+`dirname` and `basename` can be skipped by:
+[source,zsh]
+----
+local dirname="${PWD:h}"
+local basename="${PWD:t}"
+----
+Read more about [history modifiers](http://zsh.sourceforge.net/Doc/Release/Expansion.html#Modifiers).
+
 [#skipping-grep]
 ### Skipping grep
 
-[source,none]
+[source,zsh]
 ----
 declare -a lines; lines=( "${(@f)"$(<path/file)"}" )
 declare -a grepped; grepped=( ${(M)lines:#*query*} )
