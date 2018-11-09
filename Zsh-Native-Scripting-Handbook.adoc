@@ -104,7 +104,7 @@ second double-quoting isn't actually needed.
 local dirname="${PWD:h}"
 local basename="${PWD:t}"
 ----
-Read more about [history modifiers](http://zsh.sourceforge.net/Doc/Release/Expansion.html#Modifiers).
+Read more about link:http://zsh.sourceforge.net/Doc/Release/Expansion.html#Modifiers[history modifiers].
 
 [#skipping-grep]
 ### Skipping grep
