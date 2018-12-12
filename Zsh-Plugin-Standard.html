@@ -5,6 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.6.1">
+<meta name="author" content="Sebastian Gniazdowski">
 <title>Zsh Plugin Standard</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -428,6 +429,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <body class="article">
 <div id="header">
 <h1>Zsh Plugin Standard</h1>
+<div class="details">
+<span id="author" class="author">Sebastian Gniazdowski</span><br>
+<span id="email" class="email"><a href="mailto:psprint@zdharma.org">psprint@zdharma.org</a></span><br>
+<span id="revnumber">version 0.9,</span>
+<span id="revdate">12/12/2018</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_what_is_a_zsh_plugin">What is a Zsh plugin?</a></li>
+<li><a href="#zero-handling">1. Standardized $0 handling</a></li>
+<li><a href="#unload-fun">2. Unload function</a></li>
+<li><a href="#indicator">3. Plugin manager activity indicator</a></li>
+<li><a href="#zpfx">4. Global parameter with PREFIX for make, configure, etc.</a></li>
+<li><a href="#_revision_history_history_of_updates_to_the_document">Appendix A: Revision history (history of updates to the document)</a></li>
+</ul>
+</div>
 </div>
 <div id="content">
 <div class="sect1">
@@ -490,7 +508,7 @@ managers that have hooks, it can run Makefiles, add directories to <code>$PATH</
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-zsh" data-lang="zsh">0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
+<pre class="prettyprint highlight"><code class="language-zsh" data-lang="zsh">0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 
 # Then ${0:h} to get plugin's directory</code></pre>
 </div>
@@ -599,7 +617,7 @@ plugins and the plugin currently being loaded (as the last element). This will a
 Instead of issuing a notice, it may be able to satisfy the dependencies from resources
 it provides. For example, <code>pure</code> prompt provides <code>zsh-async</code> dependency library, which
 is a separate project and can be loaded by the user directly. Consequently, the prompt
-can decide to source its private copy of <code>zsh-async</code>, having also reliable <code>$ZERO</code> defined
+can decide to source its private copy of <code>zsh-async</code>, having also reliable <code>$0</code> defined
 by previous section (note: <code>pure</code> doesn&#8217;t normally do this).</p>
 </div>
 <div class="paragraph">
@@ -608,8 +626,8 @@ not handle this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-zsh" data-lang="zsh">if [[ ( ${+LOADED_PLUGINS} = 0 || ${LOADED_PLUGINS[-1]} != */kalc ) &amp;&amp; -z "${fpath[(r)${ZERO:h}]}" ]]; then
-    fpath+=( "${ZERO:h}" )
+<pre class="prettyprint highlight"><code class="language-zsh" data-lang="zsh">if [[ ( ${+LOADED_PLUGINS} = 0 || ${LOADED_PLUGINS[-1]} != */kalc ) &amp;&amp; -z "${fpath[(r)${0:h}]}" ]]; then
+    fpath+=( "${0:h}" )
 fi</code></pre>
 </div>
 </div>
@@ -661,11 +679,23 @@ on different accounts / machines.</p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_revision_history_history_of_updates_to_the_document">Appendix A: Revision history (history of updates to the document)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>v0.9, 12/12/2018: Remove ZERO references (bad design), add TOC<br></p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-05-13 08:56:14 CEST
+Version 0.9<br>
+Last updated 2018-12-12 22:43:37 CET
 </div>
 </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+<script>prettyPrint()</script>
 </body>
 </html>
