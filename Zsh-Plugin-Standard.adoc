@@ -1,4 +1,8 @@
 # Zsh Plugin Standard
+Sebastian Gniazdowski <psprint@zdharma.org>
+v0.9, 12/12/2018
+:source-highlighter: prettify
+:toc:
 
 ## What is a Zsh plugin?
 
@@ -89,15 +93,15 @@ The first item allows a plugin to e.g. issue a notice about missing dependencies
 Instead of issuing a notice, it may be able to satisfy the dependencies from resources
 it provides. For example, `pure` prompt provides `zsh-async` dependency library, which
 is a separate project and can be loaded by the user directly. Consequently, the prompt
-can decide to source its private copy of `zsh-async`, having also reliable `$ZERO` defined
+can decide to source its private copy of `zsh-async`, having also reliable `$0` defined
 by previous section (note: `pure` doesn't normally do this).
 
 The second item allows a plugin to e.g. set up `$fpath`, knowing that plugin manager will
 not handle this:
 
 ```zsh
-if [[ ( ${+LOADED_PLUGINS} = 0 || ${LOADED_PLUGINS[-1]} != */kalc ) && -z "${fpath[(r)${ZERO:h}]}" ]]; then
-    fpath+=( "${ZERO:h}" )
+if [[ ( ${+LOADED_PLUGINS} = 0 || ${LOADED_PLUGINS[-1]} != */kalc ) && -z "${fpath[(r)${0:h}]}" ]]; then
+    fpath+=( "${0:h}" )
 fi
 ```
 
@@ -125,3 +129,8 @@ No-narration facts-list related to `$ZPFX`:
  4. `cmake -DCMAKE_INSTALL_PREFIX=$ZPFX .`
  5. `zplugin ice make"PREFIX=$ZPFX install"`
  6. `zplug ... hook-build:"make PREFIX=$PFX install"`
+
+[appendix]
+== Revision history (history of updates to the document)
+v0.9, 12/12/2018: Remove ZERO references (bad design), add TOC +
+
