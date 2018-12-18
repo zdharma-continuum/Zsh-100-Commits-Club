@@ -3,6 +3,8 @@ Sebastian Gniazdowski <psprint@zdharma.org>
 v1.19, 10/21/2018
 :source-highlighter: prettify
 :toc:
+ifdef::backend-html5[The handbook is also available as a link:Zsh-Native-Scripting-Handbook.pdf[PDF].]
+
 
 This document has been created after 2.5 years of creating software for Zshell
 and receiving help from IRC channel #zsh. Avoiding forks was the main guideline

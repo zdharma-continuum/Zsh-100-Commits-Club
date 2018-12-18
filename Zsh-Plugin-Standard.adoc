@@ -4,6 +4,8 @@ v0.9, 12/12/2018
 :source-highlighter: prettify
 :toc:
 
+ifdef::backend-html5[The document is also available as a link:Zsh-Plugin-Standard.pdf[PDF].]
+
 ## What is a Zsh plugin?
 
 Zsh plugins were first defined by Oh-My-Zsh. They provide for a way to package together files that extend or configure the shell's functionality in a particular way.

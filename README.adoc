@@ -1,5 +1,7 @@
 # Zsh 100 Commits Club
 
+ifdef::backend-html5[The document is also available as a link:README.pdf[PDF].]
+
 ## Rules
 100 commits::
   - the project must have at least 100 commits or be derived from other project, yielding 100 or more total commits,
