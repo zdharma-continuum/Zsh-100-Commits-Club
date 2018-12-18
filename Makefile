@@ -21,9 +21,9 @@ Zsh-Plugin-Standard.pdf: Zsh-Native-Scripting-Handbook.adoc
 
 gh-pages: all
 	@mkdir -p ~/tmp/znsh
-	@mv -v *.html ~/tmp/znsh
+	@mv -v *.html *.pdf ~/tmp/znsh
 	git checkout gh-pages
-	@cp -v ~/tmp/znsh/*.html .
+	@cp -v ~/tmp/znsh/*.html ~/tmp/znsh/*.pdf .
 
 master:
 	git reset --hard
