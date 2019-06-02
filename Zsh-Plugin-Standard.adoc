@@ -1,10 +1,10 @@
 # Zsh Plugin Standard
 Sebastian Gniazdowski <psprint@zdharma.org>
-v0.9, 12/12/2018
+v0.91, 06/02/2018
 :source-highlighter: prettify
 :toc:
 
-ifdef::backend-html5[The document is also available as a link:Zsh-Plugin-Standard.pdf[PDF].]
+ifdef::backend-html5[The document is also available as a link:http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.pdf[PDF].]
 
 ## What is a Zsh plugin?
 
@@ -134,5 +134,6 @@ No-narration facts-list related to `$ZPFX`:
 
 [appendix]
 == Revision history (history of updates to the document)
+v0.91 06/02/2018: Fix the link to the PDF for Github +
 v0.9, 12/12/2018: Remove ZERO references (bad design), add TOC +
-
+Reminder: The date format that uses slashes is `MM/DD/YYYY`. +
