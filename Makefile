@@ -16,7 +16,7 @@ README.pdf: README.adoc
 Zsh-Native-Scripting-Handbook.pdf: Zsh-Native-Scripting-Handbook.adoc
 	asciidoctor-pdf Zsh-Native-Scripting-Handbook.adoc
 
-Zsh-Plugin-Standard.pdf: Zsh-Native-Scripting-Handbook.adoc
+Zsh-Plugin-Standard.pdf: Zsh-Plugin-Standard.adoc
 	asciidoctor-pdf Zsh-Plugin-Standard.adoc
 
 gh-pages: all
