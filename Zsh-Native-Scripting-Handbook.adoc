@@ -25,9 +25,8 @@ elements anyway. There is no need of `@` subscript.
 
 So what use has `@` in the Zsh-world? It is: "`keep array form`" or "`do not
 join`".  When is it activated? When user quotes the array, i.e. invokes
-`"$array"`, he induces *joining* of all array elements (into a single string;
-again, `KSH_ARRAYS` induces the Bash behavior: `"$array"` contains only the
-first element). `@` is to have elements still quoted (so empty elements are
+`"$array"`, he induces *joining* of all array elements (into a single string). 
+`@` is to have elements still quoted (so empty elements are
 preserved), but not joined.
 
 Two forms are available, `"$array[@]"` and `"${(@)array}"`. First form has
