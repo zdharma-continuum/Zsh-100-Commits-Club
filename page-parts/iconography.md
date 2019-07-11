@@ -2,7 +2,7 @@
 
 ### Devoted time and work detection
 
-🥈 - has 50 or more commits  
+🥈 - has 50 or more commits (unused – that's the entry to the list boundary)  
 🥇 - has 100 or more commits
 
 ### Progress detection
@@ -10,7 +10,7 @@
 🚶- slow/moderate progress: 1 commit in each of last 3 months or 5 commits in total during the 3 last months (90 days)  
 🏃- fast progress: 3 commits in each of last 3 months or 10 commits in total during the 3 last months
 
-### Attention detection
+### Maintenance detection
 
 ⌛️- long time no update (updated not in last 3 months, but in last 6 months)  
 ⏳ - updated in last 3 months, active  
