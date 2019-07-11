@@ -78,7 +78,7 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [enhancd](https://github.com/b4b4r07/enhancd) :1st_place_medal: :running_man: :hourglass_flowing_sand: - A simple tool that provides enhanced `cd` command.
 * [explain-shell](https://github.com/gmatheu/shell-plugins) : :running_man: :alarm_clock: - Opens commands on [explainshell.com](https://explainshell.com).
 * [fast-syntax-highlighting](https://github.com/zdharma/fast-syntax-highlighting) :1st_place_medal: :running_man: :alarm_clock: :briefcase: - Optimized and improved `zsh-users/zsh-syntax-highlighting` – better response times, switchable highlight themes.
-* [forgit](https://github.com/wfxr/forgit) :1st_place_medal: :running_man: :hourglass_flowing_sand: - Utility tool for `git` which takes advantage of fuzzy finder [fzf](https://github.com/junegunn/fzf).
+* [forgit](https://github.com/wfxr/forgit) :1st_place_medal: :running_man: :alarm_clock: - Utility tool for `git` which takes advantage of fuzzy finder [fzf](https://github.com/junegunn/fzf).
 * [functional](https://github.com/Tarrasch/zsh-functional) : - ZSH higher order functions.
 * [fz](https://github.com/changyuheng/fz) : :hourglass: - Seamlessly adds fuzzy search to [z](https://github.com/rupa/z)'s tab completion and lets you easily jump around among your historical directories.
 * [fzf-marks](https://github.com/urbainvaes/fzf-marks) : - Little script to create, navigate and delete bookmarks in `bash` and `zsh`, using the fuzzy finder [fzf](https://github.com/junegunn/fzf).
@@ -128,7 +128,7 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [zshmarks](https://github.com/jocelynmallon/zshmarks) : - A port of Bashmarks (by Todd Werth), a simple command line bookmarking plugin, for oh-my-zsh.
 * [ZUI](https://github.com/zdharma/zui/) :1st_place_medal: :hourglass_flowing_sand: - ZSH User Interface library – CGI+DHTML-like rapid TUI application development with ZSH.
 
-# Themes (#60)
+# Themes (#59)
 
 * [agkozak](https://github.com/agkozak/agkozak-zsh-prompt) :1st_place_medal: :running_man: :hourglass_flowing_sand: :briefcase: - Uses three asynchronous methods to keep the ZSH prompt responsive while displaying the `git` status and indicators of SSH connection, exit codes, and `vi` mode, along with an abbreviated, `PROMPT_DIRTRIM`-style path. Very customizable. Asynchronous even on Cygwin and MSYS2.
 * [alien-minimal](https://github.com/eendroroy/alien-minimal) :1st_place_medal: :hourglass: - Minimalist ZSH theme with `git` status displayed.
@@ -188,5 +188,4 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [Awesome Terminal Fonts](https://github.com/gabrielelana/awesome-terminal-fonts) : - A family of fonts that includes some nice monospaced Icons.
 * [Fantasque-sans](https://github.com/belluzj/fantasque-sans) :1st_place_medal: - Another Powerline-compatible font.
 * [Iosevka](https://github.com/be5invis/Iosevka) :1st_place_medal: :hourglass_flowing_sand: :briefcase: :chart_with_upwards_trend: - Coders’ typeface, built from code. Highly customizable.
-* [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) :1st_place_medal: :running_man: :hourglass_flowing_sand: :briefcase: - Collection of over 20 patched fonts (over 2,000 variations) & FontForge font patcher python script for Powerline, Font Awesome, Octicons, Devicons, and Vim Devicons. Includes: Droid Sans, Meslo, Source Code, AnonymousPro, Hack, ProFont, Inconsolata, and many more.
 * [Powerline patched font collection](https://github.com/powerline/fonts) :1st_place_medal: - A collection of a dozen or so fonts patched to include powerline gylphs.

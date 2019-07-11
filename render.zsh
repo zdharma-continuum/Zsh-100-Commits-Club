@@ -37,7 +37,7 @@ command git -C "$AZP_DIR" pull --no-stat
 command cp -vf "$AZP_DIR"/README.md zsh-plugin-assessor
 (
     cd zsh-plugin-assessor && \
-#        ./zsh-plugin-assessor README.md
+        ./zsh-plugin-assessor README.md
 ) || return 2
 
 #
