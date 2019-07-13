@@ -138,5 +138,5 @@ No-narration facts-list related to `$ZPFX`:
 == Revision history (history of updates to the document)
 v0.92, 07/14/2019: 1/ Rename LOADED_PLUGINS to zsh_loaded_plugins. 2/ Suggest that $ZPFX is optional.  +
 v0.91, 06/02/2018: Fix the link to the PDF for Github. +
-v0.9, 12/12/2018: Remove ZERO references (bad design), add TOC. +
+v0.9, 12/12/2017: Remove ZERO references (bad design), add TOC. +
 Reminder: The date format that uses slashes is `MM/DD/YYYY`. +
