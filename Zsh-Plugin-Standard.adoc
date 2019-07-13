@@ -85,7 +85,7 @@ dedicated function.
 [#indicator]
 ## 3. Plugin manager activity indicator
 
-Plugin managers should set the `$LOADED_PLUGINS` array to contain all previously loaded
+Plugin managers should set the `$zsh_loaded_plugins` array to contain all previously loaded
 plugins and the plugin currently being loaded (as the last element). This will allow plugins to:
 
  1. Check which plugins are already loaded.
@@ -102,7 +102,7 @@ The second item allows a plugin to e.g. set up `$fpath`, knowing that plugin man
 not handle this:
 
 ```zsh
-if [[ ( ${+LOADED_PLUGINS} = 0 || ${LOADED_PLUGINS[-1]} != */kalc ) && -z "${fpath[(r)${0:h}]}" ]]; then
+if [[ ( ${+zsh_loaded_plugins} = 0 || ${zsh_loaded_plugins[-1]} != */kalc ) && -z "${fpath[(r)${0:h}]}" ]]; then
     fpath+=( "${0:h}" )
 fi
 ```
@@ -112,7 +112,7 @@ This will allow user to reliably source the plugin without using a plugin manage
 [#zpfx]
 ## 4. Global parameter with PREFIX for make, configure, etc.
 
-Plugin managers should export the parameter `$ZPFX` which should contain a path to a directory dedicated
+Plugin managers may export the parameter `$ZPFX` which should contain a path to a directory dedicated
 for user-land software, i.e. for directories `$ZPFX/bin`, `$ZPFX/lib`, `$ZPFX/share`, etc.
 Suggested name of the directory is `polaris`, Zplugin uses this name and places this directory
 at `~/.zplugin/polaris` by default.
