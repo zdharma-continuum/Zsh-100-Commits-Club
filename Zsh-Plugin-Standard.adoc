@@ -1,6 +1,6 @@
 # Zsh Plugin Standard
 Sebastian Gniazdowski <psprint@zdharma.org>
-v0.91, 06/02/2018
+v0.92, 07/14/2019
 :source-highlighter: prettify
 :toc:
 
@@ -72,9 +72,9 @@ use case.
 [#unload-fun]
 ## 2. Unload function
 
-If a plugin is named e.g. `kalc`, then it can provide a function, `kalc_unload_plugin`,
-that can be called by a plugin manager to undo the effects of loading that
-plugin.
+If a plugin is named e.g. `kalc` (and is available via `an-user/kalc`
+plugin-ID), then it can provide a function, `kalc_unload_plugin`, that can be
+called by a plugin manager to undo the effects of loading that plugin.
 
 A plugin manager can implement its own tracking of changes made by a plugin so this
 is in general optional. However, to properly unload e.g. a prompt, detailed tracking
@@ -85,8 +85,9 @@ dedicated function.
 [#indicator]
 ## 3. Plugin manager activity indicator
 
-Plugin managers should set the `$zsh_loaded_plugins` array to contain all previously loaded
-plugins and the plugin currently being loaded (as the last element). This will allow plugins to:
+Plugin managers should set the `$zsh_loaded_plugins` array to contain all
+previously loaded plugins and the plugin currently being loaded (as the last
+element). This will allow plugins to:
 
  1. Check which plugins are already loaded.
  2. Check if it is being loaded by a plugin manager (i.e. not just sourced).
@@ -102,7 +103,8 @@ The second item allows a plugin to e.g. set up `$fpath`, knowing that plugin man
 not handle this:
 
 ```zsh
-if [[ ( ${+zsh_loaded_plugins} = 0 || ${zsh_loaded_plugins[-1]} != */kalc ) && -z "${fpath[(r)${0:h}]}" ]]; then
+if [[ ( ${+zsh_loaded_plugins} = 0 || ${zsh_loaded_plugins[-1]} != */kalc ) && -z "${fpath[(r)${0:h}]}" ]]
+then
     fpath+=( "${0:h}" )
 fi
 ```
@@ -134,6 +136,7 @@ No-narration facts-list related to `$ZPFX`:
 
 [appendix]
 == Revision history (history of updates to the document)
-v0.91 06/02/2018: Fix the link to the PDF for Github +
-v0.9, 12/12/2018: Remove ZERO references (bad design), add TOC +
+v0.92, 07/14/2019: 1/ Rename LOADED_PLUGINS to zsh_loaded_plugins. 2/ Suggest that $ZPFX is optional.  +
+v0.91, 06/02/2018: Fix the link to the PDF for Github. +
+v0.9, 12/12/2018: Remove ZERO references (bad design), add TOC. +
 Reminder: The date format that uses slashes is `MM/DD/YYYY`. +
