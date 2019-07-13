@@ -437,8 +437,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Sebastian Gniazdowski</span><br>
 <span id="email" class="email"><a href="mailto:psprint@zdharma.org">psprint@zdharma.org</a></span><br>
-<span id="revnumber">version 0.91,</span>
-<span id="revdate">06/02/2018</span>
+<span id="revnumber">version 0.92,</span>
+<span id="revdate">07/14/2019</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -594,9 +594,9 @@ use case.</p>
 <h2 id="unload-fun">2. Unload function</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If a plugin is named e.g. <code>kalc</code>, then it can provide a function, <code>kalc_unload_plugin</code>,
-that can be called by a plugin manager to undo the effects of loading that
-plugin.</p>
+<p>If a plugin is named e.g. <code>kalc</code> (and is available via <code>an-user/kalc</code>
+plugin-ID), then it can provide a function, <code>kalc_unload_plugin</code>, that can be
+called by a plugin manager to undo the effects of loading that plugin.</p>
 </div>
 <div class="paragraph">
 <p>A plugin manager can implement its own tracking of changes made by a plugin so this
@@ -611,8 +611,9 @@ dedicated function.</p>
 <h2 id="indicator">3. Plugin manager activity indicator</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Plugin managers should set the <code>$zsh_loaded_plugins</code> array to contain all previously loaded
-plugins and the plugin currently being loaded (as the last element). This will allow plugins to:</p>
+<p>Plugin managers should set the <code>$zsh_loaded_plugins</code> array to contain all
+previously loaded plugins and the plugin currently being loaded (as the last
+element). This will allow plugins to:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -638,7 +639,8 @@ not handle this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-zsh" data-lang="zsh">if [[ ( ${+zsh_loaded_plugins} = 0 || ${zsh_loaded_plugins[-1]} != */kalc ) &amp;&amp; -z "${fpath[(r)${0:h}]}" ]]; then
+<pre class="prettyprint highlight"><code class="language-zsh" data-lang="zsh">if [[ ( ${+zsh_loaded_plugins} = 0 || ${zsh_loaded_plugins[-1]} != */kalc ) &amp;&amp; -z "${fpath[(r)${0:h}]}" ]]
+then
     fpath+=( "${0:h}" )
 fi</code></pre>
 </div>
@@ -695,8 +697,9 @@ on different accounts / machines.</p>
 <h2 id="_revision_history_history_of_updates_to_the_document">Appendix A: Revision history (history of updates to the document)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>v0.91 06/02/2018: Fix the link to the PDF for Github<br>
-v0.9, 12/12/2018: Remove ZERO references (bad design), add TOC<br>
+<p>v0.92, 07/14/2019: 1/ Rename LOADED_PLUGINS to zsh_loaded_plugins. 2/ Suggest that $ZPFX is optional. <br>
+v0.91, 06/02/2018: Fix the link to the PDF for Github.<br>
+v0.9, 12/12/2018: Remove ZERO references (bad design), add TOC.<br>
 Reminder: The date format that uses slashes is <code>MM/DD/YYYY</code>.<br></p>
 </div>
 </div>
@@ -704,8 +707,8 @@ Reminder: The date format that uses slashes is <code>MM/DD/YYYY</code>.<br></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.91<br>
-Last updated 2019-07-13 14:55:40 +0200
+Version 0.92<br>
+Last updated 2019-07-13 15:10:16 +0200
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
