@@ -2,7 +2,7 @@
 # Zsh 100 Commits Club
 
 
-Plugins evaluated at July 11th, 2019
+Plugins evaluated at July 13th, 2019
 
 [![paypal](https://img.shields.io/badge/-Donate-yellow.svg?longCache=true&style=for-the-badge)](https://www.paypal.me/ZdharmaInitiative)
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=D54B3S7C6HGME)
@@ -117,7 +117,7 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [vim-mode](https://github.com/softmoth/zsh-vim-mode) : :hourglass: - Friendly `vi`-mode bindings, adding basic Emacs keys, incremental search, mode indicators and more.
 * [wd](https://github.com/mfaerevaag/wd) :1st_place_medal: :hourglass: - Warp directory lets you jump to custom directories in ZSH, without using `cd`. Why? Because `cd` seems inefficient when the folder is frequently visited or has a long path.
 * [yeoman-zsh-plugin](https://github.com/edouard-lopez/yeoman-zsh-plugin) : - Edouard Lopez's Yeoman plugin for oh-my-zsh, compatible with yeoman version ≥1.0 (includes options and command auto-completion).
-* [you-should-use](https://github.com/MichaelAquilina/zsh-you-should-use) :1st_place_medal: :walking_man: :hourglass_flowing_sand: - ZSH plugin that reminds you to use those aliases you defined.
+* [you-should-use](https://github.com/MichaelAquilina/zsh-you-should-use) :1st_place_medal: :running_man: :hourglass_flowing_sand: - ZSH plugin that reminds you to use those aliases you defined.
 * [z.lua](https://github.com/skywind3000/z.lua) :1st_place_medal: :hourglass_flowing_sand: - A command line tool which helps you navigate faster by learning your habits. An alternative to [z.sh](https://github.com/rupa/z) with windows and posix shells support and various improvements.
 * [zaw](https://github.com/zsh-users/zaw) :1st_place_medal: - ZSH anything.el-like widget.
 * [zconvey](https://github.com/zdharma/zconvey) :1st_place_medal: - Adds ability to send commands to other ZSH sessions, you can use this to `cd $PWD` on all active Z shell sessions, for example.
@@ -128,9 +128,9 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [zshmarks](https://github.com/jocelynmallon/zshmarks) : - A port of Bashmarks (by Todd Werth), a simple command line bookmarking plugin, for oh-my-zsh.
 * [ZUI](https://github.com/zdharma/zui/) :1st_place_medal: :hourglass_flowing_sand: - ZSH User Interface library – CGI+DHTML-like rapid TUI application development with ZSH.
 
-# Themes (#59)
+# Themes (#60)
 
-* [agkozak](https://github.com/agkozak/agkozak-zsh-prompt) :1st_place_medal: :running_man: :hourglass_flowing_sand: :briefcase: - Uses three asynchronous methods to keep the ZSH prompt responsive while displaying the `git` status and indicators of SSH connection, exit codes, and `vi` mode, along with an abbreviated, `PROMPT_DIRTRIM`-style path. Very customizable. Asynchronous even on Cygwin and MSYS2.
+* [agkozak](https://github.com/agkozak/agkozak-zsh-prompt) :1st_place_medal: :running_man: :alarm_clock: :briefcase: - Uses three asynchronous methods to keep the ZSH prompt responsive while displaying the `git` status and indicators of SSH connection, exit codes, and `vi` mode, along with an abbreviated, `PROMPT_DIRTRIM`-style path. Very customizable. Asynchronous even on Cygwin and MSYS2.
 * [alien-minimal](https://github.com/eendroroy/alien-minimal) :1st_place_medal: :hourglass: - Minimalist ZSH theme with `git` status displayed.
 * [alien](https://github.com/eendroroy/alien) :1st_place_medal: :hourglass_flowing_sand: - Powerline-esque ZSH theme that shows `git` decorations and the exit code of the last command. Faster than many other prompts because it determines the `git` decorations asynchronously in a background process.
 * [astral](https://github.com/alphabetum/astral) : - Theme for dark backgrounds with zen mode.
@@ -188,4 +188,5 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [Awesome Terminal Fonts](https://github.com/gabrielelana/awesome-terminal-fonts) : - A family of fonts that includes some nice monospaced Icons.
 * [Fantasque-sans](https://github.com/belluzj/fantasque-sans) :1st_place_medal: - Another Powerline-compatible font.
 * [Iosevka](https://github.com/be5invis/Iosevka) :1st_place_medal: :hourglass_flowing_sand: :briefcase: :chart_with_upwards_trend: - Coders’ typeface, built from code. Highly customizable.
+* [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) :1st_place_medal: :running_man: :hourglass_flowing_sand: :briefcase: - Collection of over 20 patched fonts (over 2,000 variations) & FontForge font patcher python script for Powerline, Font Awesome, Octicons, Devicons, and Vim Devicons. Includes: Droid Sans, Meslo, Source Code, AnonymousPro, Hack, ProFont, Inconsolata, and many more.
 * [Powerline patched font collection](https://github.com/powerline/fonts) :1st_place_medal: - A collection of a dozen or so fonts patched to include powerline gylphs.
