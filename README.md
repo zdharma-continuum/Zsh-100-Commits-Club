@@ -2,7 +2,7 @@
 # Zsh 100 Commits Club
 
 
-Plugins evaluated at July 13th, 2019
+Plugins evaluated at July 15th, 2019
 
 [![paypal](https://img.shields.io/badge/-Donate-yellow.svg?longCache=true&style=for-the-badge)](https://www.paypal.me/ZdharmaInitiative)
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=D54B3S7C6HGME)
@@ -68,7 +68,7 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [czhttpd](https://github.com/jsks/czhttpd) :1st_place_medal: :running_man: :hourglass_flowing_sand: - A simple http server written in 99.9% pure ZSH.
 * [deer](https://github.com/Vifon/deer) :1st_place_medal: - A file navigator for ZSH heavily inspired by [ranger](https://ranger.github.io/).
 * [depot-tools](https://github.com/kuoe0/zsh-depot-tools) :1st_place_medal: - Simple oh-my-zsh plugin for installing the chromium depot_tools. Installing this plugin will put all of the chromium depot_tools in your path automatically.
-* [diractions](https://github.com/AdrieanKhisbe/diractions) :1st_place_medal: :running_man: :hourglass_flowing_sand: - Allow you to map a short logical/mnemonic name to directories to quickly access them, or perform actions in them.
+* [diractions](https://github.com/AdrieanKhisbe/diractions) :1st_place_medal: :walking_man: :hourglass_flowing_sand: - Allow you to map a short logical/mnemonic name to directories to quickly access them, or perform actions in them.
 * [directory-history](https://github.com/tymm/zsh-directory-history) : - A per directory history for ZSH.
 * [dirrc](https://github.com/gmatheu/shell-plugins) : :running_man: :alarm_clock: - Executes `.dirc` when present in a directory you `cd` into.
 * [docker-aliases](https://github.com/webyneter/docker-aliases) : Docker aliases for everyday use.
@@ -87,7 +87,7 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [git-aliases.zsh](https://github.com/peterhurford/git-aliases.zsh) : - Creates a lot of useful aliases for combinations of commonly used `git` commands.
 * [git-extra-commands](https://github.com/unixorn/git-extra-commands) :1st_place_medal: :running_man: :alarm_clock: - Extra `git` helper scripts packaged as a plugin.
 * [git-it-on](https://github.com/peterhurford/git-it-on.zsh) : :hourglass: - Adds ability to open a folder in your current branch on GitHub.
-* [git-secret](https://github.com/sobolevn/git-secret) :1st_place_medal: :running_man: :hourglass_flowing_sand: :briefcase: :chart_with_upwards_trend: - A bash-tool to store your private data inside a `git` repository.
+* [git-secret](https://github.com/sobolevn/git-secret) :1st_place_medal: :running_man: :hourglass_flowing_sand: :briefcase: - A bash-tool to store your private data inside a `git` repository.
 * [gitignore](https://github.com/voronkovich/gitignore.plugin.zsh) :1st_place_medal: :running_man: :alarm_clock: - Plugin for creating `.gitignore` files.
 * [gitsync](https://github.com/washtubs/gitsync) : - ZSH plugin to improve workflows for one person developing on the same repository on multiple machines.
 * [grep2awk](https://github.com/joepvd/grep2awk) : - ZLE widget to transform `grep` command into `awk` command.
@@ -132,7 +132,7 @@ minutes you'll be able to grep interesting plugins with your eyes!
 
 * [agkozak](https://github.com/agkozak/agkozak-zsh-prompt) :1st_place_medal: :running_man: :alarm_clock: :briefcase: - Uses three asynchronous methods to keep the ZSH prompt responsive while displaying the `git` status and indicators of SSH connection, exit codes, and `vi` mode, along with an abbreviated, `PROMPT_DIRTRIM`-style path. Very customizable. Asynchronous even on Cygwin and MSYS2.
 * [alien-minimal](https://github.com/eendroroy/alien-minimal) :1st_place_medal: :hourglass: - Minimalist ZSH theme with `git` status displayed.
-* [alien](https://github.com/eendroroy/alien) :1st_place_medal: :hourglass_flowing_sand: - Powerline-esque ZSH theme that shows `git` decorations and the exit code of the last command. Faster than many other prompts because it determines the `git` decorations asynchronously in a background process.
+* [alien](https://github.com/eendroroy/alien) :1st_place_medal: :alarm_clock: - Powerline-esque ZSH theme that shows `git` decorations and the exit code of the last command. Faster than many other prompts because it determines the `git` decorations asynchronously in a background process.
 * [astral](https://github.com/alphabetum/astral) : - Theme for dark backgrounds with zen mode.
 * [bar](https://github.com/xp-bar/zsh-bar-theme) : :running_man: :hourglass_flowing_sand: - Includes username, host, pwd, `git` status decorations and  3x hour reminders to drink water.
 * [bklyn](https://github.com/gporrata/bklyn-zsh) :1st_place_medal: - Variant of [Powerlevel9k](https://github.com/bhilburn/powerlevel9k) with customizations applied.
@@ -187,6 +187,6 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [zwsh](https://github.com/naens/zwsh) :1st_place_medal: :hourglass_flowing_sand: - A Zpm3/Wordstar mode/theme for ZSH.
 * [Awesome Terminal Fonts](https://github.com/gabrielelana/awesome-terminal-fonts) : - A family of fonts that includes some nice monospaced Icons.
 * [Fantasque-sans](https://github.com/belluzj/fantasque-sans) :1st_place_medal: - Another Powerline-compatible font.
-* [Iosevka](https://github.com/be5invis/Iosevka) :1st_place_medal: :hourglass_flowing_sand: :briefcase: :chart_with_upwards_trend: - Coders’ typeface, built from code. Highly customizable.
+* [Iosevka](https://github.com/be5invis/Iosevka) :1st_place_medal: :running_man: :hourglass_flowing_sand: :briefcase: :chart_with_upwards_trend: - Coders’ typeface, built from code. Highly customizable.
 * [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) :1st_place_medal: :running_man: :hourglass_flowing_sand: :briefcase: - Collection of over 20 patched fonts (over 2,000 variations) & FontForge font patcher python script for Powerline, Font Awesome, Octicons, Devicons, and Vim Devicons. Includes: Droid Sans, Meslo, Source Code, AnonymousPro, Hack, ProFont, Inconsolata, and many more.
 * [Powerline patched font collection](https://github.com/powerline/fonts) :1st_place_medal: - A collection of a dozen or so fonts patched to include powerline gylphs.
