@@ -437,8 +437,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Sebastian Gniazdowski</span><br>
 <span id="email" class="email"><a href="mailto:psprint@zdharma.org">psprint@zdharma.org</a></span><br>
-<span id="revnumber">version 0.92,</span>
-<span id="revdate">07/14/2019</span>
+<span id="revnumber">version 0.93,</span>
+<span id="revdate">07/20/2019</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -507,7 +507,7 @@ completions, Makefiles, backend programs, documentation).</p>
 </li>
 <li>
 <p>A software package containing any type of command line artifacts – when used
-with advanced plugin managers that have hooks, it can run Makefiles, add
+with advanced plugin managers that have hooks, can run Makefiles, add
 directories to <code>$PATH</code>.</p>
 </li>
 </ol>
@@ -529,6 +529,7 @@ plugin" and the actions of plugin managers – the proposed standardization.<br>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-zsh" data-lang="zsh">0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
+0="${${(M)0#/*}:-$PWD/$0}"
 
 # Then ${0:h} to get plugin's directory</code></pre>
 </div>
@@ -589,6 +590,10 @@ is a very good last-resort fallback.</p>
 </ul>
 </div>
 </li>
+<li>
+<p>Finally, in the second line, it will ensure that <code>$0</code> contains an absolute
+path by prepending it with <code>$PWD</code> if necessary.</p>
+</li>
 </ol>
 </div>
 <div class="paragraph">
@@ -599,7 +604,12 @@ posix_argzero</code> cases.</p>
 <div class="paragraph">
 <p>A plugin manager will be even able to convert a plugin to a function (author
 implemented such proof of concept functionality, it&#8217;s possible), but performance
-differences of this are unclear. It might however provide a use case.</p>
+differences of this are yet unclear. It might however provide a use case.</p>
+</div>
+<div class="paragraph">
+<p>The last, 5th point also allows to use the <code>$0</code> handling in scripts (i.e.
+runnables with the hashbang <code>#!&#8230;&#8203;</code>) to get the directory in which the script
+file resides.</p>
 </div>
 </div>
 </div>
@@ -713,7 +723,8 @@ the same state on different accounts / machines.</p>
 <h2 id="_revision_history_history_of_updates_to_the_document">Appendix A: Revision history (history of updates to the document)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>v0.92, 07/14/2019: 1/ Rename LOADED_PLUGINS to zsh_loaded_plugins. 2/ Suggest that $ZPFX is optional. <br>
+<p>v0.93, 07/20/2019: 1/ Add the second line to the <code>$0</code> handling. 2/ Reformat to 80 columns<br>
+v0.92, 07/14/2019: 1/ Rename LOADED_PLUGINS to zsh_loaded_plugins. 2/ Suggest that $ZPFX is optional. <br>
 v0.91, 06/02/2018: Fix the link to the PDF for Github.<br>
 v0.9, 12/12/2017: Remove ZERO references (bad design), add TOC.<br>
 Reminder: The date format that uses slashes is <code>MM/DD/YYYY</code>.<br></p>
@@ -723,8 +734,8 @@ Reminder: The date format that uses slashes is <code>MM/DD/YYYY</code>.<br></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.92<br>
-Last updated 2019-07-20 13:49:10 +0200
+Version 0.93<br>
+Last updated 2019-07-20 18:24:46 +0200
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
