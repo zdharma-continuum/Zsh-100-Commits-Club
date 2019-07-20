@@ -2,7 +2,7 @@
 # Zsh 100 Commits Club
 
 
-Plugins evaluated at July 17th, 2019
+Plugins evaluated at July 20th, 2019
 
 [![paypal](https://img.shields.io/badge/-Donate-yellow.svg?longCache=true&style=for-the-badge)](https://www.paypal.me/ZdharmaInitiative)
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=D54B3S7C6HGME)
@@ -86,7 +86,7 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [fzf-z](https://github.com/andrewferrier/fzf-z) : :hourglass_flowing_sand: - Brings together the *z* plugin and *fzf* to allow you to easily browse recently used directories at any point on the command line.
 * [git-aliases.zsh](https://github.com/peterhurford/git-aliases.zsh) : - Creates a lot of useful aliases for combinations of commonly used `git` commands.
 * [git-extra-commands](https://github.com/unixorn/git-extra-commands) :1st_place_medal: :running_man: :alarm_clock: - Extra `git` helper scripts packaged as a plugin.
-* [git-it-on](https://github.com/peterhurford/git-it-on.zsh) : :hourglass: - Adds ability to open a folder in your current branch on GitHub.
+* [git-it-on](https://github.com/peterhurford/git-it-on.zsh) : - Adds ability to open a folder in your current branch on GitHub.
 * [git-secret](https://github.com/sobolevn/git-secret) :1st_place_medal: :running_man: :hourglass_flowing_sand: :briefcase: - A bash-tool to store your private data inside a `git` repository.
 * [gitignore](https://github.com/voronkovich/gitignore.plugin.zsh) :1st_place_medal: :running_man: :alarm_clock: - Plugin for creating `.gitignore` files.
 * [gitsync](https://github.com/washtubs/gitsync) : - ZSH plugin to improve workflows for one person developing on the same repository on multiple machines.
@@ -153,7 +153,7 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [lambda-pure](https://github.com/marszall87/lambda-pure) :1st_place_medal: :hourglass: - A minimal ZSH theme, based on Pure, with added NodeJS version.
 * [liquidprompt](https://github.com/nojhan/liquidprompt) :1st_place_medal: :briefcase: - A full-featured & carefully designed adaptive prompt with useful information when you need it. It shows you what you need when you need it. You will notice what changes when it changes, saving time and frustration.
 * [minimal2](https://github.com/PatTheMav/minimal2) : :hourglass: - A minimal and extensible ZSH theme. Forked from [subnixr's original](https://github.com/subnixr/minimal) and adapted for [Zimfw](https://github.com/zimfw/zimfw).
-* [minimal](https://github.com/subnixr/minimal) : :running_man: :alarm_clock: - Minimal yet feature-rich theme.
+* [minimal](https://github.com/subnixr/minimal) : :running_man: :hourglass_flowing_sand: - Minimal yet feature-rich theme.
 * [newt](https://github.com/softmoth/zsh-prompt-newt) : - Fat & fast theme – beautiful inside and out, styled segments done right.
 * [nox](https://github.com/kbrsh/nox) : :running_man: :alarm_clock: - Dark theme, displays the current working directory and git status.
 * [odin](https://github.com/tylerreckart/odin) : - Odin is a `git`-flavored ZSH theme.
@@ -173,7 +173,7 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [pure](https://github.com/sindresorhus/pure) :1st_place_medal: :running_man: :alarm_clock: - Pretty, minimal and fast ZSH prompt.
 * [purien](https://github.com/sinetoami/purien) :1st_place_medal: :hourglass: - Pretty prompt based on [pure](https://github.com/sindresorhus/pure) prompt, inpired by [alien-minimal](https://github.com/eendroroy/alien-minimal) and [filthy](https://github.com/molovo/filthy).
 * [shellder](https://github.com/simnalamburt/shellder) :1st_place_medal: - Minimal theme with git branch display. Requires a powerline font.
-* [silver](https://github.com/reujab/silver) : :running_man: :hourglass_flowing_sand: - A cross-shell customizable powerline-like prompt heavily inspired by [Agnoster](https://github.com/agnoster/agnoster-zsh-theme). A faster rust port of [bronze](https://github.com/reujab/bronze). Requires [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts).
+* [silver](https://github.com/reujab/silver) : :running_man: :alarm_clock: - A cross-shell customizable powerline-like prompt heavily inspired by [Agnoster](https://github.com/agnoster/agnoster-zsh-theme). A faster rust port of [bronze](https://github.com/reujab/bronze). Requires [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts).
 * [skeletor-syntax](https://github.com/ramonmcros/skeletor-syntax) :1st_place_medal: - Theme collection for Atom, Prism and ZSH inspired by Skeletor from He-Man and the Masters of the Universe.
 * [slimline](https://github.com/mgee/slimline) :1st_place_medal: :hourglass_flowing_sand: - Minimal, fast and elegant ZSH prompt. Displays the right information at the right time.
 * [sm](https://github.com/blyndusk/sm-theme) : :running_man: :hourglass_flowing_sand: A **Simplist** & **Minimalist** theme for your **favorite** terminal.
@@ -188,5 +188,5 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [Awesome Terminal Fonts](https://github.com/gabrielelana/awesome-terminal-fonts) : - A family of fonts that includes some nice monospaced Icons.
 * [Fantasque-sans](https://github.com/belluzj/fantasque-sans) :1st_place_medal: - Another Powerline-compatible font.
 * [Iosevka](https://github.com/be5invis/Iosevka) : :running_man: :hourglass_flowing_sand: - Coders’ typeface, built from code. Highly customizable.
-* [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) :1st_place_medal: :running_man: :hourglass_flowing_sand: - Collection of over 20 patched fonts (over 2,000 variations) & FontForge font patcher python script for Powerline, Font Awesome, Octicons, Devicons, and Vim Devicons. Includes: Droid Sans, Meslo, Source Code, AnonymousPro, Hack, ProFont, Inconsolata, and many more.
+* [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) :1st_place_medal: :running_man: :alarm_clock: - Collection of over 20 patched fonts (over 2,000 variations) & FontForge font patcher python script for Powerline, Font Awesome, Octicons, Devicons, and Vim Devicons. Includes: Droid Sans, Meslo, Source Code, AnonymousPro, Hack, ProFont, Inconsolata, and many more.
 * [Powerline patched font collection](https://github.com/powerline/fonts) :1st_place_medal: - A collection of a dozen or so fonts patched to include powerline gylphs.
