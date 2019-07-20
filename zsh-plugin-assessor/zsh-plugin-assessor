@@ -162,11 +162,17 @@ typeset -g PLUGIN
 for PLUGIN in "${gathered_plugins[@]}"; do
     typeset -g URL="${plugin_to_url[$PLUGIN]}"
 
+    if [[ "$URL" = (#i)(*nerd*fonts*|*iosevka*) ]]; then
+        local depth_opt="--depth 50"
+    else
+        local depth_opt=""
+    fi
+
     if [[ -n "$OPT_VERBOSE" ]]; then
         print
-        command git clone --progress "$URL" "$PLUGIN" |& "${ZPA_DIR}/git-process-output.zsh"
+        command git clone --progress ${=depth_opt} "$URL" "$PLUGIN" |& "${ZPA_DIR}/git-process-output.zsh"
     else
-        command git clone --progress "$URL" "$PLUGIN" |& "${ZPA_DIR}/git-process-output.zsh" -q
+        command git clone --progress ${=depth_opt} "$URL" "$PLUGIN" |& "${ZPA_DIR}/git-process-output.zsh" -q
     fi
 
     #
