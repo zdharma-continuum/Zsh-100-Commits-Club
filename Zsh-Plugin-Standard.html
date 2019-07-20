@@ -448,10 +448,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#unload-fun">2. Unload Function</a></li>
 <li><a href="#indicator">3. Plugin Manager Activity Indicator</a></li>
 <li><a href="#zpfx">4. Global Parameter With PREFIX For Make, Configure, Etc.</a></li>
-<li><a href="#_zsh_plugin_programming_best_practices">Zsh Plugin-Programming Best Practices</a>
+<li><a href="#best-practices">Zsh Plugin-Programming Best Practices</a>
 <ul class="sectlevel2">
-<li><a href="#_use_of_add_zsh_hook_to_install_hooks">Use Of <code>add-zsh-hook</code> To Install Hooks</a></li>
-<li><a href="#_use_of_add_zle_hook_widget_to_install_zle_hooks">Use Of <code>add-zle-hook-widget</code> To Install Zle Hooks</a></li>
+<li><a href="#azh">Use Of <code>add-zsh-hook</code> To Install Hooks</a></li>
+<li><a href="#azhw">Use Of <code>add-zle-hook-widget</code> To Install Zle Hooks</a></li>
 </ul>
 </li>
 <li><a href="#_revision_history_history_of_updates_to_the_document">Appendix A: Revision history (history of updates to the document)</a></li>
@@ -735,7 +735,7 @@ the same state on different accounts / machines.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_zsh_plugin_programming_best_practices">Zsh Plugin-Programming Best Practices</h2>
+<h2 id="best-practices">Zsh Plugin-Programming Best Practices</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The document is to define a <strong>Zsh-plugin</strong> but also to serve as an information
@@ -743,7 +743,7 @@ source for plugin creators. Therefore, it covers also a best practices
 information in this section.</p>
 </div>
 <div class="sect2">
-<h3 id="_use_of_add_zsh_hook_to_install_hooks">Use Of <code>add-zsh-hook</code> To Install Hooks</h3>
+<h3 id="azh">Use Of <code>add-zsh-hook</code> To Install Hooks</h3>
 <div class="paragraph">
 <p>Zsh ships with a function <code>add-zsh-hook</code>. It has the following invocation
 syntax:</p>
@@ -762,7 +762,7 @@ documentation</a>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_use_of_add_zle_hook_widget_to_install_zle_hooks">Use Of <code>add-zle-hook-widget</code> To Install Zle Hooks</h3>
+<h3 id="azhw">Use Of <code>add-zle-hook-widget</code> To Install Zle Hooks</h3>
 <div class="paragraph">
 <p>Zle editor is the part of the Zsh that is responsible for receiving the text
 from the user. It can be said that it&#8217;s based on widgets, which are nothing more
@@ -814,7 +814,7 @@ Reminder: The date format that uses slashes is <code>MM/DD/YYYY</code>.<br></p>
 <div id="footer">
 <div id="footer-text">
 Version 0.94<br>
-Last updated 2019-07-20 20:58:13 +0200
+Last updated 2019-07-20 21:05:14 +0200
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
