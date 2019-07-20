@@ -498,7 +498,7 @@ loaded via Zsh&#8217;s  <code>autoload</code> mechanism (a single function per-f
 completions, Makefiles, backend programs, documentation).</p>
 </li>
 <li>
-<p>A script that obtains the path to its directory via <code>$0</code> (see the
+<p>A sourcable script that obtains the path to its directory via <code>$0</code> (see the
 <a href="#zero-handling">next section</a> for a related enhancement proposal).</p>
 </li>
 <li>
@@ -603,8 +603,9 @@ posix_argzero</code> cases.</p>
 </div>
 <div class="paragraph">
 <p>A plugin manager will be even able to convert a plugin to a function (author
-implemented such proof of concept functionality, it&#8217;s possible), but performance
-differences of this are yet unclear. It might however provide a use case.</p>
+implemented such proof of concept functionality, it&#8217;s fully possible – also in
+an automatic fashion), but performance differences of this are yet unclear. It
+might however provide a use case.</p>
 </div>
 <div class="paragraph">
 <p>The last, 5th point also allows to use the <code>$0</code> handling in scripts (i.e.
@@ -627,6 +628,14 @@ this is in general optional. However, to properly unload e.g. a prompt, detailed
 tracking (easy to do by the plugin creator) can provide better, predictable
 results. Any special, uncommon effects of loading a plugin are possible to undo
 only by a dedicated function.</p>
+</div>
+<div class="paragraph">
+<p>However, an interesting compromise approach is available – to withdraw only the
+special effects of loading a plugin via the dedicated, plugin-provided function
+and leave the rest to the plugin manager. The value of such approach is that
+maintaining of such function (if it is to withdraw <strong>all</strong> plugin side-effects)
+can be a daunting task requiring constant monitoring of it during the plugin
+develoment process.</p>
 </div>
 </div>
 </div>
@@ -735,7 +744,7 @@ Reminder: The date format that uses slashes is <code>MM/DD/YYYY</code>.<br></p>
 <div id="footer">
 <div id="footer-text">
 Version 0.93<br>
-Last updated 2019-07-20 18:24:46 +0200
+Last updated 2019-07-20 18:43:41 +0200
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
