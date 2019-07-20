@@ -8,27 +8,35 @@ ifdef::backend-html5[The document is also available as a link:http://zdharma.org
 
 ## What is a Zsh plugin?
 
-Zsh plugins were first defined by Oh-My-Zsh. They provide for a way to package together files that extend or configure the shell's functionality in a particular way.
+Zsh plugins were first defined by Oh-My-Zsh. They provide for a way to package
+together files that extend or configure the shell's functionality in a
+particular way.
 
 At a simple level, a plugin:
 
-1. Has its directory added to `$fpath` (link:http://zsh.sourceforge.net/Doc/Release/Functions.html#Autoloading-Functions[zsh doc]).
-2. Has its first `\*.plugin.zsh` file sourced (or `*.zsh`, `init.zsh`, `*.sh`, these are non-standard).
+1. Has its directory added to `$fpath`
+(link:http://zsh.sourceforge.net/Doc/Release/Functions.html#Autoloading-Functions[zsh
+doc]).
+2. Has its first `\*.plugin.zsh` file sourced (or `*.zsh`, `init.zsh`, `*.sh`,
+   these are non-standard).
 
-The first point allows plugins to provide completions and functions that are loaded via Zsh's  `autoload` mechanism (a single function per-file).
+The first point allows plugins to provide completions and functions that are
+loaded via Zsh's  `autoload` mechanism (a single function per-file).
 
 From a more broad perspective, a plugin consists of:
 
-1. A directory containing various files (main script, autoload functions, completions, Makefiles, backend
-   programs, documentation).
-2. A script that obtains the path to its directory via `$0` (see the link:#zero-handling[next section] for
-   a related enhancement proposal).
-3. A Github (or other site) repository identified by two components **username**/**pluginname**.
-4. A software package containing any type of command line artifacts – when used with advanced plugin
-   managers that have hooks, it can run Makefiles, add directories to `$PATH`.
+1. A directory containing various files (main script, autoload functions,
+   completions, Makefiles, backend programs, documentation).
+2. A script that obtains the path to its directory via `$0` (see the
+   link:#zero-handling[next section] for a related enhancement proposal).
+3. A Github (or other site) repository identified by two components
+   **username**/**pluginname**.
+4. A software package containing any type of command line artifacts – when used
+   with advanced plugin managers that have hooks, it can run Makefiles, add
+   directories to `$PATH`.
 
-Below follow proposed enhancements and codifications of the definition of a "Zsh plugin" and the actions of plugin managers
-– the proposed standardization. +
+Below follow proposed enhancements and codifications of the definition of a "Zsh
+plugin" and the actions of plugin managers – the proposed standardization. +
  +
 
 '''
@@ -50,24 +58,29 @@ The one-line code above will:
 2. Use `ZERO` if it's not empty,
   * plugin manager will be easily able to alter effective `$0` before loading a plugin,
   * this allows for e.g. `eval "$(<plugin)"`, which can be faster than `source`
-    (link:http://www.zsh.org/mla/workers/2017/msg01827.html[comparison], note that it's not for a compiled script).
+    (link:http://www.zsh.org/mla/workers/2017/msg01827.html[comparison], note
+    that it's not for a compiled script).
 3. Use `$0` if it doesn't contain the path to the Zsh binary,
-  * plugin manager will still be able to set `$0`, although more difficultly (requires `unsetopt function_argzero`
-    before sourcing plugin script, and `0=...` assignment),
-  * `unsetopt function_argzero` will be detected (it causes `$0` not to contain plugin-script path, but path
-    to Zsh binary, if not overwritten by `0=...` assignment),
+  * plugin manager will still be able to set `$0`, although more difficultly
+    (requires `unsetopt function_argzero` before sourcing plugin script, and
+    `0=...` assignment),
+  * `unsetopt function_argzero` will be detected (it causes `$0` not to contain
+    plugin-script path, but path to Zsh binary, if not overwritten by `0=...`
+    assignment),
   * `setopt posix_argzero` will be detected (as above).
 4. Use `%N` prompt expansion flag, which always gives absolute path to script,
-  * plugin manager cannot alter this (no advanced loading of plugin is possible), but simple plugin-file
-    sourcing (without a plugin manager) will be saved from breaking caused by the mentioned `*_argzero`
-    options, so this is a very good last-resort fallback.
+  * plugin manager cannot alter this (no advanced loading of plugin is
+    possible), but simple plugin-file sourcing (without a plugin manager) will
+    be saved from breaking caused by the mentioned `*_argzero` options, so this
+    is a very good last-resort fallback.
 
-The goal is flexibility, with essential motivation to support `eval "$(<plugin)"` and definitely
-solve `setopt no_function_argzero` and `setopt posix_argzero` cases.
+The goal is flexibility, with essential motivation to support `eval
+"$(<plugin)"` and definitely solve `setopt no_function_argzero` and `setopt
+posix_argzero` cases.
 
-A plugin manager will be even able to convert a plugin to a function (author implemented such proof of concept
-functionality, it's possible), but performance differences of this are unclear. It might however provide a
-use case.
+A plugin manager will be even able to convert a plugin to a function (author
+implemented such proof of concept functionality, it's possible), but performance
+differences of this are unclear. It might however provide a use case.
 
 [#unload-fun]
 ## 2. Unload function
@@ -76,11 +89,11 @@ If a plugin is named e.g. `kalc` (and is available via `an-user/kalc`
 plugin-ID), then it can provide a function, `kalc_unload_plugin`, that can be
 called by a plugin manager to undo the effects of loading that plugin.
 
-A plugin manager can implement its own tracking of changes made by a plugin so this
-is in general optional. However, to properly unload e.g. a prompt, detailed tracking
-(easy to do by the plugin creator) can provide better, predictable results. Any
-special, uncommon effects of loading a plugin are possible to undo only by a
-dedicated function.
+A plugin manager can implement its own tracking of changes made by a plugin so
+this is in general optional. However, to properly unload e.g. a prompt, detailed
+tracking (easy to do by the plugin creator) can provide better, predictable
+results. Any special, uncommon effects of loading a plugin are possible to undo
+only by a dedicated function.
 
 [#indicator]
 ## 3. Plugin manager activity indicator
@@ -93,14 +106,15 @@ element). This will allow plugins to:
  2. Check if it is being loaded by a plugin manager (i.e. not just sourced).
 
 The first item allows a plugin to e.g. issue a notice about missing dependencies.
-Instead of issuing a notice, it may be able to satisfy the dependencies from resources
-it provides. For example, `pure` prompt provides `zsh-async` dependency library, which
-is a separate project and can be loaded by the user directly. Consequently, the prompt
-can decide to source its private copy of `zsh-async`, having also reliable `$0` defined
-by previous section (note: `pure` doesn't normally do this).
+Instead of issuing a notice, it may be able to satisfy the dependencies from
+resources it provides. For example, `pure` prompt provides `zsh-async`
+dependency library, which is a separate project and can be loaded by the user
+directly. Consequently, the prompt can decide to source its private copy of
+`zsh-async`, having also reliable `$0` defined by previous section (note: `pure`
+doesn't normally do this).
 
-The second item allows a plugin to e.g. set up `$fpath`, knowing that plugin manager will
-not handle this:
+The second item allows a plugin to e.g. set up `$fpath`, knowing that plugin
+manager will not handle this:
 
 ```zsh
 if [[ ( ${+zsh_loaded_plugins} = 0 || ${zsh_loaded_plugins[-1]} != */kalc ) && -z "${fpath[(r)${0:h}]}" ]]
@@ -114,16 +128,18 @@ This will allow user to reliably source the plugin without using a plugin manage
 [#zpfx]
 ## 4. Global parameter with PREFIX for make, configure, etc.
 
-Plugin managers may export the parameter `$ZPFX` which should contain a path to a directory dedicated
-for user-land software, i.e. for directories `$ZPFX/bin`, `$ZPFX/lib`, `$ZPFX/share`, etc.
-Suggested name of the directory is `polaris`, Zplugin uses this name and places this directory
-at `~/.zplugin/polaris` by default.
+Plugin managers may export the parameter `$ZPFX` which should contain a path to
+a directory dedicated for user-land software, i.e. for directories `$ZPFX/bin`,
+`$ZPFX/lib`, `$ZPFX/share`, etc.  Suggested name of the directory is `polaris`,
+Zplugin uses this name and places this directory at `~/.zplugin/polaris` by
+default.
 
-User can then configure hooks (feature of e.g. zplug and Zplugin) to invoke e.g. `make PREFIX=$ZPFX install`
-to install software like e.g. link:https://github.com/tj/git-extras[tj/git-extras]. This is a
-developing role of Zsh plugin managers as package managers, where `.zshrc` has a similar role
-to Chef or Puppet configuration and allows to **declare** system state, and have the same state
-on different accounts / machines.
+User can then configure hooks (feature of e.g. zplug and Zplugin) to invoke e.g.
+`make PREFIX=$ZPFX install` to install software like e.g.
+link:https://github.com/tj/git-extras[tj/git-extras]. This is a developing role
+of Zsh plugin managers as package managers, where `.zshrc` has a similar role to
+Chef or Puppet configuration and allows to **declare** system state, and have
+the same state on different accounts / machines.
 
 No-narration facts-list related to `$ZPFX`:
 
@@ -140,3 +156,5 @@ v0.92, 07/14/2019: 1/ Rename LOADED_PLUGINS to zsh_loaded_plugins. 2/ Suggest th
 v0.91, 06/02/2018: Fix the link to the PDF for Github. +
 v0.9, 12/12/2017: Remove ZERO references (bad design), add TOC. +
 Reminder: The date format that uses slashes is `MM/DD/YYYY`. +
+
+// vim:ft=asciidoc:et:sw=4:sts=4:tw=80
