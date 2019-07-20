@@ -437,17 +437,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Sebastian Gniazdowski</span><br>
 <span id="email" class="email"><a href="mailto:psprint@zdharma.org">psprint@zdharma.org</a></span><br>
-<span id="revnumber">version 0.93,</span>
+<span id="revnumber">version 0.94,</span>
 <span id="revdate">07/20/2019</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_what_is_a_zsh_plugin">What is a Zsh plugin?</a></li>
-<li><a href="#zero-handling">1. Standardized $0 handling</a></li>
-<li><a href="#unload-fun">2. Unload function</a></li>
-<li><a href="#indicator">3. Plugin manager activity indicator</a></li>
-<li><a href="#zpfx">4. Global parameter with PREFIX for make, configure, etc.</a></li>
+<li><a href="#_what_is_a_zsh_plugin">What Is A Zsh Plugin?</a></li>
+<li><a href="#zero-handling">1. Standardized <code>$0</code> Handling</a></li>
+<li><a href="#unload-fun">2. Unload Function</a></li>
+<li><a href="#indicator">3. Plugin Manager Activity Indicator</a></li>
+<li><a href="#zpfx">4. Global Parameter With PREFIX For Make, Configure, Etc.</a></li>
+<li><a href="#_zsh_plugin_programming_best_practices">Zsh Plugin-Programming Best Practices</a>
+<ul class="sectlevel2">
+<li><a href="#_use_of_add_zsh_hook_to_install_hooks">Use Of <code>add-zsh-hook</code> To Install Hooks</a></li>
+<li><a href="#_use_of_add_zle_hook_widget_to_install_zle_hooks">Use Of <code>add-zle-hook-widget</code> To Install Zle Hooks</a></li>
+</ul>
+</li>
 <li><a href="#_revision_history_history_of_updates_to_the_document">Appendix A: Revision history (history of updates to the document)</a></li>
 </ul>
 </div>
@@ -461,7 +467,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_what_is_a_zsh_plugin">What is a Zsh plugin?</h2>
+<h2 id="_what_is_a_zsh_plugin">What Is A Zsh Plugin?</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Zsh plugins were first defined by Oh-My-Zsh. They provide for a way to package
@@ -521,7 +527,7 @@ plugin" and the actions of plugin managers – the proposed standardization.<br>
 </div>
 </div>
 <div class="sect1">
-<h2 id="zero-handling">1. Standardized $0 handling</h2>
+<h2 id="zero-handling">1. Standardized <code>$0</code> Handling</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>To get the plugin&#8217;s location, plugins should do:</p>
@@ -615,7 +621,7 @@ file resides.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="unload-fun">2. Unload function</h2>
+<h2 id="unload-fun">2. Unload Function</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>If a plugin is named e.g. <code>kalc</code> (and is available via <code>an-user/kalc</code>
@@ -640,7 +646,7 @@ develoment process.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="indicator">3. Plugin manager activity indicator</h2>
+<h2 id="indicator">3. Plugin Manager Activity Indicator</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Plugin managers should set the <code>$zsh_loaded_plugins</code> array to contain all
@@ -684,7 +690,7 @@ fi</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="zpfx">4. Global parameter with PREFIX for make, configure, etc.</h2>
+<h2 id="zpfx">4. Global Parameter With PREFIX For Make, Configure, Etc.</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Plugin managers may export the parameter <code>$ZPFX</code> which should contain a path to
@@ -729,10 +735,74 @@ the same state on different accounts / machines.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_zsh_plugin_programming_best_practices">Zsh Plugin-Programming Best Practices</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The document is to define a <strong>Zsh-plugin</strong> but also to serve as an information
+source for plugin creators. Therefore, it covers also a best practices
+information in this section.</p>
+</div>
+<div class="sect2">
+<h3 id="_use_of_add_zsh_hook_to_install_hooks">Use Of <code>add-zsh-hook</code> To Install Hooks</h3>
+<div class="paragraph">
+<p>Zsh ships with a function <code>add-zsh-hook</code>. It has the following invocation
+syntax:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-zsh" data-lang="zsh">add-zsh-hook [ -L | -dD ] [ -Uzk ] hook function</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The function installs a <code>function</code> as one of the supported zsh <code>hook`s, which
+are one of: `chpwd</code>, <code>periodic</code>, <code>precmd</code>, <code>preexec</code>, <code>zshaddhistory</code>,
+<code>zshexit</code>, <code>zsh_directory_name</code>. For their meaning refer to the
+<a href="http://zsh.sourceforge.net/Doc/Release/Functions.html#Hook-Functions">Zsh
+documentation</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_use_of_add_zle_hook_widget_to_install_zle_hooks">Use Of <code>add-zle-hook-widget</code> To Install Zle Hooks</h3>
+<div class="paragraph">
+<p>Zle editor is the part of the Zsh that is responsible for receiving the text
+from the user. It can be said that it&#8217;s based on widgets, which are nothing more
+than Zsh functions that are allowed to be ran in Zle context, i.e. from the Zle
+editor (plus a few minor differences, like the <code>$WIDGET</code> parameter that&#8217;s
+automatically set by the Zle editor).</p>
+</div>
+<div class="paragraph">
+<p>The syntax of the call is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-zsh" data-lang="zsh">add-zle-hook-widget [ -L | -dD ] [ -Uzk ] hook widgetname</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So it pretty much resembles the syntax of the <code>add-zsh-hook</code> function. The only
+difference is that it takes a <code>widgetname</code>, not a function name, and that the
+<code>hook</code> is being one of: <code>isearch-exit</code>, <code>isearch-update</code>, <code>line-pre-redraw</code>,
+<code>line-init</code>, <code>line-finish</code>, <code>history-line-set</code>, or <code>keymap-select</code>. Their
+meaning is explained in the
+<a href="http://transit.iut2.upmf-grenoble.fr/doc/zsh-doc/html/Zsh-Line-Editor.html#Special-Widgets">Zsh
+documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>So basically, the use of this function is recommended because it allows to
+install <strong>multiple</strong> hooks per each <code>hook</code> entry. Before introducing the
+<code>add-zle-hook-widget</code> function the "normal" way to install a hook was to define
+widget with the name of one of the special widgets. Now, after the function has
+been introduced in Zsh <code>5.3</code> it should be used instead.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_revision_history_history_of_updates_to_the_document">Appendix A: Revision history (history of updates to the document)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>v0.93, 07/20/2019: 1/ Add the second line to the <code>$0</code> handling. 2/ Reformat to 80 columns<br>
+<p>v0.94, 07/20/2019: Add initial version of the best practices section<br>
+v0.93, 07/20/2019: 1/ Add the second line to the <code>$0</code> handling. 2/ Reformat to 80 columns<br>
 v0.92, 07/14/2019: 1/ Rename LOADED_PLUGINS to zsh_loaded_plugins. 2/ Suggest that $ZPFX is optional. <br>
 v0.91, 06/02/2018: Fix the link to the PDF for Github.<br>
 v0.9, 12/12/2017: Remove ZERO references (bad design), add TOC.<br>
@@ -743,8 +813,8 @@ Reminder: The date format that uses slashes is <code>MM/DD/YYYY</code>.<br></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.93<br>
-Last updated 2019-07-20 18:43:41 +0200
+Version 0.94<br>
+Last updated 2019-07-20 20:58:13 +0200
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
