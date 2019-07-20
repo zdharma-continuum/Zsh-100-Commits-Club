@@ -165,12 +165,14 @@ No-narration facts-list related to `$ZPFX`:
  5. `zplugin ice make"PREFIX=$ZPFX install"`
  6. `zplug ... hook-build:"make PREFIX=$PFX install"`
 
+[#best-practices]
 ## Zsh Plugin-Programming Best Practices
 
 The document is to define a *Zsh-plugin* but also to serve as an information
 source for plugin creators. Therefore, it covers also a best practices
 information in this section.
 
+[#azh]
 ### Use Of `add-zsh-hook` To Install Hooks
 
 Zsh ships with a function `add-zsh-hook`. It has the following invocation
@@ -186,8 +188,7 @@ are one of: `chpwd`, `periodic`, `precmd`, `preexec`, `zshaddhistory`,
 link:http://zsh.sourceforge.net/Doc/Release/Functions.html#Hook-Functions[Zsh
 documentation].
 
-
-
+[#azhw]
 ### Use Of `add-zle-hook-widget` To Install Zle Hooks
 
 Zle editor is the part of the Zsh that is responsible for receiving the text
