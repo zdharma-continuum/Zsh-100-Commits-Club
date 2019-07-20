@@ -1,6 +1,6 @@
 # Zsh Plugin Standard
 Sebastian Gniazdowski <psprint@zdharma.org>
-v0.92, 07/14/2019
+v0.93, 07/20/2019
 :source-highlighter: prettify
 :toc:
 
@@ -32,7 +32,7 @@ From a more broad perspective, a plugin consists of:
 3. A Github (or other site) repository identified by two components
    **username**/**pluginname**.
 4. A software package containing any type of command line artifacts – when used
-   with advanced plugin managers that have hooks, it can run Makefiles, add
+   with advanced plugin managers that have hooks, can run Makefiles, add
    directories to `$PATH`.
 
 Below follow proposed enhancements and codifications of the definition of a "Zsh
@@ -48,6 +48,7 @@ To get the plugin's location, plugins should do:
 
 ```zsh
 0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
+0="${${(M)0#/*}:-$PWD/$0}"
 
 # Then ${0:h} to get plugin's directory
 ```
@@ -73,6 +74,8 @@ The one-line code above will:
     possible), but simple plugin-file sourcing (without a plugin manager) will
     be saved from breaking caused by the mentioned `*_argzero` options, so this
     is a very good last-resort fallback.
+5. Finally, in the second line, it will ensure that `$0` contains an absolute
+   path by prepending it with `$PWD` if necessary.
 
 The goal is flexibility, with essential motivation to support `eval
 "$(<plugin)"` and definitely solve `setopt no_function_argzero` and `setopt
@@ -80,7 +83,11 @@ posix_argzero` cases.
 
 A plugin manager will be even able to convert a plugin to a function (author
 implemented such proof of concept functionality, it's possible), but performance
-differences of this are unclear. It might however provide a use case.
+differences of this are yet unclear. It might however provide a use case.
+
+The last, 5th point also allows to use the `$0` handling in scripts (i.e.
+runnables with the hashbang `#!...`) to get the directory in which the script
+file resides.
 
 [#unload-fun]
 ## 2. Unload function
@@ -152,6 +159,7 @@ No-narration facts-list related to `$ZPFX`:
 
 [appendix]
 == Revision history (history of updates to the document)
+v0.93, 07/20/2019: 1/ Add the second line to the `$0` handling. 2/ Reformat to 80 columns +
 v0.92, 07/14/2019: 1/ Rename LOADED_PLUGINS to zsh_loaded_plugins. 2/ Suggest that $ZPFX is optional.  +
 v0.91, 06/02/2018: Fix the link to the PDF for Github. +
 v0.9, 12/12/2017: Remove ZERO references (bad design), add TOC. +
