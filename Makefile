@@ -31,4 +31,5 @@ master:
 	make all
 
 loop:
+	@echo $(PWD)
 	while true; do make all >/dev/null 2>&1; sleep 1; done
