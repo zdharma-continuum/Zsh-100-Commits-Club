@@ -1,12 +1,12 @@
 # Zsh Plugin Standard
 Sebastian Gniazdowski <psprint@zdharma.org>
-v0.93, 07/20/2019
+v0.94, 07/20/2019
 :source-highlighter: prettify
 :toc:
 
 ifdef::backend-html5[The document is also available as a link:http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.pdf[PDF].]
 
-## What is a Zsh plugin?
+## What Is A Zsh Plugin?
 
 Zsh plugins were first defined by Oh-My-Zsh. They provide for a way to package
 together files that extend or configure the shell's functionality in a
@@ -42,7 +42,7 @@ plugin" and the actions of plugin managers – the proposed standardization. +
 '''
 
 [#zero-handling]
-## 1. Standardized $0 handling
+## 1. Standardized `$0` Handling
 
 To get the plugin's location, plugins should do:
 
@@ -91,7 +91,7 @@ runnables with the hashbang `#!...`) to get the directory in which the script
 file resides.
 
 [#unload-fun]
-## 2. Unload function
+## 2. Unload Function
 
 If a plugin is named e.g. `kalc` (and is available via `an-user/kalc`
 plugin-ID), then it can provide a function, `kalc_unload_plugin`, that can be
@@ -111,7 +111,7 @@ can be a daunting task requiring constant monitoring of it during the plugin
 develoment process.
 
 [#indicator]
-## 3. Plugin manager activity indicator
+## 3. Plugin Manager Activity Indicator
 
 Plugin managers should set the `$zsh_loaded_plugins` array to contain all
 previously loaded plugins and the plugin currently being loaded (as the last
@@ -141,7 +141,7 @@ fi
 This will allow user to reliably source the plugin without using a plugin manager.
 
 [#zpfx]
-## 4. Global parameter with PREFIX for make, configure, etc.
+## 4. Global Parameter With PREFIX For Make, Configure, Etc.
 
 Plugin managers may export the parameter `$ZPFX` which should contain a path to
 a directory dedicated for user-land software, i.e. for directories `$ZPFX/bin`,
@@ -165,8 +165,60 @@ No-narration facts-list related to `$ZPFX`:
  5. `zplugin ice make"PREFIX=$ZPFX install"`
  6. `zplug ... hook-build:"make PREFIX=$PFX install"`
 
+## Zsh Plugin-Programming Best Practices
+
+The document is to define a *Zsh-plugin* but also to serve as an information
+source for plugin creators. Therefore, it covers also a best practices
+information in this section.
+
+### Use Of `add-zsh-hook` To Install Hooks
+
+Zsh ships with a function `add-zsh-hook`. It has the following invocation
+syntax:
+
+```zsh
+add-zsh-hook [ -L | -dD ] [ -Uzk ] hook function
+```
+
+The function installs a `function` as one of the supported zsh `hook`s, which
+are one of: `chpwd`, `periodic`, `precmd`, `preexec`, `zshaddhistory`,
+`zshexit`, `zsh_directory_name`. For their meaning refer to the
+link:http://zsh.sourceforge.net/Doc/Release/Functions.html#Hook-Functions[Zsh
+documentation].
+
+
+
+### Use Of `add-zle-hook-widget` To Install Zle Hooks
+
+Zle editor is the part of the Zsh that is responsible for receiving the text
+from the user. It can be said that it's based on widgets, which are nothing more
+than Zsh functions that are allowed to be ran in Zle context, i.e. from the Zle
+editor (plus a few minor differences, like the `$WIDGET` parameter that's
+automatically set by the Zle editor).
+
+The syntax of the call is:
+
+```zsh
+add-zle-hook-widget [ -L | -dD ] [ -Uzk ] hook widgetname
+```
+
+So it pretty much resembles the syntax of the `add-zsh-hook` function. The only
+difference is that it takes a `widgetname`, not a function name, and that the
+`hook` is being one of: `isearch-exit`, `isearch-update`, `line-pre-redraw`,
+`line-init`, `line-finish`, `history-line-set`, or `keymap-select`. Their
+meaning is explained in the
+link:http://transit.iut2.upmf-grenoble.fr/doc/zsh-doc/html/Zsh-Line-Editor.html#Special-Widgets[Zsh
+documentation].
+
+So basically, the use of this function is recommended because it allows to
+install **multiple** hooks per each `hook` entry. Before introducing the
+`add-zle-hook-widget` function the "normal" way to install a hook was to define
+widget with the name of one of the special widgets. Now, after the function has
+been introduced in Zsh `5.3` it should be used instead.
+
 [appendix]
 == Revision history (history of updates to the document)
+v0.94, 07/20/2019: Add initial version of the best practices section +
 v0.93, 07/20/2019: 1/ Add the second line to the `$0` handling. 2/ Reformat to 80 columns +
 v0.92, 07/14/2019: 1/ Rename LOADED_PLUGINS to zsh_loaded_plugins. 2/ Suggest that $ZPFX is optional.  +
 v0.91, 06/02/2018: Fix the link to the PDF for Github. +
