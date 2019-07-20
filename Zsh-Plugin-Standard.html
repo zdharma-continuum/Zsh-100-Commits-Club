@@ -464,7 +464,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_what_is_a_zsh_plugin">What is a Zsh plugin?</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Zsh plugins were first defined by Oh-My-Zsh. They provide for a way to package together files that extend or configure the shell&#8217;s functionality in a particular way.</p>
+<p>Zsh plugins were first defined by Oh-My-Zsh. They provide for a way to package
+together files that extend or configure the shell&#8217;s functionality in a
+particular way.</p>
 </div>
 <div class="paragraph">
 <p>At a simple level, a plugin:</p>
@@ -472,15 +474,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Has its directory added to <code>$fpath</code> (<a href="http://zsh.sourceforge.net/Doc/Release/Functions.html#Autoloading-Functions">zsh doc</a>).</p>
+<p>Has its directory added to <code>$fpath</code>
+(<a href="http://zsh.sourceforge.net/Doc/Release/Functions.html#Autoloading-Functions">zsh
+doc</a>).</p>
 </li>
 <li>
-<p>Has its first <code>*.plugin.zsh</code> file sourced (or <code>*.zsh</code>, <code>init.zsh</code>, <code>*.sh</code>, these are non-standard).</p>
+<p>Has its first <code>*.plugin.zsh</code> file sourced (or <code>*.zsh</code>, <code>init.zsh</code>, <code>*.sh</code>,
+these are non-standard).</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>The first point allows plugins to provide completions and functions that are loaded via Zsh&#8217;s  <code>autoload</code> mechanism (a single function per-file).</p>
+<p>The first point allows plugins to provide completions and functions that are
+loaded via Zsh&#8217;s  <code>autoload</code> mechanism (a single function per-file).</p>
 </div>
 <div class="paragraph">
 <p>From a more broad perspective, a plugin consists of:</p>
@@ -488,25 +494,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>A directory containing various files (main script, autoload functions, completions, Makefiles, backend
-programs, documentation).</p>
+<p>A directory containing various files (main script, autoload functions,
+completions, Makefiles, backend programs, documentation).</p>
 </li>
 <li>
-<p>A script that obtains the path to its directory via <code>$0</code> (see the <a href="#zero-handling">next section</a> for
-a related enhancement proposal).</p>
+<p>A script that obtains the path to its directory via <code>$0</code> (see the
+<a href="#zero-handling">next section</a> for a related enhancement proposal).</p>
 </li>
 <li>
-<p>A Github (or other site) repository identified by two components <strong>username</strong>/<strong>pluginname</strong>.</p>
+<p>A Github (or other site) repository identified by two components
+<strong>username</strong>/<strong>pluginname</strong>.</p>
 </li>
 <li>
-<p>A software package containing any type of command line artifacts – when used with advanced plugin
-managers that have hooks, it can run Makefiles, add directories to <code>$PATH</code>.</p>
+<p>A software package containing any type of command line artifacts – when used
+with advanced plugin managers that have hooks, it can run Makefiles, add
+directories to <code>$PATH</code>.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>Below follow proposed enhancements and codifications of the definition of a "Zsh plugin" and the actions of plugin managers
-– the proposed standardization.<br>
+<p>Below follow proposed enhancements and codifications of the definition of a "Zsh
+plugin" and the actions of plugin managers – the proposed standardization.<br>
 <br></p>
 </div>
 <hr>
@@ -542,7 +550,8 @@ managers that have hooks, it can run Makefiles, add directories to <code>$PATH</
 </li>
 <li>
 <p>this allows for e.g. <code>eval "$(&lt;plugin)"</code>, which can be faster than <code>source</code>
-(<a href="http://www.zsh.org/mla/workers/2017/msg01827.html">comparison</a>, note that it&#8217;s not for a compiled script).</p>
+(<a href="http://www.zsh.org/mla/workers/2017/msg01827.html">comparison</a>, note
+that it&#8217;s not for a compiled script).</p>
 </li>
 </ul>
 </div>
@@ -552,12 +561,14 @@ managers that have hooks, it can run Makefiles, add directories to <code>$PATH</
 <div class="ulist">
 <ul>
 <li>
-<p>plugin manager will still be able to set <code>$0</code>, although more difficultly (requires <code>unsetopt function_argzero</code>
-before sourcing plugin script, and <code>0=&#8230;&#8203;</code> assignment),</p>
+<p>plugin manager will still be able to set <code>$0</code>, although more difficultly
+(requires <code>unsetopt function_argzero</code> before sourcing plugin script, and
+<code>0=&#8230;&#8203;</code> assignment),</p>
 </li>
 <li>
-<p><code>unsetopt function_argzero</code> will be detected (it causes <code>$0</code> not to contain plugin-script path, but path
-to Zsh binary, if not overwritten by <code>0=&#8230;&#8203;</code> assignment),</p>
+<p><code>unsetopt function_argzero</code> will be detected (it causes <code>$0</code> not to contain
+plugin-script path, but path to Zsh binary, if not overwritten by <code>0=&#8230;&#8203;</code>
+assignment),</p>
 </li>
 <li>
 <p><code>setopt posix_argzero</code> will be detected (as above).</p>
@@ -570,9 +581,10 @@ to Zsh binary, if not overwritten by <code>0=&#8230;&#8203;</code> assignment),<
 <div class="ulist">
 <ul>
 <li>
-<p>plugin manager cannot alter this (no advanced loading of plugin is possible), but simple plugin-file
-sourcing (without a plugin manager) will be saved from breaking caused by the mentioned <code>*_argzero</code>
-options, so this is a very good last-resort fallback.</p>
+<p>plugin manager cannot alter this (no advanced loading of plugin is
+possible), but simple plugin-file sourcing (without a plugin manager) will
+be saved from breaking caused by the mentioned <code>*_argzero</code> options, so this
+is a very good last-resort fallback.</p>
 </li>
 </ul>
 </div>
@@ -580,13 +592,14 @@ options, so this is a very good last-resort fallback.</p>
 </ol>
 </div>
 <div class="paragraph">
-<p>The goal is flexibility, with essential motivation to support <code>eval "$(&lt;plugin)"</code> and definitely
-solve <code>setopt no_function_argzero</code> and <code>setopt posix_argzero</code> cases.</p>
+<p>The goal is flexibility, with essential motivation to support <code>eval
+"$(&lt;plugin)"</code> and definitely solve <code>setopt no_function_argzero</code> and <code>setopt
+posix_argzero</code> cases.</p>
 </div>
 <div class="paragraph">
-<p>A plugin manager will be even able to convert a plugin to a function (author implemented such proof of concept
-functionality, it&#8217;s possible), but performance differences of this are unclear. It might however provide a
-use case.</p>
+<p>A plugin manager will be even able to convert a plugin to a function (author
+implemented such proof of concept functionality, it&#8217;s possible), but performance
+differences of this are unclear. It might however provide a use case.</p>
 </div>
 </div>
 </div>
@@ -599,11 +612,11 @@ plugin-ID), then it can provide a function, <code>kalc_unload_plugin</code>, tha
 called by a plugin manager to undo the effects of loading that plugin.</p>
 </div>
 <div class="paragraph">
-<p>A plugin manager can implement its own tracking of changes made by a plugin so this
-is in general optional. However, to properly unload e.g. a prompt, detailed tracking
-(easy to do by the plugin creator) can provide better, predictable results. Any
-special, uncommon effects of loading a plugin are possible to undo only by a
-dedicated function.</p>
+<p>A plugin manager can implement its own tracking of changes made by a plugin so
+this is in general optional. However, to properly unload e.g. a prompt, detailed
+tracking (easy to do by the plugin creator) can provide better, predictable
+results. Any special, uncommon effects of loading a plugin are possible to undo
+only by a dedicated function.</p>
 </div>
 </div>
 </div>
@@ -627,15 +640,16 @@ element). This will allow plugins to:</p>
 </div>
 <div class="paragraph">
 <p>The first item allows a plugin to e.g. issue a notice about missing dependencies.
-Instead of issuing a notice, it may be able to satisfy the dependencies from resources
-it provides. For example, <code>pure</code> prompt provides <code>zsh-async</code> dependency library, which
-is a separate project and can be loaded by the user directly. Consequently, the prompt
-can decide to source its private copy of <code>zsh-async</code>, having also reliable <code>$0</code> defined
-by previous section (note: <code>pure</code> doesn&#8217;t normally do this).</p>
+Instead of issuing a notice, it may be able to satisfy the dependencies from
+resources it provides. For example, <code>pure</code> prompt provides <code>zsh-async</code>
+dependency library, which is a separate project and can be loaded by the user
+directly. Consequently, the prompt can decide to source its private copy of
+<code>zsh-async</code>, having also reliable <code>$0</code> defined by previous section (note: <code>pure</code>
+doesn&#8217;t normally do this).</p>
 </div>
 <div class="paragraph">
-<p>The second item allows a plugin to e.g. set up <code>$fpath</code>, knowing that plugin manager will
-not handle this:</p>
+<p>The second item allows a plugin to e.g. set up <code>$fpath</code>, knowing that plugin
+manager will not handle this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -654,17 +668,19 @@ fi</code></pre>
 <h2 id="zpfx">4. Global parameter with PREFIX for make, configure, etc.</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Plugin managers may export the parameter <code>$ZPFX</code> which should contain a path to a directory dedicated
-for user-land software, i.e. for directories <code>$ZPFX/bin</code>, <code>$ZPFX/lib</code>, <code>$ZPFX/share</code>, etc.
-Suggested name of the directory is <code>polaris</code>, Zplugin uses this name and places this directory
-at <code>~/.zplugin/polaris</code> by default.</p>
+<p>Plugin managers may export the parameter <code>$ZPFX</code> which should contain a path to
+a directory dedicated for user-land software, i.e. for directories <code>$ZPFX/bin</code>,
+<code>$ZPFX/lib</code>, <code>$ZPFX/share</code>, etc.  Suggested name of the directory is <code>polaris</code>,
+Zplugin uses this name and places this directory at <code>~/.zplugin/polaris</code> by
+default.</p>
 </div>
 <div class="paragraph">
-<p>User can then configure hooks (feature of e.g. zplug and Zplugin) to invoke e.g. <code>make PREFIX=$ZPFX install</code>
-to install software like e.g. <a href="https://github.com/tj/git-extras">tj/git-extras</a>. This is a
-developing role of Zsh plugin managers as package managers, where <code>.zshrc</code> has a similar role
-to Chef or Puppet configuration and allows to <strong>declare</strong> system state, and have the same state
-on different accounts / machines.</p>
+<p>User can then configure hooks (feature of e.g. zplug and Zplugin) to invoke e.g.
+<code>make PREFIX=$ZPFX install</code> to install software like e.g.
+<a href="https://github.com/tj/git-extras">tj/git-extras</a>. This is a developing role
+of Zsh plugin managers as package managers, where <code>.zshrc</code> has a similar role to
+Chef or Puppet configuration and allows to <strong>declare</strong> system state, and have
+the same state on different accounts / machines.</p>
 </div>
 <div class="paragraph">
 <p>No-narration facts-list related to <code>$ZPFX</code>:</p>
@@ -708,7 +724,7 @@ Reminder: The date format that uses slashes is <code>MM/DD/YYYY</code>.<br></p>
 <div id="footer">
 <div id="footer-text">
 Version 0.92<br>
-Last updated 2019-07-13 15:30:08 +0200
+Last updated 2019-07-20 13:49:10 +0200
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
