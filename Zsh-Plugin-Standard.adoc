@@ -182,8 +182,8 @@ syntax:
 add-zsh-hook [ -L | -dD ] [ -Uzk ] hook function
 ```
 
-The function installs a `function` as one of the supported zsh `hook`s, which
-are one of: `chpwd`, `periodic`, `precmd`, `preexec`, `zshaddhistory`,
+The function installs a `function` as one of the supported zsh `hook` entries.
+which are one of: `chpwd`, `periodic`, `precmd`, `preexec`, `zshaddhistory`,
 `zshexit`, `zsh_directory_name`. For their meaning refer to the
 link:http://zsh.sourceforge.net/Doc/Release/Functions.html#Hook-Functions[Zsh
 documentation].
