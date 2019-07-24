@@ -163,7 +163,7 @@ for PLUGIN in "${gathered_plugins[@]}"; do
     typeset -g URL="${plugin_to_url[$PLUGIN]}"
 
     if [[ "$URL" = (#i)(*nerd*fonts*|*iosevka*) ]]; then
-        local depth_opt="--depth 50"
+        local depth_opt="--depth 20"
     else
         local depth_opt=""
     fi
