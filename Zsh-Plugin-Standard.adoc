@@ -203,12 +203,12 @@ The syntax of the call is:
 add-zle-hook-widget [ -L | -dD ] [ -Uzk ] hook widgetname
 ```
 
-So it pretty much resembles the syntax of the `add-zsh-hook` function. The only
+The call resembles the syntax of the `add-zsh-hook` function. The only
 difference is that it takes a `widgetname`, not a function name, and that the
 `hook` is being one of: `isearch-exit`, `isearch-update`, `line-pre-redraw`,
 `line-init`, `line-finish`, `history-line-set`, or `keymap-select`. Their
 meaning is explained in the
-link:http://transit.iut2.upmf-grenoble.fr/doc/zsh-doc/html/Zsh-Line-Editor.html#Special-Widgets[Zsh
+link:http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Special-Widgets[Zsh
 documentation].
 
 So basically, the use of this function is recommended because it allows to
