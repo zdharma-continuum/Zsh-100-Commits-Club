@@ -437,8 +437,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Sebastian Gniazdowski</span><br>
 <span id="email" class="email"><a href="mailto:psprint@zdharma.org">psprint@zdharma.org</a></span><br>
-<span id="revnumber">version 0.94,</span>
-<span id="revdate">07/20/2019</span>
+<span id="revnumber">version 0.95,</span>
+<span id="revdate">07/31/2019</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -454,7 +454,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#azhw">Use Of <code>add-zle-hook-widget</code> To Install Zle Hooks</a></li>
 </ul>
 </li>
-<li><a href="#_revision_history_history_of_updates_to_the_document">Appendix A: Revision history (history of updates to the document)</a></li>
+<li><a href="#_revision_history_history_of_updates_to_the_document">Appendix A: Revision History (History Of Updates To The Document)</a></li>
 </ul>
 </div>
 </div>
@@ -470,9 +470,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_what_is_a_zsh_plugin">What Is A Zsh Plugin?</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Zsh plugins were first defined by Oh-My-Zsh. They provide for a way to package
-together files that extend or configure the shell&#8217;s functionality in a
-particular way.</p>
+<p>Historically, Zsh plugins were first defined by Oh My Zsh. They provide for a
+way to package together files that extend or configure the shell’s functionality
+in a particular way.</p>
 </div>
 <div class="paragraph">
 <p>At a simple level, a plugin:</p>
@@ -481,8 +481,8 @@ particular way.</p>
 <ol class="arabic">
 <li>
 <p>Has its directory added to <code>$fpath</code>
-(<a href="http://zsh.sourceforge.net/Doc/Release/Functions.html#Autoloading-Functions">zsh
-doc</a>).</p>
+(<a href="http://zsh.sourceforge.net/Doc/Release/Functions.html#Autoloading-Functions">Zsh
+documentation</a>).</p>
 </li>
 <li>
 <p>Has its first <code>*.plugin.zsh</code> file sourced (or <code>*.zsh</code>, <code>init.zsh</code>, <code>*.sh</code>,
@@ -492,7 +492,7 @@ these are non-standard).</p>
 </div>
 <div class="paragraph">
 <p>The first point allows plugins to provide completions and functions that are
-loaded via Zsh&#8217;s  <code>autoload</code> mechanism (a single function per-file).</p>
+loaded via Zsh’s <code>autoload</code> mechanism (a single function per-file).</p>
 </div>
 <div class="paragraph">
 <p>From a more broad perspective, a plugin consists of:</p>
@@ -530,14 +530,14 @@ plugin" and the actions of plugin managers – the proposed standardization.<br>
 <h2 id="zero-handling">1. Standardized <code>$0</code> Handling</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To get the plugin&#8217;s location, plugins should do:</p>
+<p>To get the plugin’s location, plugins should do:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-zsh" data-lang="zsh">0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
 
-# Then ${0:h} to get plugin's directory</code></pre>
+# Then ${0:h} to get plugin’s directory</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -549,33 +549,35 @@ plugin" and the actions of plugin managers – the proposed standardization.<br>
 <p>Be backwards-compatible with normal <code>$0</code> setting and usage.</p>
 </li>
 <li>
-<p>Use <code>ZERO</code> if it&#8217;s not empty,</p>
+<p>Use <code>ZERO</code> if it’s not empty,</p>
 <div class="ulist">
 <ul>
 <li>
-<p>plugin manager will be easily able to alter effective <code>$0</code> before loading a plugin,</p>
+<p>the plugin manager will be easily able to alter effective <code>$0</code> before
+loading a plugin,</p>
 </li>
 <li>
-<p>this allows for e.g. <code>eval "$(&lt;plugin)"</code>, which can be faster than <code>source</code>
-(<a href="http://www.zsh.org/mla/workers/2017/msg01827.html">comparison</a>, note
-that it&#8217;s not for a compiled script).</p>
+<p>this allows for e.g. <code>eval "$(&lt;plugin)"</code>, which can be faster
+than <code>source</code>
+(<a href="http://www.zsh.org/mla/workers/2017/msg01827.html">comparison</a>
+note that it’s not for a compiled script).</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Use <code>$0</code> if it doesn&#8217;t contain the path to the Zsh binary,</p>
+<p>Use <code>$0</code> if it doesn’t contain the path to the Zsh binary,</p>
 <div class="ulist">
 <ul>
 <li>
 <p>plugin manager will still be able to set <code>$0</code>, although more difficultly
 (requires <code>unsetopt function_argzero</code> before sourcing plugin script, and
-<code>0=&#8230;&#8203;</code> assignment),</p>
+<code>0=…​</code> assignment),</p>
 </li>
 <li>
-<p><code>unsetopt function_argzero</code> will be detected (it causes <code>$0</code> not to contain
-plugin-script path, but path to Zsh binary, if not overwritten by <code>0=&#8230;&#8203;</code>
-assignment),</p>
+<p><code>unsetopt function_argzero</code> will be detected (it causes <code>$0</code> not to
+contain plugin-script path, but path to Zsh binary, if not overwritten
+by a <code>0=…​</code> assignment),</p>
 </li>
 <li>
 <p><code>setopt posix_argzero</code> will be detected (as above).</p>
@@ -588,10 +590,11 @@ assignment),</p>
 <div class="ulist">
 <ul>
 <li>
-<p>plugin manager cannot alter this (no advanced loading of plugin is
-possible), but simple plugin-file sourcing (without a plugin manager) will
-be saved from breaking caused by the mentioned <code>*_argzero</code> options, so this
-is a very good last-resort fallback.</p>
+<p>plugin manager cannot alter this (no advanced loading of plugin
+is possible), but simple plugin-file sourcing (without a plugin
+manager) will be saved from breaking caused by the mentioned
+<code>*_argzero</code> options, so this is a very good last-resort
+fallback.</p>
 </li>
 </ul>
 </div>
@@ -609,13 +612,13 @@ posix_argzero</code> cases.</p>
 </div>
 <div class="paragraph">
 <p>A plugin manager will be even able to convert a plugin to a function (author
-implemented such proof of concept functionality, it&#8217;s fully possible – also in
+implemented such proof of concept functionality, it’s fully possible – also in
 an automatic fashion), but performance differences of this are yet unclear. It
 might however provide a use case.</p>
 </div>
 <div class="paragraph">
 <p>The last, 5th point also allows to use the <code>$0</code> handling in scripts (i.e.
-runnables with the hashbang <code>#!&#8230;&#8203;</code>) to get the directory in which the script
+runnables with the hashbang <code>#!…</code>) to get the directory in which the script
 file resides.</p>
 </div>
 </div>
@@ -664,13 +667,13 @@ element). This will allow plugins to:</p>
 </ol>
 </div>
 <div class="paragraph">
-<p>The first item allows a plugin to e.g. issue a notice about missing dependencies.
-Instead of issuing a notice, it may be able to satisfy the dependencies from
-resources it provides. For example, <code>pure</code> prompt provides <code>zsh-async</code>
-dependency library, which is a separate project and can be loaded by the user
-directly. Consequently, the prompt can decide to source its private copy of
-<code>zsh-async</code>, having also reliable <code>$0</code> defined by previous section (note: <code>pure</code>
-doesn&#8217;t normally do this).</p>
+<p>The first item allows a plugin to e.g. issue a notice about missing
+dependencies. Instead of issuing a notice, it may be able to satisfy the
+dependencies from resources it provides. For example, <code>pure</code> prompt provides
+<code>zsh-async</code> dependency library, which is a separate project and can be loaded by
+the user directly. Consequently, the prompt can decide to source its private
+copy of <code>zsh-async</code>, having also reliable <code>$0</code> defined by previous section
+(note: <code>pure</code> doesn’t normally do this).</p>
 </div>
 <div class="paragraph">
 <p>The second item allows a plugin to e.g. set up <code>$fpath</code>, knowing that plugin
@@ -678,14 +681,16 @@ manager will not handle this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-zsh" data-lang="zsh">if [[ ( ${+zsh_loaded_plugins} = 0 || ${zsh_loaded_plugins[-1]} != */kalc ) &amp;&amp; -z "${fpath[(r)${0:h}]}" ]]
+<pre class="prettyprint highlight"><code class="language-zsh" data-lang="zsh">if [[ (${+zsh_loaded_plugins} = 0 || ${zsh_loaded_plugins[-1]} != */kalc) \
+    &amp;&amp; -z ${fpath[(r)${0:h}]} ]]
 then
     fpath+=( "${0:h}" )
 fi</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This will allow user to reliably source the plugin without using a plugin manager.</p>
+<p>This will allow user to reliably source the plugin without using a plugin
+manager.</p>
 </div>
 </div>
 </div>
@@ -695,7 +700,7 @@ fi</code></pre>
 <div class="paragraph">
 <p>Plugin managers may export the parameter <code>$ZPFX</code> which should contain a path to
 a directory dedicated for user-land software, i.e. for directories <code>$ZPFX/bin</code>,
-<code>$ZPFX/lib</code>, <code>$ZPFX/share</code>, etc.  Suggested name of the directory is <code>polaris</code>,
+<code>$ZPFX/lib</code>, <code>$ZPFX/share</code>, etc. Suggested name of the directory is <code>polaris</code>,
 Zplugin uses this name and places this directory at <code>~/.zplugin/polaris</code> by
 default.</p>
 </div>
@@ -728,7 +733,7 @@ the same state on different accounts / machines.</p>
 <p><code>zplugin ice make"PREFIX=$ZPFX install"</code></p>
 </li>
 <li>
-<p><code>zplug &#8230;&#8203; hook-build:"make PREFIX=$PFX install"</code></p>
+<p><code>zplug … hook-build:"make PREFIX=$PFX install"</code></p>
 </li>
 </ol>
 </div>
@@ -765,9 +770,9 @@ documentation</a>.</p>
 <h3 id="azhw">Use Of <code>add-zle-hook-widget</code> To Install Zle Hooks</h3>
 <div class="paragraph">
 <p>Zle editor is the part of the Zsh that is responsible for receiving the text
-from the user. It can be said that it&#8217;s based on widgets, which are nothing more
+from the user. It can be said that it’s based on widgets, which are nothing more
 than Zsh functions that are allowed to be ran in Zle context, i.e. from the Zle
-editor (plus a few minor differences, like the <code>$WIDGET</code> parameter that&#8217;s
+editor (plus a few minor differences, like the <code>$WIDGET</code> parameter that’s
 automatically set by the Zle editor).</p>
 </div>
 <div class="paragraph">
@@ -788,7 +793,7 @@ meaning is explained in the
 documentation</a>.</p>
 </div>
 <div class="paragraph">
-<p>So basically, the use of this function is recommended because it allows to
+<p>The use of this function is recommended because it allows to
 install <strong>multiple</strong> hooks per each <code>hook</code> entry. Before introducing the
 <code>add-zle-hook-widget</code> function the "normal" way to install a hook was to define
 widget with the name of one of the special widgets. Now, after the function has
@@ -798,22 +803,28 @@ been introduced in Zsh <code>5.3</code> it should be used instead.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_revision_history_history_of_updates_to_the_document">Appendix A: Revision history (history of updates to the document)</h2>
+<h2 id="_revision_history_history_of_updates_to_the_document">Appendix A: Revision History (History Of Updates To The Document)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>v0.94, 07/20/2019: Add initial version of the best practices section<br>
-v0.93, 07/20/2019: 1/ Add the second line to the <code>$0</code> handling. 2/ Reformat to 80 columns<br>
-v0.92, 07/14/2019: 1/ Rename LOADED_PLUGINS to zsh_loaded_plugins. 2/ Suggest that $ZPFX is optional. <br>
+<p>v0.95, 07/31/2019: Plugin unload function <code>*_unload_plugin</code> -&#8594;
+<code>*_plugin_unload</code><br>
+v0.94, 07/20/2019: Add initial version of the best practices section<br>
+v0.93, 07/20/2019: 1/ Add the second line to the <code>$0</code> handling.<br>
+v0.93, 07/20/2019: 2/ Reformat to 80 columns<br>
+v0.92, 07/14/2019: 1/ Rename LOADED_PLUGINS to zsh_loaded_plugins.<br>
+v0.92, 07/14/2019: 2/ Suggest that $ZPFX is optional.<br>
 v0.91, 06/02/2018: Fix the link to the PDF for Github.<br>
-v0.9, 12/12/2017: Remove ZERO references (bad design), add TOC.<br>
-Reminder: The date format that uses slashes is <code>MM/DD/YYYY</code>.<br></p>
+v0.9, 12/12/2017: Remove ZERO references (wrong design), add TOC.</p>
+</div>
+<div class="paragraph">
+<p>Reminder: The date format that uses slashes is <code>MM/DD/YYYY</code>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.94<br>
+Version 0.95<br>
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
