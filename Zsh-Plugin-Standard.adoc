@@ -1,6 +1,6 @@
 # Zsh Plugin Standard
 Sebastian Gniazdowski <psprint@zdharma.org>
-v0.94, 07/20/2019
+v0.95, 07/31/2019
 :source-highlighter: prettify
 :toc:
 
@@ -8,29 +8,32 @@ ifdef::backend-html5[The document is also available as a link:http://zdharma.org
 
 ## What Is A Zsh Plugin?
 
-Zsh plugins were first defined by Oh-My-Zsh. They provide for a way to package
-together files that extend or configure the shell's functionality in a
-particular way.
+Historically, Zsh plugins were first defined by Oh My Zsh. They provide for a
+way to package together files that extend or configure the shell’s functionality
+in a particular way.
 
 At a simple level, a plugin:
 
 1. Has its directory added to `$fpath`
-(link:http://zsh.sourceforge.net/Doc/Release/Functions.html#Autoloading-Functions[zsh
-doc]).
+(link:http://zsh.sourceforge.net/Doc/Release/Functions.html#Autoloading-Functions[Zsh
+documentation]).
 2. Has its first `\*.plugin.zsh` file sourced (or `*.zsh`, `init.zsh`, `*.sh`,
    these are non-standard).
 
 The first point allows plugins to provide completions and functions that are
-loaded via Zsh's  `autoload` mechanism (a single function per-file).
+loaded via Zsh’s `autoload` mechanism (a single function per-file).
 
 From a more broad perspective, a plugin consists of:
 
 1. A directory containing various files (main script, autoload functions,
    completions, Makefiles, backend programs, documentation).
+
 2. A sourcable script that obtains the path to its directory via `$0` (see the
    link:#zero-handling[next section] for a related enhancement proposal).
+
 3. A Github (or other site) repository identified by two components
    **username**/**pluginname**.
+
 4. A software package containing any type of command line artifacts – when used
    with advanced plugin managers that have hooks, can run Makefiles, add
    directories to `$PATH`.
@@ -44,36 +47,49 @@ plugin" and the actions of plugin managers – the proposed standardization. +
 [#zero-handling]
 ## 1. Standardized `$0` Handling
 
-To get the plugin's location, plugins should do:
+To get the plugin’s location, plugins should do:
 
 ```zsh
 0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
 
-# Then ${0:h} to get plugin's directory
+# Then ${0:h} to get plugin’s directory
 ```
 
 The one-line code above will:
 
 1. Be backwards-compatible with normal `$0` setting and usage.
-2. Use `ZERO` if it's not empty,
-  * plugin manager will be easily able to alter effective `$0` before loading a plugin,
-  * this allows for e.g. `eval "$(<plugin)"`, which can be faster than `source`
-    (link:http://www.zsh.org/mla/workers/2017/msg01827.html[comparison], note
-    that it's not for a compiled script).
-3. Use `$0` if it doesn't contain the path to the Zsh binary,
-  * plugin manager will still be able to set `$0`, although more difficultly
-    (requires `unsetopt function_argzero` before sourcing plugin script, and
-    `0=...` assignment),
-  * `unsetopt function_argzero` will be detected (it causes `$0` not to contain
-    plugin-script path, but path to Zsh binary, if not overwritten by `0=...`
-    assignment),
-  * `setopt posix_argzero` will be detected (as above).
+
+2. Use `ZERO` if it’s not empty,
+
+      - the plugin manager will be easily able to alter effective `$0` before
+        loading a plugin,
+
+      - this allows for e.g. `eval "$(<plugin)"`, which can be faster
+        than `source`
+        (link:http://www.zsh.org/mla/workers/2017/msg01827.html[comparison]
+        note that it’s not for a compiled script).
+
+3. Use `$0` if it doesn’t contain the path to the Zsh binary,
+
+      - plugin manager will still be able to set `$0`, although more difficultly
+        (requires `unsetopt function_argzero` before sourcing plugin script, and
+        `0=…​` assignment),
+
+      - `unsetopt function_argzero` will be detected (it causes `$0` not to
+        contain plugin-script path, but path to Zsh binary, if not overwritten
+        by a `0=…​` assignment),
+    
+      - `setopt posix_argzero` will be detected (as above).
+
 4. Use `%N` prompt expansion flag, which always gives absolute path to script,
-  * plugin manager cannot alter this (no advanced loading of plugin is
-    possible), but simple plugin-file sourcing (without a plugin manager) will
-    be saved from breaking caused by the mentioned `*_argzero` options, so this
-    is a very good last-resort fallback.
+
+      - plugin manager cannot alter this (no advanced loading of plugin
+        is possible), but simple plugin-file sourcing (without a plugin
+        manager) will be saved from breaking caused by the mentioned
+        `*_argzero` options, so this is a very good last-resort
+        fallback.
+
 5. Finally, in the second line, it will ensure that `$0` contains an absolute
    path by prepending it with `$PWD` if necessary.
 
@@ -82,12 +98,12 @@ The goal is flexibility, with essential motivation to support `eval
 posix_argzero` cases.
 
 A plugin manager will be even able to convert a plugin to a function (author
-implemented such proof of concept functionality, it's fully possible – also in
+implemented such proof of concept functionality, it’s fully possible – also in
 an automatic fashion), but performance differences of this are yet unclear. It
 might however provide a use case.
 
 The last, 5th point also allows to use the `$0` handling in scripts (i.e.
-runnables with the hashbang `#!...`) to get the directory in which the script
+runnables with the hashbang `#!…`) to get the directory in which the script
 file resides.
 
 [#unload-fun]
@@ -120,32 +136,34 @@ element). This will allow plugins to:
  1. Check which plugins are already loaded.
  2. Check if it is being loaded by a plugin manager (i.e. not just sourced).
 
-The first item allows a plugin to e.g. issue a notice about missing dependencies.
-Instead of issuing a notice, it may be able to satisfy the dependencies from
-resources it provides. For example, `pure` prompt provides `zsh-async`
-dependency library, which is a separate project and can be loaded by the user
-directly. Consequently, the prompt can decide to source its private copy of
-`zsh-async`, having also reliable `$0` defined by previous section (note: `pure`
-doesn't normally do this).
+The first item allows a plugin to e.g. issue a notice about missing
+dependencies. Instead of issuing a notice, it may be able to satisfy the
+dependencies from resources it provides. For example, `pure` prompt provides
+`zsh-async` dependency library, which is a separate project and can be loaded by
+the user directly. Consequently, the prompt can decide to source its private
+copy of `zsh-async`, having also reliable `$0` defined by previous section
+(note: `pure` doesn’t normally do this).
 
 The second item allows a plugin to e.g. set up `$fpath`, knowing that plugin
 manager will not handle this:
 
 ```zsh
-if [[ ( ${+zsh_loaded_plugins} = 0 || ${zsh_loaded_plugins[-1]} != */kalc ) && -z "${fpath[(r)${0:h}]}" ]]
+if [[ (${+zsh_loaded_plugins} = 0 || ${zsh_loaded_plugins[-1]} != */kalc) \
+    && -z ${fpath[(r)${0:h}]} ]]
 then
     fpath+=( "${0:h}" )
 fi
 ```
 
-This will allow user to reliably source the plugin without using a plugin manager.
+This will allow user to reliably source the plugin without using a plugin
+manager.
 
 [#zpfx]
 ## 4. Global Parameter With PREFIX For Make, Configure, Etc.
 
 Plugin managers may export the parameter `$ZPFX` which should contain a path to
 a directory dedicated for user-land software, i.e. for directories `$ZPFX/bin`,
-`$ZPFX/lib`, `$ZPFX/share`, etc.  Suggested name of the directory is `polaris`,
+`$ZPFX/lib`, `$ZPFX/share`, etc. Suggested name of the directory is `polaris`,
 Zplugin uses this name and places this directory at `~/.zplugin/polaris` by
 default.
 
@@ -163,7 +181,7 @@ No-narration facts-list related to `$ZPFX`:
  3. `./configure --prefix=$ZPFX`
  4. `cmake -DCMAKE_INSTALL_PREFIX=$ZPFX .`
  5. `zplugin ice make"PREFIX=$ZPFX install"`
- 6. `zplug ... hook-build:"make PREFIX=$PFX install"`
+ 6. `zplug … hook-build:"make PREFIX=$PFX install"`
 
 [#best-practices]
 ## Zsh Plugin-Programming Best Practices
@@ -192,9 +210,9 @@ documentation].
 ### Use Of `add-zle-hook-widget` To Install Zle Hooks
 
 Zle editor is the part of the Zsh that is responsible for receiving the text
-from the user. It can be said that it's based on widgets, which are nothing more
+from the user. It can be said that it’s based on widgets, which are nothing more
 than Zsh functions that are allowed to be ran in Zle context, i.e. from the Zle
-editor (plus a few minor differences, like the `$WIDGET` parameter that's
+editor (plus a few minor differences, like the `$WIDGET` parameter that’s
 automatically set by the Zle editor).
 
 The syntax of the call is:
@@ -211,19 +229,25 @@ meaning is explained in the
 link:http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Special-Widgets[Zsh
 documentation].
 
-So basically, the use of this function is recommended because it allows to
+The use of this function is recommended because it allows to
 install **multiple** hooks per each `hook` entry. Before introducing the
 `add-zle-hook-widget` function the "normal" way to install a hook was to define
 widget with the name of one of the special widgets. Now, after the function has
 been introduced in Zsh `5.3` it should be used instead.
 
 [appendix]
-== Revision history (history of updates to the document)
+== Revision History (History Of Updates To The Document)
+
+v0.95, 07/31/2019: Plugin unload function `*_unload_plugin` -->
+`*_plugin_unload` +
 v0.94, 07/20/2019: Add initial version of the best practices section +
-v0.93, 07/20/2019: 1/ Add the second line to the `$0` handling. 2/ Reformat to 80 columns +
-v0.92, 07/14/2019: 1/ Rename LOADED_PLUGINS to zsh_loaded_plugins. 2/ Suggest that $ZPFX is optional.  +
+v0.93, 07/20/2019: 1/ Add the second line to the `$0` handling. +
+v0.93, 07/20/2019: 2/ Reformat to 80 columns +
+v0.92, 07/14/2019: 1/ Rename LOADED_PLUGINS to zsh_loaded_plugins. +
+v0.92, 07/14/2019: 2/ Suggest that $ZPFX is optional. +
 v0.91, 06/02/2018: Fix the link to the PDF for Github. +
-v0.9, 12/12/2017: Remove ZERO references (bad design), add TOC. +
-Reminder: The date format that uses slashes is `MM/DD/YYYY`. +
+v0.9, 12/12/2017: Remove ZERO references (wrong design), add TOC.
+
+Reminder: The date format that uses slashes is `MM/DD/YYYY`.
 
 // vim:ft=asciidoc:et:sw=4:sts=4:tw=80
