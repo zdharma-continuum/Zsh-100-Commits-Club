@@ -24,6 +24,8 @@ gh-pages: all
 	@mv -v *.html *.pdf ~/tmp/znsh
 	git checkout gh-pages
 	@cp -v ~/tmp/znsh/*.html ~/tmp/znsh/*.pdf .
+	git add -A *.pdf *.html
+	git commit && git push origin gh-pages
 
 master:
 	git reset --hard
