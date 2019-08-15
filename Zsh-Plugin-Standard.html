@@ -639,10 +639,10 @@ called by a plugin manager to undo the effects of loading that plugin.</p>
 </div>
 <div class="paragraph">
 <p>A plugin manager can implement its own tracking of changes made by a plugin so
-this is in general optional. However, to properly unload e.g. a prompt, detailed
-tracking (easy to do by the plugin creator) can provide better, predictable
-results. Any special, uncommon effects of loading a plugin are possible to undo
-only by a dedicated function.</p>
+this is in general optional. However, to properly unload e.g. a prompt,
+dedicated tracking (easy to do for the plugin creator) can provide better,
+predictable results. Any special, uncommon effects of loading a plugin are
+possible to undo only by a dedicated function.</p>
 </div>
 <div class="paragraph">
 <p>However, an interesting compromise approach is available – to withdraw only the
@@ -660,7 +660,7 @@ develoment process.</p>
 <div class="paragraph">
 <p>Plugin managers should set the <code>$zsh_loaded_plugins</code> array to contain all
 previously loaded plugins and the plugin currently being loaded (as the last
-element). This will allow plugins to:</p>
+element). This will allow any plugin to:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -676,10 +676,10 @@ element). This will allow plugins to:</p>
 <p>The first item allows a plugin to e.g. issue a notice about missing
 dependencies. Instead of issuing a notice, it may be able to satisfy the
 dependencies from resources it provides. For example, <code>pure</code> prompt provides
-<code>zsh-async</code> dependency library, which is a separate project and can be loaded by
-the user directly. Consequently, the prompt can decide to source its private
-copy of <code>zsh-async</code>, having also reliable <code>$0</code> defined by previous section
-(note: <code>pure</code> doesn’t normally do this).</p>
+<code>zsh-async</code> dependency library within its source tree, which is normally a
+separate project. Consequently, the prompt can decide to source its private copy
+of <code>zsh-async</code>, having also reliable <code>$0</code> defined by previous section (note:
+<code>pure</code> doesn’t normally do this).</p>
 </div>
 <div class="paragraph">
 <p>The second item allows a plugin to e.g. set up <code>$fpath</code>, knowing that plugin
@@ -712,11 +712,11 @@ default.</p>
 </div>
 <div class="paragraph">
 <p>User can then configure hooks (feature of e.g. zplug and Zplugin) to invoke e.g.
-<code>make PREFIX=$ZPFX install</code> to install software like e.g.
-<a href="https://github.com/tj/git-extras">tj/git-extras</a>. This is a developing role
-of Zsh plugin managers as package managers, where <code>.zshrc</code> has a similar role to
-Chef or Puppet configuration and allows to <strong>declare</strong> system state, and have
-the same state on different accounts / machines.</p>
+<code>make PREFIX=$ZPFX install</code> at clone &amp; update of the plugin to install software
+like e.g. <a href="https://github.com/tj/git-extras">tj/git-extras</a>. This is a
+developing role of Zsh plugin managers as package managers, where <code>.zshrc</code> has a
+similar role to Chef or Puppet configuration and allows to <strong>declare</strong> system
+state, and have the same state on different accounts / machines.</p>
 </div>
 <div class="paragraph">
 <p>No-narration facts-list related to <code>$ZPFX</code>:</p>
@@ -765,7 +765,7 @@ syntax:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The function installs a <code>function</code> as one of the supported zsh <code>hook</code> entries.
+<p>The command installs a <code>function</code> as one of the supported zsh <code>hook</code> entries.
 which are one of: <code>chpwd</code>, <code>periodic</code>, <code>precmd</code>, <code>preexec</code>, <code>zshaddhistory</code>,
 <code>zshexit</code>, <code>zsh_directory_name</code>. For their meaning refer to the
 <a href="http://zsh.sourceforge.net/Doc/Release/Functions.html#Hook-Functions">Zsh
@@ -778,7 +778,7 @@ documentation</a>.</p>
 <p>Zle editor is the part of the Zsh that is responsible for receiving the text
 from the user. It can be said that it’s based on widgets, which are nothing more
 than Zsh functions that are allowed to be ran in Zle context, i.e. from the Zle
-editor (plus a few minor differences, like the <code>$WIDGET</code> parameter that’s
+editor (plus a few minor differences, like e.g.: the <code>$WIDGET</code> parameter that’s
 automatically set by the Zle editor).</p>
 </div>
 <div class="paragraph">
