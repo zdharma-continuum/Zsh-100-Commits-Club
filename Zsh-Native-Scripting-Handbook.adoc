@@ -256,7 +256,7 @@ code that makes 10-line function a 20-line one.
 
 [source,none]
 ----
-[[ "aabbb" = (#b)(a##)*(b(#c2,2)) ]] && print ${match[1]}-${match[2]} ▶ aa-bb
+[[ "aabbb" = (#b)(a##)*(b(#c2,2))* ]] && print ${match[1]}-${match[2]} ▶ aa-bb
 ----
 
 `\##` is: "1 or more". `(#c2,2)` is: "exactly 2". A few other constructs: `#` is
