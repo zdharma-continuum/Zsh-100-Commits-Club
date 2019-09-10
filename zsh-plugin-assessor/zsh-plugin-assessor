@@ -305,6 +305,11 @@ for PLUGIN in "${gathered_plugins[@]}"; do
         emoji_string+=":1st_place_medal: "
     fi
 
+    # High attention detection
+    if (( attention_rank >= 3 )); then
+        emoji_string+=":alarm_clock: "
+    fi
+
     # 2. Progress pace
     if (( has_running_pace )); then
         emoji_string+=":running_man: "
@@ -313,9 +318,7 @@ for PLUGIN in "${gathered_plugins[@]}"; do
     fi
 
     # 3. Current attention
-    if (( attention_rank >= 3 )); then
-        emoji_string+=":alarm_clock: "
-    elif (( attention_rank == 2 )); then
+    if (( attention_rank == 2 )); then
         emoji_string+=":hourglass_flowing_sand: "
     elif (( attention_rank == 1 )); then
         emoji_string+=":hourglass: "
