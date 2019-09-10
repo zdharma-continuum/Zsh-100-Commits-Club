@@ -11,13 +11,13 @@ Zsh-Plugin-Standard.html: Zsh-Plugin-Standard.adoc
 	asciidoctor -a reproducible Zsh-Plugin-Standard.adoc
 
 README.pdf: README.adoc
-	asciidoctor-pdf README.adoc
+	asciidoctor-pdf -a reproducible README.adoc
 
 Zsh-Native-Scripting-Handbook.pdf: Zsh-Native-Scripting-Handbook.adoc
-	asciidoctor-pdf Zsh-Native-Scripting-Handbook.adoc
+	asciidoctor-pdf -a reproducible Zsh-Native-Scripting-Handbook.adoc
 
 Zsh-Plugin-Standard.pdf: Zsh-Plugin-Standard.adoc
-	asciidoctor-pdf Zsh-Plugin-Standard.adoc
+	asciidoctor-pdf -a reproducible Zsh-Plugin-Standard.adoc
 
 gh-pages: all
 	@mkdir -p ~/tmp/znsh
