@@ -266,6 +266,49 @@ install **multiple** hooks per each `hook` entry. Before introducing the
 widget with the name of one of the special widgets. Now, after the function has
 been introduced in Zsh `5.3` it should be used instead.
 
+[#standard-options]
+### Standard recommended options
+
+The following code snippet is recommended to be included at the beginning of
+each of the main functions provided by the plugin:
+
+```zsh
+emulate -L zsh
+setopt extendedglob warncreateglobal typesetsilent \
+        noshortloops rcquotes noautopushd
+```
+
+It resets all the options to their default state according to the `zsh`
+emulation mode, with use of the `localoptions` option – so the options will be
+restored to their previous state when leaving the function.
+
+It then alters the emulation by `6` different options:
+
+- `extendedglob` – enables one of the main Zshell features – the advanced,
+  built-in regex-like globing mechanism,
+- `warncreateglobal` – enables warnings to be printed each time a (global)
+  variable is defined without being explicitly defined by a `typeset`, `local`,
+  `declare`, etc.  call; it allows to catch typos and missing localizations of
+  the variables and thus prevents from writing a bad code,
+- `typesetsilent` – it allows to call `typeset`, `local`, etc. multiple times on
+  the same variable; without it the second call causes the variable contents to
+  be printed first; using this option allows to declare variables inside loops,
+  near the place of their use, which sometimes helps to write a more readable
+  code,
+- `noshortloops` – disables the short-loops syntax; this is done because when
+  the syntax is enabled it limits the parser's ability to detect errors (see
+  this link:https://www.zsh.org/mla/workers/2011/msg01050.html[zsh-workers post]
+  for the details),
+- `rcquotes` – adds useful ability to insert apostrophes into an
+  apostrophe-quoted string, by use of `''` inside it, e.g.: `'a string''s
+  example` will yield the string `a string's example`,
+- `noautopushd` - disables the automatic push of the directory passed to `cd`
+  builtin onto the directory stack; this is useful, because otherwise the
+  internal directory changes done by the plugin will pollute the global
+  directory stack.
+
+
+
 [appendix]
 == Revision History (History Of Updates To The Document)
 
