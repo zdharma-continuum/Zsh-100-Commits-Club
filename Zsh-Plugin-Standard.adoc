@@ -126,8 +126,39 @@ maintaining of such function (if it is to withdraw **all** plugin side-effects)
 can be a daunting task requiring constant monitoring of it during the plugin
 develoment process.
 
+[#unload-register-call]
+## 3. `@zsh-plugin-run-on-unload` call
+
+The plugin manager can provide a function `@zsh-plugin-run-on-unload` which
+has the following call syntax:
+
+```zsh
+@zsh-plugin-run-on-unload "{code-snippet-1}" "{code-snippet-2}" …
+```
+
+The function registers pieces of code to be run by the plugin manager **on
+unload of the plugin**. The execution of the code should be done by the `eval`
+builtin in the same order as they are passed to the call.
+
+The mechanism thus provides another way, side to the link:#unload-fun[unload
+function], for the plugin to participate in the process of unloading it.
+
+[#update-register-call]
+## 4. `@zsh-plugin-run-on-update` call
+
+The plugin manager can provide a function `@zsh-plugin-run-on-update` which
+has the following call syntax:
+
+```zsh
+@zsh-plugin-run-on-update "{code-snippet-1}" "{code-snippet-2}" …
+```
+
+The function registers pieces of code to be run by the plugin manager **on
+update of the plugin**. The execution of the code should be done by the `eval`
+builtin in the same order as they are passed to the call.
+
 [#indicator]
-## 3. Plugin Manager Activity Indicator
+## 5. Plugin Manager Activity Indicator
 
 Plugin managers should set the `$zsh_loaded_plugins` array to contain all
 previously loaded plugins and the plugin currently being loaded (as the last
@@ -159,7 +190,7 @@ This will allow user to reliably source the plugin without using a plugin
 manager.
 
 [#zpfx]
-## 4. Global Parameter With PREFIX For Make, Configure, Etc.
+## 6. Global Parameter With PREFIX For Make, Configure, Etc.
 
 Plugin managers may export the parameter `$ZPFX` which should contain a path to
 a directory dedicated for user-land software, i.e. for directories `$ZPFX/bin`,
@@ -238,6 +269,8 @@ been introduced in Zsh `5.3` it should be used instead.
 [appendix]
 == Revision History (History Of Updates To The Document)
 
+v0.96, 10/23/2019: Added `@zsh-plugin-run-on-unload` and
+`@zsh-plugin-run-on-update` calls +
 v0.95, 07/31/2019: Plugin unload function `*_unload_plugin` -->
 `*_plugin_unload` +
 v0.94, 07/20/2019: Add initial version of the best practices section +
