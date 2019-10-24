@@ -1,6 +1,6 @@
 # Zsh Plugin Standard
 Sebastian Gniazdowski <psprint@zdharma.org>
-v0.95, 07/31/2019
+v0.97, 10/23/2019
 :source-highlighter: prettify
 :toc:
 
