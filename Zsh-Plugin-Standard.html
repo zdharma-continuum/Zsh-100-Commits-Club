@@ -460,6 +460,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#azh">Use Of <code>add-zsh-hook</code> To Install Hooks</a></li>
 <li><a href="#azhw">Use Of <code>add-zle-hook-widget</code> To Install Zle Hooks</a></li>
+<li><a href="#standard-options">Standard recommended options</a></li>
 </ul>
 </li>
 <li><a href="#_revision_history_history_of_updates_to_the_document">Appendix A: Revision History (History Of Updates To The Document)</a></li>
@@ -674,6 +675,9 @@ unload of the plugin</strong>. The execution of the code should be done by the <
 builtin in the same order as they are passed to the call.</p>
 </div>
 <div class="paragraph">
+<p>The code should be executed in the plugin&#8217;s directory, possibly in a subshell.</p>
+</div>
+<div class="paragraph">
 <p>The mechanism thus provides another way, side to the <a href="#unload-fun">unload
 function</a>, for the plugin to participate in the process of unloading it.</p>
 </div>
@@ -695,6 +699,9 @@ has the following call syntax:</p>
 <p>The function registers pieces of code to be run by the plugin manager <strong>on
 update of the plugin</strong>. The execution of the code should be done by the <code>eval</code>
 builtin in the same order as they are passed to the call.</p>
+</div>
+<div class="paragraph">
+<p>The code should be executed in the plugin&#8217;s directory, possibly in a subshell.</p>
 </div>
 </div>
 </div>
@@ -850,13 +857,74 @@ widget with the name of one of the special widgets. Now, after the function has
 been introduced in Zsh <code>5.3</code> it should be used instead.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="standard-options">Standard recommended options</h3>
+<div class="paragraph">
+<p>The following code snippet is recommended to be included at the beginning of
+each of the main functions provided by the plugin:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="zsh">emulate -L zsh
+setopt extendedglob warncreateglobal typesetsilent \
+        noshortloops rcquotes noautopushd</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It resets all the options to their default state according to the <code>zsh</code>
+emulation mode, with use of the <code>localoptions</code> option – so the options will be
+restored to their previous state when leaving the function.</p>
+</div>
+<div class="paragraph">
+<p>It then alters the emulation by <code>6</code> different options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>extendedglob</code> – enables one of the main Zshell features – the advanced,
+built-in regex-like globing mechanism,</p>
+</li>
+<li>
+<p><code>warncreateglobal</code> – enables warnings to be printed each time a (global)
+variable is defined without being explicitly defined by a <code>typeset</code>, <code>local</code>,
+<code>declare</code>, etc.  call; it allows to catch typos and missing localizations of
+the variables and thus prevents from writing a bad code,</p>
+</li>
+<li>
+<p><code>typesetsilent</code> – it allows to call <code>typeset</code>, <code>local</code>, etc. multiple times on
+the same variable; without it the second call causes the variable contents to
+be printed first; using this option allows to declare variables inside loops,
+near the place of their use, which sometimes helps to write a more readable
+code,</p>
+</li>
+<li>
+<p><code>noshortloops</code> – disables the short-loops syntax; this is done because when
+the syntax is enabled it limits the parser&#8217;s ability to detect errors (see
+this <a href="https://www.zsh.org/mla/workers/2011/msg01050.html">zsh-workers post</a>
+for the details),</p>
+</li>
+<li>
+<p><code>rcquotes</code> – adds useful ability to insert apostrophes into an
+apostrophe-quoted string, by use of <code>''</code> inside it, e.g.: <code>'a string''s
+example'</code> will yield the string <code>a string&#8217;s example</code>,</p>
+</li>
+<li>
+<p><code>noautopushd</code> - disables the automatic push of the directory passed to <code>cd</code>
+builtin onto the directory stack; this is useful, because otherwise the
+internal directory changes done by the plugin will pollute the global
+directory stack.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_revision_history_history_of_updates_to_the_document">Appendix A: Revision History (History Of Updates To The Document)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>v0.96, 10/23/2019: Added <code>@zsh-plugin-run-on-unload</code> and
+<p>v0.97, 10/23/2019: Added <code>Standard recommended option</code> section<br>
+v0.96, 10/23/2019: Added <code>@zsh-plugin-run-on-unload</code> and
 <code>@zsh-plugin-run-on-update</code> calls<br>
 v0.95, 07/31/2019: Plugin unload function <code>*_unload_plugin</code> -&#8594;
 <code>*_plugin_unload</code><br>
