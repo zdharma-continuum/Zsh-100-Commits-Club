@@ -140,7 +140,7 @@ The function registers pieces of code to be run by the plugin manager **on
 unload of the plugin**. The execution of the code should be done by the `eval`
 builtin in the same order as they are passed to the call.
 
-The code should be executed in the plugin's directory, possibly in a subshell.
+The code should be executed in the plugin's directory, in the current shell.
 
 The mechanism thus provides another way, side to the link:#unload-fun[unload
 function], for the plugin to participate in the process of unloading it.
