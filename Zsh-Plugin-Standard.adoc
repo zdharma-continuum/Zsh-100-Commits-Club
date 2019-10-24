@@ -271,7 +271,7 @@ widget with the name of one of the special widgets. Now, after the function has
 been introduced in Zsh `5.3` it should be used instead.
 
 [#standard-options]
-### Standard recommended options
+### Standard Recommended Options
 
 The following code snippet is recommended to be included at the beginning of
 each of the main functions provided by the plugin:
@@ -314,7 +314,7 @@ It then alters the emulation by `6` different options:
 [appendix]
 == Revision History (History Of Updates To The Document)
 
-v0.97, 10/23/2019: Added `Standard recommended option` section +
+v0.97, 10/23/2019: Added `Standard Recommended Options` section +
 v0.96, 10/23/2019: Added `@zsh-plugin-run-on-unload` and
 `@zsh-plugin-run-on-update` calls +
 v0.95, 07/31/2019: Plugin unload function `*_unload_plugin` -->
