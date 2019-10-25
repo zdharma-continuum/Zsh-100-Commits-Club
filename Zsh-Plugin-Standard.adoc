@@ -423,4 +423,4 @@ v0.9, 12/12/2017: Remove ZERO references (wrong design), add TOC.
 
 Reminder: The date format that uses slashes is `MM/DD/YYYY`.
 
-// vim:ft=asciidoc:et:sw=4:sts=4:tw=80
+// vim:ft=asciidoc:et:sw=4:sts=4:tw=80:fo+=2n
