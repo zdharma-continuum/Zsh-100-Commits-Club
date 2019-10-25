@@ -106,7 +106,7 @@ The last, 5th point also allows to use the `$0` handling in scripts (i.e.
 runnables with the hashbang `#!…`) to get the directory in which the script
 file resides.
 
-###### Adoption Status
+##### Adoption Status
 
 1. Plugin managers: Zplugin, Zgen (after and if the
 link:https://github.com/tarjoilija/zgen/pull/124[PR] will be merged)
@@ -135,7 +135,7 @@ maintaining of such function (if it is to withdraw **all** plugin side-effects)
 can be a daunting task requiring constant monitoring of it during the plugin
 develoment process.
 
-###### Adoption Status
+##### Adoption Status
 
 1. One plugin manager, Zplugin, implements plugin unloading and calls the
    function.
@@ -164,7 +164,7 @@ The code should be executed in the plugin's directory, in the current shell.
 The mechanism thus provides another way, side to the link:#unload-fun[unload
 function], for the plugin to participate in the process of unloading it.
 
-###### Adoption Status
+##### Adoption Status
 
 It's a recent addition to the standard and only one plugin manager, Zplugin,
 implements it.
@@ -185,7 +185,7 @@ builtin in the same order as they are passed to the call.
 
 The code should be executed in the plugin's directory, possibly in a subshell.
 
-###### Adoption Status
+##### Adoption Status
 
 It's a recent addition to the standard and only one plugin manager, Zplugin,
 implements it.
@@ -222,7 +222,7 @@ fi
 This will allow user to reliably source the plugin without using a plugin
 manager.
 
-###### Adoption Status
+##### Adoption Status
 
 1. Plugin managers: Zplugin, Zgen (after and if the
 link:https://github.com/tarjoilija/zgen/pull/124[PR] will be merged)
@@ -255,7 +255,7 @@ No-narration facts-list related to `$ZPFX`:
  5. `zplugin ice make"PREFIX=$ZPFX install"`
  6. `zplug … hook-build:"make PREFIX=$PFX install"`
 
-###### Adoption Status
+##### Adoption Status
 
 One plugin manager, Zplugin, provides the `$ZPFX` parameter.
 
