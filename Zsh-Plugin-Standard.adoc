@@ -446,11 +446,49 @@ as follows:
 This way the functions defined by the body of the main (most often an autoload)
 function will be only set during the execution of the function.
 
+[#params]
+### Preventing Parameter Pollution
+
+When writing a plugin one often needs to keep a state during the Zsh
+session. To do this it is natural to use global parameters. However,
+when the number of the parameters grows one might want to limit it.
+
+With the following method, only a single global parameter per plugin can be
+sufficient:
+
+```shell
+typeset -A PLGMAP
+typeset -A some_map
+typeset -a some_array
+
+# Use
+PLGMAP[state]=1
+some_map[state]=1
+some_array[1]=state
+```
+
+can be converted into:
+
+```shell
+typeset -A PLGMAP
+
+# Use
+PLGMAP[state]=1
+PLGMAP[some_map__state]=1
+PLGMAP[some_array__1]=state
+```
+
+The use of this method is very unproblematic. The author reduced the number of
+global parameters in one of projects by 21 by using an automatic conversion with
+Vim substitution patterns with back references without any problems.
+
 [appendix]
 == Revision History (History Of Updates To The Document)
 
 v0.98, 10/25/2019: 1/ Added `Standard Recommended Variables` section +
 v0.98, 10/25/2019: 2/ Added `Standard Function Name-Space Prefixes` section +
+v0.98, 10/25/2019: 3/ Added `Preventing Function Pollution` section +
+v0.98, 10/25/2019: 4/ Added `Preventing Parameter Pollution` section +
 v0.97, 10/23/2019: Added `Standard Recommended Options` section +
 v0.96, 10/23/2019: Added `@zsh-plugin-run-on-unload` and
 `@zsh-plugin-run-on-update` calls +
