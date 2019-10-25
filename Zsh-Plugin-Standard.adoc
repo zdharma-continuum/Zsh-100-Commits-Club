@@ -278,35 +278,35 @@ each of the main functions provided by the plugin:
 
 ```zsh
 emulate -L zsh
-setopt extendedglob warncreateglobal typesetsilent \
-        noshortloops rcquotes noautopushd
+setopt extendedglob warn_create_global typeset_silent \
+        no_short_loops rc_quotes no_auto_pushd
 ```
 
 It resets all the options to their default state according to the `zsh`
-emulation mode, with use of the `localoptions` option – so the options will be
+emulation mode, with use of the `local_options` option – so the options will be
 restored to their previous state when leaving the function.
 
 It then alters the emulation by `6` different options:
 
-- `extendedglob` – enables one of the main Zshell features – the advanced,
+- `extended_glob` – enables one of the main Zshell features – the advanced,
   built-in regex-like globing mechanism,
-- `warncreateglobal` – enables warnings to be printed each time a (global)
+- `warn_create_global` – enables warnings to be printed each time a (global)
   variable is defined without being explicitly defined by a `typeset`, `local`,
   `declare`, etc.  call; it allows to catch typos and missing localizations of
   the variables and thus prevents from writing a bad code,
-- `typesetsilent` – it allows to call `typeset`, `local`, etc. multiple times on
+- `typeset_silent` – it allows to call `typeset`, `local`, etc. multiple times on
   the same variable; without it the second call causes the variable contents to
   be printed first; using this option allows to declare variables inside loops,
   near the place of their use, which sometimes helps to write a more readable
   code,
-- `noshortloops` – disables the short-loops syntax; this is done because when
+- `no_short_loops` – disables the short-loops syntax; this is done because when
   the syntax is enabled it limits the parser's ability to detect errors (see
   this link:https://www.zsh.org/mla/workers/2011/msg01050.html[zsh-workers post]
   for the details),
-- `rcquotes` – adds useful ability to insert apostrophes into an
+- `rc_quotes` – adds useful ability to insert apostrophes into an
   apostrophe-quoted string, by use of `''` inside it, e.g.: `'a string''s
   example'` will yield the string `a string's example`,
-- `noautopushd` - disables the automatic push of the directory passed to `cd`
+- `no_auto_pushd` - disables the automatic push of the directory passed to `cd`
   builtin onto the directory stack; this is useful, because otherwise the
   internal directory changes done by the plugin will pollute the global
   directory stack.
