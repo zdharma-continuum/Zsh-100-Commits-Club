@@ -327,11 +327,83 @@ utilizing `(#b)` and `(#m)` flags, respectively. They should not leak to the
 global scope. Also, their automatic creation would trigger the warning from the
 `warn_create_global` option.
 
-The `reply` and `REPLY` parameters are being often used to return an array or a
-scalar from a function, respectively. Their use is naturally limited to the
-functions called from the main function of a plugin – they should not be used to
-pass data around e.g.: in between prompts, thus it's natural to localize them in
-the main function.
+The `reply` and `REPLY` parameters are being normally used to return an array or
+a scalar from a function, respectively – it's the standard way of passing values
+from functions. Their use is naturally limited to the functions called from the
+main function of a plugin – they should not be used to pass data around e.g.: in
+between prompts, thus it's natural to localize them in the main function.
+
+[#namespacing]
+### Standard Function Name-Space Prefixes
+
+The recommendation is purely subjective opinion of the author. It can evolve –
+if you have any remarks, don't hesitate to
+link:https://github.com/zdharma/Zsh-100-Commits-Club/issues/new[fill them].
+
+##### The Problems Solved By The Proposition
+
+However when adopted, the proposition will solve the following issues:
+
+1. Using the underscore `_` to namespace functions – this isn't the right thing
+   to do because the prefix is being already used by the completion functions,
+   so the namespace is already filled up greately and the plugin functions get
+   lost in it.
+
+2. Not using a prefix at all – this is also an unwanted practice as it pollutes
+   the command namespace
+   (link:http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html#update-register-call[an
+   example] of such issue appearing).
+
+3. It would allow to quickly discriminate between function types – e.g.: seeing
+   the `:` prefix informs the user that it's a hook-type function, while seeing
+   the `@` prefix informs the user that it's an API-like function, etc.
+
+4. It also provides an improvement during programming, by allowing to quickly
+   limit the number of completions offered by the editor, e.g.: for vim's
+   `Ctrl-P` completing, when entering `+<Ctrl-P>`, then only a subset of the
+   functions is being completed (see below for the type of the functions).
+   **Note:** the editor has to be configured so that it accepts such special
+   characters as part of keywords, for vim it's: `:set isk+=@-@,.,+,/,:` for all
+   of the proposed prefixes.
+
+##### The Proposed Function-Name Prefixes
+
+The proposition of the standard prefixes is as follows:
+
+1. `.`: for regular private functions. Example function:
+   `.prompt_zinc_get_value`.
+2. `:`: for hook-like functions, so it should be used e.g.: for the
+   link:#azh[Zsh hooks] and the link:#azhw[Zle hooks], but also for any other
+   custom hook-like mechanism in the plugin (e.g.: Zplugin annexes
+   link:http://zdharma.org/zplugin/wiki/Annexes/#how_to_code_them[use] such
+   prefix for the Zplugin hook functions). Example function name:
+   `:prompt_zinc_precmd`.
+3. `+`: for output functions, i.e.: for functions that print to the standard
+   output and error or to a log, etc. Example function name:
+   `+prompt_zinc_output_segment`.
+4. `/`: for debug functions, i.e: for functions that output debug messages to
+   the screen or to a log or e.g.: gather some debug data. **Note:** the slash
+   makes it impossible for such functions to be auto-loaded via the `autoload`
+   mechanism. It is somewhat risky to assume, that this will never be needed for
+   the functions, however the limited number of available ASCII characters
+   justifies such allocation. Example function name: `/prompt_zinc_dbg_log`.
+5. `@`: for API-like functions, i.e: for functions that are on a boundary to a
+   subsystem and expose its functionality through a well-defined, in general
+   fixed interface. For example the plugin standard
+   link:http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html#update-register-call[defines]
+   the function `@zsh-plugin-run-on-update`, which is exposing a plugin
+   manager's functionality in a well-defined way.
+
+##### Example Code Utilizing The Prefixes
+
+```zsh
+.zinc_register_hooks() {
+    add-zsh-hook precmd :zinc_precmd
+    /zinc_dmsg "Installed precmd hook with result: $?"
+    @zsh-plugin-run-on-unload "add-zsh-hook -d precmd :zinc_precmd"
+    +zinc_print "Initialization complete"
+}
+```
 
 [appendix]
 == Revision History (History Of Updates To The Document)
