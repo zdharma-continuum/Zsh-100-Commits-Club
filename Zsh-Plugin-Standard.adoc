@@ -311,6 +311,28 @@ It then alters the emulation by `6` different options:
   internal directory changes done by the plugin will pollute the global
   directory stack.
 
+[#standard-variables]
+### Standard Recommended Variables
+
+It's good to localize the following variables at the entry of the main function
+of a plugin:
+
+```zsh
+local MATCH REPLY; integer MBEGIN MEND
+local -a match mbegin mend reply
+```
+
+The variables starting with `m` and `M` are being used by the substitutions
+utilizing `(#b)` and `(#m)` flags, respectively. They should not leak to the
+global scope. Also, their automatic creation would trigger the warning from the
+`warn_create_global` option.
+
+The `reply` and `REPLY` parameters are being often used to return an array or a
+scalar from a function, respectively. Their use is naturally limited to the
+functions called from the main function of a plugin – they should not be used to
+pass data around e.g.: in between prompts, thus it's natural to localize them in
+the main function.
+
 [appendix]
 == Revision History (History Of Updates To The Document)
 
