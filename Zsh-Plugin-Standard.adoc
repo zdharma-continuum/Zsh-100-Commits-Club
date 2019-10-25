@@ -482,6 +482,7 @@ The use of this method is very unproblematic. The author reduced the number of
 global parameters in one of projects by 21 by using an automatic conversion with
 Vim substitution patterns with back references without any problems.
 
+[#appendix]
 [appendix]
 == Revision History (History Of Updates To The Document)
 
