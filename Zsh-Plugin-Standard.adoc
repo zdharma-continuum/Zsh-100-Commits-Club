@@ -1,7 +1,7 @@
 # Zsh Plugin Standard
 Sebastian Gniazdowski <psprint@zdharma.org>
 v0.98, 10/23/2019
-:source-highlighter: prettify
+:source-highlighter: rouge
 :toc:
 
 ifdef::backend-html5[The document is also available as a link:http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.pdf[PDF].]
@@ -49,7 +49,7 @@ plugin" and the actions of plugin managers – the proposed standardization. +
 
 To get the plugin’s location, plugins should do:
 
-```zsh
+```shell
 0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
 
@@ -132,7 +132,7 @@ develoment process.
 The plugin manager can provide a function `@zsh-plugin-run-on-unload` which
 has the following call syntax:
 
-```zsh
+```shell
 @zsh-plugin-run-on-unload "{code-snippet-1}" "{code-snippet-2}" …
 ```
 
@@ -151,7 +151,7 @@ function], for the plugin to participate in the process of unloading it.
 The plugin manager can provide a function `@zsh-plugin-run-on-update` which
 has the following call syntax:
 
-```zsh
+```shell
 @zsh-plugin-run-on-update "{code-snippet-1}" "{code-snippet-2}" …
 ```
 
@@ -182,7 +182,7 @@ of `zsh-async`, having also reliable `$0` defined by previous section (note:
 The second item allows a plugin to e.g. set up `$fpath`, knowing that plugin
 manager will not handle this:
 
-```zsh
+```shell
 if [[ (${+zsh_loaded_plugins} = 0 || ${zsh_loaded_plugins[-1]} != */kalc) \
     && -z ${fpath[(r)${0:h}]} ]]
 then
@@ -231,7 +231,7 @@ information in this section.
 Zsh ships with a function `add-zsh-hook`. It has the following invocation
 syntax:
 
-```zsh
+```shell
 add-zsh-hook [ -L | -dD ] [ -Uzk ] hook function
 ```
 
@@ -252,7 +252,7 @@ automatically set by the Zle editor).
 
 The syntax of the call is:
 
-```zsh
+```shell
 add-zle-hook-widget [ -L | -dD ] [ -Uzk ] hook widgetname
 ```
 
@@ -276,7 +276,7 @@ been introduced in Zsh `5.3` it should be used instead.
 The following code snippet is recommended to be included at the beginning of
 each of the main functions provided by the plugin:
 
-```zsh
+```shell
 emulate -L zsh
 setopt extended_glob warn_create_global typeset_silent \
         no_short_loops rc_quotes no_auto_pushd
@@ -317,7 +317,7 @@ It then alters the emulation by `6` different options:
 It's good to localize the following variables at the entry of the main function
 of a plugin:
 
-```zsh
+```shell
 local MATCH REPLY; integer MBEGIN MEND
 local -a match mbegin mend reply
 ```
@@ -399,7 +399,7 @@ The proposition of the standard prefixes is as follows:
 
 ##### Example Code Utilizing The Prefixes
 
-```zsh
+```shell
 .zinc_register_hooks() {
     add-zsh-hook precmd :zinc_precmd
     /zinc_dmsg "Installed precmd hook with result: $?"
@@ -418,7 +418,7 @@ undesired, e.g.: because of the command name-space pollution. The following
 snippet of code, when added at the beginning of the main function will
 automatically unset the sub-functions when leaving the main function:
 
-```zsh
+```shell
 # Don't leak any functions
 typeset -g prjef
 prjef=( ${(k)functions} )
