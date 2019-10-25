@@ -386,13 +386,12 @@ The proposition of the standard prefixes is as follows:
    makes it impossible for such functions to be auto-loaded via the `autoload`
    mechanism. It is somewhat risky to assume, that this will never be needed for
    the functions, however the limited number of available ASCII characters
-   justifies such allocation. Example function name: `/prompt_zinc_dbg_log`.
+   justifies such allocation. Example function name: `/prompt_zinc_dmsg`.
 5. `@`: for API-like functions, i.e: for functions that are on a boundary to a
    subsystem and expose its functionality through a well-defined, in general
-   fixed interface. For example the plugin standard
-   link:http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html#update-register-call[defines]
-   the function `@zsh-plugin-run-on-update`, which is exposing a plugin
-   manager's functionality in a well-defined way.
+   fixed interface. For example this plugin standard
+   link:#update-register-call[defines] the function `@zsh-plugin-run-on-update`,
+   which is exposing a plugin manager's functionality in a well-defined way.
 
 ##### Example Code Utilizing The Prefixes
 
@@ -401,7 +400,7 @@ The proposition of the standard prefixes is as follows:
     add-zsh-hook precmd :zinc_precmd
     /zinc_dmsg "Installed precmd hook with result: $?"
     @zsh-plugin-run-on-unload "add-zsh-hook -d precmd :zinc_precmd"
-    +zinc_print "Initialization complete"
+    +zinc_print "Zinc initialization complete"
 }
 ```
 
