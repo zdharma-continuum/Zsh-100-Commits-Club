@@ -1018,15 +1018,14 @@ the screen or to a log or e.g.: gather some debug data. <strong>Note:</strong> t
 makes it impossible for such functions to be auto-loaded via the <code>autoload</code>
 mechanism. It is somewhat risky to assume, that this will never be needed for
 the functions, however the limited number of available ASCII characters
-justifies such allocation. Example function name: <code>/prompt_zinc_dbg_log</code>.</p>
+justifies such allocation. Example function name: <code>/prompt_zinc_dmsg</code>.</p>
 </li>
 <li>
 <p><code>@</code>: for API-like functions, i.e: for functions that are on a boundary to a
 subsystem and expose its functionality through a well-defined, in general
-fixed interface. For example the plugin standard
-<a href="http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html#update-register-call">defines</a>
-the function <code>@zsh-plugin-run-on-update</code>, which is exposing a plugin
-manager&#8217;s functionality in a well-defined way.</p>
+fixed interface. For example this plugin standard
+<a href="#update-register-call">defines</a> the function <code>@zsh-plugin-run-on-update</code>,
+which is exposing a plugin manager&#8217;s functionality in a well-defined way.</p>
 </li>
 </ol>
 </div>
@@ -1039,7 +1038,7 @@ manager&#8217;s functionality in a well-defined way.</p>
     add-zsh-hook precmd :zinc_precmd
     /zinc_dmsg "Installed precmd hook with result: $?"
     @zsh-plugin-run-on-unload "add-zsh-hook -d precmd :zinc_precmd"
-    +zinc_print "Initialization complete"
+    +zinc_print "Zinc initialization complete"
 }</code></pre>
 </div>
 </div>
