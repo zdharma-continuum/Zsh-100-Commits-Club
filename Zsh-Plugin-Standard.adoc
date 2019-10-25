@@ -372,21 +372,25 @@ The proposition of the standard prefixes is as follows:
 
 1. `.`: for regular private functions. Example function:
    `.prompt_zinc_get_value`.
+
 2. `:`: for hook-like functions, so it should be used e.g.: for the
    link:#azh[Zsh hooks] and the link:#azhw[Zle hooks], but also for any other
    custom hook-like mechanism in the plugin (e.g.: Zplugin annexes
    link:http://zdharma.org/zplugin/wiki/Annexes/#how_to_code_them[use] such
    prefix for the Zplugin hook functions). Example function name:
    `:prompt_zinc_precmd`.
+
 3. `+`: for output functions, i.e.: for functions that print to the standard
    output and error or to a log, etc. Example function name:
    `+prompt_zinc_output_segment`.
+
 4. `/`: for debug functions, i.e: for functions that output debug messages to
    the screen or to a log or e.g.: gather some debug data. **Note:** the slash
    makes it impossible for such functions to be auto-loaded via the `autoload`
    mechanism. It is somewhat risky to assume, that this will never be needed for
    the functions, however the limited number of available ASCII characters
    justifies such allocation. Example function name: `/prompt_zinc_dmsg`.
+
 5. `@`: for API-like functions, i.e: for functions that are on a boundary to a
    subsystem and expose its functionality through a well-defined, in general
    fixed interface. For example this plugin standard
@@ -403,6 +407,44 @@ The proposition of the standard prefixes is as follows:
     +zinc_print "Zinc initialization complete"
 }
 ```
+
+[#auto-unfun]
+### Preventing Function Pollution
+
+When writing a larger autoload function, it very often is the case that the
+function contains definitions of other functions. When the main function
+finishes executing, the functions are being left defined. This might be
+undesired, e.g.: because of the command name-space pollution. The following
+snippet of code, when added at the beginning of the main function will
+automatically unset the sub-functions when leaving the main function:
+
+```zsh
+# Don't leak any functions
+typeset -g prjef
+prjef=( ${(k)functions} )
+trap "unset -f -- \"\${(k)functions[@]:|prjef}\" &>/dev/null; unset prjef" EXIT
+trap "unset -f -- \"\${(k)functions[@]:|prjef}\" &>/dev/null; unset prjef; return 1" INT
+```
+
+Replace the `prj*` prefix with your project name, e.g.: `rustef` for a
+`rust`-related plugin. The `*ef` stands for "entry functions". The snippet works
+as follows:
+
+1. The line `prjef=( ${(k)functions} )` remembers all the functions that are
+   currently defined – which means that the list excludes the functions that are
+   to be yet defined by the body of the main function.
+
+2. The code `unset -f -- "${(k)functions[@]:|prjef}"` first does an intersection
+   – the `:|` substitution operator – of the functions that are defined at the
+   moment of leaving of the function (the `trap`-s invoke the code in this
+   moment) with the list of functions from the start of the main function
+   – the ones stored in the variables `$prjef`.
+
+3. It then unsets the resulting list of the functions – being only the newly
+   defined functions in the main function – by passing it to `unset -f …`.
+
+This way the functions defined by the body of the main (most often an autoload)
+function will be only set during the execution of the function.
 
 [appendix]
 == Revision History (History Of Updates To The Document)
