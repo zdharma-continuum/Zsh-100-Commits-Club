@@ -346,7 +346,7 @@ However when adopted, the proposition will solve the following issues:
 
 1. Using the underscore `_` to namespace functions – this isn't the right thing
    to do because the prefix is being already used by the completion functions,
-   so the namespace is already filled up greately and the plugin functions get
+   so the namespace is already filled up greatly and the plugin functions get
    lost in it.
 
 2. Not using a prefix at all – this is also an unwanted practice as it pollutes
@@ -359,11 +359,11 @@ However when adopted, the proposition will solve the following issues:
    the `@` prefix informs the user that it's an API-like function, etc.
 
 4. It also provides an improvement during programming, by allowing to quickly
-   limit the number of completions offered by the editor, e.g.: for vim's
+   limit the number of completions offered by the editor, e.g.: for Vim's
    `Ctrl-P` completing, when entering `+<Ctrl-P>`, then only a subset of the
    functions is being completed (see below for the type of the functions).
    **Note:** the editor has to be configured so that it accepts such special
-   characters as part of keywords, for vim it's: `:set isk+=@-@,.,+,/,:` for all
+   characters as part of keywords, for Vim it's: `:set isk+=@-@,.,+,/,:` for all
    of the proposed prefixes.
 
 ##### The Proposed Function-Name Prefixes
@@ -434,11 +434,11 @@ as follows:
    currently defined – which means that the list excludes the functions that are
    to be yet defined by the body of the main function.
 
-2. The code `unset -f -- "${(k)functions[@]:|prjef}"` first does an intersection
-   – the `:|` substitution operator – of the functions that are defined at the
-   moment of leaving of the function (the `trap`-s invoke the code in this
-   moment) with the list of functions from the start of the main function
-   – the ones stored in the variables `$prjef`.
+2. The code `unset -f -- "${(k)functions[@]:|prjef}"` first does an subtraction
+   of array contents – the `:|` substitution operator – of the functions that
+   are defined at the moment of leaving of the function (the `trap`-s invoke the
+   code in this moment) with the list of functions from the start of the main
+   function – the ones stored in the variables `$prjef`.
 
 3. It then unsets the resulting list of the functions – being only the newly
    defined functions in the main function – by passing it to `unset -f …`.
