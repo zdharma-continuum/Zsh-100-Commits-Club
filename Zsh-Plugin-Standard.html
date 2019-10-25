@@ -964,7 +964,7 @@ if you have any remarks, don&#8217;t hesitate to
 <li>
 <p>Using the underscore <code>_</code> to namespace functions – this isn&#8217;t the right thing
 to do because the prefix is being already used by the completion functions,
-so the namespace is already filled up greately and the plugin functions get
+so the namespace is already filled up greatly and the plugin functions get
 lost in it.</p>
 </li>
 <li>
@@ -980,11 +980,11 @@ the <code>@</code> prefix informs the user that it&#8217;s an API-like function,
 </li>
 <li>
 <p>It also provides an improvement during programming, by allowing to quickly
-limit the number of completions offered by the editor, e.g.: for vim&#8217;s
+limit the number of completions offered by the editor, e.g.: for Vim&#8217;s
 <code>Ctrl-P</code> completing, when entering <code>+&lt;Ctrl-P&gt;</code>, then only a subset of the
 functions is being completed (see below for the type of the functions).
 <strong>Note:</strong> the editor has to be configured so that it accepts such special
-characters as part of keywords, for vim it&#8217;s: <code>:set isk+=@-@,.,+,/,:</code> for all
+characters as part of keywords, for Vim it&#8217;s: <code>:set isk+=@-@,.,+,/,:</code> for all
 of the proposed prefixes.</p>
 </li>
 </ol>
@@ -1078,11 +1078,11 @@ currently defined – which means that the list excludes the functions that are
 to be yet defined by the body of the main function.</p>
 </li>
 <li>
-<p>The code <code>unset -f&#8201;&#8212;&#8201;"${(k)functions[@]:|prjef}"</code> first does an intersection
-– the <code>:|</code> substitution operator – of the functions that are defined at the
-moment of leaving of the function (the <code>trap</code>-s invoke the code in this
-moment) with the list of functions from the start of the main function
-– the ones stored in the variables <code>$prjef</code>.</p>
+<p>The code <code>unset -f&#8201;&#8212;&#8201;"${(k)functions[@]:|prjef}"</code> first does an subtraction
+of array contents – the <code>:|</code> substitution operator – of the functions that
+are defined at the moment of leaving of the function (the <code>trap</code>-s invoke the
+code in this moment) with the list of functions from the start of the main
+function – the ones stored in the variables <code>$prjef</code>.</p>
 </li>
 <li>
 <p>It then unsets the resulting list of the functions – being only the newly
