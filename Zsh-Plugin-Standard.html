@@ -443,19 +443,43 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Sebastian Gniazdowski</span><br>
 <span id="email" class="email"><a href="mailto:psprint@zdharma.org">psprint@zdharma.org</a></span><br>
-<span id="revnumber">version 0.98,</span>
-<span id="revdate">10/23/2019</span>
+<span id="revnumber">version 0.99,</span>
+<span id="revdate">10/26/2019</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_what_is_a_zsh_plugin">What Is A Zsh Plugin?</a></li>
-<li><a href="#zero-handling">1. Standardized <code>$0</code> Handling</a></li>
-<li><a href="#unload-fun">2. Unload Function</a></li>
-<li><a href="#unload-register-call">3. <code>@zsh-plugin-run-on-unload</code> call</a></li>
-<li><a href="#update-register-call">4. <code>@zsh-plugin-run-on-update</code> call</a></li>
-<li><a href="#indicator">5. Plugin Manager Activity Indicator</a></li>
-<li><a href="#zpfx">6. Global Parameter With PREFIX For Make, Configure, Etc.</a></li>
+<li><a href="#zero-handling">1. Standardized <code>$0</code> Handling</a>
+<ul class="sectlevel5">
+<li><a href="#_adoption_status">Adoption Status</a></li>
+</ul>
+</li>
+<li><a href="#unload-fun">2. Unload Function</a>
+<ul class="sectlevel5">
+<li><a href="#_adoption_status_2">Adoption Status</a></li>
+</ul>
+</li>
+<li><a href="#unload-register-call">3. <code>@zsh-plugin-run-on-unload</code> call</a>
+<ul class="sectlevel5">
+<li><a href="#_adoption_status_3">Adoption Status</a></li>
+</ul>
+</li>
+<li><a href="#update-register-call">4. <code>@zsh-plugin-run-on-update</code> call</a>
+<ul class="sectlevel5">
+<li><a href="#_adoption_status_4">Adoption Status</a></li>
+</ul>
+</li>
+<li><a href="#indicator">5. Plugin Manager Activity Indicator</a>
+<ul class="sectlevel5">
+<li><a href="#_adoption_status_5">Adoption Status</a></li>
+</ul>
+</li>
+<li><a href="#zpfx">6. Global Parameter With PREFIX For Make, Configure, Etc.</a>
+<ul class="sectlevel5">
+<li><a href="#_adoption_status_6">Adoption Status</a></li>
+</ul>
+</li>
 <li><a href="#best-practices">Zsh Plugin-Programming Best Practices</a>
 <ul class="sectlevel2">
 <li><a href="#azh">Use Of <code>add-zsh-hook</code> To Install Hooks</a></li>
@@ -634,6 +658,22 @@ might however provide a use case.</p>
 runnables with the hashbang <code>#!…</code>) to get the directory in which the script
 file resides.</p>
 </div>
+<div class="sect5">
+<h6 id="_adoption_status">Adoption Status</h6>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Plugin managers: Zplugin, Zgen (after and if the
+<a href="https://github.com/tarjoilija/zgen/pull/124">PR</a> will be merged)</p>
+</li>
+<li>
+<p>Plugins:
+<a href="https://github.com/search?q=%22${ZERO:-${0:%23$ZSH_ARGZERO}}%22&amp;type=Code">GitHub
+search</a></p>
+</li>
+</ol>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -658,6 +698,24 @@ and leave the rest to the plugin manager. The value of such approach is that
 maintaining of such function (if it is to withdraw <strong>all</strong> plugin side-effects)
 can be a daunting task requiring constant monitoring of it during the plugin
 develoment process.</p>
+</div>
+<div class="sect5">
+<h6 id="_adoption_status_2">Adoption Status</h6>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>One plugin manager, Zplugin, implements plugin unloading and calls the
+function.</p>
+</li>
+<li>
+<p>One plugin, <code>romkatv/powerlevel10k</code>, is
+<a href="https://github.com/romkatv/powerlevel10k/blob/f17081ca/internal/p10k.zsh#L5390">using</a>
+the function to execute a specific task: shutdown of the binary, background
+<a href="https://github.com/romkatv/gitstatus">gitstatus</a> demon, with a very good
+results.</p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 </div>
@@ -685,6 +743,13 @@ builtin in the same order as they are passed to the call.</p>
 <p>The mechanism thus provides another way, side to the <a href="#unload-fun">unload
 function</a>, for the plugin to participate in the process of unloading it.</p>
 </div>
+<div class="sect5">
+<h6 id="_adoption_status_3">Adoption Status</h6>
+<div class="paragraph">
+<p>It&#8217;s a recent addition to the standard and only one plugin manager, Zplugin,
+implements it.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -706,6 +771,13 @@ builtin in the same order as they are passed to the call.</p>
 </div>
 <div class="paragraph">
 <p>The code should be executed in the plugin&#8217;s directory, possibly in a subshell.</p>
+</div>
+<div class="sect5">
+<h6 id="_adoption_status_4">Adoption Status</h6>
+<div class="paragraph">
+<p>It&#8217;s a recent addition to the standard and only one plugin manager, Zplugin,
+implements it.</p>
+</div>
 </div>
 </div>
 </div>
@@ -753,6 +825,21 @@ manager will not handle this:</p>
 <p>This will allow user to reliably source the plugin without using a plugin
 manager.</p>
 </div>
+<div class="sect5">
+<h6 id="_adoption_status_5">Adoption Status</h6>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Plugin managers: Zplugin, Zgen (after and if the
+<a href="https://github.com/tarjoilija/zgen/pull/124">PR</a> will be merged)</p>
+</li>
+<li>
+<p>Plugins:
+<a href="https://github.com/search?q=if+%22zsh_loaded_plugins%22&amp;type=Code">GitHub search</a></p>
+</li>
+</ol>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -797,6 +884,12 @@ state, and have the same state on different accounts / machines.</p>
 <p><code>zplug … hook-build:"make PREFIX=$PFX install"</code></p>
 </li>
 </ol>
+</div>
+<div class="sect5">
+<h6 id="_adoption_status_6">Adoption Status</h6>
+<div class="paragraph">
+<p>One plugin manager, Zplugin, provides the <code>$ZPFX</code> parameter.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1143,7 +1236,8 @@ Vim substitution patterns with back references without any problems.</p>
 <h2 id="appendix">Appendix A: Revision History (History Of Updates To The Document)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>v0.98, 10/25/2019: 1/ Added <code>Standard Recommended Variables</code> section<br>
+<p>v0.99, 10/26/2019: Added <code>Adoption Status</code> sub-sections<br>
+v0.98, 10/25/2019: 1/ Added <code>Standard Recommended Variables</code> section<br>
 v0.98, 10/25/2019: 2/ Added <code>Standard Function Name-Space Prefixes</code> section<br>
 v0.98, 10/25/2019: 3/ Added <code>Preventing Function Pollution</code> section<br>
 v0.98, 10/25/2019: 4/ Added <code>Preventing Parameter Pollution</code> section<br>
@@ -1168,7 +1262,7 @@ v0.9, 12/12/2017: Remove ZERO references (wrong design), add TOC.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.98<br>
+Version 0.99<br>
 </div>
 </div>
 <style>
