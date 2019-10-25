@@ -351,7 +351,7 @@ However when adopted, the proposition will solve the following issues:
 
 2. Not using a prefix at all – this is also an unwanted practice as it pollutes
    the command namespace
-   (link:http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html#update-register-call[an
+   (link:https://github.com/zdharma/fast-syntax-highlighting/issues/157[an
    example] of such issue appearing).
 
 3. It would allow to quickly discriminate between function types – e.g.: seeing
