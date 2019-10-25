@@ -462,6 +462,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#azhw">Use Of <code>add-zle-hook-widget</code> To Install Zle Hooks</a></li>
 <li><a href="#standard-options">Standard Recommended Options</a></li>
 <li><a href="#standard-variables">Standard Recommended Variables</a></li>
+<li><a href="#namespacing">Standard Function Name-Space Prefixes</a></li>
 </ul>
 </li>
 <li><a href="#_revision_history_history_of_updates_to_the_document">Appendix A: Revision History (History Of Updates To The Document)</a></li>
@@ -867,7 +868,7 @@ each of the main functions provided by the plugin:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="zsh">emulate -L zsh
-setopt extendedglob warn_create_global typeset_silent \
+setopt extended_glob warn_create_global typeset_silent \
         no_short_loops rc_quotes no_auto_pushd</code></pre>
 </div>
 </div>
@@ -937,11 +938,111 @@ global scope. Also, their automatic creation would trigger the warning from the
 <code>warn_create_global</code> option.</p>
 </div>
 <div class="paragraph">
-<p>The <code>reply</code> and <code>REPLY</code> parameters are being often used to return an array or a
-scalar from a function, respectively. Their use is naturally limited to the
-functions called from the main function of a plugin – they should not be used to
-pass data around e.g.: in between prompts, thus it&#8217;s natural to localize them in
-the main function.</p>
+<p>The <code>reply</code> and <code>REPLY</code> parameters are being normally used to return an array or
+a scalar from a function, respectively – it&#8217;s the standard way of passing values
+from functions. Their use is naturally limited to the functions called from the
+main function of a plugin – they should not be used to pass data around e.g.: in
+between prompts, thus it&#8217;s natural to localize them in the main function.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="namespacing">Standard Function Name-Space Prefixes</h3>
+<div class="paragraph">
+<p>The recommendation is purely subjective opinion of the author. It can evolve –
+if you have any remarks, don&#8217;t hesitate to
+<a href="https://github.com/zdharma/Zsh-100-Commits-Club/issues/new">fill them</a>.</p>
+</div>
+<div class="sect4">
+<h5 id="_the_problems_solved_by_the_proposition">The Problems Solved By The Proposition</h5>
+<div class="paragraph">
+<p>However when adopted, the proposition will solve the following issues:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Using the underscore <code>_</code> to namespace functions – this isn&#8217;t the right thing
+to do because the prefix is being already used by the completion functions,
+so the namespace is already filled up greately and the plugin functions get
+lost in it.</p>
+</li>
+<li>
+<p>Not using a prefix at all – this is also an unwanted practice as it pollutes
+the command namespace
+(<a href="http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html#update-register-call">an
+example</a> of such issue appearing).</p>
+</li>
+<li>
+<p>It would allow to quickly discriminate between function types – e.g.: seeing
+the <code>:</code> prefix informs the user that it&#8217;s a hook-type function, while seeing
+the <code>@</code> prefix informs the user that it&#8217;s an API-like function, etc.</p>
+</li>
+<li>
+<p>It also provides an improvement during programming, by allowing to quickly
+limit the number of completions offered by the editor, e.g.: for vim&#8217;s
+<code>Ctrl-P</code> completing, when entering <code>+&lt;Ctrl-P&gt;</code>, then only a subset of the
+functions is being completed (see below for the type of the functions).
+<strong>Note:</strong> the editor has to be configured so that it accepts such special
+characters as part of keywords, for vim it&#8217;s: <code>:set isk+=@-@,.,+,/,:</code> for all
+of the proposed prefixes.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_the_proposed_function_name_prefixes">The Proposed Function-Name Prefixes</h5>
+<div class="paragraph">
+<p>The proposition of the standard prefixes is as follows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>.</code>: for regular private functions. Example function:
+<code>.prompt_zinc_get_value</code>.</p>
+</li>
+<li>
+<p><code>:</code>: for hook-like functions, so it should be used e.g.: for the
+<a href="#azh">Zsh hooks</a> and the <a href="#azhw">Zle hooks</a>, but also for any other
+custom hook-like mechanism in the plugin (e.g.: Zplugin annexes
+<a href="http://zdharma.org/zplugin/wiki/Annexes/#how_to_code_them">use</a> such
+prefix for the Zplugin hook functions). Example function name:
+<code>:prompt_zinc_precmd</code>.</p>
+</li>
+<li>
+<p><code>+</code>: for output functions, i.e.: for functions that print to the standard
+output and error or to a log, etc. Example function name:
+<code>+prompt_zinc_output_segment</code>.</p>
+</li>
+<li>
+<p><code>/</code>: for debug functions, i.e: for functions that output debug messages to
+the screen or to a log or e.g.: gather some debug data. <strong>Note:</strong> the slash
+makes it impossible for such functions to be auto-loaded via the <code>autoload</code>
+mechanism. It is somewhat risky to assume, that this will never be needed for
+the functions, however the limited number of available ASCII characters
+justifies such allocation. Example function name: <code>/prompt_zinc_dbg_log</code>.</p>
+</li>
+<li>
+<p><code>@</code>: for API-like functions, i.e: for functions that are on a boundary to a
+subsystem and expose its functionality through a well-defined, in general
+fixed interface. For example the plugin standard
+<a href="http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html#update-register-call">defines</a>
+the function <code>@zsh-plugin-run-on-update</code>, which is exposing a plugin
+manager&#8217;s functionality in a well-defined way.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_example_code_utilizing_the_prefixes">Example Code Utilizing The Prefixes</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="zsh">.zinc_register_hooks() {
+    add-zsh-hook precmd :zinc_precmd
+    /zinc_dmsg "Installed precmd hook with result: $?"
+    @zsh-plugin-run-on-unload "add-zsh-hook -d precmd :zinc_precmd"
+    +zinc_print "Initialization complete"
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
