@@ -699,6 +699,10 @@ maintaining of such function (if it is to withdraw <strong>all</strong> plugin s
 can be a daunting task requiring constant monitoring of it during the plugin
 develoment process.</p>
 </div>
+<div class="paragraph">
+<p>Note that the unload function should contain <code>unfunction $0</code>, to also delete the
+function itself.</p>
+</div>
 <div class="sect4">
 <h5 id="_adoption_status_2">Adoption Status</h5>
 <div class="olist arabic">
@@ -708,11 +712,23 @@ develoment process.</p>
 function.</p>
 </li>
 <li>
-<p>One plugin, <code>romkatv/powerlevel10k</code>, is
+<p>Two plugins:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>romkatv/powerlevel10k</code>, is
 <a href="https://github.com/romkatv/powerlevel10k/blob/f17081ca/internal/p10k.zsh#L5390">using</a>
 the function to execute a specific task: shutdown of the binary, background
 <a href="https://github.com/romkatv/gitstatus">gitstatus</a> demon, with a very good
-results.</p>
+results,</p>
+</li>
+<li>
+<p><code>agkozak/agkozak-zsh-prompt</code>, is
+<a href="https://github.com/agkozak/agkozak-zsh-prompt/commit/08b5879a">using</a>
+the function for the full unload of the theme.</p>
+</li>
+</ul>
+</div>
 </li>
 </ol>
 </div>
