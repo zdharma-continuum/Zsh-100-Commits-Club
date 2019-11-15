@@ -135,15 +135,22 @@ maintaining of such function (if it is to withdraw **all** plugin side-effects)
 can be a daunting task requiring constant monitoring of it during the plugin
 develoment process.
 
+Note that the unload function should contain `unfunction $0`, to also delete the
+function itself.
+
 ##### Adoption Status
 
 1. One plugin manager, Zplugin, implements plugin unloading and calls the
    function.
-2. One plugin, `romkatv/powerlevel10k`, is
+2. Two plugins:
+   - `romkatv/powerlevel10k`, is
    link:https://github.com/romkatv/powerlevel10k/blob/f17081ca/internal/p10k.zsh#L5390[using]
    the function to execute a specific task: shutdown of the binary, background
    link:https://github.com/romkatv/gitstatus[gitstatus] demon, with a very good
-   results.
+   results,
+   - `agkozak/agkozak-zsh-prompt`, is
+     link:https://github.com/agkozak/agkozak-zsh-prompt/commit/08b5879a[using]
+     the function for the full unload of the theme.
 
 [#unload-register-call]
 ## 3. `@zsh-plugin-run-on-unload` call
