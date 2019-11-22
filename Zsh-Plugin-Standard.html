@@ -519,7 +519,8 @@ in a particular way.</p>
 <li>
 <p>Has its directory added to <code>$fpath</code>
 (<a href="http://zsh.sourceforge.net/Doc/Release/Functions.html#Autoloading-Functions">Zsh
-documentation</a>).</p>
+documentation</a>). This is being done either by a plugin manager or by the plugin
+itself (see <a href="#indicator">5th section</a> for more information).</p>
 </li>
 <li>
 <p>Has its first <code>*.plugin.zsh</code> file sourced (or <code>*.zsh</code>, <code>init.zsh</code>, <code>*.sh</code>,
@@ -830,7 +831,7 @@ manager will not handle this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="shell"><span class="k">if</span> <span class="o">[[</span> <span class="nv">$zsh_loaded_plugins</span><span class="o">[</span><span class="nt">-1</span><span class="o">]</span> <span class="o">!=</span> <span class="k">*</span>/kalc <span class="o">&amp;&amp;</span> <span class="nt">-z</span> <span class="nv">$fpath</span><span class="o">[(</span>r<span class="o">)</span><span class="k">${</span><span class="nv">0</span>:h<span class="k">}</span><span class="o">]</span> <span class="o">]]</span>
+<pre class="rouge highlight"><code data-lang="shell"><span class="k">if</span> <span class="o">[[</span> <span class="k">${</span><span class="nv">zsh_loaded_plugins</span><span class="p">[-1]</span><span class="k">}</span> <span class="o">!=</span> <span class="k">*</span>/kalc <span class="o">&amp;&amp;</span> <span class="nt">-z</span> <span class="k">${</span><span class="nv">fpath</span><span class="p">[(r)</span><span class="k">${</span><span class="nv">0</span>:h<span class="k">}</span><span class="p">]</span><span class="k">}</span> <span class="o">]]</span>
 <span class="k">then
     </span>fpath+<span class="o">=(</span> <span class="s2">"</span><span class="k">${</span><span class="nv">0</span>:h<span class="k">}</span><span class="s2">"</span> <span class="o">)</span>
 <span class="k">fi</span></code></pre>
