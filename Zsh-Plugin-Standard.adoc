@@ -16,7 +16,8 @@ At a simple level, a plugin:
 
 1. Has its directory added to `$fpath`
 (link:http://zsh.sourceforge.net/Doc/Release/Functions.html#Autoloading-Functions[Zsh
-documentation]).
+documentation]). This is being done either by a plugin manager or by the plugin
+itself (see link:#indicator[5th section] for more information).
 2. Has its first `\*.plugin.zsh` file sourced (or `*.zsh`, `init.zsh`, `*.sh`,
    these are non-standard).
 
@@ -143,14 +144,16 @@ function itself.
 1. One plugin manager, Zplugin, implements plugin unloading and calls the
    function.
 2. Two plugins:
-   - `romkatv/powerlevel10k`, is
-   link:https://github.com/romkatv/powerlevel10k/blob/f17081ca/internal/p10k.zsh#L5390[using]
-   the function to execute a specific task: shutdown of the binary, background
-   link:https://github.com/romkatv/gitstatus[gitstatus] demon, with a very good
-   results,
-   - `agkozak/agkozak-zsh-prompt`, is
-     link:https://github.com/agkozak/agkozak-zsh-prompt/commit/08b5879a[using]
-     the function for the full unload of the theme.
+
+    - `romkatv/powerlevel10k`, is
+      link:https://github.com/romkatv/powerlevel10k/blob/f17081ca/internal/p10k.zsh#L5390[using]
+      the function to execute a specific task: shutdown of the binary, background
+      link:https://github.com/romkatv/gitstatus[gitstatus] demon, with a very good
+      results,
+
+    - `agkozak/agkozak-zsh-prompt`, is
+      link:https://github.com/agkozak/agkozak-zsh-prompt/commit/08b5879a[using]
+      the function for the full unload of the theme.
 
 [#unload-register-call]
 ## 3. `@zsh-plugin-run-on-unload` call
@@ -219,7 +222,7 @@ The second item allows a plugin to e.g. set up `$fpath`, knowing that plugin
 manager will not handle this:
 
 ```shell
-if [[ $zsh_loaded_plugins[-1] != */kalc && -z $fpath[(r)${0:h}] ]]
+if [[ ${zsh_loaded_plugins[-1]} != */kalc && -z ${fpath[(r)${0:h}]} ]]
 then
     fpath+=( "${0:h}" )
 fi
