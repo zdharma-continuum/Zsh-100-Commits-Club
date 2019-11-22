@@ -15,9 +15,10 @@ in a particular way.
 At a simple level, a plugin:
 
 1. Has its directory added to `$fpath`
-(link:http://zsh.sourceforge.net/Doc/Release/Functions.html#Autoloading-Functions[Zsh
-documentation]). This is being done either by a plugin manager or by the plugin
-itself (see link:#indicator[5th section] for more information).
+  (link:http://zsh.sourceforge.net/Doc/Release/Functions.html#Autoloading-Functions[Zsh
+  documentation]). This is being done either by a plugin manager or by the
+  plugin itself (see link:#indicator[5th section] for more information).
+
 2. Has its first `\*.plugin.zsh` file sourced (or `*.zsh`, `init.zsh`, `*.sh`,
    these are non-standard).
 
@@ -229,7 +230,9 @@ fi
 ```
 
 This will allow user to reliably source the plugin without using a plugin
-manager.
+manager. The code uses the wrapping braces around variables (i.e.: e.g.:
+`${fpath…}`) to make it compatible with the `KSH_ARRAYS` option and the quoting
+around `${0:h}` to make it compatible with the `SH_WORD_SPLIT` option.
 
 ##### Adoption Status
 
