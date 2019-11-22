@@ -1,6 +1,6 @@
 # Zsh Plugin Standard
 Sebastian Gniazdowski <psprint@zdharma.org>
-v0.99, 10/26/2019
+v1.0, 11/22/2019
 :source-highlighter: rouge
 :toc:
 
@@ -51,8 +51,8 @@ plugin" and the actions of plugin managers – the proposed standardization. +
 To get the plugin’s location, plugins should do:
 
 ```shell
-0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
-0="${${(M)0:#/*}:-$PWD/$0}"
+0=${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}
+0=${${(M)0:#/*}:-$PWD/$0}
 
 # Then ${0:h} to get plugin’s directory
 ```
@@ -536,6 +536,7 @@ Vim substitution patterns with back references without any problems.
 [appendix]
 == Revision History (History Of Updates To The Document)
 
+v1.0, 11/22/2019: Removed quoting from the `$0` assignments +
 v0.99, 10/26/2019: Added `Adoption Status` sub-sections +
 v0.98, 10/25/2019: 1/ Added `Standard Recommended Variables` section +
 v0.98, 10/25/2019: 2/ Added `Standard Function Name-Space Prefixes` section +
