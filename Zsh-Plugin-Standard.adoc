@@ -137,8 +137,9 @@ maintaining of such function (if it is to withdraw **all** plugin side-effects)
 can be a daunting task requiring constant monitoring of it during the plugin
 develoment process.
 
-Note that the unload function should contain `unfunction $0`, to also delete the
-function itself.
+Note that the unload function should contain `unfunction $0` (or better
+`unfunction kalc_plugin_unload` etc., for copatibility with the `*_argzero`
+options), to also delete the function itself.
 
 ##### Adoption Status
 
