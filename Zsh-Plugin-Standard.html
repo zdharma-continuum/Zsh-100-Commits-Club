@@ -519,8 +519,8 @@ in a particular way.</p>
 <li>
 <p>Has its directory added to <code>$fpath</code>
 (<a href="http://zsh.sourceforge.net/Doc/Release/Functions.html#Autoloading-Functions">Zsh
-documentation</a>). This is being done either by a plugin manager or by the plugin
-itself (see <a href="#indicator">5th section</a> for more information).</p>
+documentation</a>). This is being done either by a plugin manager or by the
+plugin itself (see <a href="#indicator">5th section</a> for more information).</p>
 </li>
 <li>
 <p>Has its first <code>*.plugin.zsh</code> file sourced (or <code>*.zsh</code>, <code>init.zsh</code>, <code>*.sh</code>,
@@ -701,8 +701,9 @@ can be a daunting task requiring constant monitoring of it during the plugin
 develoment process.</p>
 </div>
 <div class="paragraph">
-<p>Note that the unload function should contain <code>unfunction $0</code>, to also delete the
-function itself.</p>
+<p>Note that the unload function should contain <code>unfunction $0</code> (or better
+<code>unfunction kalc_plugin_unload</code> etc., for copatibility with the <code>*_argzero</code>
+options), to also delete the function itself.</p>
 </div>
 <div class="sect4">
 <h5 id="_adoption_status_2">Adoption Status</h5>
@@ -839,7 +840,9 @@ manager will not handle this:</p>
 </div>
 <div class="paragraph">
 <p>This will allow user to reliably source the plugin without using a plugin
-manager.</p>
+manager. The code uses the wrapping braces around variables (i.e.: e.g.:
+<code>${fpath…}</code>) to make it compatible with the <code>KSH_ARRAYS</code> option and the quoting
+around <code>${0:h}</code> to make it compatible with the <code>SH_WORD_SPLIT</code> option.</p>
 </div>
 <div class="sect4">
 <h5 id="_adoption_status_5">Adoption Status</h5>
