@@ -783,12 +783,13 @@ has the following call syntax:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The function registers pieces of code to be run by the plugin manager <strong>on
-update of the plugin</strong>. The execution of the code should be done by the <code>eval</code>
+<p>The function registers pieces of code to be run by the plugin manager on
+update of the plugin. The execution of the code should be done by the <code>eval</code>
 builtin in the same order as they are passed to the call.</p>
 </div>
 <div class="paragraph">
-<p>The code should be executed in the plugin&#8217;s directory, possibly in a subshell.</p>
+<p>The code should be executed in the plugin&#8217;s directory, possibly in a subshell
+<strong>after downloading any new commits</strong> to the repository.</p>
 </div>
 <div class="sect4">
 <h5 id="_adoption_status_4">Adoption Status</h5>
