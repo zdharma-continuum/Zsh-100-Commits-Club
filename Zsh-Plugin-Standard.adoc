@@ -191,11 +191,12 @@ has the following call syntax:
 @zsh-plugin-run-on-update "{code-snippet-1}" "{code-snippet-2}" …
 ```
 
-The function registers pieces of code to be run by the plugin manager **on
-update of the plugin**. The execution of the code should be done by the `eval`
+The function registers pieces of code to be run by the plugin manager on
+update of the plugin. The execution of the code should be done by the `eval`
 builtin in the same order as they are passed to the call.
 
-The code should be executed in the plugin's directory, possibly in a subshell.
+The code should be executed in the plugin's directory, possibly in a subshell
+**after downloading any new commits** to the repository.
 
 ##### Adoption Status
 
