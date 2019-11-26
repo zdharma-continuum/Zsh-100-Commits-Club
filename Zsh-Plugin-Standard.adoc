@@ -150,7 +150,7 @@ options), to also delete the function itself.
 
 1. One plugin manager, Zplugin, implements plugin unloading and calls the
    function.
-2. Two plugins:
+2. Four plugins:
 
     - `romkatv/powerlevel10k`, is
       link:https://github.com/romkatv/powerlevel10k/blob/f17081ca/internal/p10k.zsh#L5390[using]
@@ -158,9 +158,16 @@ options), to also delete the function itself.
       link:https://github.com/romkatv/gitstatus[gitstatus] demon, with a very good
       results,
 
-    - `agkozak/agkozak-zsh-prompt`, is
-      link:https://github.com/agkozak/agkozak-zsh-prompt/commit/08b5879a[using]
-      the function for the full unload of the theme.
+    - `agkozak/agkozak-zsh-prompt` is
+      link:https://github.com/agkozak/agkozak-zsh-prompt/blob/ed228952d68fea6d5cad3beee869167f76c59606/agkozak-zsh-prompt.plugin.zsh#L992-L1039[using] the function to completely unload the prompt.
+
+    - `agkozak/zsh-z` is
+      link:https://github.com/agkozak/zsh-z/blob/16fba5e9d5c4b650358d65e07609dda4947f97e8/zsh-z.plugin.zsh#L680-L698[using]
+      the function to completly unload the plugin.
+
+    - `agkozak/zhooks` is
+      link:https://github.com/agkozak/zhooks/blob/628e1e3b8373bf31c26cb154f71c16ebe9d13b51/zhooks.plugin.zsh#L75-L82[using]
+      the function to completely unload the plugin.
 
 [#unload-register-call]
 ## 3. `@zsh-plugin-run-on-unload` Call
