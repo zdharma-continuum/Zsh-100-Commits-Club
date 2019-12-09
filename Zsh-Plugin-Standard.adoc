@@ -163,7 +163,7 @@ options), to also delete the function itself.
       the function for the full unload of the theme.
 
 [#unload-register-call]
-## 3. `@zsh-plugin-run-on-unload` call
+## 3. `@zsh-plugin-run-on-unload` Call
 
 The plugin manager can provide a function `@zsh-plugin-run-on-unload` which
 has the following call syntax:
@@ -187,7 +187,7 @@ It's a recent addition to the standard and only one plugin manager, Zplugin,
 implements it.
 
 [#update-register-call]
-## 4. `@zsh-plugin-run-on-update` call
+## 4. `@zsh-plugin-run-on-update` Call
 
 The plugin manager can provide a function `@zsh-plugin-run-on-update` which
 has the following call syntax:
