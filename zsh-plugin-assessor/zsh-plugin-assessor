@@ -168,11 +168,14 @@ for PLUGIN in "${gathered_plugins[@]}"; do
         local depth_opt=""
     fi
 
+    integer count
+    (( ++ count ))
+
     if [[ -n "$OPT_VERBOSE" ]]; then
         print
-        command git clone --progress ${=depth_opt} "$URL" "$PLUGIN" |& "${ZPA_DIR}/git-process-output.zsh"
+        command git clone --progress ${=depth_opt} "$URL" "$PLUGIN"_"$count" |& "${ZPA_DIR}/git-process-output.zsh"
     else
-        command git clone --progress ${=depth_opt} "$URL" "$PLUGIN" |& "${ZPA_DIR}/git-process-output.zsh" -q
+        command git clone --progress ${=depth_opt} "$URL" "$PLUGIN"_"$count" |& "${ZPA_DIR}/git-process-output.zsh" -q
     fi
 
     #
@@ -180,13 +183,13 @@ for PLUGIN in "${gathered_plugins[@]}"; do
     #
 
     # Number of commits in master
-    typeset -g DATA_COMMIT_COUNT=$(command git -C "$PLUGIN" rev-list --count master 2>/dev/null)
+    typeset -g DATA_COMMIT_COUNT=$(command git -C "$PLUGIN"_"$count" rev-list --count master 2>/dev/null)
     # Time of last commit in master
-    typeset -g DATA_LAST_COMMIT_DATE=$(command git -C "$PLUGIN" log --max-count=1 --pretty=format:%ct master 2>/dev/null)
+    typeset -g DATA_LAST_COMMIT_DATE=$(command git -C "$PLUGIN"_"$count" log --max-count=1 --pretty=format:%ct master 2>/dev/null)
     # As above, for ^master
-    typeset -g DATA_COMMIT_COUNT_ALL=$(command git -C "$PLUGIN" rev-list --all --count '^master' 2>/dev/null)
+    typeset -g DATA_COMMIT_COUNT_ALL=$(command git -C "$PLUGIN"_"$count" rev-list --all --count '^master' 2>/dev/null)
     # As above, for ^master
-    typeset -g DATA_LAST_COMMIT_DATE_BRANCHES=$(command git -C "$PLUGIN" log --max-count=1 --pretty=format:%ct --all '^master' 2>/dev/null)
+    typeset -g DATA_LAST_COMMIT_DATE_BRANCHES=$(command git -C "$PLUGIN"_"$count" log --max-count=1 --pretty=format:%ct --all '^master' 2>/dev/null)
 
     #
     # Progress detection
@@ -194,10 +197,10 @@ for PLUGIN in "${gathered_plugins[@]}"; do
 
     integer has_walking_pace=0 has_running_pace=0
 
-    typeset -g DATA_CURRENT_MONTH_COMMIT_COUNT=$(command git -C "$PLUGIN" rev-list --after='30 days ago' --count master 2>/dev/null)
-    typeset -g DATA_CURRENT_1_MONTH_COMMIT_COUNT=$(command git -C "$PLUGIN" rev-list --after='60 days ago' --before='30 days ago' --count master 2>/dev/null)
-    typeset -g DATA_CURRENT_2_MONTH_COMMIT_COUNT=$(command git -C "$PLUGIN" rev-list --after='90 days ago' --before='60 days ago' --count master 2>/dev/null)
-    typeset -g DATA_3_LAST_MONTHS_COMMIT_COUNT=$(command git -C "$PLUGIN" rev-list --after='90 days ago' --count master 2>/dev/null)
+    typeset -g DATA_CURRENT_MONTH_COMMIT_COUNT=$(command git -C "$PLUGIN"_"$count" rev-list --after='30 days ago' --count master 2>/dev/null)
+    typeset -g DATA_CURRENT_1_MONTH_COMMIT_COUNT=$(command git -C "$PLUGIN"_"$count" rev-list --after='60 days ago' --before='30 days ago' --count master 2>/dev/null)
+    typeset -g DATA_CURRENT_2_MONTH_COMMIT_COUNT=$(command git -C "$PLUGIN"_"$count" rev-list --after='90 days ago' --before='60 days ago' --count master 2>/dev/null)
+    typeset -g DATA_3_LAST_MONTHS_COMMIT_COUNT=$(command git -C "$PLUGIN"_"$count" rev-list --after='90 days ago' --count master 2>/dev/null)
 
     if (( DATA_CURRENT_MONTH_COMMIT_COUNT > 0 && \
             DATA_CURRENT_1_MONTH_COMMIT_COUNT > 0 && \
@@ -275,7 +278,7 @@ for PLUGIN in "${gathered_plugins[@]}"; do
     if (( score_commit_count_branches > 0 )); then
         has_r_and_d=1
     fi
-    typeset -g DATA_LAST_4_MONTHS_COMMIT_COUNT=$(command git -C "$PLUGIN" rev-list --after='120 days ago' --all --count '^master' 2>/dev/null)
+    typeset -g DATA_LAST_4_MONTHS_COMMIT_COUNT=$(command git -C "$PLUGIN"_"$count" rev-list --after='120 days ago' --all --count '^master' 2>/dev/null)
     if (( DATA_LAST_4_MONTHS_COMMIT_COUNT >= 3 )); then
         r_and_d_active=1
     fi
