@@ -342,6 +342,8 @@ for PLUGIN in "${gathered_plugins[@]}"; do
 
     plugin_to_score[$PLUGIN]="${(l:4::0:)score}"
     plugin_to_emoji_str[$PLUGIN]="${emoji_string%%[[:blank:]]##}"
+
+    rm -rf "$PLUGIN"_"$count"
 done
 
 #
