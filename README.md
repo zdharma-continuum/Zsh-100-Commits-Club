@@ -2,7 +2,7 @@
 # Zsh 100 Commits Club
 
 
-Plugins evaluated at January 13th, 2020
+Plugins evaluated at January 15th, 2020
 
 [![paypal](https://img.shields.io/badge/-Donate-yellow.svg?longCache=true&style=for-the-badge)](https://www.paypal.me/ZdharmaInitiative)
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=D54B3S7C6HGME)
@@ -60,7 +60,7 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [autoenv](https://github.com/Tarrasch/zsh-autoenv) :1st_place_medal: - If a directory contains a `.env` file, it will automatically be executed when you `cd` into it.
 * [autojump](https://github.com/wting/autojump) :1st_place_medal: - A `cd` command that learns - easily navigate directories from the command line. Install autojump-zsh for best results.
 * [autopair](https://github.com/hlissner/zsh-autopair) : :hourglass_flowing_sand: - A ZSH plugin for auto-closing, deleting and skipping over matching delimiters. Only tested on ZSH 5.0.2 or later.
-* [autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) :1st_place_medal: :running_man: :hourglass_flowing_sand: - [Fish](https://fishshell.com/)-like fast/unobtrusive autosuggestions for ZSH.
+* [autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) :1st_place_medal: :alarm_clock: :running_man: - [Fish](https://fishshell.com/)-like fast/unobtrusive autosuggestions for ZSH.
 * [autoswitch-virtualenv](https://github.com/MichaelAquilina/zsh-autoswitch-virtualenv) :1st_place_medal: :alarm_clock: :running_man: - ZSH plugin to automatically switch python virtualenvs and pipenvs when traversing directories.
 * [base16](https://github.com/chriskempson/base16-shell) :1st_place_medal: - Adds script to allow you to change your shell's default ANSI colors but most importantly, colors 17 to 21 of your shell's 256 colorspace (if supported by your terminal). This script makes it possible to honor the original bright colors of your shell (e.g. bright green is still green and so on) while providing additional base16 colors to applications such as [Vim](https://www.vim.org).
 * [blackbox](https://github.com/StackExchange/blackbox) :1st_place_medal: :hourglass: :briefcase: - [Stack Exchange](https://stackexchange.com)'s toolkit for storing keys/credentials securely in a `git` repository.
@@ -85,7 +85,7 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [forgit](https://github.com/wfxr/forgit) :1st_place_medal: :alarm_clock: :running_man: - Utility tool for `git` which takes advantage of fuzzy finder [fzf](https://github.com/junegunn/fzf).
 * [functional](https://github.com/Tarrasch/zsh-functional) : - ZSH higher order functions.
 * [fz](https://github.com/changyuheng/fz) : - Seamlessly adds fuzzy search to [z](https://github.com/rupa/z)'s tab completion and lets you easily jump around among your historical directories.
-* [fzf-marks](https://github.com/urbainvaes/fzf-marks) : :running_man: :hourglass_flowing_sand: - Little script to create, navigate and delete bookmarks in `bash` and `zsh`, using the fuzzy finder [fzf](https://github.com/junegunn/fzf).
+* [fzf-marks](https://github.com/urbainvaes/fzf-marks) : :alarm_clock: :running_man: - Little script to create, navigate and delete bookmarks in `bash` and `zsh`, using the fuzzy finder [fzf](https://github.com/junegunn/fzf).
 * [fzf-widgets](https://github.com/ytet5uy4/fzf-widgets) :1st_place_medal: - Adds some ZLE widgets for [fzf](https://github.com/junegunn/fzf).
 * [fzf-z](https://github.com/andrewferrier/fzf-z) : :hourglass_flowing_sand: - Brings together the *z* plugin and *fzf* to allow you to easily browse recently used directories at any point on the command line.
 * [git-aliases.zsh](https://github.com/peterhurford/git-aliases.zsh) : :walking_man: :hourglass_flowing_sand: - Creates a lot of useful aliases for combinations of commonly used `git` commands.
@@ -96,7 +96,7 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [gitsync](https://github.com/washtubs/gitsync) : - ZSH plugin to improve workflows for one person developing on the same repository on multiple machines.
 * [grep2awk](https://github.com/joepvd/grep2awk) : - ZLE widget to transform `grep` command into `awk` command.
 * [histdb](https://github.com/larkery/zsh-histdb) : :hourglass_flowing_sand: - Stores your history in an SQLite database.
-* [history-search-multi-word](https://github.com/zdharma/history-search-multi-word) :1st_place_medal: :hourglass_flowing_sand: - syntax highlighted, multi-word history searcher for ZSH, bound to Ctrl-R, with advanced functions (e.g. bump of history entry to top of history).
+* [history-search-multi-word](https://github.com/zdharma/history-search-multi-word) :1st_place_medal: :walking_man: :hourglass_flowing_sand: - syntax highlighted, multi-word history searcher for ZSH, bound to Ctrl-R, with advanced functions (e.g. bump of history entry to top of history).
 * [history-substring-search](https://github.com/zsh-users/zsh-history-substring-search) :1st_place_medal: - Needs to be loaded after `zsh-syntax-highlighting`, or they'll both break. You'll also need to bind keys to its functions, details are in the README.md.
 * [history-sync](https://github.com/wulfgarpro/history-sync) : - An Oh My Zsh plugin for GPG encrypted, Internet synchronized ZSH history using `git`.
 * [iterm-touchbar](https://github.com/iam4x/zsh-iterm-touchbar) : - Display iTerm2 feedback in the MacbookPro TouchBar (Current directory, git branch & status).
@@ -123,14 +123,14 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [vim-mode](https://github.com/softmoth/zsh-vim-mode) : - Friendly `vi`-mode bindings, adding basic Emacs keys, incremental search, mode indicators and more.
 * [wd](https://github.com/mfaerevaag/wd) :1st_place_medal: :walking_man: :hourglass_flowing_sand: - Warp directory lets you jump to custom directories in ZSH, without using `cd`. Why? Because `cd` seems inefficient when the folder is frequently visited or has a long path.
 * [yeoman](https://github.com/edouard-lopez/yeoman-zsh-plugin) : - Edouard Lopez's Yeoman plugin for oh-my-zsh, compatible with yeoman version ≥1.0 (includes options and command auto-completion).
-* [you-should-use](https://github.com/MichaelAquilina/zsh-you-should-use) :1st_place_medal: :hourglass_flowing_sand: - ZSH plugin that reminds you to use those aliases you defined.
+* [you-should-use](https://github.com/MichaelAquilina/zsh-you-should-use) :1st_place_medal: :hourglass: - ZSH plugin that reminds you to use those aliases you defined.
 * [z-a-bin-gem-node](https://github.com/zplugin/z-a-bin-gem-node) :1st_place_medal: :alarm_clock: :running_man: - Zplugin extension that a) exposes binaries without altering `$PATH`, b) installs Ruby gems and Node modules and easily exposes their binaries, c) updates the gems and modules on update of the associated plugin or snippet.
 * [z-a-man](https://github.com/zplugin/z-a-man) : :hourglass_flowing_sand: - Zplugin extension that generates man pages for all plugins and snippets.
 * [z.lua](https://github.com/skywind3000/z.lua) :1st_place_medal: :alarm_clock: :walking_man: - A command line tool which helps you navigate faster by learning your habits. An alternative to [z.sh](https://github.com/rupa/z) with windows and posix shells support and various improvements.
 * [zaw](https://github.com/zsh-users/zaw) :1st_place_medal: - ZSH anything.el-like widget.
 * [zconvey](https://github.com/zdharma/zconvey) :1st_place_medal: :hourglass_flowing_sand: - Adds ability to send commands to other ZSH sessions, you can use this to `cd $PWD` on all active Z shell sessions, for example.
 * [zero](https://github.com/arlimus/zero.zsh) :1st_place_medal: - Zero's theme & plugin. Has variants for both light and dark terminal backgrounds.
-* [zflai](https://github.com/zdharma/zflai) : :running_man: :hourglass_flowing_sand: - A fast logging framework for ZSH.
+* [zflai](https://github.com/zdharma/zflai) : :alarm_clock: :running_man: - A fast logging framework for ZSH.
 * [zgdbm](https://github.com/zdharma/zgdbm) : - Adds GDBM as a plugin.
 * [zplugin-console](https://github.com/zplugin/zplugin-console) : :hourglass_flowing_sand: – a semigraphical (curses) consolette for [Zplugin](#zplugin)
 * [zredis](https://github.com/zdharma/zredis) :1st_place_medal: :walking_man: :hourglass_flowing_sand: - Adds Redis database support, with `database_key` <-> `shell_variable` binding. Supports all data types.
