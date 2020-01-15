@@ -207,9 +207,9 @@ for PLUGIN in "${gathered_plugins[@]}"; do
             DATA_CURRENT_2_MONTH_COMMIT_COUNT > 0 ))
     then
         has_walking_pace=1
-        if (( DATA_CURRENT_MONTH_COMMIT_COUNT >= 3 && \
-                DATA_CURRENT_1_MONTH_COMMIT_COUNT >= 3 && \
-                DATA_CURRENT_2_MONTH_COMMIT_COUNT >= 3 ))
+        if (( DATA_CURRENT_MONTH_COMMIT_COUNT >= 2 && \
+                DATA_CURRENT_1_MONTH_COMMIT_COUNT >= 2 && \
+                DATA_CURRENT_2_MONTH_COMMIT_COUNT >= 2 ))
         then
             has_running_pace=1
         elif (( DATA_3_LAST_MONTHS_COMMIT_COUNT >= 10 )); then

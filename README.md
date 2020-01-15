@@ -35,7 +35,7 @@ minutes you'll be able to grep interesting plugins with your eyes!
 ### Progress detection
 
 🚶- slow/moderate progress: 1 commit in each of last 3 months or 5 commits in total during the 3 last months (90 days)  
-🏃- fast progress: 3 commits in each of last 3 months or 10 commits in total during the 3 last months
+🏃- fast progress: 2 commits in each of last 3 months or 10 commits in total during the 3 last months
 
 ### Maintenance detection
 
