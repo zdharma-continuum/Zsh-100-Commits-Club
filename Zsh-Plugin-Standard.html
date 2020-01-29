@@ -485,6 +485,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_adoption_status_7">Adoption Status</a></li>
 </ul>
 </li>
+<li><a href="#pmspec">8. Global Parameter holding the plugin-manager&#8217;s capabilities</a>
+<ul class="sectlevel4">
+<li><a href="#_adoption_status_8">Adoption Status</a></li>
+</ul>
+</li>
 <li><a href="#best-practices">Zsh Plugin-Programming Best Practices</a>
 <ul class="sectlevel2">
 <li><a href="#azh">Use Of <code>add-zsh-hook</code> To Install Hooks</a></li>
@@ -707,10 +712,19 @@ the current plugin managers can be easily resolved via the
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="shell"><span class="k">if</span> <span class="o">[[</span> <span class="k">${</span><span class="nv">zsh_loaded_plugins</span><span class="p">[-1]</span><span class="k">}</span> <span class="o">!=</span> <span class="k">*</span>/kalc <span class="o">&amp;&amp;</span> <span class="nt">-z</span> <span class="k">${</span><span class="nv">fpath</span><span class="p">[(r)</span><span class="k">${</span><span class="nv">0</span>:h<span class="k">}</span><span class="p">/functions]</span><span class="k">}</span> <span class="o">]]</span>
-<span class="k">then
-    </span>fpath+<span class="o">=(</span> <span class="s2">"</span><span class="k">${</span><span class="nv">0</span>:h<span class="k">}</span><span class="s2">/functions"</span> <span class="o">)</span>
-<span class="k">fi</span></code></pre>
+<pre class="rouge highlight"><code data-lang="shell"><span class="k">if</span> <span class="o">[[</span> <span class="k">${</span><span class="nv">zsh_loaded_plugins</span><span class="p">[-1]</span><span class="k">}</span> <span class="o">!=</span> <span class="k">*</span>/kalc <span class="o">&amp;&amp;</span> <span class="nt">-z</span> <span class="k">${</span><span class="nv">fpath</span><span class="p">[(r)</span><span class="k">${</span><span class="nv">0</span>:h<span class="k">}</span><span class="p">/functions]</span><span class="k">}</span> <span class="o">]]</span> <span class="o">{</span>
+    fpath+<span class="o">=(</span> <span class="s2">"</span><span class="k">${</span><span class="nv">0</span>:h<span class="k">}</span><span class="s2">/functions"</span> <span class="o">)</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or, via use of the <code>PMSPEC</code> <a href="#pmspec">parameter</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell"><span class="k">if</span> <span class="o">[[</span> <span class="nv">$PMSPEC</span> <span class="o">!=</span> <span class="k">*</span>f<span class="k">*</span> <span class="o">]]</span> <span class="o">{</span>
+    fpath+<span class="o">=(</span> <span class="s2">"</span><span class="k">${</span><span class="nv">0</span>:h<span class="k">}</span><span class="s2">/functions"</span> <span class="o">)</span>
+<span class="o">}</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -891,10 +905,9 @@ manager will not handle this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="shell"><span class="k">if</span> <span class="o">[[</span> <span class="k">${</span><span class="nv">zsh_loaded_plugins</span><span class="p">[-1]</span><span class="k">}</span> <span class="o">!=</span> <span class="k">*</span>/kalc <span class="o">&amp;&amp;</span> <span class="nt">-z</span> <span class="k">${</span><span class="nv">fpath</span><span class="p">[(r)</span><span class="k">${</span><span class="nv">0</span>:h<span class="k">}</span><span class="p">]</span><span class="k">}</span> <span class="o">]]</span>
-<span class="k">then
-    </span>fpath+<span class="o">=(</span> <span class="s2">"</span><span class="k">${</span><span class="nv">0</span>:h<span class="k">}</span><span class="s2">"</span> <span class="o">)</span>
-<span class="k">fi</span></code></pre>
+<pre class="rouge highlight"><code data-lang="shell"><span class="k">if</span> <span class="o">[[</span> <span class="k">${</span><span class="nv">zsh_loaded_plugins</span><span class="p">[-1]</span><span class="k">}</span> <span class="o">!=</span> <span class="k">*</span>/kalc <span class="o">&amp;&amp;</span> <span class="nt">-z</span> <span class="k">${</span><span class="nv">fpath</span><span class="p">[(r)</span><span class="k">${</span><span class="nv">0</span>:h<span class="k">}</span><span class="p">]</span><span class="k">}</span> <span class="o">]]</span> <span class="o">{</span>
+    fpath+<span class="o">=(</span> <span class="s2">"</span><span class="k">${</span><span class="nv">0</span>:h<span class="k">}</span><span class="s2">"</span> <span class="o">)</span>
+<span class="o">}</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -967,6 +980,64 @@ state, and have the same state on different accounts / machines.</p>
 <h5 id="_adoption_status_7">Adoption Status</h5>
 <div class="paragraph">
 <p>One plugin manager, Zinit, provides the <code>$ZPFX</code> parameter.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pmspec">8. Global Parameter holding the plugin-manager&#8217;s capabilities</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The above paragraphs of the standard spec each constitute a capability, a
+feature of the plugin manager. It would make sense that the capabilities are
+somehow discoverable. To address this, a global parameter called <code>PMSPEC</code> (from
+<em>plugin-manager specification</em>) is proposed. It can hold the following latin
+letters each informing the plugin, that the plugin manager has support for a
+given feature:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>0</code> – the plugin manager provides the <code>ZERO</code> parameter,</p>
+</li>
+<li>
+<p><code>f</code> - … supports the <code>functions</code> subdirectory,</p>
+</li>
+<li>
+<p><code>u</code> - … the unload function,</p>
+</li>
+<li>
+<p><code>U</code> - … the <code>@zsh-plugin-run-on-unload</code> call,</p>
+</li>
+<li>
+<p><code>p</code> – … the <code>@zsh-plugin-run-on-update</code> call,</p>
+</li>
+<li>
+<p><code>i</code> – … the <code>zsh_loaded_plugins</code> activity indicator,</p>
+</li>
+<li>
+<p><code>P</code> – … the <code>ZPFX</code> global parameter,</p>
+</li>
+<li>
+<p><code>s</code> – … the <code>PMSPEC</code> global parameter itself (i.e.: should be always present).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The contents of the parameter describing a fully-compliant plugin manager should
+be: <code>0fuUpiPs</code>. The plugin can then verify the support by, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell"><span class="k">if</span> <span class="o">[[</span> <span class="nv">$PMSPEC</span> <span class="o">!=</span> <span class="k">*</span>f<span class="k">*</span> <span class="o">]]</span> <span class="o">{</span>
+    fpath+<span class="o">=(</span> <span class="s2">"</span><span class="k">${</span><span class="nv">0</span>:h<span class="k">}</span><span class="s2">/functions"</span> <span class="o">)</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_adoption_status_8">Adoption Status</h5>
+<div class="paragraph">
+<p>It&#8217;s a recent addition to the standard and only Zinit supports it.</p>
 </div>
 </div>
 </div>
@@ -1314,7 +1385,8 @@ Vim substitution patterns with back references without any problems.</p>
 <h2 id="appendix">Appendix A: Revision History (History Of Updates To The Document)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>v1.07, 01/29/2020: Added the <code>functions</code>-directory paragraph<br>
+<p>v1.08, 01/29/2020: Added the <code>PMSPEC</code> paragraph<br>
+v1.07, 01/29/2020: Added the <code>functions</code>-directory paragraph<br>
 v1.05, 11/22/2019: Restored the quoting to the <code>$0</code> assignments + justification<br>
 v1.0, 11/22/2019: Removed quoting from the <code>$0</code> assignments<br>
 v0.99, 10/26/2019: Added <code>Adoption Status</code> sub-sections<br>
