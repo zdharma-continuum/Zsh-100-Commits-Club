@@ -123,8 +123,37 @@ link:https://github.com/tarjoilija/zgen/pull/124[PR] will be merged)
    link:https://github.com/search?q=%22${ZERO:-${0:%23$ZSH_ARGZERO}}%22&type=Code[GitHub
    search]
 
+[#funcs-dir]
+## 2. Functions directory
+
+Despite that the current-standard plugins have their main directory added to
+`$fpath`, a more clean approach is being proposed: that the plugins use a
+subdirectory called `functions` to store their completions and autoload
+functions. This will allow a much cleaner design of plugins. For example,
+link:https://github.com/zdharma/zflai[zdharma/zflai] suffers from this issue –
+it has all of its autoload functions in the main directory of the plugin.
+
+The plugin manager should add such directory to `$fpath`. The lack of support of
+the current plugin managers can be easily resolved via the
+link:#indicator[indicator]:
+
+```shell
+if [[ ${zsh_loaded_plugins[-1]} != */kalc && -z ${fpath[(r)${0:h}/functions]} ]]
+then
+    fpath+=( "${0:h}/functions" )
+fi
+```
+
+Above snippet added to the `plugin.zsh` file will add the directory to the
+`$fpath` with the compatibiliy with any new plugin managers preserved.
+
+##### Adoption Status
+
+It's a recent addition to the standard and no plugin managers yet support the
+feature.
+
 [#unload-fun]
-## 2. Unload Function
+## 3. Unload Function
 
 If a plugin is named e.g. `kalc` (and is available via `an-user/kalc`
 plugin-ID), then it can provide a function, `kalc_plugin_unload`, that can be
@@ -171,7 +200,7 @@ options), to also delete the function itself.
       the function to completely unload the plugin.
 
 [#unload-register-call]
-## 3. `@zsh-plugin-run-on-unload` Call
+## 4. `@zsh-plugin-run-on-unload` Call
 
 The plugin manager can provide a function `@zsh-plugin-run-on-unload` which
 has the following call syntax:
@@ -195,7 +224,7 @@ It's a recent addition to the standard and only one plugin manager, Zplugin,
 implements it.
 
 [#update-register-call]
-## 4. `@zsh-plugin-run-on-update` Call
+## 5. `@zsh-plugin-run-on-update` Call
 
 The plugin manager can provide a function `@zsh-plugin-run-on-update` which
 has the following call syntax:
@@ -217,7 +246,7 @@ It's a recent addition to the standard and only one plugin manager, Zplugin,
 implements it.
 
 [#indicator]
-## 5. Plugin Manager Activity Indicator
+## 6. Plugin Manager Activity Indicator
 
 Plugin managers should set the `$zsh_loaded_plugins` array to contain all
 previously loaded plugins and the plugin currently being loaded (as the last
@@ -258,7 +287,7 @@ link:https://github.com/tarjoilija/zgen/pull/124[PR] will be merged)
    link:https://github.com/search?q=if+%22zsh_loaded_plugins%22&type=Code[GitHub search]
 
 [#zpfx]
-## 6. Global Parameter With PREFIX For Make, Configure, Etc.
+## 7. Global Parameter With PREFIX For Make, Configure, Etc.
 
 Plugin managers may export the parameter `$ZPFX` which should contain a path to
 a directory dedicated for user-land software, i.e. for directories `$ZPFX/bin`,
@@ -554,6 +583,7 @@ Vim substitution patterns with back references without any problems.
 [appendix]
 == Revision History (History Of Updates To The Document)
 
+v1.07, 01/29/2020: Added the `functions`-directory paragraph +
 v1.05, 11/22/2019: Restored the quoting to the `$0` assignments + justification +
 v1.0, 11/22/2019: Removed quoting from the `$0` assignments +
 v0.99, 10/26/2019: Added `Adoption Status` sub-sections +
