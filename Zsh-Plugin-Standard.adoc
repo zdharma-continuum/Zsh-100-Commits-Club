@@ -138,10 +138,17 @@ the current plugin managers can be easily resolved via the
 link:#indicator[indicator]:
 
 ```shell
-if [[ ${zsh_loaded_plugins[-1]} != */kalc && -z ${fpath[(r)${0:h}/functions]} ]]
-then
+if [[ ${zsh_loaded_plugins[-1]} != */kalc && -z ${fpath[(r)${0:h}/functions]} ]] {
     fpath+=( "${0:h}/functions" )
-fi
+}
+```
+
+or, via use of the `PMSPEC` link:#pmspec[parameter]:
+
+```shell
+if [[ $PMSPEC != *f* ]] {
+    fpath+=( "${0:h}/functions" )
+}
 ```
 
 Above snippet added to the `plugin.zsh` file will add the directory to the
@@ -267,10 +274,9 @@ The second item allows a plugin to e.g. set up `$fpath`, knowing that plugin
 manager will not handle this:
 
 ```shell
-if [[ ${zsh_loaded_plugins[-1]} != */kalc && -z ${fpath[(r)${0:h}]} ]]
-then
+if [[ ${zsh_loaded_plugins[-1]} != */kalc && -z ${fpath[(r)${0:h}]} ]] {
     fpath+=( "${0:h}" )
-fi
+}
 ```
 
 This will allow user to reliably source the plugin without using a plugin
@@ -314,6 +320,34 @@ No-narration facts-list related to `$ZPFX`:
 ##### Adoption Status
 
 One plugin manager, Zinit, provides the `$ZPFX` parameter.
+
+[#pmspec]
+## 8. Global Parameter holding the plugin-manager's capabilities
+
+The above paragraphs of the standard spec each constitute a capability, a
+feature of the plugin manager. It would make sense that the capabilities are
+somehow discoverable. To address this, a global parameter called `PMSPEC` (from
+_plugin-manager specification_) is proposed. It can hold the following latin
+letters each informing the plugin, that the plugin manager has support for a
+given feature:
+
+- `0` – the plugin manager provides the `ZERO` parameter,
+- `f` - … supports the `functions` subdirectory,
+- `u` - … the unload function,
+- `U` - … the `@zsh-plugin-run-on-unload` call,
+- `p` – … the `@zsh-plugin-run-on-update` call,
+- `i` – … the `zsh_loaded_plugins` activity indicator,
+- `P` – … the `ZPFX` global parameter,
+- `s` – … the `PMSPEC` global parameter itself (i.e.: should be always present).
+
+The contents of the parameter describing a fully-compliant plugin manager should
+be: `0fuUpiPs`. The plugin can then verify the support by, e.g.:
+
+```shell
+if [[ $PMSPEC != *f* ]] {
+    fpath+=( "${0:h}/functions" )
+}
+```
 
 [#best-practices]
 ## Zsh Plugin-Programming Best Practices
@@ -583,6 +617,7 @@ Vim substitution patterns with back references without any problems.
 [appendix]
 == Revision History (History Of Updates To The Document)
 
+v1.08, 01/29/2020: Added the `PMSPEC` paragraph +
 v1.07, 01/29/2020: Added the `functions`-directory paragraph +
 v1.05, 11/22/2019: Restored the quoting to the `$0` assignments + justification +
 v1.0, 11/22/2019: Removed quoting from the `$0` assignments +
