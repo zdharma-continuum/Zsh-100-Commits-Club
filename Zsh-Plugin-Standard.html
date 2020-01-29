@@ -455,29 +455,34 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_adoption_status">Adoption Status</a></li>
 </ul>
 </li>
-<li><a href="#unload-fun">2. Unload Function</a>
+<li><a href="#funcs-dir">2. Functions directory</a>
 <ul class="sectlevel4">
 <li><a href="#_adoption_status_2">Adoption Status</a></li>
 </ul>
 </li>
-<li><a href="#unload-register-call">3. <code>@zsh-plugin-run-on-unload</code> Call</a>
+<li><a href="#unload-fun">3. Unload Function</a>
 <ul class="sectlevel4">
 <li><a href="#_adoption_status_3">Adoption Status</a></li>
 </ul>
 </li>
-<li><a href="#update-register-call">4. <code>@zsh-plugin-run-on-update</code> Call</a>
+<li><a href="#unload-register-call">4. <code>@zsh-plugin-run-on-unload</code> Call</a>
 <ul class="sectlevel4">
 <li><a href="#_adoption_status_4">Adoption Status</a></li>
 </ul>
 </li>
-<li><a href="#indicator">5. Plugin Manager Activity Indicator</a>
+<li><a href="#update-register-call">5. <code>@zsh-plugin-run-on-update</code> Call</a>
 <ul class="sectlevel4">
 <li><a href="#_adoption_status_5">Adoption Status</a></li>
 </ul>
 </li>
-<li><a href="#zpfx">6. Global Parameter With PREFIX For Make, Configure, Etc.</a>
+<li><a href="#indicator">6. Plugin Manager Activity Indicator</a>
 <ul class="sectlevel4">
 <li><a href="#_adoption_status_6">Adoption Status</a></li>
+</ul>
+</li>
+<li><a href="#zpfx">7. Global Parameter With PREFIX For Make, Configure, Etc.</a>
+<ul class="sectlevel4">
+<li><a href="#_adoption_status_7">Adoption Status</a></li>
 </ul>
 </li>
 <li><a href="#best-practices">Zsh Plugin-Programming Best Practices</a>
@@ -558,7 +563,8 @@ directories to <code>$PATH</code>.</p>
 </div>
 <div class="paragraph">
 <p>Below follow proposed enhancements and codifications of the definition of a "Zsh
-plugin" and the actions of plugin managers – the proposed standardization.<br>
+plugin" and the actions of plugin managers – the proposed standardization. They
+cover the information of how to write a Zsh plugin.<br>
 <br></p>
 </div>
 <hr>
@@ -684,7 +690,44 @@ search</a></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="unload-fun">2. Unload Function</h2>
+<h2 id="funcs-dir">2. Functions directory</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Despite that the current-standard plugins have their main directory added to
+<code>$fpath</code>, a more clean approach is being proposed: that the plugins use a
+subdirectory called <code>functions</code> to store their completions and autoload
+functions. This will allow a much cleaner design of plugins. For example,
+<a href="https://github.com/zdharma/zflai">zdharma/zflai</a> suffers from this issue –
+it has all of its autoload functions in the main directory of the plugin.</p>
+</div>
+<div class="paragraph">
+<p>The plugin manager should add such directory to <code>$fpath</code>. The lack of support of
+the current plugin managers can be easily resolved via the
+<a href="#indicator">indicator</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell"><span class="k">if</span> <span class="o">[[</span> <span class="k">${</span><span class="nv">zsh_loaded_plugins</span><span class="p">[-1]</span><span class="k">}</span> <span class="o">!=</span> <span class="k">*</span>/kalc <span class="o">&amp;&amp;</span> <span class="nt">-z</span> <span class="k">${</span><span class="nv">fpath</span><span class="p">[(r)</span><span class="k">${</span><span class="nv">0</span>:h<span class="k">}</span><span class="p">/functions]</span><span class="k">}</span> <span class="o">]]</span>
+<span class="k">then
+    </span>fpath+<span class="o">=(</span> <span class="s2">"</span><span class="k">${</span><span class="nv">0</span>:h<span class="k">}</span><span class="s2">/functions"</span> <span class="o">)</span>
+<span class="k">fi</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Above snippet added to the <code>plugin.zsh</code> file will add the directory to the
+<code>$fpath</code> with the compatibiliy with any new plugin managers preserved.</p>
+</div>
+<div class="sect4">
+<h5 id="_adoption_status_2">Adoption Status</h5>
+<div class="paragraph">
+<p>It&#8217;s a recent addition to the standard and no plugin managers yet support the
+feature.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="unload-fun">3. Unload Function</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>If a plugin is named e.g. <code>kalc</code> (and is available via <code>an-user/kalc</code>
@@ -712,7 +755,7 @@ develoment process.</p>
 options), to also delete the function itself.</p>
 </div>
 <div class="sect4">
-<h5 id="_adoption_status_2">Adoption Status</h5>
+<h5 id="_adoption_status_3">Adoption Status</h5>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -753,7 +796,7 @@ the function to completely unload the plugin.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="unload-register-call">3. <code>@zsh-plugin-run-on-unload</code> Call</h2>
+<h2 id="unload-register-call">4. <code>@zsh-plugin-run-on-unload</code> Call</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The plugin manager can provide a function <code>@zsh-plugin-run-on-unload</code> which
@@ -777,7 +820,7 @@ builtin in the same order as they are passed to the call.</p>
 function</a>, for the plugin to participate in the process of unloading it.</p>
 </div>
 <div class="sect4">
-<h5 id="_adoption_status_3">Adoption Status</h5>
+<h5 id="_adoption_status_4">Adoption Status</h5>
 <div class="paragraph">
 <p>It&#8217;s a recent addition to the standard and only one plugin manager, Zplugin,
 implements it.</p>
@@ -786,7 +829,7 @@ implements it.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="update-register-call">4. <code>@zsh-plugin-run-on-update</code> Call</h2>
+<h2 id="update-register-call">5. <code>@zsh-plugin-run-on-update</code> Call</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The plugin manager can provide a function <code>@zsh-plugin-run-on-update</code> which
@@ -807,7 +850,7 @@ builtin in the same order as they are passed to the call.</p>
 <strong>after downloading any new commits</strong> to the repository.</p>
 </div>
 <div class="sect4">
-<h5 id="_adoption_status_4">Adoption Status</h5>
+<h5 id="_adoption_status_5">Adoption Status</h5>
 <div class="paragraph">
 <p>It&#8217;s a recent addition to the standard and only one plugin manager, Zplugin,
 implements it.</p>
@@ -816,7 +859,7 @@ implements it.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="indicator">5. Plugin Manager Activity Indicator</h2>
+<h2 id="indicator">6. Plugin Manager Activity Indicator</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Plugin managers should set the <code>$zsh_loaded_plugins</code> array to contain all
@@ -861,7 +904,7 @@ manager. The code uses the wrapping braces around variables (i.e.: e.g.:
 around <code>${0:h}</code> to make it compatible with the <code>SH_WORD_SPLIT</code> option.</p>
 </div>
 <div class="sect4">
-<h5 id="_adoption_status_5">Adoption Status</h5>
+<h5 id="_adoption_status_6">Adoption Status</h5>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -878,7 +921,7 @@ around <code>${0:h}</code> to make it compatible with the <code>SH_WORD_SPLIT</c
 </div>
 </div>
 <div class="sect1">
-<h2 id="zpfx">6. Global Parameter With PREFIX For Make, Configure, Etc.</h2>
+<h2 id="zpfx">7. Global Parameter With PREFIX For Make, Configure, Etc.</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Plugin managers may export the parameter <code>$ZPFX</code> which should contain a path to
@@ -921,7 +964,7 @@ state, and have the same state on different accounts / machines.</p>
 </ol>
 </div>
 <div class="sect4">
-<h5 id="_adoption_status_6">Adoption Status</h5>
+<h5 id="_adoption_status_7">Adoption Status</h5>
 <div class="paragraph">
 <p>One plugin manager, Zplugin, provides the <code>$ZPFX</code> parameter.</p>
 </div>
@@ -1271,7 +1314,8 @@ Vim substitution patterns with back references without any problems.</p>
 <h2 id="appendix">Appendix A: Revision History (History Of Updates To The Document)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>v1.05, 11/22/2019: Restored the quoting to the <code>$0</code> assignments + justification<br>
+<p>v1.07, 01/29/2020: Added the <code>functions</code>-directory paragraph<br>
+v1.05, 11/22/2019: Restored the quoting to the <code>$0</code> assignments + justification<br>
 v1.0, 11/22/2019: Removed quoting from the <code>$0</code> assignments<br>
 v0.99, 10/26/2019: Added <code>Adoption Status</code> sub-sections<br>
 v0.98, 10/25/2019: 1/ Added <code>Standard Recommended Variables</code> section<br>
