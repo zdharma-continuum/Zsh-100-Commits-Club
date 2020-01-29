@@ -418,7 +418,8 @@ function lowercase even when they are scalars, not arrays.
 An extension to the convention is being proposed: to name associative arrays
 (i.e.: hashes) capitalized, i.e.: with only first letter uppercase and the
 remaining letters lowercase. See link:#std-hash[the next section] for an
-example of such hash.
+example of such hash. In case of the name consisting of multiple words each of
+them should be capitalized, e.g.: `typeset -gA MyHash`.
 
 This convention will increase code readibility and bring order into it.
 
