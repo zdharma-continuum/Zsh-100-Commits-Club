@@ -676,7 +676,7 @@ general don&#8217;t have to quote assignments.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Plugin managers: Zplugin, Zgen (after and if the
+<p>Plugin managers: Zinit, Zgen (after and if the
 <a href="https://github.com/tarjoilija/zgen/pull/124">PR</a> will be merged)</p>
 </li>
 <li>
@@ -759,7 +759,7 @@ options), to also delete the function itself.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>One plugin manager, Zplugin, implements plugin unloading and calls the
+<p>One plugin manager, Zinit, implements plugin unloading and calls the
 function.</p>
 </li>
 <li>
@@ -822,7 +822,7 @@ function</a>, for the plugin to participate in the process of unloading it.</p>
 <div class="sect4">
 <h5 id="_adoption_status_4">Adoption Status</h5>
 <div class="paragraph">
-<p>It&#8217;s a recent addition to the standard and only one plugin manager, Zplugin,
+<p>It&#8217;s a recent addition to the standard and only one plugin manager, Zinit,
 implements it.</p>
 </div>
 </div>
@@ -852,7 +852,7 @@ builtin in the same order as they are passed to the call.</p>
 <div class="sect4">
 <h5 id="_adoption_status_5">Adoption Status</h5>
 <div class="paragraph">
-<p>It&#8217;s a recent addition to the standard and only one plugin manager, Zplugin,
+<p>It&#8217;s a recent addition to the standard and only one plugin manager, Zinit,
 implements it.</p>
 </div>
 </div>
@@ -908,7 +908,7 @@ around <code>${0:h}</code> to make it compatible with the <code>SH_WORD_SPLIT</c
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Plugin managers: Zplugin, Zgen (after and if the
+<p>Plugin managers: Zinit, Zgen (after and if the
 <a href="https://github.com/tarjoilija/zgen/pull/124">PR</a> will be merged)</p>
 </li>
 <li>
@@ -926,12 +926,12 @@ around <code>${0:h}</code> to make it compatible with the <code>SH_WORD_SPLIT</c
 <div class="paragraph">
 <p>Plugin managers may export the parameter <code>$ZPFX</code> which should contain a path to
 a directory dedicated for user-land software, i.e. for directories <code>$ZPFX/bin</code>,
-<code>$ZPFX/lib</code>, <code>$ZPFX/share</code>, etc. Suggested name of the directory is <code>polaris</code>,
-Zplugin uses this name and places this directory at <code>~/.zplugin/polaris</code> by
-default.</p>
+<code>$ZPFX/lib</code>, <code>$ZPFX/share</code>, etc. Suggested name of the directory is <code>polaris</code>
+(e.g.: Zinit uses this name and places this directory at <code>~/.zinit/polaris</code> by
+default).</p>
 </div>
 <div class="paragraph">
-<p>User can then configure hooks (feature of e.g. zplug and Zplugin) to invoke e.g.
+<p>User can then configure hooks (feature of e.g. zplug and Zinit) to invoke e.g.
 <code>make PREFIX=$ZPFX install</code> at clone &amp; update of the plugin to install software
 like e.g. <a href="https://github.com/tj/git-extras">tj/git-extras</a>. This is a
 developing role of Zsh plugin managers as package managers, where <code>.zshrc</code> has a
@@ -944,7 +944,7 @@ state, and have the same state on different accounts / machines.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>export ZPFX="$HOME/polaris"</code> (or e.g. <code>$HOME/.zplugin/polaris</code>)</p>
+<p><code>export ZPFX="$HOME/polaris"</code> (or e.g. <code>$HOME/.zinit/polaris</code>)</p>
 </li>
 <li>
 <p><code>make PREFIX=$ZPFX install</code></p>
@@ -956,7 +956,7 @@ state, and have the same state on different accounts / machines.</p>
 <p><code>cmake -DCMAKE_INSTALL_PREFIX=$ZPFX .</code></p>
 </li>
 <li>
-<p><code>zplugin ice make"PREFIX=$ZPFX install"</code></p>
+<p><code>zinit ice make"PREFIX=$ZPFX install"</code></p>
 </li>
 <li>
 <p><code>zplug … hook-build:"make PREFIX=$PFX install"</code></p>
@@ -966,7 +966,7 @@ state, and have the same state on different accounts / machines.</p>
 <div class="sect4">
 <h5 id="_adoption_status_7">Adoption Status</h5>
 <div class="paragraph">
-<p>One plugin manager, Zplugin, provides the <code>$ZPFX</code> parameter.</p>
+<p>One plugin manager, Zinit, provides the <code>$ZPFX</code> parameter.</p>
 </div>
 </div>
 </div>
@@ -1175,9 +1175,9 @@ of the proposed prefixes.</p>
 <li>
 <p><code>:</code>: for hook-like functions, so it should be used e.g.: for the
 <a href="#azh">Zsh hooks</a> and the <a href="#azhw">Zle hooks</a>, but also for any other
-custom hook-like mechanism in the plugin (e.g.: Zplugin annexes
-<a href="http://zdharma.org/zplugin/wiki/Annexes/#how_to_code_them">use</a> such
-prefix for the Zplugin hook functions). Example function name:
+custom hook-like mechanism in the plugin (e.g.: Zinit annexes
+<a href="http://zdharma.org/zinit/wiki/Annexes/#how_to_code_them">use</a> such
+prefix for the Zinit hook functions). Example function name:
 <code>:prompt_zinc_precmd</code>.</p>
 </li>
 <li>
