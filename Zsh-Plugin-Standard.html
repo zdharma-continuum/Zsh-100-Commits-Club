@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_adoption_status">Adoption Status</a></li>
 </ul>
 </li>
-<li><a href="#funcs-dir">2. Functions directory</a>
+<li><a href="#funcs-dir">2. Functions Directory</a>
 <ul class="sectlevel4">
 <li><a href="#_adoption_status_2">Adoption Status</a></li>
 </ul>
@@ -494,8 +494,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#azh">Use Of <code>add-zsh-hook</code> To Install Hooks</a></li>
 <li><a href="#azhw">Use Of <code>add-zle-hook-widget</code> To Install Zle Hooks</a></li>
-<li><a href="#standard-options">Standard Recommended Options</a></li>
-<li><a href="#standard-variables">Standard Recommended Variables</a></li>
+<li><a href="#std-param-naming">Standard Parameter Naming</a></li>
+<li><a href="#std-hash">Standard <code>Plugins</code> Hash</a></li>
+<li><a href="#std-options">Standard Recommended Options</a></li>
+<li><a href="#std-variables">Standard Recommended Variables</a></li>
 <li><a href="#namespacing">Standard Function Name-Space Prefixes</a></li>
 <li><a href="#auto-unfun">Preventing Function Pollution</a></li>
 <li><a href="#params">Preventing Parameter Pollution</a></li>
@@ -695,7 +697,7 @@ search</a></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="funcs-dir">2. Functions directory</h2>
+<h2 id="funcs-dir">2. Functions Directory</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Despite that the current-standard plugins have their main directory added to
@@ -1104,7 +1106,50 @@ been introduced in Zsh <code>5.3</code> it should be used instead.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="standard-options">Standard Recommended Options</h3>
+<h3 id="std-param-naming">Standard Parameter Naming</h3>
+<div class="paragraph">
+<p>There&#8217;s a convention already present in the Zsh world – to name array variables
+lowercase and scalars uppercase. It&#8217;s being followed by e.g.: the Zsh manual and
+the Zshell itself (e.g.: <code>REPLY</code> scalar and <code>reply</code> array, etc.). The
+requirement for the scalars to be uppercase should be, in my opinion, kept only
+for the global parameters. I.e.: it&#8217;s fine to name local parameters inside a
+function lowercase even when they are scalars, not arrays.</p>
+</div>
+<div class="paragraph">
+<p>An extension to the convention is being proposed: to name associative arrays
+(i.e.: hashes) capitalized, i.e.: with only first letter uppercase and the
+remaining letters lowercase. See <a href="#std-hash">the next section</a> for an
+example of such hash.</p>
+</div>
+<div class="paragraph">
+<p>This convention will increase code readibility and bring order into it.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="std-hash">Standard <code>Plugins</code> Hash</h3>
+<div class="paragraph">
+<p>The plugin often has to declare global parameters that should live throughout a
+Zsh session. Following the <a href="#params">namespace pollution prevention</a> the
+plugin could use a hash to store the different values. Additionally, the plugins
+could use a single hash parameter – called <code>Plugins</code> – to prevent the pollution
+even more:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">…
+<span class="nb">typeset</span> <span class="nt">-gA</span> Plugins
+<span class="c"># An example value needed by the plugin</span>
+Plugins[MY_PLUGIN_REPO_DIR]<span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">0</span>:h<span class="k">}</span><span class="s2">"</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This way all the data of all plugins will be kept in a single parameter,
+available for easy examination and overview (via e.g.: <code>vared Plugins</code>) and also
+not polluting the namespace.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="std-options">Standard Recommended Options</h3>
 <div class="paragraph">
 <p>The following code snippet is recommended to be included at the beginning of
 each of the main functions provided by the plugin:</p>
@@ -1164,7 +1209,7 @@ directory stack.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="standard-variables">Standard Recommended Variables</h3>
+<h3 id="std-variables">Standard Recommended Variables</h3>
 <div class="paragraph">
 <p>It&#8217;s good to localize the following variables at the entry of the main function
 of a plugin:</p>
@@ -1294,7 +1339,7 @@ which is exposing a plugin manager&#8217;s functionality in a well-defined way.<
 <p>When writing a larger autoload function, it very often is the case that the
 function contains definitions of other functions. When the main function
 finishes executing, the functions are being left defined. This might be
-undesired, e.g.: because of the command name-space pollution. The following
+undesired, e.g.: because of the command namespace pollution. The following
 snippet of code, when added at the beginning of the main function will
 automatically unset the sub-functions when leaving the main function:</p>
 </div>
@@ -1385,8 +1430,10 @@ Vim substitution patterns with back references without any problems.</p>
 <h2 id="appendix">Appendix A: Revision History (History Of Updates To The Document)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>v1.08, 01/29/2020: Added the <code>PMSPEC</code> paragraph<br>
-v1.07, 01/29/2020: Added the <code>functions</code>-directory paragraph<br>
+<p>v1.09, 01/29/2020: 1/ Added <code>Standard Parameter Naming</code> section<br>
+v1.09, 01/29/2020: 2/ Added <code>Standard Plugins Hash</code> section<br>
+v1.08, 01/29/2020: Added the <code>PMSPEC</code> section<br>
+v1.07, 01/29/2020: Added the <code>functions</code>-directory section<br>
 v1.05, 11/22/2019: Restored the quoting to the <code>$0</code> assignments + justification<br>
 v1.0, 11/22/2019: Removed quoting from the <code>$0</code> assignments<br>
 v0.99, 10/26/2019: Added <code>Adoption Status</code> sub-sections<br>
