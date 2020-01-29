@@ -413,7 +413,7 @@ lowercase and scalars uppercase. It's being followed by e.g.: the Zsh manual and
 the Zshell itself (e.g.: `REPLY` scalar and `reply` array, etc.). The
 requirement for the scalars to be uppercase should be, in my opinion, kept only
 for the global parameters. I.e.: it's fine to name local parameters inside a
-function lowercase even when they are scalars, not arrays.
+function lowercase even when they are scalars, not only arrays.
 
 An extension to the convention is being proposed: to name associative arrays
 (i.e.: hashes) capitalized, i.e.: with only first letter uppercase and the
