@@ -124,7 +124,7 @@ link:https://github.com/tarjoilija/zgen/pull/124[PR] will be merged)
    search]
 
 [#funcs-dir]
-## 2. Functions directory
+## 2. Functions Directory
 
 Despite that the current-standard plugins have their main directory added to
 `$fpath`, a more clean approach is being proposed: that the plugins use a
@@ -405,7 +405,44 @@ install **multiple** hooks per each `hook` entry. Before introducing the
 widget with the name of one of the special widgets. Now, after the function has
 been introduced in Zsh `5.3` it should be used instead.
 
-[#standard-options]
+[#std-param-naming]
+### Standard Parameter Naming
+
+There's a convention already present in the Zsh world – to name array variables
+lowercase and scalars uppercase. It's being followed by e.g.: the Zsh manual and
+the Zshell itself (e.g.: `REPLY` scalar and `reply` array, etc.). The
+requirement for the scalars to be uppercase should be, in my opinion, kept only
+for the global parameters. I.e.: it's fine to name local parameters inside a
+function lowercase even when they are scalars, not arrays.
+
+An extension to the convention is being proposed: to name associative arrays
+(i.e.: hashes) capitalized, i.e.: with only first letter uppercase and the
+remaining letters lowercase. See link:#std-hash[the next section] for an
+example of such hash.
+
+This convention will increase code readibility and bring order into it.
+
+[#std-hash]
+### Standard `Plugins` Hash
+
+The plugin often has to declare global parameters that should live throughout a
+Zsh session. Following the link:#params[namespace pollution prevention] the
+plugin could use a hash to store the different values. Additionally, the plugins
+could use a single hash parameter – called `Plugins` – to prevent the pollution
+even more:
+
+```shell
+…
+typeset -gA Plugins
+# An example value needed by the plugin
+Plugins[MY_PLUGIN_REPO_DIR]="${0:h}"
+```
+
+This way all the data of all plugins will be kept in a single parameter,
+available for easy examination and overview (via e.g.: `vared Plugins`) and also
+not polluting the namespace.
+
+[#std-options]
 ### Standard Recommended Options
 
 The following code snippet is recommended to be included at the beginning of
@@ -446,7 +483,7 @@ It then alters the emulation by `6` different options:
   internal directory changes done by the plugin will pollute the global
   directory stack.
 
-[#standard-variables]
+[#std-variables]
 ### Standard Recommended Variables
 
 It's good to localize the following variables at the entry of the main function
@@ -549,7 +586,7 @@ The proposition of the standard prefixes is as follows:
 When writing a larger autoload function, it very often is the case that the
 function contains definitions of other functions. When the main function
 finishes executing, the functions are being left defined. This might be
-undesired, e.g.: because of the command name-space pollution. The following
+undesired, e.g.: because of the command namespace pollution. The following
 snippet of code, when added at the beginning of the main function will
 automatically unset the sub-functions when leaving the main function:
 
@@ -621,8 +658,10 @@ Vim substitution patterns with back references without any problems.
 [appendix]
 == Revision History (History Of Updates To The Document)
 
-v1.08, 01/29/2020: Added the `PMSPEC` paragraph +
-v1.07, 01/29/2020: Added the `functions`-directory paragraph +
+v1.09, 01/29/2020: 1/ Added `Standard Parameter Naming` section +
+v1.09, 01/29/2020: 2/ Added `Standard Plugins Hash` section +
+v1.08, 01/29/2020: Added the `PMSPEC` section +
+v1.07, 01/29/2020: Added the `functions`-directory section +
 v1.05, 11/22/2019: Restored the quoting to the `$0` assignments + justification +
 v1.0, 11/22/2019: Removed quoting from the `$0` assignments +
 v0.99, 10/26/2019: Added `Adoption Status` sub-sections +
