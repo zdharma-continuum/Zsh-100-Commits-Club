@@ -349,6 +349,10 @@ if [[ $PMSPEC != *f* ]] {
 }
 ```
 
+##### Adoption Status
+
+It's a recent addition to the standard and only Zinit supports it.
+
 [#best-practices]
 ## Zsh Plugin-Programming Best Practices
 
