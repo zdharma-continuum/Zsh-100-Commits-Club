@@ -632,12 +632,12 @@ sufficient:
 
 ```shell
 typeset -A PlgMap
-typeset -A some_map
+typeset -A SomeMap
 typeset -a some_array
 
 # Use
 PlgMap[state]=1
-some_map[state]=1
+SomeMap[state]=1
 some_array[1]=state
 ```
 
@@ -648,7 +648,7 @@ typeset -A PlgMap
 
 # Use
 PlgMap[state]=1
-PlgMap[some_map__state]=1
+PlgMap[SomeMap__state]=1
 PlgMap[some_array__1]=state
 ```
 
