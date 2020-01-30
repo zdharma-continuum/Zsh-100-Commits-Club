@@ -187,7 +187,9 @@ options), to also delete the function itself.
 
 1. One plugin manager, Zinit, implements plugin unloading and calls the
    function.
-2. Four plugins:
+2. Multiple plugins:
+    - link:https://github.com/search?q=%22_plugin_unload%22+zsh+NOT+%28zplugin%7Czinit%29%28.ch%7C-autoload%29+NOT+_zinit+NOT+_zplugin+NOT+langs.xml+NOT+tags&type=Code[GitHub
+      search],
 
     - `romkatv/powerlevel10k`, is
       link:https://github.com/romkatv/powerlevel10k/blob/f17081ca/internal/p10k.zsh#L5390[using]
