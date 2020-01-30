@@ -1397,12 +1397,12 @@ sufficient:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="shell"><span class="nb">typeset</span> <span class="nt">-A</span> PLGMAP
+<pre class="rouge highlight"><code data-lang="shell"><span class="nb">typeset</span> <span class="nt">-A</span> PlgMap
 <span class="nb">typeset</span> <span class="nt">-A</span> some_map
 <span class="nb">typeset</span> <span class="nt">-a</span> some_array
 
 <span class="c"># Use</span>
-PLGMAP[state]<span class="o">=</span>1
+PlgMap[state]<span class="o">=</span>1
 some_map[state]<span class="o">=</span>1
 some_array[1]<span class="o">=</span>state</code></pre>
 </div>
@@ -1412,18 +1412,22 @@ some_array[1]<span class="o">=</span>state</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="shell"><span class="nb">typeset</span> <span class="nt">-A</span> PLGMAP
+<pre class="rouge highlight"><code data-lang="shell"><span class="nb">typeset</span> <span class="nt">-A</span> PlgMap
 
 <span class="c"># Use</span>
-PLGMAP[state]<span class="o">=</span>1
-PLGMAP[some_map__state]<span class="o">=</span>1
-PLGMAP[some_array__1]<span class="o">=</span>state</code></pre>
+PlgMap[state]<span class="o">=</span>1
+PlgMap[some_map__state]<span class="o">=</span>1
+PlgMap[some_array__1]<span class="o">=</span>state</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>The use of this method is very unproblematic. The author reduced the number of
 global parameters in one of projects by 21 by using an automatic conversion with
 Vim substitution patterns with back references without any problems.</p>
+</div>
+<div class="paragraph">
+<p>Following the <a href="#std-hash">Standard Plugins Hash</a> section, the plugin could
+even use a common hash name – <code>Plugins</code> – to lower the pollution even more.</p>
 </div>
 </div>
 </div>
