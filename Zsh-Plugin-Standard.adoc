@@ -196,11 +196,12 @@ options), to also delete the function itself.
       results,
 
     - `agkozak/agkozak-zsh-prompt` is
-      link:https://github.com/agkozak/agkozak-zsh-prompt/blob/ed228952d68fea6d5cad3beee869167f76c59606/agkozak-zsh-prompt.plugin.zsh#L992-L1039[using] the function to completely unload the prompt.
+      link:https://github.com/agkozak/agkozak-zsh-prompt/blob/ed228952d68fea6d5cad3beee869167f76c59606/agkozak-zsh-prompt.plugin.zsh#L992-L1039[using]
+      the function to completely unload the prompt,
 
     - `agkozak/zsh-z` is
       link:https://github.com/agkozak/zsh-z/blob/16fba5e9d5c4b650358d65e07609dda4947f97e8/zsh-z.plugin.zsh#L680-L698[using]
-      the function to completly unload the plugin.
+      the function to completly unload the plugin,
 
     - `agkozak/zhooks` is
       link:https://github.com/agkozak/zhooks/blob/628e1e3b8373bf31c26cb154f71c16ebe9d13b51/zhooks.plugin.zsh#L75-L82[using]
