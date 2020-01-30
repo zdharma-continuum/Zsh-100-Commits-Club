@@ -631,12 +631,12 @@ With the following method, only a single global parameter per plugin can be
 sufficient:
 
 ```shell
-typeset -A PLGMAP
+typeset -A PlgMap
 typeset -A some_map
 typeset -a some_array
 
 # Use
-PLGMAP[state]=1
+PlgMap[state]=1
 some_map[state]=1
 some_array[1]=state
 ```
@@ -644,17 +644,20 @@ some_array[1]=state
 can be converted into:
 
 ```shell
-typeset -A PLGMAP
+typeset -A PlgMap
 
 # Use
-PLGMAP[state]=1
-PLGMAP[some_map__state]=1
-PLGMAP[some_array__1]=state
+PlgMap[state]=1
+PlgMap[some_map__state]=1
+PlgMap[some_array__1]=state
 ```
 
 The use of this method is very unproblematic. The author reduced the number of
 global parameters in one of projects by 21 by using an automatic conversion with
 Vim substitution patterns with back references without any problems.
+
+Following the link:#std-hash[Standard Plugins Hash] section, the plugin could
+even use a common hash name – `Plugins` – to lower the pollution even more.
 
 [#appendix]
 [appendix]
