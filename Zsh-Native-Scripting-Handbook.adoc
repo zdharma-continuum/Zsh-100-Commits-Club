@@ -224,7 +224,7 @@ queried for character-replacement. You can substitute a text variable too, just
 skip `[@]` and parentheses in assignment.
 
 [#ternary-expressions-1]
-### Ternary expressions with `\+,-,:+,:-` substitutions
+### Ternary expressions with `+,-,:+,:-` substitutions
 
 [source,none]
 ----
@@ -414,8 +414,10 @@ That are `4` forks. The code can be replaced according to this guide:
 ----
 local -a lines_list
 lines_list=( ${(f)"$(git help -a)"} )
-lines_list=( ${(M)${(s: :)${(M)lines_list:#  [a-z]*}}:#$mysub} )
+lines_list=( ${(M)${(s: :)${(M)lines_list:#   [a-z]*}}:#$mysub} )
 if (( ${#lines_list} > 0 )); then
+    …
+fi
 ----
 
 The result is just `1` fork.
