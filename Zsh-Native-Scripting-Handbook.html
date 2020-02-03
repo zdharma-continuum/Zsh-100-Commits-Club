@@ -464,7 +464,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#skipping-grep">Skipping grep</a></li>
 <li><a href="#pattern-matching-in-and-fashion">Pattern matching in AND-fashion</a></li>
 <li><a href="#skipping-tr">Skipping tr</a></li>
-<li><a href="#ternary-expressions-1">Ternary expressions with <code>\+,-,:+,:-</code> substitutions</a></li>
+<li><a href="#ternary-expressions-1">Ternary expressions with <code>+,-,:+,:-</code> substitutions</a></li>
 <li><a href="#ternary-expressions-2">Ternary expressions with <code>:#</code> substitution</a></li>
 <li><a href="#built-in-regular-expressions-engine">Using built-in regular expressions engine</a></li>
 <li><a href="#skipping-uniq">Skipping uniq</a></li>
@@ -747,7 +747,7 @@ skip <code>[@]</code> and parentheses in assignment.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="ternary-expressions-1">Ternary expressions with <code>\+,-,:+,:-</code> substitutions</h3>
+<h3 id="ternary-expressions-1">Ternary expressions with <code>+,-,:+,:-</code> substitutions</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="none">HELP="yes"; print ${${HELP:+help enabled}:-help disabled} ▶ help enabled
@@ -957,8 +957,10 @@ value, but as always, <code>eval</code> should be avoided if possible.</p>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="none">local -a lines_list
 lines_list=( ${(f)"$(git help -a)"} )
-lines_list=( ${(M)${(s: :)${(M)lines_list:#  [a-z]*}}:#$mysub} )
-if (( ${#lines_list} &gt; 0 )); then</code></pre>
+lines_list=( ${(M)${(s: :)${(M)lines_list:#   [a-z]*}}:#$mysub} )
+if (( ${#lines_list} &gt; 0 )); then
+    …
+fi</code></pre>
 </div>
 </div>
 <div class="paragraph">
