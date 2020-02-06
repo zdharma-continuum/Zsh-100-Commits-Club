@@ -9,4 +9,5 @@ Zsh-Native-Scripting-Handbook.html: Zsh-Native-Scripting-Handbook.adoc
 master:
 	git reset --hard
 	git checkout master
+	touch *.html
 	make all
