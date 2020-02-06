@@ -1,4 +1,4 @@
-all: README.html Zsh-Native-Scripting-Handbook.html
+all: Zsh-Native-Scripting-Handbook.html
 
 README.html: README.adoc
 	asciidoctor README.adoc
