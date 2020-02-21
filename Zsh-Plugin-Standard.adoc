@@ -549,12 +549,28 @@ The proposition of the standard prefixes is as follows:
 1. `.`: for regular private functions. Example function:
    `.prompt_zinc_get_value`.
 
-2. `:`: for hook-like functions, so it should be used e.g.: for the
+2. `→`: for hook-like functions, so it should be used e.g.: for the
    link:#azh[Zsh hooks] and the link:#azhw[Zle hooks], but also for any other
-   custom hook-like mechanism in the plugin (e.g.: Zinit annexes
-   link:http://zdharma.org/zinit/wiki/Annexes/#how_to_code_them[use] such
-   prefix for the Zinit hook functions). Example function name:
-   `:prompt_zinc_precmd`.
+   custom hook-like mechanism in the plugin . Example function name:
+   `→prompt_zinc_precmd`.
+   - previous version of the document recommended colon (`:`) for the prefix,
+     however, it was problematic, because Windows doesn't allow colons in file
+     names, so it wasn't possible to name an autoload function this way,
+   - the arrow has a rationale behind – it denotes the execution *coming back*
+     to the function at a later time, after it has been registered as a callback
+     or a handler,
+   - the arrow is easy to type on most keyboard layouts – it is `Right-Alt`+`I`;
+     in case of problems with typing the character can be always copied –
+     handler functions do occur in the code rarely,
+   - Zsh supports absolutely any string as a function name, because absolutely
+     any string can be a **file** name – if there would be an exception in the
+     name of the callables, then how would it be possible to run a script called
+     "→abcd"?  There are *no* exceptions, the function can be called even as a
+     sequence of null bytes:
+
+    ❯ $'\0'() { print hello }
+    ❯ $'\0'
+    hello
 
 3. `+`: for output functions, i.e.: for functions that print to the standard
    output and error or to a log, etc. Example function name:
@@ -665,6 +681,7 @@ even use a common hash name – `Plugins` – to lower the pollution even more.
 [appendix]
 == Revision History (History Of Updates To The Document)
 
+v1.1, 21/02/2020: Changed the handler-function prefix character to `→` +
 v1.09, 01/29/2020: 1/ Added `Standard Parameter Naming` section +
 v1.09, 01/29/2020: 2/ Added `Standard Plugins Hash` section +
 v1.08, 01/29/2020: Added the `PMSPEC` section +
