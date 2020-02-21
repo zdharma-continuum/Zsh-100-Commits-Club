@@ -1295,12 +1295,43 @@ of the proposed prefixes.</p>
 <code>.prompt_zinc_get_value</code>.</p>
 </li>
 <li>
-<p><code>:</code>: for hook-like functions, so it should be used e.g.: for the
+<p><code>→</code>: for hook-like functions, so it should be used e.g.: for the
 <a href="#azh">Zsh hooks</a> and the <a href="#azhw">Zle hooks</a>, but also for any other
-custom hook-like mechanism in the plugin (e.g.: Zinit annexes
-<a href="http://zdharma.org/zinit/wiki/Annexes/#how_to_code_them">use</a> such
-prefix for the Zinit hook functions). Example function name:
-<code>:prompt_zinc_precmd</code>.</p>
+custom hook-like mechanism in the plugin . Example function name:
+<code>→prompt_zinc_precmd</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>previous version of the document recommended colon (<code>:</code>) for the prefix,
+however, it was problematic, because Windows doesn&#8217;t allow colons in file
+names, so it wasn&#8217;t possible to name an autoload function this way,</p>
+</li>
+<li>
+<p>the arrow has a rationale behind – it denotes the execution <strong>coming back</strong>
+to the function at a later time, after it has been registered as a callback
+or a handler,</p>
+</li>
+<li>
+<p>the arrow is easy to type on most keyboard layouts – it is <code>Right-Alt</code>+<code>I</code>;
+in case of problems with typing the character can be always copied –
+handler functions do occur in the code rarely,</p>
+</li>
+<li>
+<p>Zsh supports absolutely any string as a function name, because absolutely
+any string can be a <strong>file</strong> name – if there would be an exception in the
+name of the callables, then how would it be possible to run a script called
+"→abcd"?  There are <strong>no</strong> exceptions, the function can be called even as a
+sequence of null bytes:</p>
+<div class="literalblock">
+<div class="content">
+<pre>❯ $'\0'() { print hello }
+❯ $'\0'
+hello</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p><code>+</code>: for output functions, i.e.: for functions that print to the standard
@@ -1440,7 +1471,8 @@ even use a common hash name – <code>Plugins</code> – to lower the pollution 
 <h2 id="appendix">Appendix A: Revision History (History Of Updates To The Document)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>v1.09, 01/29/2020: 1/ Added <code>Standard Parameter Naming</code> section<br>
+<p>v1.1, 21/02/2020: Changed the handler-function prefix character to <code>→</code><br>
+v1.09, 01/29/2020: 1/ Added <code>Standard Parameter Naming</code> section<br>
 v1.09, 01/29/2020: 2/ Added <code>Standard Plugins Hash</code> section<br>
 v1.08, 01/29/2020: Added the <code>PMSPEC</code> section<br>
 v1.07, 01/29/2020: Added the <code>functions</code>-directory section<br>
