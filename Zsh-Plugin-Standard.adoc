@@ -116,7 +116,7 @@ general don't have to quote assignments.
 
 ##### Adoption Status
 
-1. Plugin managers: Zinit, Zgen (after and if the
+1. Plugin managers: Zinit, link:https://github/com/zpm-zsh/zpm[Zpm], Zgen (after and if the
 link:https://github.com/tarjoilija/zgen/pull/124[PR] will be merged)
 
 2. Plugins:
@@ -156,8 +156,8 @@ Above snippet added to the `plugin.zsh` file will add the directory to the
 
 ##### Adoption Status
 
-It's a recent addition to the standard and no plugin managers yet support the
-feature.
+1. Plugin managers: link:https://github/com/zpm-zsh/zpm[Zpm]
+
 
 [#unload-fun]
 ## 3. Unload Function
@@ -289,8 +289,9 @@ around `${0:h}` to make it compatible with the `SH_WORD_SPLIT` option.
 
 ##### Adoption Status
 
-1. Plugin managers: Zinit, Zgen (after and if the
+1. Plugin managers: Zinit, link:https://github/com/zpm-zsh/zpm[Zpm], Zgen (after and if the
 link:https://github.com/tarjoilija/zgen/pull/124[PR] will be merged)
+
 
 2. Plugins:
    link:https://github.com/search?q=if+%22zsh_loaded_plugins%22&type=Code[GitHub search]
@@ -322,7 +323,7 @@ No-narration facts-list related to `$ZPFX`:
 
 ##### Adoption Status
 
-One plugin manager, Zinit, provides the `$ZPFX` parameter.
+1. Plugin managers: Zinit, link:https://github/com/zpm-zsh/zpm[Zpm]
 
 [#pmspec]
 ## 8. Global Parameter holding the plugin-manager's capabilities
@@ -354,7 +355,7 @@ if [[ $PMSPEC != *f* ]] {
 
 ##### Adoption Status
 
-It's a recent addition to the standard and only Zinit supports it.
+1. Plugin managers: Zinit, link:https://github/com/zpm-zsh/zpm[Zpm]
 
 [#best-practices]
 ## Zsh Plugin-Programming Best Practices
