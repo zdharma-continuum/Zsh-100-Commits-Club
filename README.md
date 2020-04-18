@@ -2,7 +2,7 @@
 # Zsh 100 Commits Club
 
 
-Plugins evaluated at February 11th, 2020
+Plugins evaluated at kwietnia 18th, 2020
 
 [![paypal](https://img.shields.io/badge/-Donate-yellow.svg?longCache=true&style=for-the-badge)](https://www.paypal.me/ZdharmaInitiative)
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=D54B3S7C6HGME)
@@ -48,117 +48,121 @@ minutes you'll be able to grep interesting plugins with your eyes!
 💼 - has branches with at least 50 commits in total  
 📈 – the branches were active 3 times in last 4 months
 
-# Plugins (#88)
+# Plugins (#92)
 
 * [alias-tips](https://github.com/djui/alias-tips) :1st_place_medal: - An oh-my-zsh plugin to help remembering those aliases you defined once.
 * [allergen](https://github.com/stanislas/allergen) : :hourglass: - A collection of custom ZSH plugins to use with Antigen.
-* [ansiweather](https://github.com/fcambus/ansiweather) :1st_place_medal: :walking_man: :hourglass_flowing_sand: - Weather in your terminal, with ANSI colors and Unicode symbols.
+* [ansiweather](https://github.com/fcambus/ansiweather) :1st_place_medal: :hourglass_flowing_sand: - Weather in your terminal, with ANSI colors and Unicode symbols.
 * [anyframe](https://github.com/mollifier/anyframe) : - A peco/percol/fzf wrapper plugin for ZSH.
 * [auto-fu.zsh](https://github.com/hchbaw/auto-fu.zsh) :1st_place_medal: :briefcase: - Automatic complete-word and list-choices. Originally incr-0.2.zsh by y.fujii <y-fujii at mimosa-pudica.net>.
-* [auto-notify](https://github.com/MichaelAquilina/zsh-auto-notify) : :hourglass: - Automatically sends out a notification when a long running task has completed.
-* [autoenv-extended](https://github.com/zpm-zsh/autoenv) : :hourglass: - Extended version of the [zsh-autoenv](https://github.com/Tarrasch/zsh-autoenv) plugin.
+* [auto-notify](https://github.com/MichaelAquilina/zsh-auto-notify) : - Automatically sends out a notification when a long running task has completed.
+* [autoenv-extended](https://github.com/zpm-zsh/autoenv) : :alarm_clock: - Extended version of the [zsh-autoenv](https://github.com/Tarrasch/zsh-autoenv) plugin.
 * [autoenv](https://github.com/Tarrasch/zsh-autoenv) :1st_place_medal: - If a directory contains a `.env` file, it will automatically be executed when you `cd` into it.
 * [autojump](https://github.com/wting/autojump) :1st_place_medal: - A `cd` command that learns - easily navigate directories from the command line. Install autojump-zsh for best results.
 * [autopair](https://github.com/hlissner/zsh-autopair) : :hourglass: - A ZSH plugin for auto-closing, deleting and skipping over matching delimiters. Only tested on ZSH 5.0.2 or later.
-* [autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) :1st_place_medal: :running_man: :hourglass_flowing_sand: - [Fish](https://fishshell.com/)-like fast/unobtrusive autosuggestions for ZSH.
-* [autoswitch-virtualenv](https://github.com/MichaelAquilina/zsh-autoswitch-virtualenv) :1st_place_medal: :alarm_clock: :running_man: - ZSH plugin to automatically switch python virtualenvs and pipenvs when traversing directories.
+* [autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) :1st_place_medal: :hourglass: - [Fish](https://fishshell.com/)-like fast/unobtrusive autosuggestions for ZSH.
+* [autoswitch-virtualenv](https://github.com/MichaelAquilina/zsh-autoswitch-virtualenv) :1st_place_medal: :walking_man: :hourglass_flowing_sand: - ZSH plugin to automatically switch python virtualenvs and pipenvs when traversing directories.
 * [base16](https://github.com/chriskempson/base16-shell) :1st_place_medal: - Adds script to allow you to change your shell's default ANSI colors but most importantly, colors 17 to 21 of your shell's 256 colorspace (if supported by your terminal). This script makes it possible to honor the original bright colors of your shell (e.g. bright green is still green and so on) while providing additional base16 colors to applications such as [Vim](https://www.vim.org).
 * [blackbox](https://github.com/StackExchange/blackbox) :1st_place_medal: :hourglass_flowing_sand: :briefcase: - [Stack Exchange](https://stackexchange.com)'s toolkit for storing keys/credentials securely in a `git` repository.
-* [cdc](https://github.com/evanthegrayt/cdc) : :running_man: :hourglass_flowing_sand: - Shell function for changing directory to a directory found in one of your defined frequently-used places.
+* [cdc](https://github.com/evanthegrayt/cdc) : :walking_man: :hourglass_flowing_sand: - Shell function for changing directory to a directory found in one of your defined frequently-used places.
 * [cmd-architect](https://github.com/psprint/zsh-cmd-architect) : - Build commands from what's in history and at prompt, move, delete, add command segments and search history with multi-word queries.
 * [czhttpd](https://github.com/jsks/czhttpd) :1st_place_medal: :hourglass_flowing_sand: - A simple http server written in 99.9% pure ZSH.
 * [declare-zsh](https://github.com/zdharma/declare-zsh) : :hourglass_flowing_sand: - A command-line parser for Zinit commands in `zshrc`.
-* [deer](https://github.com/Vifon/deer) :1st_place_medal: :alarm_clock: :walking_man: - A file navigator for ZSH heavily inspired by [ranger](https://ranger.github.io/).
+* [deer](https://github.com/Vifon/deer) :1st_place_medal: :hourglass_flowing_sand: - A file navigator for ZSH heavily inspired by [ranger](https://ranger.github.io/).
 * [depot-tools](https://github.com/kuoe0/zsh-depot-tools) :1st_place_medal: - Simple oh-my-zsh plugin for installing the chromium depot_tools. Installing this plugin will put all of the chromium depot_tools in your path automatically.
-* [diractions](https://github.com/AdrieanKhisbe/diractions) :1st_place_medal: - Allow you to map a short logical/mnemonic name to directories to quickly access them, or perform actions in them.
+* [diractions](https://github.com/AdrieanKhisbe/diractions) :1st_place_medal: :running_man: :hourglass_flowing_sand: - Allow you to map a short logical/mnemonic name to directories to quickly access them, or perform actions in them.
 * [directory-history](https://github.com/tymm/zsh-directory-history) : :hourglass_flowing_sand: - A per directory history for ZSH which implements forward/backward navigation as well as substring search in a directory sensitive manner.
-* [dirrc](https://github.com/gmatheu/shell-plugins) : :hourglass: - Executes `.dirc` when present in a directory you `cd` into.
-* [docker-aliases](https://github.com/webyneter/docker-aliases) : Docker aliases for everyday use.
-* [docker-helpers](https://github.com/unixorn/docker-helpers.zshplugin) : :walking_man: :hourglass_flowing_sand: - A collection of docker helper scripts.
+* [dirrc](https://github.com/gmatheu/shell-plugins) : - Executes `.dirc` when present in a directory you `cd` into.
+* [docker-aliases](https://github.com/webyneter/docker-aliases) : :walking_man: :hourglass_flowing_sand: Docker aliases for everyday use.
+* [docker-helpers](https://github.com/unixorn/docker-helpers.zshplugin) : :running_man: :hourglass_flowing_sand: - A collection of docker helper scripts.
 * [dwim](https://github.com/oknowton/zsh-dwim) : - zsh-dwim attempts to predict what you will want to do next. It provides a key binding (control-u) that will replace the current (or previous) command line with the command you will want to run next.
-* [editing-workbench](https://github.com/psprint/zsh-editing-workbench) : :alarm_clock: :walking_man: - Adds sane, complex command line editing (e.g. incremental history _word_ completion).
+* [editing-workbench](https://github.com/psprint/zsh-editing-workbench) : :hourglass_flowing_sand: - Adds sane, complex command line editing (e.g. incremental history _word_ completion).
 * [elixir](https://github.com/gusaiani/elixir-oh-my-zsh) : - Adds shortcuts for Elixir, IEX, Mix, Kiex and Phoenix.
 * [enhancd](https://github.com/b4b4r07/enhancd) :1st_place_medal: :running_man: :hourglass_flowing_sand: - A simple tool that provides enhanced `cd` command.
-* [evil-registers](https://github.com/zsh-vi-more/evil-registers) : :hourglass_flowing_sand: - Extends ZLE vi commands to remotely access named registers of the vim and nvim editors, and system selection and clipboard.
-* [explain-shell](https://github.com/gmatheu/shell-plugins) : :hourglass: - Opens commands on [explainshell.com](https://explainshell.com).
-* [fast-syntax-highlighting](https://github.com/zdharma/fast-syntax-highlighting) :1st_place_medal: :alarm_clock: :running_man: :briefcase: :chart_with_upwards_trend: - Optimized and improved `zsh-users/zsh-syntax-highlighting` – better response times, switchable highlight themes.
-* [forgit](https://github.com/wfxr/forgit) :1st_place_medal: :alarm_clock: :running_man: - Utility tool for `git` which takes advantage of fuzzy finder [fzf](https://github.com/junegunn/fzf).
+* [evil-registers](https://github.com/zsh-vi-more/evil-registers) : :walking_man: :hourglass_flowing_sand: - Extends ZLE vi commands to remotely access named registers of the vim and nvim editors, and system selection and clipboard.
+* [explain-shell](https://github.com/gmatheu/shell-plugins) : - Opens commands on [explainshell.com](https://explainshell.com).
+* [fast-syntax-highlighting](https://github.com/zdharma/fast-syntax-highlighting) :1st_place_medal: :alarm_clock: :running_man: :briefcase: - Optimized and improved `zsh-users/zsh-syntax-highlighting` – better response times, switchable highlight themes.
+* [forgit](https://github.com/wfxr/forgit) :1st_place_medal: :running_man: :hourglass_flowing_sand: - Utility tool for `git` which takes advantage of fuzzy finder [fzf](https://github.com/junegunn/fzf).
 * [functional](https://github.com/Tarrasch/zsh-functional) : - ZSH higher order functions.
 * [fz](https://github.com/changyuheng/fz) : - Seamlessly adds fuzzy search to [z](https://github.com/rupa/z)'s tab completion and lets you easily jump around among your historical directories.
-* [fzf-marks](https://github.com/urbainvaes/fzf-marks) : :alarm_clock: :running_man: - Little script to create, navigate and delete bookmarks in `bash` and `zsh`, using the fuzzy finder [fzf](https://github.com/junegunn/fzf).
+* [fzf-marks](https://github.com/urbainvaes/fzf-marks) : :walking_man: :hourglass_flowing_sand: - Little script to create, navigate and delete bookmarks in `bash` and `zsh`, using the fuzzy finder [fzf](https://github.com/junegunn/fzf).
 * [fzf-widgets](https://github.com/ytet5uy4/fzf-widgets) :1st_place_medal: - Adds some ZLE widgets for [fzf](https://github.com/junegunn/fzf).
-* [fzf-z](https://github.com/andrewferrier/fzf-z) : :hourglass_flowing_sand: - Brings together the *z* plugin and *fzf* to allow you to easily browse recently used directories at any point on the command line.
-* [git-aliases.zsh](https://github.com/peterhurford/git-aliases.zsh) : :walking_man: :hourglass_flowing_sand: - Creates a lot of useful aliases for combinations of commonly used `git` commands.
+* [fzf-z](https://github.com/andrewferrier/fzf-z) : :hourglass: - Brings together the *z* plugin and *fzf* to allow you to easily browse recently used directories at any point on the command line.
+* [git-aliases.zsh](https://github.com/peterhurford/git-aliases.zsh) : :hourglass: - Creates a lot of useful aliases for combinations of commonly used `git` commands.
 * [git-extra-commands](https://github.com/unixorn/git-extra-commands) :1st_place_medal: :hourglass_flowing_sand: - Extra `git` helper scripts packaged as a plugin.
 * [git-it-on](https://github.com/peterhurford/git-it-on.zsh) : - Adds ability to open a folder in your current branch on GitHub.
-* [git-secret](https://github.com/sobolevn/git-secret) :1st_place_medal: :alarm_clock: :walking_man: :briefcase: - A bash-tool to store your private data inside a `git` repository.
+* [git-secret](https://github.com/sobolevn/git-secret) :1st_place_medal: :hourglass_flowing_sand: :briefcase: :chart_with_upwards_trend: - A bash-tool to store your private data inside a `git` repository.
 * [gitignore](https://github.com/voronkovich/gitignore.plugin.zsh) :1st_place_medal: :alarm_clock: :running_man: - Plugin for creating `.gitignore` files.
 * [gitsync](https://github.com/washtubs/gitsync) : - ZSH plugin to improve workflows for one person developing on the same repository on multiple machines.
 * [grep2awk](https://github.com/joepvd/grep2awk) : - ZLE widget to transform `grep` command into `awk` command.
-* [histdb](https://github.com/larkery/zsh-histdb) : :hourglass: - Stores your history in an SQLite database.
-* [history-search-multi-word](https://github.com/zdharma/history-search-multi-word) :1st_place_medal: :walking_man: :hourglass_flowing_sand: - syntax highlighted, multi-word history searcher for ZSH, bound to Ctrl-R, with advanced functions (e.g. bump of history entry to top of history).
+* [histdb](https://github.com/larkery/zsh-histdb) : :alarm_clock: :running_man: - Stores your history in an SQLite database.
+* [history-search-multi-word](https://github.com/zdharma/history-search-multi-word) :1st_place_medal: :hourglass_flowing_sand: - syntax highlighted, multi-word history searcher for ZSH, bound to Ctrl-R, with advanced functions (e.g. bump of history entry to top of history).
 * [history-substring-search](https://github.com/zsh-users/zsh-history-substring-search) :1st_place_medal: - Needs to be loaded after `zsh-syntax-highlighting`, or they'll both break. You'll also need to bind keys to its functions, details are in the README.md.
-* [history-sync](https://github.com/wulfgarpro/history-sync) : - An Oh My Zsh plugin for GPG encrypted, Internet synchronized ZSH history using `git`.
+* [history-sync](https://github.com/wulfgarpro/history-sync) : :hourglass_flowing_sand: - An Oh My Zsh plugin for GPG encrypted, Internet synchronized ZSH history using `git`.
 * [iterm-touchbar](https://github.com/iam4x/zsh-iterm-touchbar) : - Display iTerm2 feedback in the MacbookPro TouchBar (Current directory, git branch & status).
 * [jhipster](https://github.com/jhipster/jhipster-oh-my-zsh-plugin) : :hourglass_flowing_sand: - Adds commands for [jHipster](https://www.jhipster.tech/).
 * [k](https://github.com/supercrabtree/k) :1st_place_medal: :briefcase: - Directory listings for ZSH with `git` status decorations.
-* [kube-ps1](https://github.com/jonmosco/kube-ps1) :1st_place_medal: :hourglass_flowing_sand: - ZSH plugin for `kubectl` that adds current context and namespace.
+* [kube-ps1](https://github.com/jonmosco/kube-ps1) :1st_place_medal: :hourglass: - ZSH plugin for `kubectl` that adds current context and namespace.
 * [kubernetes](https://github.com/Dbz/zsh-kubernetes) : - Add [kubernetes](https://kubernetes.io) helper functions and aliases.
 * [morpho](https://github.com/psprint/zsh-morpho) : - Terminal screen savers written in pure ZSH, and also screen saver framework.
 * [navigation-tools](https://github.com/psprint/zsh-navigation-tools) :1st_place_medal: :hourglass_flowing_sand: - Adds `htop`-like `kill`, directory bookmarks browser, multi-word incremental history searcher and more.
+* [new-file-from-template](https://github.com/zpm-zsh/new-file-from-template) : :alarm_clock: :running_man: -  Generates file from template.
 * [nix-shell](https://github.com/chisui/zsh-nix-shell) : :hourglass_flowing_sand: - Plugin that lets you use ZSH as the default shell in a `nix-shell` environment.
-* [notify](https://github.com/marzocchi/zsh-notify) : :hourglass_flowing_sand: - A plugin for ZSH (on macOS and Linux) that posts desktop notifications when a command terminates with a non-zero exit status or when it took more than 30 seconds to complete, if the terminal application is in the background (or the command's terminal tab is inactive).
+* [notify](https://github.com/marzocchi/zsh-notify) : :alarm_clock: :walking_man: - A plugin for ZSH (on macOS and Linux) that posts desktop notifications when a command terminates with a non-zero exit status or when it took more than 30 seconds to complete, if the terminal application is in the background (or the command's terminal tab is inactive).
 * [nvm](https://github.com/lukechilds/zsh-nvm) :1st_place_medal: :hourglass_flowing_sand: :briefcase: - ZSH plugin for installing, updating and loading `nvm`.
 * [open-pr](https://github.com/caarlos0/zsh-open-pr) : - A ZSH plugin to open pull requests from command line.
 * [opp](https://github.com/hchbaw/opp.zsh) : - Vim's text-objects-ish for ZSH.
-* [pentest](https://github.com/jhwohlgemuth/oh-my-zsh-pentest-plugin) : :running_man: :hourglass_flowing_sand: - Aliases and functions for the lazy penetration tester.
-* [pr-git](https://github.com/zpm-zsh/pr-git) : :running_man: :hourglass_flowing_sand: - Creates a global variable with `git` status information that can be displayed in prompts.
-* [profile-secrets](https://github.com/gmatheu/shell-plugins) : :hourglass: - Securely keep sensitive variables (api tokens, passwords, etc) as part of your terminal init files. Uses gpg to encrypt/decrypt the file with your secrets.
+* [pentest](https://github.com/jhwohlgemuth/oh-my-zsh-pentest-plugin) : :hourglass: - Aliases and functions for the lazy penetration tester.
+* [pr-cwd](https://github.com/zpm-zsh/pr-cwd) : :alarm_clock: :running_man: - Creates a global variable with current working directory. Plugin has integration with [jocelynmallon/zshmarks](https://github.com/jocelynmallon/zshmarks).
+* [pr-git](https://github.com/zpm-zsh/pr-git) : :alarm_clock: :running_man: - Creates a global variable with `git` status information that can be displayed in prompts.
+* [profile-secrets](https://github.com/gmatheu/shell-plugins) : - Securely keep sensitive variables (api tokens, passwords, etc) as part of your terminal init files. Uses gpg to encrypt/decrypt the file with your secrets.
+* [project (gko)](https://github.com/gko/project) : :walking_man: :hourglass_flowing_sand: - Create node/python/ruby project both locally and on github(private or public repository).
 * [syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) :1st_place_medal: :alarm_clock: :running_man: - Add syntax highlighting to your ZSH. Make sure you load this _before_ zsh-users/zsh-history-substring-search or they will both break.
 * [sysadmin-util](https://github.com/skx/sysadmin-util) :1st_place_medal: :hourglass_flowing_sand: - Steve Kemp's collection of tool scripts for sysadmins.
 * [system-clipboard](https://github.com/kutsan/zsh-system-clipboard) : - Adds key bindings support for ZLE (Zsh Line Editor) clipboard operations for vi emulation keymaps. It works under Linux, macOS and Android (via Termux).
-* [tig](https://github.com/zdharma/zsh-tig-plugin) : :running_man: :hourglass_flowing_sand: - Automatically adds a few advanced bindings and also provides a ZSH-rewritten function and/or script `tig-pick`.
+* [tig](https://github.com/zdharma/zsh-tig-plugin) : :hourglass: - Automatically adds a few advanced bindings and also provides a ZSH-rewritten function and/or script `tig-pick`.
 * [tmux-zsh-vim-titles](https://github.com/MikeDacre/tmux-zsh-vim-titles) : - Create unified terminal titles for `tmux`, ZSH, and Vim/NVIM, modular.
 * [tsm](https://github.com/RobertAudi/tsm) : - Adds a [tmux](https://tmux.github.io) Session Manager.
 * [tumult](https://github.com/unixorn/tumult.plugin.zsh) :1st_place_medal: :walking_man: :hourglass_flowing_sand: - Adds tools for macOS.
-* [vim-mode](https://github.com/softmoth/zsh-vim-mode) : - Friendly `vi`-mode bindings, adding basic Emacs keys, incremental search, mode indicators and more.
+* [vim-mode](https://github.com/softmoth/zsh-vim-mode) : :walking_man: :hourglass_flowing_sand: - Friendly `vi`-mode bindings, adding basic Emacs keys, incremental search, mode indicators and more.
 * [wd](https://github.com/mfaerevaag/wd) :1st_place_medal: :hourglass: - Warp directory lets you jump to custom directories in ZSH, without using `cd`. Why? Because `cd` seems inefficient when the folder is frequently visited or has a long path.
 * [yeoman](https://github.com/edouard-lopez/yeoman-zsh-plugin) : - Edouard Lopez's Yeoman plugin for oh-my-zsh, compatible with yeoman version ≥1.0 (includes options and command auto-completion).
-* [you-should-use](https://github.com/MichaelAquilina/zsh-you-should-use) :1st_place_medal: :walking_man: :hourglass_flowing_sand: - ZSH plugin that reminds you to use those aliases you defined.
-* [z-a-bin-gem-node](https://github.com/zinit-zsh/z-a-bin-gem-node) :1st_place_medal: :alarm_clock: :running_man: - Zinit extension that a) exposes binaries without altering `$PATH`, b) installs Ruby gems and Node modules and easily exposes their binaries, c) updates the gems and modules on update of the associated plugin or snippet.
+* [you-should-use](https://github.com/MichaelAquilina/zsh-you-should-use) :1st_place_medal: :hourglass_flowing_sand: - ZSH plugin that reminds you to use those aliases you defined.
+* [z-a-bin-gem-node](https://github.com/zinit-zsh/z-a-bin-gem-node) :1st_place_medal: :running_man: :hourglass_flowing_sand: - Zinit extension that a) exposes binaries without altering `$PATH`, b) installs Ruby gems and Node modules and easily exposes their binaries, c) updates the gems and modules on update of the associated plugin or snippet.
 * [z-a-man](https://github.com/zinit-zsh/z-a-man) : :hourglass_flowing_sand: - Zinit extension that generates man pages for all plugins and snippets.
 * [z.lua](https://github.com/skywind3000/z.lua) :1st_place_medal: :alarm_clock: :running_man: - A command line tool which helps you navigate faster by learning your habits. An alternative to [z.sh](https://github.com/rupa/z) with windows and posix shells support and various improvements.
 * [zaw](https://github.com/zsh-users/zaw) :1st_place_medal: - ZSH anything.el-like widget.
 * [zconvey](https://github.com/zdharma/zconvey) :1st_place_medal: :hourglass_flowing_sand: - Adds ability to send commands to other ZSH sessions, you can use this to `cd $PWD` on all active Z shell sessions, for example.
-* [zflai](https://github.com/zdharma/zflai) : :walking_man: :hourglass_flowing_sand: - A fast logging framework for ZSH.
+* [zero](https://github.com/arlimus/zero.zsh) :1st_place_medal: - Zero's theme & plugin. Has variants for both light and dark terminal backgrounds.
+* [zflai](https://github.com/zdharma/zflai) : :hourglass_flowing_sand: - A fast logging framework for ZSH.
 * [zgdbm](https://github.com/zdharma/zgdbm) : - Adds GDBM as a plugin.
 * [zinit-console](https://github.com/zinit-zsh/zinit-console) : :walking_man: :hourglass_flowing_sand: – a semigraphical (curses) consolette for [zinit](#zinit) plugin manager.
 * [zredis](https://github.com/zdharma/zredis) :1st_place_medal: :hourglass: - Adds Redis database support, with `database_key` <-> `shell_variable` binding. Supports all data types.
-* [zsh-z](https://github.com/agkozak/zsh-z) :1st_place_medal: :alarm_clock: :running_man: - Jump quickly to directories that you have visited "frecently." A native ZSH port of `z.sh` - without `awk`, `sed`, `sort`, or `date`.
+* [zsh-z](https://github.com/agkozak/zsh-z) :1st_place_medal: :walking_man: :hourglass_flowing_sand: - Jump quickly to directories that you have visited "frecently." A native ZSH port of `z.sh` - without `awk`, `sed`, `sort`, or `date`.
 * [zshmarks](https://github.com/jocelynmallon/zshmarks) : - A port of Bashmarks (by Todd Werth), a simple command line bookmarking plugin, for oh-my-zsh.
-* [ZUI](https://github.com/zdharma/zui/) :1st_place_medal: :walking_man: :hourglass_flowing_sand: - ZSH User Interface library – CGI+DHTML-like rapid TUI application development with ZSH.
-* [zzcomplete](https://github.com/zdharma/zzcomplete) : :running_man: :hourglass_flowing_sand: - An alternate completer that allows to browse the man page of the command and select the needed option via a comfortable curses interface.
+* [ZUI](https://github.com/zdharma/zui/) :1st_place_medal: :hourglass: - ZSH User Interface library – CGI+DHTML-like rapid TUI application development with ZSH.
+* [zzcomplete](https://github.com/zdharma/zzcomplete) : :hourglass: - An alternate completer that allows to browse the man page of the command and select the needed option via a comfortable curses interface.
 
-# Themes (#60)
+# Themes (#65)
 
-* [agkozak](https://github.com/agkozak/agkozak-zsh-prompt) :1st_place_medal: :alarm_clock: :running_man: :briefcase: :chart_with_upwards_trend: - Uses three asynchronous methods to keep the ZSH prompt responsive while displaying the `git` status and indicators of SSH connection, exit codes, and `vi` mode, along with an abbreviated, `PROMPT_DIRTRIM`-style path. Very customizable. Asynchronous even on Cygwin and MSYS2.
-* [agnoster-j](https://github.com/apjanke/agnosterj-zsh-theme) : :running_man: :hourglass_flowing_sand: - Optimized for [solarized](https://ethanschoonover.com/solarized/) color scheme, `git` or other VCS tools, and unicode-compatible fonts. Includes status of last command run, user@hostname, `git` status decorations, working directory, whether running as root, whether background jobs are running, and other information.
-* [alien-minimal](https://github.com/eendroroy/alien-minimal) :1st_place_medal: :hourglass_flowing_sand: - Minimalist ZSH theme with `git` status displayed.
-* [alien](https://github.com/eendroroy/alien) :1st_place_medal: :alarm_clock: :walking_man: - Powerline-esque ZSH theme that shows `git` decorations and the exit code of the last command. Faster than many other prompts because it determines the `git` decorations asynchronously in a background process.
+* [agkozak](https://github.com/agkozak/agkozak-zsh-prompt) :1st_place_medal: :running_man: :hourglass_flowing_sand: :briefcase: :chart_with_upwards_trend: - Uses three asynchronous methods to keep the ZSH prompt responsive while displaying the `git` status and indicators of SSH connection, exit codes, and `vi` mode, along with an abbreviated, `PROMPT_DIRTRIM`-style path. Very customizable. Asynchronous even on Cygwin and MSYS2.
+* [agnoster-j](https://github.com/apjanke/agnosterj-zsh-theme) : :hourglass_flowing_sand: - Optimized for [solarized](https://ethanschoonover.com/solarized/) color scheme, `git` or other VCS tools, and unicode-compatible fonts. Includes status of last command run, user@hostname, `git` status decorations, working directory, whether running as root, whether background jobs are running, and other information.
+* [alien-minimal](https://github.com/eendroroy/alien-minimal) :1st_place_medal: :walking_man: :hourglass_flowing_sand: - Minimalist ZSH theme with `git` status displayed.
+* [alien](https://github.com/eendroroy/alien) :1st_place_medal: :hourglass_flowing_sand: - Powerline-esque ZSH theme that shows `git` decorations and the exit code of the last command. Faster than many other prompts because it determines the `git` decorations asynchronously in a background process.
 * [apollo](https://github.com/mjrafferty/apollo-zsh-theme) :1st_place_medal: :alarm_clock: :running_man: - A heavily customizable, compatible and performant ZSH theme that uses modules to enable features.
 * [astral](https://github.com/alphabetum/astral) : :hourglass_flowing_sand: - Theme for dark backgrounds with zen mode.
-* [bar](https://github.com/xp-bar/zsh-bar-theme) : :hourglass_flowing_sand: - Includes username, host, pwd, `git` status decorations and  3x hour reminders to drink water.
+* [bar](https://github.com/xp-bar/zsh-bar-theme) : :hourglass: - Includes username, host, pwd, `git` status decorations and  3x hour reminders to drink water.
 * [bklyn](https://github.com/gporrata/bklyn-zsh) :1st_place_medal: :hourglass_flowing_sand: - Variant of [Powerlevel9k](https://github.com/bhilburn/powerlevel9k) with customizations applied.
 * [blox](https://github.com/yardnsm/blox-zsh-theme) : :hourglass_flowing_sand: - A minimal and fast ZSH theme that shows you what you need. It consists of blocks: each block is shown inside a pair of \[square brackets\], and you can add blocks by simply creating a function.
 * [bronze](https://github.com/reujab/bronze) :1st_place_medal: - A cross-shell customizable powerline-like prompt with icons written in go. Requires [nerd-fonts](https://github.com/ryanoasis/nerd-fonts).
-* [bullet-train](https://github.com/caiogondim/bullet-train.zsh) :1st_place_medal: :hourglass: - Inspired by the Powerline Vim plugin. It aims for simplicity, showing information only when it's relevant.
+* [bullet-train](https://github.com/caiogondim/bullet-train.zsh) :1st_place_medal: - Inspired by the Powerline Vim plugin. It aims for simplicity, showing information only when it's relevant.
 * [chaffee](https://github.com/jasonchaffee/chaffee.zsh-theme) : - Based on sorin. Shows the current active versions of Java, Scala, Go, Node, Python and Ruby.
 * [clean (BrandonRoehl)](https://github.com/BrandonRoehl/zsh-clean) :1st_place_medal: - A minimalist variant of [pure](https://github.com/sindresorhus/pure). Pure is not clean, clean is not pure.
-* [czsh](https://github.com/Cellophan/czsh) :1st_place_medal: :alarm_clock: :walking_man: - [ZSH](https://en.wikipedia.org/wiki/Z_shell) with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) and the [agnoster](https://github.com/agnoster/agnoster-zsh-theme) theme in a container.
-* [dracula](https://github.com/dracula/zsh) :1st_place_medal: :hourglass_flowing_sand: - A dark theme for Atom, Alfred, Chrome DevTools, iTerm 2, Sublime Text, Textmate, Terminal.app, Vim, Xcode, and ZSH.
+* [czsh](https://github.com/Cellophan/czsh) :1st_place_medal: :alarm_clock: :running_man: - [ZSH](https://en.wikipedia.org/wiki/Z_shell) with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) and the [agnoster](https://github.com/agnoster/agnoster-zsh-theme) theme in a container.
+* [dracula](https://github.com/dracula/zsh) :1st_place_medal: :hourglass: - A dark theme for Atom, Alfred, Chrome DevTools, iTerm 2, Sublime Text, Textmate, Terminal.app, Vim, Xcode, and ZSH.
 * [filthy](https://github.com/molovo/filthy) : - A disgustingly clean ZSH prompt.
 * [fishy-lite](https://github.com/sudorook/fishy-lite) : :hourglass_flowing_sand: - Fork of the original [fishy](https://github.com/robbyrussell/oh-my-zsh/wiki/themes#fishy) theme in oh-my-zsh with much of the extraneous stuff cut out to improve load speeds. Includes a battery gauge and `git` status display that can be enabled on the right-hand side of the prompt.
-* [garrett](https://github.com/chauncey-garrett/zsh-prompt-garrett) : :hourglass: - Prezto prompt with the information you need the moment you need it.
+* [garrett](https://github.com/chauncey-garrett/zsh-prompt-garrett) : - Prezto prompt with the information you need the moment you need it.
 * [git-prompt](https://github.com/olivierverdier/zsh-git-prompt) :1st_place_medal: - Displays information about the current `git` repository. In particular the branch name, difference with remote branch, number of files staged or changed, etc.
 * [hyperzsh](https://github.com/tylerreckart/hyperzsh) : - Gives you a comprehensive overview of the branch you're working on and the status of your repository without cluttering your terminal.
 * [infoline](https://github.com/hevi9/infoline-zsh-theme) : - Clean theme that shows `git` status, background jobs, remote host, and other information.
@@ -166,13 +170,13 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [jovial](https://github.com/zthxxx/jovial) : - Shows host, user, path, development environment, `git` branch, which python venv is active.
 * [jwalter](https://github.com/jeffwalter/zsh-jwalter) : - Powerline-style theme with `git`, `svn`, `npm`, `rvm` and network awareness. Requires Powerline-compatible terminal font.
 * [kiss](https://github.com/rileytwo/kiss) : :alarm_clock: :running_man: - Simple theme for oh-my-zsh, VSCode, iTerm2, Neovim, and RStudio. Includes `git` status decorations.
-* [lambda-pure](https://github.com/marszall87/lambda-pure) :1st_place_medal: - A minimal ZSH theme, based on Pure, with added NodeJS version.
-* [liquidprompt](https://github.com/nojhan/liquidprompt) :1st_place_medal: :hourglass: :briefcase: - A full-featured & carefully designed adaptive prompt with useful information when you need it. It shows you what you need when you need it. You will notice what changes when it changes, saving time and frustration.
+* [lambda-pure](https://github.com/marszall87/lambda-pure) :1st_place_medal: :hourglass_flowing_sand: - A minimal ZSH theme, based on Pure, with added NodeJS version.
+* [liquidprompt](https://github.com/nojhan/liquidprompt) :1st_place_medal: :briefcase: - A full-featured & carefully designed adaptive prompt with useful information when you need it. It shows you what you need when you need it. You will notice what changes when it changes, saving time and frustration.
 * [materialshell](https://github.com/carloscuesta/materialshell) : :hourglass: - A [material design](https://material.io/guidelines/style/color.html) theme for your shell with a good contrast and color pops at the important parts. Designed to be easy on the eyes.
 * [minimal2](https://github.com/PatTheMav/minimal2) : - A minimal and extensible ZSH theme. Forked from [subnixr's original](https://github.com/subnixr/minimal) and adapted for [Zimfw](https://github.com/zimfw/zimfw).
 * [minimal](https://github.com/subnixr/minimal) : - Minimal yet feature-rich theme.
 * [newt](https://github.com/softmoth/zsh-prompt-newt) : - Fat & fast theme – beautiful inside and out, styled segments done right.
-* [nox](https://github.com/kbrsh/nox) :1st_place_medal: :walking_man: :hourglass_flowing_sand: - Dark theme, displays the current working directory and git status.
+* [nox](https://github.com/kbrsh/nox) :1st_place_medal: :hourglass: - Dark theme, displays the current working directory and git status.
 * [odin](https://github.com/tylerreckart/odin) : - Odin is a `git`-flavored ZSH theme.
 * [oh-my-git](https://github.com/arialdomartini/oh-my-git) :1st_place_medal: - An opinionated prompt for bash and ZSH.
 * [poncho](https://github.com/RainyDayMedia/oh-my-zsh-poncho) : - RDM's basic oh-my-zsh custom theme.
@@ -180,24 +184,29 @@ minutes you'll be able to grep interesting plugins with your eyes!
 * [powerlevel10k](https://github.com/romkatv/powerlevel10k) :1st_place_medal: :alarm_clock: :running_man: - A fast reimplementation of [powerlevel9k](https://github.com/bhilburn/powerlevel9k) ZSH theme. Can be used as a drop-in replacement for powerlevel9k, when given the same configuration options it will generate the same prompt, only faster.
 * [powerlevel9k](https://github.com/bhilburn/powerlevel9k) :1st_place_medal: :briefcase: - Powerlevel9k is a theme for ZSH which uses [Powerline Fonts](https://github.com/powerline/fonts). It can be used with vanilla ZSH or ZSH frameworks such as [Oh-My-Zsh](https://github.com/robbyrussell/oh-my-zsh), [Prezto](https://github.com/sorin-ionescu/prezto), [Antigen](https://github.com/zsh-users/antigen), and [many others](https://github.com/bhilburn/powerlevel9k/wiki/Install-Instructions).
 * [powerline (jeremy)](https://github.com/jeremyFreeAgent/oh-my-zsh-powerline-theme) : - Another take on a powerline theme. Nicely configurable, but requires at least a 256 color-capable terminal with a powerline-compatible terminal font.
-* [powerline-go](https://github.com/justjanne/powerline-go) :1st_place_medal: :running_man: :hourglass_flowing_sand: - A beautiful and useful low-latency prompt, written in golang. Includes `git` and `hg` status decorations, exit status of the last command run, current Python virtualenv, whether you're in a [nix](https://nixos.org/) shell, and is easy to extend.
-* [powerline-hs](https://github.com/rdnetto/powerline-hs) :1st_place_medal: :hourglass_flowing_sand: - A [Powerline](https://github.com/powerline/powerline) clone written in Haskell. It is significantly faster than the original implementation, and makes the shell noticeably more responsive.
-* [powerline-pills](https://github.com/lucasqueiroz/powerline-pills-zsh) : :hourglass: - Created in Ruby, uses powerline characters to simulate pills with useful information.
+* [powerline-go](https://github.com/justjanne/powerline-go) :1st_place_medal: :hourglass_flowing_sand: - A beautiful and useful low-latency prompt, written in golang. Includes `git` and `hg` status decorations, exit status of the last command run, current Python virtualenv, whether you're in a [nix](https://nixos.org/) shell, and is easy to extend.
+* [powerline-hs](https://github.com/rdnetto/powerline-hs) :1st_place_medal: :hourglass: - A [Powerline](https://github.com/powerline/powerline) clone written in Haskell. It is significantly faster than the original implementation, and makes the shell noticeably more responsive.
+* [powerline-pills](https://github.com/lucasqueiroz/powerline-pills-zsh) : - Created in Ruby, uses powerline characters to simulate pills with useful information.
 * [powerline-shell (b-ryan)](https://github.com/b-ryan/powerline-shell) :1st_place_medal: - Beautiful and useful prompt generator for Bash, ZSH, Fish, and tcsh.
 * [powerline-shell (banga)](https://github.com/b-ryan/powerline-shell) :1st_place_medal: - A [powerline](https://github.com/Lokaltog/vim-powerline)-like prompt for Bash, ZSH and Fish. Shows important details about git/svn/hg/fossil branch and is easy to customize/extend.
 * [powerline-train](https://github.com/sherubthakur/powerline-train) : - A powerline variant.
-* [prompt_j2](https://github.com/malinoskj2/prompt_j2) : - Has a dynamic exit status indicator, can change to two lines dynamically to display context.
-* [pure-agnoster](https://github.com/yourfin/pure-agnoster) :1st_place_medal: :hourglass: - Mashup of pure and agnoster. Has `git` decorations and works well with both dark and light terminal backgrounds.
-* [pure](https://github.com/sindresorhus/pure) :1st_place_medal: :alarm_clock: :running_man: - Pretty, minimal and fast ZSH prompt.
-* [purify](https://github.com/banminkyoz/purify) :1st_place_medal: :hourglass: - Simple, fast & cool prompt.
-* [shellder](https://github.com/simnalamburt/shellder) :1st_place_medal: - Minimal theme with git branch display. Requires a Powerline-compatible font.
-* [silver](https://github.com/reujab/silver) : :hourglass: - A cross-shell customizable powerline-like prompt heavily inspired by [Agnoster](https://github.com/agnoster/agnoster-zsh-theme). A faster rust port of [bronze](https://github.com/reujab/bronze). Requires [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts).
+* [prompt_j2](https://github.com/malinoskj2/prompt_j2) : :walking_man: :hourglass_flowing_sand: - Has a dynamic exit status indicator, can change to two lines dynamically to display context.
+* [pure-agnoster](https://github.com/yourfin/pure-agnoster) :1st_place_medal: :hourglass_flowing_sand: - Mashup of pure and agnoster. Has `git` decorations and works well with both dark and light terminal backgrounds.
+* [pure](https://github.com/sindresorhus/pure) :1st_place_medal: :alarm_clock: :walking_man: - Pretty, minimal and fast ZSH prompt.
+* [purify](https://github.com/banminkyoz/purify) :1st_place_medal: :alarm_clock: - Simple, fast & cool prompt.
+* [shellder](https://github.com/simnalamburt/shellder) :1st_place_medal: :running_man: :hourglass_flowing_sand: - Minimal theme with git branch display. Requires a Powerline-compatible font.
+* [silver](https://github.com/reujab/silver) : :alarm_clock: :running_man: - A cross-shell customizable powerline-like prompt heavily inspired by [Agnoster](https://github.com/agnoster/agnoster-zsh-theme). A faster rust port of [bronze](https://github.com/reujab/bronze). Requires [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts).
 * [skeletor-syntax](https://github.com/ramonmcros/skeletor-syntax) :1st_place_medal: - Theme collection for Atom, Prism and ZSH inspired by Skeletor from He-Man and the Masters of the Universe.
 * [slimline](https://github.com/mengelbrecht/slimline) :1st_place_medal: :hourglass_flowing_sand: - Minimal, fast and elegant ZSH prompt. Displays the right information at the right time.
-* [sm](https://github.com/blyndusk/sm-theme) : :hourglass_flowing_sand: A **Simplist** & **Minimalist** theme for your **favorite** terminal. Includes `git` status decorations.
-* [snakypy](https://github.com/snakypy/snakypy-prompt) :1st_place_medal: :running_man: :hourglass_flowing_sand: - Focused on the needs of [Python](https://www.python.org/) developers. Displays `git` and `venv` status decorations. Includes an installer script.
+* [sm](https://github.com/blyndusk/sm-theme) :1st_place_medal: :running_man: :hourglass_flowing_sand: A **Simplist** & **Minimalist** theme for your **favorite** terminal. Includes `git` status decorations.
 * [solarized-powerline (KuoE0)](https://github.com/KuoE0/oh-my-zsh-solarized-powerline-theme) : - Solarized powerline variant.
-* [spaceship](https://github.com/denysdovhan/spaceship-prompt) :1st_place_medal: :alarm_clock: :running_man: :briefcase: :chart_with_upwards_trend: - Theme with `git`, `nvm`, rvm/rbenv/chruby, python, `ssh` and other useful status indicators.
-* [statusline](https://github.com/el1t/statusline) : :hourglass: - A responsive ZSH theme that provides informational segments when you need them.
-* [tvline](https://github.com/thvitt/tvline) :1st_place_medal: :hourglass_flowing_sand: - Derived from the [agnoster](https://gist.github.com/agnoster/3712874) theme, adds powerline font enhancements.
+* [spaceship](https://github.com/denysdovhan/spaceship-prompt) :1st_place_medal: :walking_man: :hourglass_flowing_sand: :briefcase: :chart_with_upwards_trend: - Theme with `git`, `nvm`, rvm/rbenv/chruby, python, `ssh` and other useful status indicators.
+* [statusline](https://github.com/el1t/statusline) : - A responsive ZSH theme that provides informational segments when you need them.
+* [tvline](https://github.com/thvitt/tvline) :1st_place_medal: :hourglass: - Derived from the [agnoster](https://gist.github.com/agnoster/3712874) theme, adds powerline font enhancements.
 * [wild-cherry](https://github.com/mashaal/wild-cherry) :1st_place_medal: - A fairy-tale inspired theme for ZSH, iTerm 2, Sublime, Atom, & Mou.
+* [zero](https://github.com/arlimus/zero.zsh) :1st_place_medal: - Zero's theme & plugin. Has variants for both light and dark terminal backgrounds.
+* [zinc](https://gitlab.com/robobenklein/zinc) :1st_place_medal: :hourglass: - A blazing-fast, pure ZSH, mixed asynchronous powerline prompt that's easily extensible and extremely configurable.
+* [zwsh](https://github.com/naens/zwsh) :1st_place_medal: - A Zpm3/Wordstar mode/theme for ZSH.
+* [Awesome Terminal Fonts](https://github.com/gabrielelana/awesome-terminal-fonts) : :hourglass_flowing_sand: - A family of fonts that includes some nice monospaced Icons.
+* [Fantasque-sans](https://github.com/belluzj/fantasque-sans) :1st_place_medal: :hourglass: - Another Powerline-compatible font.
+* [Powerline patched font collection](https://github.com/powerline/fonts) :1st_place_medal: - A collection of a dozen or so fonts patched to include powerline gylphs.
