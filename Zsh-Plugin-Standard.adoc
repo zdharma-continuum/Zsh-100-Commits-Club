@@ -154,6 +154,9 @@ if [[ $PMSPEC != *f* ]] {
 Above snippet added to the `plugin.zsh` file will add the directory to the
 `$fpath` with the compatibiliy with any new plugin managers preserved.
 
+Existence of the `functions` subdirectory cancels the normal adding of the main
+plugin directory to `$fpath`. 
+
 ##### Adoption Status
 
 1. Plugin managers: link:https://github/com/zpm-zsh/zpm[Zpm]
