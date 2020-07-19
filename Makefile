@@ -20,10 +20,10 @@ Zsh-Plugin-Standard.pdf: Zsh-Plugin-Standard.adoc
 
 gh-pages: all
 	@mkdir -p ~/tmp/znsh
-	@mv -v *.html *.pdf ~/tmp/znsh
+	@mv -v *.html ~/tmp/znsh
 	git checkout gh-pages
-	@cp -v ~/tmp/znsh/*.html ~/tmp/znsh/*.pdf .
-	git add -A *.pdf *.html
+	@cp -v ~/tmp/znsh/*.html  .
+	git add -A *.html
 	git commit && git push origin gh-pages
 
 master:
