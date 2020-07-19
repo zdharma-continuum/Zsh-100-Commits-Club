@@ -167,11 +167,11 @@ plugin directory to `$fpath`.
 ## 3. Binaries Directory
 
 Plugins sometimes provide a runnable script or program, either for their
-internal use or for the end user. It is proposed that for the latter (it is
-recommended, that for internal use, the runnable be called via the `$0` value
-obtained as described above), the plugin shall use a `bin/` subdirectory inside
-its main dir. The runnable should be put into the directory with a `+x` access
-right assigned.
+internal use or for the end user. It is proposed that for the latter, the plugin
+shall use a `bin/` subdirectory inside its main dir (it is recommended, that for
+internal use, the runnable be called via the `$0` value obtained as described
+above). The runnable should be put into the directory with a `+x` access right
+assigned.
 
 The task of the plugin manager should be:
 
