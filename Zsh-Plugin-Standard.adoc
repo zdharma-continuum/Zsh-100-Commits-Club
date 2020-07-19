@@ -159,11 +159,40 @@ plugin directory to `$fpath`.
 
 ##### Adoption Status
 
-1. Plugin managers: link:https://github/com/zpm-zsh/zpm[Zpm]
+1. Plugin managers: link:https://github.com/zpm-zsh/zpm[Zpm],
+   link:https://github.com/zdharma/zinit[Zinit].
+
+
+[#funcs-dir]
+## 3. Binaries Directory
+
+Plugins sometimes provide a runnable script or program, either for their
+internal use or for the end user. It is proposed that for the latter (it is
+recommended, that for internal use, the runnable be called via the `$0` value
+obtained as described above), the plugin shall use a `bin/` subdirectory inside
+its main dir. The runnable should be put into the directory with a `+x` access
+right assigned.
+
+The task of the plugin manager should be:
+
+1. Before sourcing the plugin's script it should test, if the `bin/` directory
+   exists within the plugin directory.
+2. If it does, it should add the directory to `$PATH`.
+3. The plugin manager can also, instead of extending the `$PATH`, create a
+   *shim* (i.e.: a forwarder script) or a symbolic link inside a common
+   directory that's already added to `$PATH` (to limit extending it).
+4. The plugin manager is permitted to do optional things like ensuring `+x`
+   access rights on the directory contents.
+
+##### Adoption Status
+
+1. Plugin managers.
+
+It's a recent addition to the standard and no plugin managers support it yet.
 
 
 [#unload-fun]
-## 3. Unload Function
+## 4. Unload Function
 
 If a plugin is named e.g. `kalc` (and is available via `an-user/kalc`
 plugin-ID), then it can provide a function, `kalc_plugin_unload`, that can be
@@ -213,7 +242,7 @@ options), to also delete the function itself.
       the function to completely unload the plugin.
 
 [#unload-register-call]
-## 4. `@zsh-plugin-run-on-unload` Call
+## 5. `@zsh-plugin-run-on-unload` Call
 
 The plugin manager can provide a function `@zsh-plugin-run-on-unload` which
 has the following call syntax:
@@ -237,7 +266,7 @@ It's a recent addition to the standard and only one plugin manager, Zinit,
 implements it.
 
 [#update-register-call]
-## 5. `@zsh-plugin-run-on-update` Call
+## 6. `@zsh-plugin-run-on-update` Call
 
 The plugin manager can provide a function `@zsh-plugin-run-on-update` which
 has the following call syntax:
@@ -259,7 +288,7 @@ It's a recent addition to the standard and only one plugin manager, Zinit,
 implements it.
 
 [#indicator]
-## 6. Plugin Manager Activity Indicator
+## 7. Plugin Manager Activity Indicator
 
 Plugin managers should set the `$zsh_loaded_plugins` array to contain all
 previously loaded plugins and the plugin currently being loaded (as the last
@@ -300,7 +329,7 @@ link:https://github.com/tarjoilija/zgen/pull/124[PR] will be merged)
    link:https://github.com/search?q=if+%22zsh_loaded_plugins%22&type=Code[GitHub search]
 
 [#zpfx]
-## 7. Global Parameter With PREFIX For Make, Configure, Etc.
+## 8. Global Parameter With PREFIX For Make, Configure, Etc.
 
 Plugin managers may export the parameter `$ZPFX` which should contain a path to
 a directory dedicated for user-land software, i.e. for directories `$ZPFX/bin`,
@@ -329,7 +358,7 @@ No-narration facts-list related to `$ZPFX`:
 1. Plugin managers: Zinit, link:https://github/com/zpm-zsh/zpm[Zpm]
 
 [#pmspec]
-## 8. Global Parameter holding the plugin-manager's capabilities
+## 9. Global Parameter holding the plugin-manager's capabilities
 
 The above paragraphs of the standard spec each constitute a capability, a
 feature of the plugin manager. It would make sense that the capabilities are
