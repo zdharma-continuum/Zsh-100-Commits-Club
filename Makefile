@@ -1,5 +1,4 @@
-all: Zsh-Native-Scripting-Handbook.html Zsh-Plugin-Standard.html \
-	Zsh-Native-Scripting-Handbook.pdf Zsh-Plugin-Standard.pdf
+all: Zsh-Native-Scripting-Handbook.html Zsh-Plugin-Standard.html
 
 README.html: README.adoc
 	asciidoctor -a reproducible README.adoc
