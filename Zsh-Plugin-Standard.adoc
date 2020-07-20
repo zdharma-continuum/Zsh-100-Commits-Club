@@ -123,6 +123,7 @@ link:https://github.com/tarjoilija/zgen/pull/124[PR] will be merged)
    link:https://github.com/search?q=%22${ZERO:-${0:%23$ZSH_ARGZERO}}%22&type=Code[GitHub
    search]
 
+
 [#funcs-dir]
 ## 2. Functions Directory
 
@@ -184,11 +185,19 @@ The task of the plugin manager should be:
 4. The plugin manager is permitted to do optional things like ensuring `+x`
    access rights on the directory contents.
 
+The `$PMSPEC` code letter for the feature is `b`, and it allows for the plugin
+to handle the `$PATH` extending itself, via, e.g.:
+
+```shell
+if [[ $PMSPEC != *b* ]] {
+    path+=( "${0:h}/bin" )
+}
+```
+
 ##### Adoption Status
 
-1. Plugin managers.
+1. Plugin managers: link:https://github/com/zpm-zsh/zpm[Zpm]
 
-It's a recent addition to the standard and no plugin managers support it yet.
 
 
 [#unload-fun]
@@ -357,6 +366,7 @@ No-narration facts-list related to `$ZPFX`:
 
 1. Plugin managers: Zinit, link:https://github/com/zpm-zsh/zpm[Zpm]
 
+
 [#pmspec]
 ## 9. Global Parameter holding the plugin-manager's capabilities
 
@@ -368,7 +378,8 @@ letters each informing the plugin, that the plugin manager has support for a
 given feature:
 
 - `0` – the plugin manager provides the `ZERO` parameter,
-- `f` - … supports the `functions` subdirectory,
+- `f` - … supports the `functions/` subdirectory,
+- `b` - … supports the `bin/` subdirectory,
 - `u` - … the unload function,
 - `U` - … the `@zsh-plugin-run-on-unload` call,
 - `p` – … the `@zsh-plugin-run-on-update` call,
@@ -388,6 +399,7 @@ if [[ $PMSPEC != *f* ]] {
 ##### Adoption Status
 
 1. Plugin managers: Zinit, link:https://github/com/zpm-zsh/zpm[Zpm]
+
 
 [#best-practices]
 ## Zsh Plugin-Programming Best Practices
@@ -714,6 +726,7 @@ even use a common hash name – `Plugins` – to lower the pollution even more.
 [appendix]
 == Revision History (History Of Updates To The Document)
 
+v1.1.1, 21/02/2020: Added `Binaries Directory` section +
 v1.1, 21/02/2020: Changed the handler-function prefix character to `→` +
 v1.09, 01/29/2020: 1/ Added `Standard Parameter Naming` section +
 v1.09, 01/29/2020: 2/ Added `Standard Plugins Hash` section +
