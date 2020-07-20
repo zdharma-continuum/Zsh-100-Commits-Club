@@ -116,7 +116,7 @@ general don't have to quote assignments.
 
 ##### Adoption Status
 
-1. Plugin managers: Zinit, link:https://github/com/zpm-zsh/zpm[Zpm], Zgen (after and if the
+1. Plugin managers: Zinit, link:https://github.com/zpm-zsh/zpm[Zpm], Zgen (after and if the
 link:https://github.com/tarjoilija/zgen/pull/124[PR] will be merged)
 
 2. Plugins:
@@ -196,7 +196,7 @@ if [[ $PMSPEC != *b* ]] {
 
 ##### Adoption Status
 
-1. Plugin managers: link:https://github/com/zpm-zsh/zpm[Zpm]
+1. Plugin managers: link:https://github.com/zpm-zsh/zpm[Zpm]
 
 
 
@@ -330,7 +330,7 @@ around `${0:h}` to make it compatible with the `SH_WORD_SPLIT` option.
 
 ##### Adoption Status
 
-1. Plugin managers: Zinit, link:https://github/com/zpm-zsh/zpm[Zpm], Zgen (after and if the
+1. Plugin managers: Zinit, link:https://github.com/zpm-zsh/zpm[Zpm], Zgen (after and if the
 link:https://github.com/tarjoilija/zgen/pull/124[PR] will be merged)
 
 
@@ -364,7 +364,7 @@ No-narration facts-list related to `$ZPFX`:
 
 ##### Adoption Status
 
-1. Plugin managers: Zinit, link:https://github/com/zpm-zsh/zpm[Zpm]
+1. Plugin managers: Zinit, link:https://github.com/zpm-zsh/zpm[Zpm]
 
 
 [#pmspec]
@@ -398,7 +398,7 @@ if [[ $PMSPEC != *f* ]] {
 
 ##### Adoption Status
 
-1. Plugin managers: Zinit, link:https://github/com/zpm-zsh/zpm[Zpm]
+1. Plugin managers: Zinit, link:https://github.com/zpm-zsh/zpm[Zpm]
 
 
 [#best-practices]
