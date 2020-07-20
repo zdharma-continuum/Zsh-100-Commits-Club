@@ -789,17 +789,25 @@ access rights on the directory contents.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>The <code>$PMSPEC</code> code letter for the feature is <code>b</code>, and it allows for the plugin
+to handle the <code>$PATH</code> extending itself, via, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">if [[ $PMSPEC != *b* ]] {
+    path+=( "${0:h}/bin" )
+}</code></pre>
+</div>
+</div>
 <div class="sect4">
 <h5 id="_adoption_status_3">Adoption Status</h5>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Plugin managers.</p>
+<p>Plugin managers: <a href="https://github/com/zpm-zsh/zpm">Zpm</a></p>
 </li>
 </ol>
-</div>
-<div class="paragraph">
-<p>It&#8217;s a recent addition to the standard and no plugin managers support it yet.</p>
 </div>
 </div>
 </div>
@@ -1074,7 +1082,10 @@ given feature:</p>
 <p><code>0</code> – the plugin manager provides the <code>ZERO</code> parameter,</p>
 </li>
 <li>
-<p><code>f</code> - … supports the <code>functions</code> subdirectory,</p>
+<p><code>f</code> - … supports the <code>functions/</code> subdirectory,</p>
+</li>
+<li>
+<p><code>b</code> - … supports the <code>bin/</code> subdirectory,</p>
 </li>
 <li>
 <p><code>u</code> - … the unload function,</p>
@@ -1541,7 +1552,8 @@ even use a common hash name – <code>Plugins</code> – to lower the pollution 
 <h2 id="appendix">Appendix A: Revision History (History Of Updates To The Document)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>v1.1, 21/02/2020: Changed the handler-function prefix character to <code>→</code><br>
+<p>v1.1.1, 21/02/2020: Added <code>Binaries Directory</code> section<br>
+v1.1, 21/02/2020: Changed the handler-function prefix character to <code>→</code><br>
 v1.09, 01/29/2020: 1/ Added <code>Standard Parameter Naming</code> section<br>
 v1.09, 01/29/2020: 2/ Added <code>Standard Plugins Hash</code> section<br>
 v1.08, 01/29/2020: Added the <code>PMSPEC</code> section<br>
