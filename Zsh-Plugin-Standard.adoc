@@ -53,7 +53,7 @@ cover the information of how to write a Zsh plugin. +
 To get the plugin’s location, plugins should do:
 
 ```shell
-0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
+0="${ZERO:-${${0:#$ZSH_ARGZERO}:-${(%):-%N}}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
 
 # Then ${0:h} to get plugin’s directory
@@ -726,6 +726,7 @@ even use a common hash name – `Plugins` – to lower the pollution even more.
 [appendix]
 == Revision History (History Of Updates To The Document)
 
+v1.1.5, 06/11/2020: Changed the `$0=…` assignment to a more straightforward one +
 v1.1.1, 21/02/2020: Added `Binaries Directory` section +
 v1.1, 21/02/2020: Changed the handler-function prefix character to `→` +
 v1.09, 01/29/2020: 1/ Added `Standard Parameter Naming` section +
