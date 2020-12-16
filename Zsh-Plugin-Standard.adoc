@@ -116,7 +116,7 @@ general don't have to quote assignments.
 
 ##### Adoption Status
 
-1. Plugin managers: Zinit, link:https://github.com/zpm-zsh/zpm[Zpm], Zgen (after and if the
+1. Plugin managers: Zinit, link:https://github.com/zpm-zsh/zpm[Zpm], link:https://github.com/jandamm/zgenom[Zgenom], Zgen (after and if the
 link:https://github.com/tarjoilija/zgen/pull/124[PR] will be merged)
 
 2. Plugins:
@@ -161,7 +161,7 @@ plugin directory to `$fpath`.
 ##### Adoption Status
 
 1. Plugin managers: link:https://github.com/zpm-zsh/zpm[Zpm],
-   link:https://github.com/zdharma/zinit[Zinit].
+   link:https://github.com/zdharma/zinit[Zinit], link:https://github.com/jandamm/zgenom[Zgenom].
 
 
 [#bin-dir]
@@ -196,7 +196,7 @@ if [[ $PMSPEC != *b* ]] {
 
 ##### Adoption Status
 
-1. Plugin managers: link:https://github.com/zpm-zsh/zpm[Zpm]
+1. Plugin managers: link:https://github.com/zpm-zsh/zpm[Zpm], link:https://github.com/jandamm/zgenom[Zgenom] (when you set `ZGENOM_AUTO_ADD_BIN=1`)
 
 
 
@@ -330,7 +330,7 @@ around `${0:h}` to make it compatible with the `SH_WORD_SPLIT` option.
 
 ##### Adoption Status
 
-1. Plugin managers: Zinit, link:https://github.com/zpm-zsh/zpm[Zpm], Zgen (after and if the
+1. Plugin managers: Zinit, link:https://github.com/zpm-zsh/zpm[Zpm], link:https://github.com/jandamm/zgenom[Zgenom], Zgen (after and if the
 link:https://github.com/tarjoilija/zgen/pull/124[PR] will be merged)
 
 
@@ -364,7 +364,7 @@ No-narration facts-list related to `$ZPFX`:
 
 ##### Adoption Status
 
-1. Plugin managers: Zinit, link:https://github.com/zpm-zsh/zpm[Zpm]
+1. Plugin managers: Zinit, link:https://github.com/zpm-zsh/zpm[Zpm], link:https://github.com/jandamm/zgenom[Zgenom].
 
 
 [#pmspec]
@@ -398,7 +398,7 @@ if [[ $PMSPEC != *f* ]] {
 
 ##### Adoption Status
 
-1. Plugin managers: Zinit, link:https://github.com/zpm-zsh/zpm[Zpm]
+1. Plugin managers: Zinit, link:https://github.com/zpm-zsh/zpm[Zpm], link:https://github.com/jandamm/zgenom[Zgenom]
 
 
 [#best-practices]
