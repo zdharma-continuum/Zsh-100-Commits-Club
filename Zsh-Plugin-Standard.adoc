@@ -4,7 +4,7 @@ v1.0, 11/22/2019
 :source-highlighter: rouge
 :toc:
 
-ifdef::backend-html5[The document is also available as a link:http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.pdf[PDF].]
+ifdef::backend-html5[The document is also available as a link:https://zdharma-continuum.github.io/Zsh-100-Commits-Club/Zsh-Plugin-Standard.pdf[PDF].]
 
 ## What Is A Zsh Plugin?
 
