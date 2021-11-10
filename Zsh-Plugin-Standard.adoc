@@ -161,7 +161,7 @@ plugin directory to `$fpath`.
 ##### Adoption Status
 
 1. Plugin managers: link:https://github.com/zpm-zsh/zpm[Zpm],
-   link:https://github.com/zdharma/zinit[Zinit], link:https://github.com/jandamm/zgenom[Zgenom].
+   link:https://github.com/zdharma-continuum/zinit[Zinit], link:https://github.com/jandamm/zgenom[Zgenom].
 
 
 [#bin-dir]
