@@ -1,6 +1,6 @@
 # Zsh Plugin Standard
-Sebastian Gniazdowski <psprint@zdharma.org>
-v1.0, 11/22/2019
+Sebastian Gniazdowski <sgniazdowski@gmail.com>
+v1.1.7, 07/26/2023
 :source-highlighter: rouge
 :toc:
 
@@ -53,8 +53,7 @@ cover the information of how to write a Zsh plugin. +
 To get the plugin’s location, plugins should do:
 
 ```shell
-0="${ZERO:-${${0:#$ZSH_ARGZERO}:-${(%):-%N}}}"
-0="${${(M)0:#/*}:-$PWD/$0}"
+0="${ZERO:-${${${(M)${0::=${(%):-%x}}:#/*}:-$PWD/$0}:A}}"
 
 # Then ${0:h} to get plugin’s directory
 ```
@@ -73,28 +72,26 @@ The one-line code above will:
         (link:http://www.zsh.org/mla/workers/2017/msg01827.html[comparison]
         note that it’s not for a compiled script).
 
-3. Use `$0` if it doesn’t contain the path to the Zsh binary,
+3. Use `%x` expansion otherwise.
 
-      - plugin manager will still be able to set `$0`, although more difficultly
-        (requires `unsetopt function_argzero` before sourcing plugin script, and
-        `0=…​` assignment),
+      - it is an universal expansion that returns source file path even for
+        autoloaded functions (and also of course for sourced scripts, like
+        the plugin script), so you can use it also in the auto-funs source
+        files (tested by author) or hash-bang scripts (tested, too),
 
       - `unsetopt function_argzero` will be detected (it causes `$0` not to
-        contain plugin-script path, but path to Zsh binary, if not overwritten
-        by a `0=…​` assignment),
-    
+        contain plugin-script path, but path to Zsh binary, like `/bin/zsh`),
+
       - `setopt posix_argzero` will be detected (as above).
 
-4. Use `%N` prompt expansion flag, which always gives absolute path to script,
+4. The `%x` expansion path will be tested to be absolute, and if not, `$PWD`
+   (current working dir) will be prepended to fix this.
 
-      - plugin manager cannot alter this (no advanced loading of plugin
-        is possible), but simple plugin-file sourcing (without a plugin
-        manager) will be saved from breaking caused by the mentioned
-        `*_argzero` options, so this is a very good last-resort
-        fallback.
-
-5. Finally, in the second line, it will ensure that `$0` contains an absolute
-   path by prepending it with `$PWD` if necessary.
+5. Finally, the `:A` modifier will be applied in to resolve any
+   symbolic links and unneeded `../` components. This step is taken in
+   order to provide the same trailing dir for different symbolic paths,
+   because some plugins use it, e.g.: for location of plugin configuration
+   in `~/.config/DIR` or similar.
 
 The goal is flexibility, with essential motivation to support `eval
 "$(<plugin)"` and definitely solve `setopt no_function_argzero` and `setopt
@@ -104,10 +101,6 @@ A plugin manager will be even able to convert a plugin to a function (author
 implemented such proof of concept functionality, it’s fully possible – also in
 an automatic fashion), but performance differences of this are yet unclear. It
 might however provide a use case.
-
-The last, 5th point also allows to use the `$0` handling in scripts (i.e.
-runnables with the hashbang `#!…`) to get the directory in which the script
-file resides.
 
 The assignment uses quoting to make it resilient to combination of `GLOB_SUBST`
 and `GLOB_ASSIGN` options. It's a standard snippet of code, so it has to be
@@ -725,7 +718,7 @@ even use a common hash name – `Plugins` – to lower the pollution even more.
 [#appendix]
 [appendix]
 == Revision History (History Of Updates To The Document)
-
+v1.1.7, 07/26/2023: Changed `0="…"` snippet to a newer, better one +
 v1.1.5, 06/11/2020: Changed the `$0=…` assignment to a more straightforward one +
 v1.1.1, 21/02/2020: Added `Binaries Directory` section +
 v1.1, 21/02/2020: Changed the handler-function prefix character to `→` +
